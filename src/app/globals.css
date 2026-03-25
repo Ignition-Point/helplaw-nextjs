@@ -1,26 +1,296 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* ─── Help Law Design System ─── */
 
 @theme inline {
+  /* Core brand palette */
+  --color-navy-950: #0a1628;
+  --color-navy-900: #0f1d32;
+  --color-navy-800: #162a46;
+  --color-navy-700: #1e3a5f;
+  --color-navy-600: #274b78;
+  --color-navy-500: #335d92;
+  --color-navy-400: #5a83b4;
+  --color-navy-300: #8aacce;
+  --color-navy-200: #b8cfe4;
+  --color-navy-100: #dce7f2;
+  --color-navy-50: #eef3f9;
+
+  --color-gold-700: #8b6914;
+  --color-gold-600: #a67c1a;
+  --color-gold-500: #c4952a;
+  --color-gold-400: #d4ad4a;
+  --color-gold-300: #e2c672;
+  --color-gold-200: #edda9e;
+  --color-gold-100: #f5ecc8;
+  --color-gold-50: #faf6e8;
+
+  --color-slate-warm-950: #1a1a1a;
+  --color-slate-warm-900: #2a2a2a;
+  --color-slate-warm-800: #3a3a3a;
+  --color-slate-warm-700: #4a4a4a;
+  --color-slate-warm-600: #5c5c5c;
+  --color-slate-warm-500: #737373;
+  --color-slate-warm-400: #8f8f8f;
+  --color-slate-warm-300: #b0b0b0;
+  --color-slate-warm-200: #d1d1d1;
+  --color-slate-warm-100: #ebebeb;
+  --color-slate-warm-50: #f7f7f7;
+
+  /* Semantic tokens */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Typography */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-inter);
   --font-mono: var(--font-geist-mono);
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.5rem;
+
+  /* Navy-based light theme */
+  --background: #ffffff;
+  --foreground: #0f1d32;
+  --card: #ffffff;
+  --card-foreground: #0f1d32;
+  --popover: #ffffff;
+  --popover-foreground: #0f1d32;
+  --primary: #162a46;
+  --primary-foreground: #ffffff;
+  --secondary: #eef3f9;
+  --secondary-foreground: #162a46;
+  --muted: #f7f7f7;
+  --muted-foreground: #5c5c5c;
+  --accent: #c4952a;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --border: #dce7f2;
+  --input: #dce7f2;
+  --ring: #274b78;
+
+  /* Chart colors */
+  --chart-1: #162a46;
+  --chart-2: #274b78;
+  --chart-3: #c4952a;
+  --chart-4: #5a83b4;
+  --chart-5: #d4ad4a;
+
+  /* Sidebar */
+  --sidebar: #0f1d32;
+  --sidebar-foreground: #dce7f2;
+  --sidebar-primary: #c4952a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #162a46;
+  --sidebar-accent-foreground: #dce7f2;
+  --sidebar-border: #1e3a5f;
+  --sidebar-ring: #274b78;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    line-height: 1.75;
+  }
+
+  /* Refined heading styles */
+  h1, h2 {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  h3, h4 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  /* Smooth scrolling with offset for fixed header */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  /* Better paragraph spacing globally */
+  p + p {
+    margin-top: 1rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ─── Rich text content styling (for CMS content) ─── */
+.prose-helplaw {
+  h2 {
+    @apply text-2xl font-bold text-navy-900 mt-12 mb-4 tracking-tight;
+    font-family: var(--font-heading);
+  }
+  h3 {
+    @apply text-xl font-semibold text-navy-800 mt-8 mb-3 tracking-tight;
+    font-family: var(--font-heading);
+  }
+  h4 {
+    @apply text-lg font-semibold text-navy-700 mt-6 mb-2;
+  }
+  p {
+    @apply text-base leading-relaxed text-slate-warm-700 mb-4;
+  }
+  ul, ol {
+    @apply mb-4 pl-6 text-slate-warm-700;
+  }
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
+  li {
+    @apply mb-1.5 leading-relaxed;
+  }
+  a {
+    @apply text-navy-600 underline underline-offset-2 hover:text-gold-600 transition-colors;
+  }
+  blockquote {
+    @apply border-l-4 border-gold-400 pl-5 py-1 my-6 italic text-slate-warm-600 bg-gold-50/50 rounded-r-lg;
+  }
+  table {
+    @apply w-full border-collapse mb-6;
+  }
+  th {
+    @apply bg-navy-50 text-navy-800 font-semibold text-left px-4 py-3 border border-navy-100 text-sm;
+  }
+  td {
+    @apply px-4 py-3 border border-navy-100 text-sm text-slate-warm-700;
+  }
+  tr:nth-child(even) td {
+    @apply bg-slate-warm-50;
+  }
+  img {
+    @apply rounded-lg my-6;
+  }
+  strong {
+    @apply font-semibold text-navy-900;
+  }
+}
+
+/* ─── Dark prose variant for dark backgrounds ─── */
+.prose-helplaw-dark {
+  h2 {
+    @apply text-2xl font-bold text-white mt-12 mb-4 tracking-tight;
+    font-family: var(--font-heading);
+  }
+  h3 {
+    @apply text-xl font-semibold text-navy-100 mt-8 mb-3 tracking-tight;
+    font-family: var(--font-heading);
+  }
+  h4 {
+    @apply text-lg font-semibold text-navy-200 mt-6 mb-2;
+  }
+  p {
+    @apply text-base leading-relaxed text-navy-200 mb-4;
+  }
+  ul, ol {
+    @apply mb-4 pl-6 text-navy-200;
+  }
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
+  li {
+    @apply mb-1.5 leading-relaxed text-navy-200;
+  }
+  a {
+    @apply text-gold-400 underline underline-offset-2 hover:text-gold-300 transition-colors;
+  }
+  blockquote {
+    @apply border-l-4 border-gold-400 pl-5 py-1 my-6 italic text-navy-300 bg-navy-800/40 rounded-r-lg;
+  }
+  strong {
+    @apply font-semibold text-white;
+  }
+}
+
+/* ─── Subtle animation classes ─── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s ease-out forwards;
+}
+
+/* Stagger delays for sequential reveals */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+
+/* Gold accent line used on section dividers */
+.gold-line {
+  @apply h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent;
+}
+
+/* Infinite horizontal scroll for trust bar */
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 30s linear infinite;
 }
