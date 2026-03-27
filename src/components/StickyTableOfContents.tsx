@@ -82,8 +82,8 @@ export function StickyTableOfContents({ headings }: StickyTableOfContentsProps) 
           On this page
         </p>
         <ul className="space-y-1 border-l border-slate-200">
-          {headings.map((h) => (
-            <li key={h.id}>
+          {headings.map((h, idx) => (
+            <li key={`${h.id}-${idx}`}>
               <button
                 onClick={() => handleClick(h.id)}
                 className={`block w-full text-left text-sm py-1 transition-colors border-l-2 -ml-px ${
