@@ -1,17 +1,13 @@
 import Link from "next/link";
 import { Logo } from "./Logo";
 
-const CASE_LINKS = [
-  { label: "Mass Torts", href: "/cases?type=mass-tort" },
-  { label: "Class Actions", href: "/cases?type=class-action" },
-  { label: "Data Breaches", href: "/cases?type=data-breach" },
-];
-
-const COMPANY_LINKS = [
-  { label: "About", href: "/about" },
-  { label: "How It Works", href: "/how-it-works" },
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "Our Cases", href: "/cases" },
   { label: "Resources", href: "/resources" },
-  { label: "FAQ", href: "/faq" },
+  { label: "Your Rights", href: "/your-rights" },
+  { label: "FAQs", href: "/faq" },
+  { label: "Get Legal Help", href: "/get-legal-help" },
 ];
 
 const LEGAL_LINKS = [
@@ -35,8 +31,8 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <Logo variant="light" />
             <p className="mt-4 text-sm leading-relaxed text-navy-300 max-w-xs">
-              Connecting individuals affected by mass torts, class actions, and data breaches
-              with experienced legal representation.
+              Connecting individuals and families with attorneys who handle
+              serious harm, including abuse, unsafe products, and platform harm.
             </p>
             <a
               href="tel:1-800-HELP-LAW"
@@ -46,33 +42,14 @@ export function Footer() {
             </a>
           </div>
 
-          {/* Cases */}
+          {/* Navigation */}
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-navy-400 mb-4">
-              Practice Areas
+              Navigate
             </h3>
             <ul className="space-y-2.5">
-              {CASE_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-navy-300 hover:text-white transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-navy-400 mb-4">
-              Company
-            </h3>
-            <ul className="space-y-2.5">
-              {COMPANY_LINKS.map((link) => (
-                <li key={link.href}>
+              {NAV_LINKS.map((link, i) => (
+                <li key={`${link.href}-${i}`}>
                   <Link
                     href={link.href}
                     className="text-sm text-navy-300 hover:text-white transition-colors"

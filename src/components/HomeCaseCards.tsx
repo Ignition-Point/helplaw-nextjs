@@ -4,18 +4,52 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 
-interface CaseItem {
-  id: string;
-  title: string;
-  slug: string;
-  case_type: string;
-  hero_subheadline?: string | null;
-  seo_image?: string | null;
-}
+const caseCategories = [
+  {
+    title: "Clergy and Religious Institution Abuse",
+    description:
+      "Sexual abuse committed by clergy members or within religious organizations, including cases from years ago.",
+    image: "/uploads/cases/clergy-religious-institution-abuse.jpg",
+    href: "/cases",
+  },
+  {
+    title: "Medical Abuse",
+    description:
+      "Sexual abuse or misconduct by a doctor, nurse, or other healthcare provider.",
+    image: "/uploads/cases/medical-abuse.jpg",
+    href: "/cases",
+  },
+  {
+    title: "Online Platform Harm",
+    description:
+      "Sexual exploitation or serious harm facilitated by platforms like Snapchat, Roblox, or Instagram.",
+    image: "/uploads/cases/online-platform-harm.jpg",
+    href: "/cases",
+  },
+  {
+    title: "Unsafe Products",
+    description:
+      "Injuries caused by a product that failed or was never safe to begin with.",
+    image: "/uploads/cases/unsafe-products.jpg",
+    href: "/cases",
+  },
+  {
+    title: "NYC Clergy Abuse Lawsuits",
+    description:
+      "Active settlement efforts are underway across NYC dioceses. If you were abused by clergy in New York, your options may still be open.",
+    image: "/uploads/cases/nyc-clergy-abuse.jpg",
+    href: "/cases",
+  },
+  {
+    title: "NYC Juvenile Detention Abuse",
+    description:
+      "Survivors of abuse at Spofford, Horizon, Crossroads, or Rikers youth housing may have legal options under recent legislation.",
+    image: "/uploads/cases/nyc-juvenile-detention-abuse.jpg",
+    href: "/cases",
+  },
+];
 
-export function HomeCaseCards({ cases }: { cases: CaseItem[] }) {
-  if (!cases.length) return null;
-
+export function HomeCaseCards() {
   return (
     <section className="py-20 sm:py-28 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -24,38 +58,35 @@ export function HomeCaseCards({ cases }: { cases: CaseItem[] }) {
             Cases We Are Currently Reviewing
           </h2>
           <p className="mt-4 text-base text-slate-warm-500 leading-relaxed">
-            Attorneys in our network are actively reviewing cases in these areas. If you or someone you know experienced this kind of harm, you may have legal options.
+            Attorneys in our network are actively reviewing cases in these areas.
+            If you or someone you know experienced this kind of harm, you may
+            have legal options.
           </p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {cases.map((c) => (
+          {caseCategories.map((c) => (
             <Link
-              key={c.id}
-              href={`/cases/${c.slug}`}
+              key={c.title}
+              href={c.href}
               className="group relative rounded-2xl border border-navy-100 bg-white overflow-hidden shadow-sm transition-all hover:shadow-lg hover:border-navy-200 hover:-translate-y-0.5"
             >
-              {/* Image */}
-              {c.seo_image && (
-                <div className="relative h-44 overflow-hidden">
-                  <Image
-                    src={c.seo_image}
-                    alt={c.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-              )}
+              <div className="relative h-44 overflow-hidden">
+                <Image
+                  src={c.image}
+                  alt={c.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
               <div className="p-5">
                 <h3 className="text-lg font-semibold text-navy-900 leading-snug group-hover:text-navy-700">
                   {c.title}
                 </h3>
-                {c.hero_subheadline && (
-                  <p className="mt-2 text-sm text-slate-warm-500 line-clamp-2 leading-relaxed">
-                    {c.hero_subheadline}
-                  </p>
-                )}
+                <p className="mt-2 text-sm text-slate-warm-500 line-clamp-2 leading-relaxed">
+                  {c.description}
+                </p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy-700 group-hover:text-gold-600 transition-colors">
                   Check Eligibility
                   <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
 import { ArrowRight, Check } from "lucide-react";
 import { HomeCaseCards } from "@/components/HomeCaseCards";
 import { HomeBlogCards } from "@/components/HomeBlogCards";
@@ -8,31 +7,7 @@ import { HomeLeadForm } from "@/components/HomeLeadForm";
 
 export const revalidate = 60;
 
-async function getActiveCases() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("cases")
-    .select("id, title, slug, case_type, category, hero_eyebrow, hero_headline, hero_subheadline, seo_image")
-    .eq("status", "active")
-    .eq("page_type", "content")
-    .order("created_at", { ascending: false })
-    .limit(6);
-  return data ?? [];
-}
-
-async function getRecentPosts() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("blog_posts")
-    .select("id, title, slug, excerpt, category, featured_image")
-    .eq("status", "published")
-    .order("published_at", { ascending: false })
-    .limit(3);
-  return data ?? [];
-}
-
 export default async function HomePage() {
-  const [cases, posts] = await Promise.all([getActiveCases(), getRecentPosts()]);
 
   return (
     <>
@@ -271,10 +246,10 @@ export default async function HomePage() {
       </section>
 
       {/* ─── Cases We Are Currently Reviewing ─── */}
-      <HomeCaseCards cases={cases} />
+      <HomeCaseCards />
 
       {/* ─── Information That Can Help (Blog) ─── */}
-      <HomeBlogCards posts={posts} />
+      <HomeBlogCards />
 
       {/* ─── What Help Law Group Can Do For You + Lead Form ─── */}
       <section className="py-20 sm:py-28 bg-navy-950">

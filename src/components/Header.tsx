@@ -9,9 +9,9 @@ const NAV_ITEMS = [
   { label: "About Us", href: "/about" },
   { label: "Our Cases", href: "/cases" },
   { label: "Resources", href: "/resources" },
-  { label: "Your Rights", href: "/faq" },
+  { label: "Your Rights", href: "/your-rights" },
   { label: "FAQs", href: "/faq" },
-  { label: "Get Legal Help", href: "/cases" },
+  { label: "Get Legal Help", href: "/get-legal-help" },
 ];
 
 export function Header() {
