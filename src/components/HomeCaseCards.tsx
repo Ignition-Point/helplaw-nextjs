@@ -9,42 +9,42 @@ const caseCategories = [
     title: "Clergy and Religious Institution Abuse",
     description:
       "Sexual abuse committed by clergy members or within religious organizations, including cases from years ago.",
-    image: "https://image2url.com/r2/default/images/1774552039582-b0bffe85-1f5b-4ac2-b69f-ca27d547b0d1.blob",
+    image: "/images/cases/clergy-religious-institution-abuse.jpg",
     href: "/cases",
   },
   {
     title: "Medical Abuse",
     description:
       "Sexual abuse or misconduct by a doctor, nurse, or other healthcare provider.",
-    image: "https://image2url.com/r2/default/images/1774552561697-7d36c54a-8062-4f0c-b63a-8132e487e7b5.blob",
+    image: "/images/cases/medical-abuse.jpg",
     href: "/cases",
   },
   {
     title: "Online Platform Harm",
     description:
       "Sexual exploitation or serious harm facilitated by platforms like Snapchat, Roblox, or Instagram.",
-    image: "https://image2url.com/r2/default/images/1774974529709-8e6ba685-6dff-4161-af7d-0f17aa87ab3c.blob",
+    image: "/images/cases/online-platform-harm.jpg",
     href: "/cases",
   },
   {
     title: "Unsafe Products",
     description:
       "Injuries caused by a product that failed or was never safe to begin with.",
-    image: "https://image2url.com/r2/default/images/1774982512600-cab39edf-fc3c-45b2-865d-d15b6a47df91.blob",
+    image: "/images/cases/unsafe-products.jpg",
     href: "/cases",
   },
   {
     title: "NYC Clergy Abuse Lawsuits",
     description:
       "Active settlement efforts are underway across NYC dioceses. If you were abused by clergy in New York, your options may still be open.",
-    image: "https://image2url.com/r2/default/images/1774970847331-c7150745-13b2-456f-bb18-6e6322d30896.blob",
+    image: "/images/cases/nyc-clergy-abuse.jpg",
     href: "/cases",
   },
   {
     title: "NYC Juvenile Detention Abuse",
     description:
       "Survivors of abuse at Spofford, Horizon, Crossroads, or Rikers youth housing may have legal options under recent legislation.",
-    image: "https://image2url.com/r2/default/images/1771448909507-e07abe58-e17e-40c9-9dd5-3de9db2ac054.jpg",
+    image: "/images/cases/nyc-juvenile-detention-abuse.jpg",
     href: "/cases",
   },
 ];
