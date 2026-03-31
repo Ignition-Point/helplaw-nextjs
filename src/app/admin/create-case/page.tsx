@@ -126,6 +126,9 @@ export default function CreateCasePage() {
                 {result.slug}
               </div>
 
+              <div className="text-slate-500">Category</div>
+              <div className="text-navy-900 font-medium">{result.category}</div>
+
               <div className="text-slate-500">Sections</div>
               <div className="text-navy-900">{result.sectionCount}</div>
 
@@ -145,7 +148,7 @@ export default function CreateCasePage() {
               </p>
               <ol className="text-sm text-slate-600 list-decimal list-inside space-y-1">
                 <li>Review the page in Lovable CMS</li>
-                <li>Edit sections, reorder blocks, or tweak copy as needed</li>
+                <li>Verify category, sections, and FAQs look correct</li>
                 <li>Set status to &quot;Active&quot; to publish</li>
               </ol>
             </div>
@@ -167,20 +170,65 @@ export default function CreateCasePage() {
           </h2>
           <div className="text-sm text-slate-600 space-y-4">
             <div>
-              <p className="font-medium text-navy-800">Basic structure:</p>
+              <p className="font-medium text-navy-800">
+                Metadata fields (top of doc):
+              </p>
+              <pre className="mt-1 p-3 bg-slate-50 rounded text-xs font-mono whitespace-pre-wrap">
+{`**Title:** San Diego County Juvenile Detention Abuse Lawsuit
+**Background Image:** https://...
+**Eyebrow:** County Name | Civil Lawsuits Active
+**Subheadline:** Your one-sentence summary here.
+
+**SEO Title (Meta Title):** Page Title | Help Law Group (60 chars)
+**Meta Description:** 150-character description for search results.
+**Focus Keyword:** primary keyword phrase
+**Secondary Keywords:** keyword1, keyword2, keyword3`}
+              </pre>
+            </div>
+
+            <div>
+              <p className="font-medium text-navy-800">Content sections:</p>
               <ul className="list-disc list-inside mt-1 space-y-1 text-slate-500">
-                <li>First line = page title</li>
-                <li>Content before first heading = hero subheadline + intro</li>
-                <li>Each heading = new narrative section</li>
                 <li>
-                  &quot;Frequently Asked Questions&quot; heading = FAQ section
-                  (Q&amp;A pairs)
+                  Separate sections with horizontal rules (───)
                 </li>
                 <li>
-                  &quot;Midpage CTA:&quot; = call-to-action block with [Button
-                  Text]
+                  Bold heading on first line: <code>**Section Title**</code>
                 </li>
+                <li>
+                  Add variant hint: <code>**Section Title** (Dark)</code>
+                </li>
+                <li>
+                  Sub-headings within a section: <code>**Sub Heading**</code>
+                </li>
+                <li>Bullet lists with * or - prefixes</li>
               </ul>
+            </div>
+
+            <div>
+              <p className="font-medium text-navy-800">Special sections:</p>
+              <pre className="mt-1 p-3 bg-slate-50 rounded text-xs font-mono whitespace-pre-wrap">
+{`**(MID-PAGE CTA)**
+**Headline here**
+Description paragraph.
+[Button Text]
+
+───
+
+**Frequently Asked Questions**
+**Question one?**
+Answer text here.
+
+**Question two?**
+Answer text here.
+
+───
+
+**(CLOSING CTA)**
+**Headline here**
+Description paragraph.
+[Button Text]`}
+              </pre>
             </div>
 
             <div>
@@ -193,19 +241,40 @@ export default function CreateCasePage() {
 - Email (email, required)
 - Phone (phone, required)
 - State (select, required)
-- Which facility? (select: Spofford, Horizon, Crossroads, Rikers)
+- Which facility? (select: Spofford, Horizon, Crossroads)
 - Anything else? (textarea)`}
               </pre>
             </div>
 
             <div>
               <p className="font-medium text-navy-800">
-                SEO metadata (optional, at bottom):
+                Auto-detected categories:
               </p>
-              <pre className="mt-1 p-3 bg-slate-50 rounded text-xs font-mono whitespace-pre-wrap">
-{`Meta Title: Your Page Title | Help Law Group
-Meta Description: A 150-character description for search results.`}
-              </pre>
+              <p className="text-xs text-slate-400 mt-1">
+                Category is auto-detected from the title, or you can add{" "}
+                <code>**Category:** Juvenile Detention Abuse</code> to the
+                metadata fields.
+              </p>
+              <div className="flex flex-wrap gap-1 mt-2">
+                {[
+                  "Juvenile Detention Abuse",
+                  "Clergy and Religious Institution Abuse",
+                  "Medical Abuse",
+                  "Foster Care Abuse",
+                  "Rideshare Assault",
+                  "Social Media Addiction",
+                  "Online Platform Harm",
+                  "Sexual Abuse and Institutional Harm",
+                  "Unsafe Products",
+                ].map((cat) => (
+                  <span
+                    key={cat}
+                    className="inline-block px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded"
+                  >
+                    {cat}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>

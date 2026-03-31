@@ -24,11 +24,32 @@ interface FAQ {
 }
 
 interface ParsedSection {
-  type: string;
+  type: "narrative" | "mid-page-cta";
   headline: string;
   content: string;
-  variant: string;
+  variant: "dark" | "light" | "gold" | "";
   cta_text?: string;
+}
+
+interface ParsedDoc {
+  title: string;
+  slug: string;
+  eyebrow: string;
+  subheadline: string;
+  backgroundImage: string;
+  introHtml: string;
+  sections: ParsedSection[];
+  faqs: FAQ[];
+  closingCta: { headline: string; content: string; cta_text: string } | null;
+  leadForm: { name?: string; cta_text?: string; fields: FormField[] };
+  meta: {
+    seo_title: string;
+    seo_description: string;
+    seo_focus_keyword: string;
+    seo_secondary_keywords: string;
+    case_type: string;
+    category: string;
+  };
 }
 
 // ─── Google Doc Fetcher ───
@@ -45,6 +66,74 @@ async function fetchGoogleDoc(url: string): Promise<string> {
     );
   }
   return response.text();
+}
+
+// ─── Helpers ───
+
+function stripBold(text: string): string {
+  // Remove ** markers from bold text
+  return text.replace(/\*\*/g, "").trim();
+}
+
+function isHorizontalRule(line: string): boolean {
+  const t = line.trim();
+  return /^[_─━═\-]{3,}$/.test(t) || t === "---";
+}
+
+function isDisclaimer(line: string): boolean {
+  return /^\*?\*?attorney\s+advertising/i.test(line.trim());
+}
+
+function extractFieldValue(line: string, prefix: string): string | null {
+  const regex = new RegExp(`^\\*?\\*?${prefix}:?\\*?\\*?\\s*(.+)`, "i");
+  const m = line.trim().match(regex);
+  return m ? stripBold(m[1]) : null;
+}
+
+// ─── Text → HTML converter ───
+
+function textToHtml(lines: string[]): string {
+  const parts: string[] = [];
+  let inList = false;
+  const listItems: string[] = [];
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    const listMatch = trimmed.match(/^[-•*]\s+(.+)$/);
+
+    if (listMatch) {
+      if (!inList) { inList = true; listItems.length = 0; }
+      listItems.push(listMatch[1]);
+      continue;
+    }
+
+    if (inList) {
+      parts.push("<ul>" + listItems.map((li) => `<li><p>${li}</p></li>`).join("") + "</ul>");
+      inList = false;
+      listItems.length = 0;
+    }
+
+    // Year headings for timelines (e.g., "1954", "Early 1990s", "September 2024", "Pre-2015")
+    if (/^(?:Early\s+|Mid-|Late\s+|Pre-)?(?:\d{4}s?|(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}?,?\s*\d{4})(?:\s*[–—-]\s*.+)?$/i.test(trimmed)) {
+      parts.push(`<h3>${trimmed}</h3>`);
+      continue;
+    }
+
+    // Sub-headings within sections (bold text that stands alone, not a paragraph)
+    if (/^\*\*[^*]+\*\*$/.test(trimmed)) {
+      parts.push(`<h3>${stripBold(trimmed)}</h3>`);
+      continue;
+    }
+
+    parts.push(`<p>${stripBold(trimmed)}</p>`);
+  }
+
+  if (inList) {
+    parts.push("<ul>" + listItems.map((li) => `<li><p>${li}</p></li>`).join("") + "</ul>");
+  }
+  return parts.join("");
 }
 
 // ─── Lead Form Parser ───
@@ -122,35 +211,15 @@ function parseLeadFormSection(lines: string[]): {
   return { name, cta_text: ctaText, fields };
 }
 
-// ─── Meta Parser ───
-
-function parseMetaSection(lines: string[]): Record<string, string> {
-  const meta: Record<string, string> = {};
-  for (const line of lines) {
-    const match = line.trim().match(/^(.+?):\s*(.+)$/);
-    if (!match) continue;
-    const key = match[1].trim().toLowerCase().replace(/\s+/g, "_");
-    const value = match[2].trim();
-    if (key.includes("title")) meta.seo_title = value;
-    else if (key.includes("description")) meta.seo_description = value;
-    else if (key.includes("focus") || key.includes("primary")) meta.seo_focus_keyword = value;
-    else if (key.includes("secondary")) meta.seo_secondary_keywords = value;
-    else if (key === "category") meta.category = value;
-    else if (key === "slug") meta.slug = value;
-    else if (key === "case_type" || key === "type") meta.case_type = value;
-  }
-  return meta;
-}
-
 // ─── FAQ Parser ───
 
-function parseFaqSection(lines: string[]): FAQ[] {
+function parseFaqs(lines: string[]): FAQ[] {
   const faqs: FAQ[] = [];
   let question: string | null = null;
   let answer: string[] = [];
 
   for (const line of lines) {
-    const trimmed = line.trim();
+    const trimmed = stripBold(line.trim());
     if (!trimmed) {
       if (question && answer.length > 0) {
         faqs.push({ question, answer: answer.join("\n") });
@@ -171,229 +240,319 @@ function parseFaqSection(lines: string[]): FAQ[] {
   return faqs;
 }
 
-// ─── Text → HTML ───
+// ─── Main Document Parser ───
+// Handles Ashley's Google Doc format:
+//   - Metadata fields at top: **Title:**, **Eyebrow:**, **Subheadline:**, **Background Image:**
+//   - SEO fields near top: **SEO Title:**, **Meta Description:**, **Focus Keyword:**, **Secondary Keywords:**
+//   - Sections separated by horizontal rules (─── or ___ or ---)
+//   - Bold headings: **Section Heading** or **Section Heading** (Dark)
+//   - (MID-PAGE CTA) blocks with [Button Text]
+//   - (CLOSING CTA) blocks with [Button Text]
+//   - Frequently Asked Questions section with Q&A pairs
+//   - LEAD FORM: section (optional)
+//   - **Table of Contents** (skipped, auto-generated)
+//   - **Attorney Advertising.** disclaimer (skipped)
 
-function textToHtml(text: string): string {
-  const lines = text.split("\n");
-  const parts: string[] = [];
-  let inList = false;
-  let listItems: string[] = [];
+function parseDocument(rawText: string): ParsedDoc {
+  const allLines = rawText.split("\n");
 
-  for (const line of lines) {
-    const trimmed = line.trim();
-    const listMatch = trimmed.match(/^[-•*]\s+(.+)$/);
+  // ── Phase 1: Extract metadata fields from top of document ──
+  let title = "";
+  let slug = "";
+  let eyebrow = "";
+  let subheadline = "";
+  let backgroundImage = "";
+  let seoTitle = "";
+  let seoDescription = "";
+  let seoFocusKeyword = "";
+  let seoSecondaryKeywords = "";
+  let caseType = "mass-tort";
+  let category = "Uncategorized";
 
-    if (listMatch) {
-      if (!inList) { inList = true; listItems = []; }
-      listItems.push(listMatch[1]);
+  // Scan first ~40 lines for metadata fields
+  const metaScanLimit = Math.min(allLines.length, 40);
+  const metaFieldsConsumed = new Set<number>();
+
+  for (let i = 0; i < metaScanLimit; i++) {
+    const line = allLines[i];
+
+    // Title (standalone heading or **Title:** field)
+    let val = extractFieldValue(line, "Title");
+    if (val && !title) { title = val.replace(/\s*\(\d+\s+characters?\)$/i, ""); metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Background Image");
+    if (val) { backgroundImage = val; metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Eyebrow");
+    if (val) { eyebrow = val; metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Subheadline");
+    if (val) { subheadline = val; metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "SEO Title(?:\\s*\\(Meta Title\\))?|Meta Title");
+    if (val) { seoTitle = val.replace(/\s*\(\d+\s+characters?\)$/i, ""); metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Meta Description");
+    if (val) { seoDescription = val.replace(/\s*\(\d+\s+characters?\)$/i, ""); metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Focus Keyword");
+    if (val) { seoFocusKeyword = val; metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Secondary Keywords");
+    if (val) { seoSecondaryKeywords = val; metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Category");
+    if (val) { category = val; metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Case Type|Type");
+    if (val) { caseType = val.toLowerCase().replace(/\s+/g, "-"); metaFieldsConsumed.add(i); continue; }
+
+    val = extractFieldValue(line, "Slug");
+    if (val) { slug = val; metaFieldsConsumed.add(i); continue; }
+  }
+
+  // If title wasn't found via **Title:** field, use first non-empty non-rule line
+  if (!title) {
+    for (let i = 0; i < allLines.length; i++) {
+      const t = allLines[i].trim();
+      if (t && !isHorizontalRule(t) && !metaFieldsConsumed.has(i)) {
+        title = stripBold(t).replace(/^#\s+/, "");
+        metaFieldsConsumed.add(i);
+        break;
+      }
+    }
+  }
+
+  if (!slug) {
+    slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  // ── Phase 2: Split remaining content into blocks separated by horizontal rules ──
+  // Skip metadata lines and split on rules
+  const contentLines: string[] = [];
+  for (let i = 0; i < allLines.length; i++) {
+    if (metaFieldsConsumed.has(i)) continue;
+    contentLines.push(allLines[i]);
+  }
+
+  // Split into blocks by horizontal rules
+  const blocks: string[][] = [];
+  let currentBlock: string[] = [];
+
+  for (const line of contentLines) {
+    if (isHorizontalRule(line)) {
+      if (currentBlock.length > 0) {
+        blocks.push(currentBlock);
+        currentBlock = [];
+      }
+    } else {
+      currentBlock.push(line);
+    }
+  }
+  if (currentBlock.length > 0) blocks.push(currentBlock);
+
+  // ── Phase 3: Classify each block ──
+  const sections: ParsedSection[] = [];
+  const introLines: string[] = [];
+  let faqs: FAQ[] = [];
+  let closingCta: { headline: string; content: string; cta_text: string } | null = null;
+  const leadFormLines: string[] = [];
+  let foundFirstSection = false;
+
+  for (const block of blocks) {
+    // Get the first non-empty line of the block
+    const firstNonEmpty = block.find((l) => l.trim().length > 0)?.trim() || "";
+    const stripped = stripBold(firstNonEmpty);
+
+    // Skip Table of Contents
+    if (/^table\s+of\s+contents$/i.test(stripped)) continue;
+
+    // Skip disclaimer
+    if (isDisclaimer(firstNonEmpty)) continue;
+
+    // Skip blocks that are just metadata we already parsed (SEO fields block)
+    if (/^(?:SEO Title|Meta Title)/i.test(stripped)) continue;
+    if (/^(?:Focus Keyword|Secondary Keywords)/i.test(stripped)) continue;
+
+    // Lead Form section
+    if (/^lead\s+form:/i.test(stripped)) {
+      leadFormLines.push(...block.slice(block.indexOf(block.find((l) => /^lead\s+form:/i.test(stripBold(l.trim())))!) + 1));
       continue;
     }
-
-    if (inList) {
-      parts.push("<ul>" + listItems.map((li) => `<li><p>${li}</p></li>`).join("") + "</ul>");
-      inList = false;
-      listItems = [];
-    }
-
-    if (!trimmed) continue;
-
-    const h3Match = trimmed.match(/^(\d{4}(?:\s*[–—-]\s*\d{4})?(?:\s*[–—-]\s*.+)?)\s*$/);
-    if (h3Match) { parts.push(`<h3>${h3Match[1]}</h3>`); continue; }
-
-    parts.push(`<p>${trimmed}</p>`);
-  }
-
-  if (inList) {
-    parts.push("<ul>" + listItems.map((li) => `<li><p>${li}</p></li>`).join("") + "</ul>");
-  }
-  return parts.join("");
-}
-
-// ─── Document Parser ───
-
-function parseDocument(rawText: string): {
-  title: string;
-  heroSubheadline: string;
-  introContent: string;
-  sections: ParsedSection[];
-  faqs: FAQ[];
-  leadForm: { name?: string; cta_text?: string; fields: FormField[] };
-  meta: Record<string, string>;
-} {
-  const lines = rawText.split("\n");
-  let title = "";
-  let heroSubheadline = "";
-  const introLines: string[] = [];
-  const sections: ParsedSection[] = [];
-  let faqs: FAQ[] = [];
-  const leadFormLines: string[] = [];
-  const metaLines: string[] = [];
-
-  let mode: "hero" | "intro" | "section" | "faq" | "lead-form" | "meta" | "cta" | "skip" = "hero";
-  let sectionHeadline = "";
-  let sectionContent: string[] = [];
-  let ctaHeadline = "";
-  let ctaContent: string[] = [];
-  let darkToggle = true;
-
-  const isRule = (l: string) => /^[_─━═]{3,}$/.test(l.trim()) || l.trim() === "---";
-  const isHeroBlock = (l: string) => /^hero\s+with\s+form/i.test(l.trim());
-  const isToc = (l: string) => /^table\s+of\s+contents$/i.test(l.trim());
-  const isFaq = (l: string) => /^frequently\s+asked\s+questions/i.test(l.trim());
-  const isLeadForm = (l: string) => /^lead\s+form:/i.test(l.trim());
-  const isMidCta = (l: string) => /^midpage\s+cta:/i.test(l.trim());
-  const isNote = (l: string) => /^note:/i.test(l.trim());
-  const isDisclaimer = (l: string) => /^attorney\s+advertising/i.test(l.trim());
-
-  const knownHeaders = [
-    "what you need to know", "what you should know", "how widespread", "how did this happen",
-    "which juvenile", "who was responsible", "what happened to", "why didn't anyone",
-    "in the news", "what are your legal", "how help law", "do you have a case",
-    "who is", "when did", "what were the results", "how does", "did the hospitals",
-    "what compensation", "nyc juvenile detention", "dr. robert hadden",
-    "what happened in", "what the nyc", "filing deadlines", "what a civil",
-    "the law that opened",
-  ];
-
-  function saveSection() {
-    if (sectionHeadline && sectionContent.length > 0) {
-      sections.push({
-        type: "narrative",
-        headline: sectionHeadline,
-        content: textToHtml(sectionContent.join("\n")),
-        variant: darkToggle ? "dark" : "",
-      });
-      darkToggle = !darkToggle;
-    }
-    sectionHeadline = "";
-    sectionContent = [];
-  }
-
-  function isKnownHeader(text: string): boolean {
-    return knownHeaders.some((h) => text.toLowerCase().startsWith(h));
-  }
-
-  for (let i = 0; i < lines.length; i++) {
-    const trimmed = lines[i].trim();
-
-    if (isRule(trimmed) || isHeroBlock(trimmed)) continue;
-    if (isDisclaimer(trimmed) || isNote(trimmed)) { saveSection(); mode = "skip"; continue; }
-    if (mode === "skip") continue;
-
-    // Lead form section
-    if (isLeadForm(trimmed)) { saveSection(); mode = "lead-form"; continue; }
-    if (mode === "lead-form") {
-      if (trimmed && isKnownHeader(trimmed)) {
-        mode = "section"; sectionHeadline = trimmed; sectionContent = []; continue;
-      }
-      leadFormLines.push(lines[i]); continue;
-    }
-
-    // Meta section
-    if (trimmed.toLowerCase().startsWith("meta title:") || trimmed.toLowerCase().startsWith("meta description:")) {
-      saveSection(); metaLines.push(lines[i]); mode = "meta"; continue;
-    }
-    if (mode === "meta") { if (trimmed) metaLines.push(lines[i]); continue; }
 
     // FAQ section
-    if (isFaq(trimmed)) {
-      saveSection();
-      const faqLines: string[] = [];
-      i++;
-      while (i < lines.length) {
-        const fl = lines[i].trim();
-        if (isRule(fl) || isDisclaimer(fl) || isNote(fl) || fl.toLowerCase().startsWith("meta title:")) { i--; break; }
-        // Check for a new major heading that isn't a question
-        if (fl && !fl.endsWith("?") && isKnownHeader(fl)) { i--; break; }
-        faqLines.push(lines[i]);
-        i++;
-      }
-      faqs = parseFaqSection(faqLines);
-      mode = "section"; continue;
-    }
-
-    // Midpage CTA
-    if (isMidCta(trimmed)) {
-      saveSection();
-      ctaHeadline = trimmed.replace(/^midpage\s+cta:\s*/i, "");
-      ctaContent = [];
-      mode = "cta"; continue;
-    }
-    if (mode === "cta") {
-      const btn = trimmed.match(/^\[(.+)\]$/);
-      if (btn) {
-        sections.push({ type: "mid-page-cta", headline: ctaHeadline, content: textToHtml(ctaContent.join("\n")), variant: "gold", cta_text: btn[1] });
-        mode = "section"; sectionHeadline = ""; sectionContent = []; continue;
-      }
-      if (trimmed) ctaContent.push(trimmed);
+    if (/^frequently\s+asked\s+questions/i.test(stripped)) {
+      const faqStart = block.findIndex((l) => /^frequently\s+asked\s+questions/i.test(stripBold(l.trim())));
+      faqs = parseFaqs(block.slice(faqStart + 1));
       continue;
     }
 
-    // ToC — skip
-    if (isToc(trimmed)) {
-      i++;
-      while (i < lines.length && (lines[i].trim().match(/^\d+\./) || !lines[i].trim())) i++;
-      i--; continue;
-    }
+    // Mid-page CTA
+    if (/^\(?\s*MID[\s-]*PAGE\s+CTA\s*\)?/i.test(stripped)) {
+      const ctaLines = block.filter((l) => l.trim().length > 0 && !/^\(?\s*MID[\s-]*PAGE\s+CTA\s*\)?/i.test(stripBold(l.trim())));
+      let ctaHeadline = "";
+      let ctaText = "Request a Case Review";
+      const ctaContentLines: string[] = [];
 
-    // Hero
-    if (mode === "hero") {
-      if (!trimmed) continue;
-      title = trimmed; mode = "intro"; continue;
-    }
-
-    // Intro
-    if (mode === "intro") {
-      if (isKnownHeader(trimmed)) {
-        if (introLines.length > 0) heroSubheadline = `<h3>${introLines[0]}</h3>`;
-        mode = "section"; sectionHeadline = trimmed; sectionContent = []; continue;
+      for (const line of ctaLines) {
+        const t = line.trim();
+        const btnMatch = t.match(/^\[(.+)\]$/);
+        if (btnMatch) {
+          ctaText = btnMatch[1];
+        } else if (!ctaHeadline && /^\*\*/.test(t)) {
+          ctaHeadline = stripBold(t);
+        } else {
+          ctaContentLines.push(t);
+        }
       }
-      if (trimmed) introLines.push(trimmed);
+
+      sections.push({
+        type: "mid-page-cta",
+        headline: ctaHeadline,
+        content: textToHtml(ctaContentLines),
+        variant: "gold",
+        cta_text: ctaText,
+      });
       continue;
     }
 
-    // Section
-    if (mode === "section") {
-      if (isKnownHeader(trimmed) && trimmed !== sectionHeadline && sectionHeadline) {
-        saveSection();
-        sectionHeadline = trimmed; sectionContent = []; continue;
+    // Closing CTA
+    if (/^\(?\s*CLOSING\s+CTA\s*\)?/i.test(stripped)) {
+      const ctaLines = block.filter((l) => l.trim().length > 0 && !/^\(?\s*CLOSING\s+CTA\s*\)?/i.test(stripBold(l.trim())));
+      let ctaHeadline = "";
+      let ctaText = "Get Your Case Reviewed";
+      const ctaContentLines: string[] = [];
+
+      for (const line of ctaLines) {
+        const t = line.trim();
+        const btnMatch = t.match(/^\[(.+)\]$/);
+        if (btnMatch) {
+          ctaText = btnMatch[1];
+        } else if (!ctaHeadline && /^\*\*/.test(t)) {
+          ctaHeadline = stripBold(t);
+        } else {
+          ctaContentLines.push(t);
+        }
       }
-      if (!sectionHeadline && trimmed) { sectionHeadline = trimmed; continue; }
-      if (trimmed) sectionContent.push(trimmed);
+
+      closingCta = {
+        headline: ctaHeadline,
+        content: textToHtml(ctaContentLines),
+        cta_text: ctaText,
+      };
+      continue;
+    }
+
+    // Regular content block — determine if it's a section with a heading or intro content
+    // Check if block starts with a bold heading
+    const headingLine = block.find((l) => {
+      const t = l.trim();
+      return t.length > 0 && /^\*\*[^*]+\*\*/.test(t);
+    });
+
+    if (headingLine) {
+      foundFirstSection = true;
+      let headingText = stripBold(headingLine.trim());
+      let variant: "dark" | "light" | "" = "";
+
+      // Check for (Dark) or (Light) variant hint
+      const variantMatch = headingText.match(/\s*\((Dark|Light)\)\s*$/i);
+      if (variantMatch) {
+        variant = variantMatch[1].toLowerCase() as "dark" | "light";
+        headingText = headingText.replace(/\s*\((Dark|Light)\)\s*$/i, "").trim();
+      }
+
+      // Content is everything after the heading line
+      const headingIndex = block.indexOf(headingLine);
+      const bodyLines = block.slice(headingIndex + 1);
+
+      sections.push({
+        type: "narrative",
+        headline: headingText,
+        content: textToHtml(bodyLines),
+        variant,
+      });
+    } else if (!foundFirstSection) {
+      // Pre-section content = intro
+      const nonEmpty = block.filter((l) => l.trim().length > 0);
+      if (nonEmpty.length > 0) {
+        introLines.push(...nonEmpty);
+      }
+    } else {
+      // Content block without a heading after sections have started — treat as narrative
+      const nonEmpty = block.filter((l) => l.trim().length > 0);
+      if (nonEmpty.length > 0) {
+        sections.push({
+          type: "narrative",
+          headline: "",
+          content: textToHtml(nonEmpty),
+          variant: "",
+        });
+      }
     }
   }
 
-  saveSection();
-
+  // Build lead form
   const leadForm = parseLeadFormSection(leadFormLines);
-  const meta = parseMetaSection(metaLines);
 
-  const introContent = introLines.length > 1 ? textToHtml(introLines.slice(1).join("\n")) : "";
+  // Build intro HTML
+  const introHtml = introLines.length > 0 ? textToHtml(introLines) : "";
 
-  return { title, heroSubheadline, introContent, sections, faqs, leadForm, meta };
+  // Auto-detect category from title if still uncategorized
+  if (category === "Uncategorized") {
+    const tl = title.toLowerCase();
+    if (tl.includes("juvenile detention") || tl.includes("juvenile hall")) category = "Juvenile Detention Abuse";
+    else if (tl.includes("clergy") || tl.includes("diocese")) category = "Clergy and Religious Institution Abuse";
+    else if (tl.includes("foster care")) category = "Foster Care Abuse";
+    else if (tl.includes("rideshare") || tl.includes("uber") || tl.includes("lyft")) category = "Rideshare Assault";
+    else if (tl.includes("social media")) category = "Social Media Addiction";
+    else if (tl.includes("dr.") || tl.includes("doctor") || tl.includes("medical") || tl.includes("hospital")) category = "Medical Abuse";
+    else if (tl.includes("sexual abuse") || tl.includes("sexual assault")) category = "Sexual Abuse and Institutional Harm";
+    else if (tl.includes("online platform")) category = "Online Platform Harm";
+    else if (tl.includes("product") || tl.includes("unsafe")) category = "Unsafe Products";
+  }
+
+  return {
+    title,
+    slug,
+    eyebrow,
+    subheadline,
+    backgroundImage,
+    introHtml,
+    sections,
+    faqs,
+    closingCta,
+    leadForm,
+    meta: {
+      seo_title: seoTitle || `${title} | Help Law Group`,
+      seo_description: seoDescription,
+      seo_focus_keyword: seoFocusKeyword,
+      seo_secondary_keywords: seoSecondaryKeywords,
+      case_type: caseType,
+      category,
+    },
+  };
 }
 
 // ─── Case Creator ───
 
 async function createCaseFromDoc(docUrl: string) {
   const rawText = await fetchGoogleDoc(docUrl);
-  const { title, heroSubheadline, introContent, sections, faqs, leadForm, meta } = parseDocument(rawText);
+  const doc = parseDocument(rawText);
 
-  if (!title) throw new Error("Could not find a title in the document");
-
-  const slug = meta.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  if (!doc.title) throw new Error("Could not find a title in the document");
 
   // Check for existing slug
-  const { data: existing } = await supabase.from("cases").select("id").eq("slug", slug).maybeSingle();
-  if (existing) throw new Error(`A case with slug "${slug}" already exists`);
+  const { data: existing } = await supabase.from("cases").select("id").eq("slug", doc.slug).maybeSingle();
+  if (existing) throw new Error(`A case with slug "${doc.slug}" already exists. Delete or rename the existing case first.`);
 
   // Create lead form
   const formId = randomUUID();
   const { error: formErr } = await supabase.from("lead_forms").insert({
     id: formId,
-    name: leadForm.name || `${title} - Lead Form`,
-    fields: leadForm.fields,
-    cta_text: leadForm.cta_text || "Get Your Free Case Review",
+    name: doc.leadForm.name || `${doc.title} - Lead Form`,
+    fields: doc.leadForm.fields,
+    cta_text: doc.leadForm.cta_text || "Get Your Free Case Review",
     post_submit: "thank-you",
     intake_questions: [],
     intake_position: "after",
@@ -402,26 +561,27 @@ async function createCaseFromDoc(docUrl: string) {
 
   // Create case
   const caseId = randomUUID();
+  const heroSubheadline = doc.subheadline ? `<h3>${doc.subheadline}</h3>` : "";
   const { error: caseErr } = await supabase.from("cases").insert({
     id: caseId,
-    title,
-    slug,
-    case_type: meta.case_type || "mass-tort",
-    category: meta.category || "Uncategorized",
+    title: doc.title,
+    slug: doc.slug,
+    case_type: doc.meta.case_type,
+    category: doc.meta.category,
     status: "draft",
     page_type: "content",
-    phone_number: "1-800-555-0123",
-    display_number: "1-800-555-0123",
-    seo_title: meta.seo_title || `${title} | Help Law Group`,
-    seo_description: meta.seo_description || "",
-    seo_focus_keyword: meta.seo_focus_keyword || "",
-    seo_secondary_keywords: meta.seo_secondary_keywords || "",
-    hero_eyebrow: `Fighting for Survivors`,
-    hero_headline: title,
+    phone_number: "1-800-HELP-LAW",
+    display_number: "1-800-HELP-LAW",
+    seo_title: doc.meta.seo_title,
+    seo_description: doc.meta.seo_description,
+    seo_focus_keyword: doc.meta.seo_focus_keyword,
+    seo_secondary_keywords: doc.meta.seo_secondary_keywords,
+    hero_eyebrow: doc.eyebrow || "Fighting for Survivors",
+    hero_headline: doc.title,
     hero_subheadline: heroSubheadline || `<h3>Help Law Group advocates for survivors affected by this case.</h3>`,
-    hero_background_image: "",
-    final_cta_headline: "Take the First Step Toward Justice",
-    final_cta_button: "Request a Confidential Case Review",
+    hero_background_image: doc.backgroundImage,
+    final_cta_headline: doc.closingCta?.headline || "Take the First Step Toward Justice",
+    final_cta_button: doc.closingCta?.cta_text || "Start Your Free Case Review",
     final_cta_background_image: "",
   });
   if (caseErr) {
@@ -434,42 +594,46 @@ async function createCaseFromDoc(docUrl: string) {
   let sortOrder = 0;
   let anchorCounter = 1;
 
-  // Hero
+  // 1. Hero with form
   sectionsToInsert.push({
     case_id: caseId,
     section_type: "hero-with-form",
     sort_order: sortOrder++,
     visible: true,
     content: {
-      eyebrow: "Fighting for Survivors",
-      headline: title,
+      eyebrow: doc.eyebrow || "Fighting for Survivors",
+      headline: doc.title,
       subheadline: heroSubheadline,
       content: "",
-      backgroundImage: "",
+      backgroundImage: doc.backgroundImage,
       leadFormId: formId,
       anchorId: "",
       textAlign: "",
     },
   });
 
-  // Intro narrative
-  if (introContent) {
+  // 2. Intro narrative (if present)
+  if (doc.introHtml) {
     sectionsToInsert.push({
       case_id: caseId,
       section_type: "narrative",
       sort_order: sortOrder++,
       visible: true,
-      content: { eyebrow: "", headline: "", content: introContent, variant: "", anchorId: "", textAlign: "" },
+      content: { eyebrow: "", headline: "", content: doc.introHtml, variant: "", anchorId: "", textAlign: "" },
     });
   }
 
-  // Auto-generate ToC from headlined sections
-  const headlinedSections = sections.filter(
-    (s) => s.headline && s.type !== "mid-page-cta"
-  );
+  // 3. Table of contents (auto-generated from headlined sections)
+  const headlinedSections = doc.sections.filter((s) => s.headline && s.type !== "mid-page-cta");
   if (headlinedSections.length >= 3) {
-    const tocLines = headlinedSections.map((s, i) => `${s.headline} | ${i + 1}`);
-    if (faqs.length > 0) tocLines.push(`Frequently Asked Questions | ${headlinedSections.length + 1}`);
+    const tocLines: string[] = [];
+    let tocAnchor = 1;
+    for (const s of headlinedSections) {
+      tocLines.push(`${s.headline} | ${tocAnchor++}`);
+    }
+    if (doc.faqs.length > 0) {
+      tocLines.push(`Frequently Asked Questions | ${tocAnchor++}`);
+    }
 
     sectionsToInsert.push({
       case_id: caseId,
@@ -480,8 +644,8 @@ async function createCaseFromDoc(docUrl: string) {
     });
   }
 
-  // Content sections
-  for (const section of sections) {
+  // 4. Content sections
+  for (const section of doc.sections) {
     if (section.type === "mid-page-cta") {
       sectionsToInsert.push({
         case_id: caseId,
@@ -499,9 +663,10 @@ async function createCaseFromDoc(docUrl: string) {
         },
       });
     } else {
+      const isHeadlined = !!section.headline;
       sectionsToInsert.push({
         case_id: caseId,
-        section_type: section.type,
+        section_type: "narrative",
         sort_order: sortOrder++,
         visible: true,
         content: {
@@ -509,15 +674,15 @@ async function createCaseFromDoc(docUrl: string) {
           headline: section.headline,
           content: section.content,
           variant: section.variant,
-          anchorId: section.headline ? String(anchorCounter++) : "",
+          anchorId: isHeadlined ? String(anchorCounter++) : "",
           textAlign: "",
         },
       });
     }
   }
 
-  // FAQ section
-  if (faqs.length > 0) {
+  // 5. FAQ section
+  if (doc.faqs.length > 0) {
     sectionsToInsert.push({
       case_id: caseId,
       section_type: "faq-section",
@@ -527,16 +692,16 @@ async function createCaseFromDoc(docUrl: string) {
     });
   }
 
-  // Final CTA
+  // 6. Final CTA band
   sectionsToInsert.push({
     case_id: caseId,
     section_type: "final-cta-band",
     sort_order: sortOrder++,
     visible: true,
     content: {
-      headline: "Take the First Step Toward Justice",
-      content: "<p>Contact Help Law Group today to request a confidential case review.</p>",
-      ctaText: "Request a Confidential Case Review",
+      headline: doc.closingCta?.headline || "Take the First Step Toward Justice",
+      content: doc.closingCta?.content || "<p>Contact Help Law Group today to request a confidential case review.</p>",
+      ctaText: doc.closingCta?.cta_text || "Start Your Free Case Review",
       backgroundImage: "",
       variant: "",
       anchorId: "",
@@ -553,21 +718,22 @@ async function createCaseFromDoc(docUrl: string) {
   }
 
   // Insert FAQs
-  if (faqs.length > 0) {
+  if (doc.faqs.length > 0) {
     const { error: faqErr } = await supabase.from("case_faqs").insert(
-      faqs.map((faq, i) => ({ case_id: caseId, question: faq.question, answer: faq.answer, sort_order: i }))
+      doc.faqs.map((faq, i) => ({ case_id: caseId, question: faq.question, answer: faq.answer, sort_order: i }))
     );
     if (faqErr) console.error("FAQ insert error:", faqErr.message);
   }
 
   return {
     caseId,
-    slug,
+    slug: doc.slug,
     formId,
-    title,
+    title: doc.title,
+    category: doc.meta.category,
     sectionCount: sectionsToInsert.length,
-    faqCount: faqs.length,
-    formFieldCount: leadForm.fields.length,
+    faqCount: doc.faqs.length,
+    formFieldCount: doc.leadForm.fields.length,
   };
 }
 
@@ -588,7 +754,7 @@ export async function POST(request: NextRequest) {
       success: true,
       ...result,
       previewUrl: `https://helplaw-nextjs.vercel.app/cases/${result.slug}`,
-      message: `Case "${result.title}" created as draft. Set to active in Lovable CMS to publish.`,
+      message: `Case "${result.title}" created as draft with category "${result.category}". Set to active in Lovable CMS to publish.`,
     });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
