@@ -164,7 +164,18 @@ export default function CreateCasePage() {
           </div>
         )}
 
-        <div className="mt-12 p-6 bg-white border border-slate-200 rounded-lg">
+        <div className="mt-8">
+          <a
+            href="/case-page-template.docx"
+            download
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-navy-200 bg-white px-5 py-3 text-sm font-semibold text-navy-800 hover:border-navy-400 hover:bg-navy-50 transition-all"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Case Page Template (.docx)
+          </a>
+        </div>
+
+        <div className="mt-8 p-6 bg-white border border-slate-200 rounded-lg">
           <h2 className="text-lg font-semibold text-navy-900 mb-3">
             Google Doc Format Guide
           </h2>
