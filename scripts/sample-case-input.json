@@ -1,0 +1,86 @@
+{
+  "title": "Dr. Robert Hadden Sexual Abuse Lawsuits",
+  "slug": "dr-robert-hadden-sexual-abuse-lawsuits-test",
+  "case_type": "mass-tort",
+  "category": "Sexual Abuse & Institutional Harm",
+  "page_type": "content",
+
+  "hero_eyebrow": "Fighting For Survivors Sexually Abused By Dr. Robert Hadden",
+  "hero_subheadline": "<h3>Help Law Group advocates for patients harmed by Dr. Robert Hadden at Columbia University and NewYork-Presbyterian Hospital.</h3>",
+
+  "phone_number": "1-800-555-0123",
+  "display_number": "1-800-555-0123",
+
+  "seo_title": "Dr. Robert Hadden Lawsuits | Help Law Group",
+  "seo_description": "Survivors of Dr. Robert Hadden's abuse may have legal options. Learn about lawsuits, settlements, and how Help Law Group can support your case.",
+  "seo_focus_keyword": "Dr. Robert Hadden sexual abuse lawsuit",
+  "seo_secondary_keywords": "Robert Hadden Columbia University abuse, NewYork-Presbyterian gynecologist sexual abuse",
+
+  "lead_form": {
+    "name": "Dr. Robert Hadden Sexual Abuse Lawsuits",
+    "cta_text": "Get Your Free Case Review",
+    "fields": [
+      { "key": "fullName", "type": "text", "label": "Full Name", "required": true },
+      { "key": "phone", "type": "tel", "label": "Phone", "required": true },
+      { "key": "email", "type": "email", "label": "Email", "required": true },
+      { "key": "state", "type": "select", "label": "State", "required": true }
+    ]
+  },
+
+  "sections": [
+    {
+      "type": "narrative",
+      "content": "<p>For more than two decades, Dr. Robert Hadden practiced as an OB-GYN at two of New York City's most prominent medical institutions. During that time, he sexually abused hundreds of patients.</p><p>Help Law Group advocates for survivors who were sexually abused by Dr. Robert Hadden.</p>"
+    },
+    {
+      "type": "narrative",
+      "headline": "What You Need to Know",
+      "variant": "dark",
+      "content": "<ul><li><p>Public reporting describes sexual abuse spanning roughly 1987 to 2012.</p></li><li><p>Over 1,000 survivors have come forward through civil litigation.</p></li><li><p>Columbia University has reportedly paid more than $1 billion in settlements.</p></li><li><p>Hadden was sentenced to 20 years in federal prison in July 2023.</p></li></ul>"
+    },
+    {
+      "type": "narrative",
+      "headline": "Who Is Dr. Robert Hadden?",
+      "content": "<p>Dr. Robert Hadden worked as an obstetrician-gynecologist at Columbia University Irving Medical Center and NewYork-Presbyterian Hospital.</p>"
+    },
+    {
+      "type": "narrative",
+      "headline": "Timeline of Events",
+      "variant": "dark",
+      "content": "<h3>1987</h3><p>Hadden begins his OB-GYN practice at Columbia University.</p><h3>June 2012</h3><p>A patient calls 911 to report assault.</p><h3>July 2023</h3><p>Sentenced to 20 years in federal prison.</p>"
+    },
+    {
+      "type": "mid-page-cta",
+      "headline": "You Have Been Carrying This Long Enough",
+      "content": "<p>Hundreds of survivors have already come forward. Help Law Group is here when you are ready.</p>",
+      "cta_text": "Speak With a Case Advocate Today"
+    },
+    {
+      "type": "narrative",
+      "headline": "Did the Hospitals Know?",
+      "content": "<p>Investigative reporting and court records have raised serious questions about what Columbia and NewYork-Presbyterian knew.</p>"
+    },
+    {
+      "type": "narrative",
+      "headline": "Do You Have a Case?",
+      "content": "<p>Many survivors reach out years after their appointments. The conversation starts with what you remember.</p>"
+    }
+  ],
+
+  "faqs": [
+    {
+      "question": "How long do I have to file a lawsuit?",
+      "answer": "New York's Adult Survivors Act lookback window ran from November 2022 to November 2023 and is now closed. However, other options may still exist."
+    },
+    {
+      "question": "Can I come forward anonymously?",
+      "answer": "Many survivors have filed civil claims as Jane Doe plaintiffs. Courts have regularly permitted anonymous filings in sexual abuse cases."
+    }
+  ],
+
+  "final_cta": {
+    "headline": "Take the First Step at Your Own Pace",
+    "content": "<p>Submit the form below or click to request a private case review.</p>",
+    "cta_text": "Get Answers. Start Your Confidential Review."
+  }
+}
