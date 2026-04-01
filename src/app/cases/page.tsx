@@ -12,14 +12,6 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-const FEATURED_CASES = [
-  "Major Blaine McGraw Sexual Abuse Lawsuits",
-  "Dr. Robert Hadden Sexual Abuse Lawsuits",
-  "Dr. Babak Hajhosseini Sexual Assault Lawsuit",
-  "NYC Clergy Sexual Abuse Lawsuits",
-  "NYC Juvenile Detention Abuse Lawsuits",
-];
-
 async function getCases() {
   const supabase = await createClient();
   const { data } = await supabase
@@ -27,7 +19,6 @@ async function getCases() {
     .select("id, title, slug, case_type, category, hero_eyebrow, hero_subheadline, page_type")
     .eq("status", "active")
     .eq("page_type", "content")
-    .in("title", FEATURED_CASES)
     .order("created_at", { ascending: false });
   return data ?? [];
 }
