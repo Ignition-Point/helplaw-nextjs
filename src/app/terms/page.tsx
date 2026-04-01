@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Terms of Service" };
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description:
+    "Terms and conditions for using the Help Law Group website. Review the rules and guidelines that govern your use of our services.",
+};
 
 export default function TermsPage() {
   return (

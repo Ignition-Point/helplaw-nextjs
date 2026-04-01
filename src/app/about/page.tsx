@@ -3,7 +3,11 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Ear, Search, ShieldCheck, Lock, Users, Globe } from "lucide-react";
 
-export const metadata: Metadata = { title: "About Us" };
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Help Law Group connects survivors of abuse, unsafe products, and institutional harm with experienced attorneys. Free case evaluations, no fees unless you win.",
+};
 
 export default function AboutPage() {
   return (

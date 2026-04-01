@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Privacy Policy" };
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description:
+    "How Help Law Group collects, uses, and protects your personal information. Your privacy and confidentiality are important to us.",
+};
 
 export default function PrivacyPage() {
   return (

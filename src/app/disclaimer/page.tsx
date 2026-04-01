@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Disclaimer" };
+export const metadata: Metadata = {
+  title: "Disclaimer",
+  description:
+    "Attorney advertising disclaimer for Help Law Group. This website provides general information and is not a substitute for legal advice.",
+};
 
 export default function DisclaimerPage() {
   return (

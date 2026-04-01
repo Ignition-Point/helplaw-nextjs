@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const metadata: Metadata = { title: "How It Works" };
+export const metadata: Metadata = {
+  title: "How It Works",
+  description:
+    "Four simple steps: tell us what happened, get a free attorney review, understand your options, and decide when you are ready. No cost unless you win.",
+};
 
 export default function HowItWorksPage() {
   return (

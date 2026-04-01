@@ -3,7 +3,11 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FAQAccordion } from "@/components/FAQAccordion";
 
-export const metadata: Metadata = { title: "Frequently Asked Questions" };
+export const metadata: Metadata = {
+  title: "Frequently Asked Questions",
+  description:
+    "Common questions about working with Help Law Group — how the process works, what it costs, who qualifies, and what to expect from your free case evaluation.",
+};
 
 const FAQ_SECTIONS = [
   {
@@ -146,9 +150,26 @@ const FAQ_SECTIONS = [
   },
 ];
 
+function buildFaqJsonLd() {
+  const allFaqs = FAQ_SECTIONS.flatMap((s) => s.items);
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: allFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
+}
+
 export default function FAQPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqJsonLd()) }}
+      />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

@@ -1,9 +1,29 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 import { HomeCaseCards } from "@/components/HomeCaseCards";
 import { HomeBlogCards } from "@/components/HomeBlogCards";
 import { HomeLeadForm } from "@/components/HomeLeadForm";
+
+export const metadata: Metadata = {
+  title: "Help Law Group | Mass Tort & Class Action Attorneys",
+  description:
+    "Were you harmed by a person, company, or institution? Help Law Group connects you with experienced attorneys for a free, confidential case evaluation. No fees unless you win.",
+  openGraph: {
+    title: "Help Law Group | Mass Tort & Class Action Attorneys",
+    description:
+      "Free, confidential case evaluations for survivors of abuse, unsafe products, and institutional harm. No fees unless you win.",
+    url: "https://helplaw.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Help Law Group | Mass Tort & Class Action Attorneys",
+    description:
+      "Free, confidential case evaluations for survivors of abuse, unsafe products, and institutional harm.",
+  },
+  alternates: { canonical: "https://helplaw.com" },
+};
 
 export const revalidate = 60;
 
