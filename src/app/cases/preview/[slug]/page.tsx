@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { createAdminClient } from "@/lib/supabase/server";
 
 import { HeroWithForm } from "@/components/blocks/HeroWithForm";
 import { TrustBanner } from "@/components/blocks/TrustBanner";
@@ -28,37 +27,23 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-// ─── Data fetching (no status filter — shows draft + active) ───
+// ─── Data fetching via Supabase Edge Function (bypasses RLS server-side) ───
 
-async function getCaseBySlug(slug: string) {
-  const supabase = createAdminClient();
-  const { data } = await supabase
-    .from("cases")
-    .select("*")
-    .eq("slug", slug)
-    .maybeSingle();
-  return data;
-}
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 
-async function getCaseSections(caseId: string) {
-  const supabase = createAdminClient();
-  const { data } = await supabase
-    .from("case_sections")
-    .select("*")
-    .eq("case_id", caseId)
-    .eq("visible", true)
-    .order("sort_order");
-  return data ?? [];
-}
-
-async function getCaseFaqs(caseId: string) {
-  const supabase = createAdminClient();
-  const { data } = await supabase
-    .from("case_faqs")
-    .select("*")
-    .eq("case_id", caseId)
-    .order("sort_order");
-  return data ?? [];
+async function getPreviewData(slug: string) {
+  const res = await fetch(
+    `${SUPABASE_URL}/functions/v1/preview-case?slug=${encodeURIComponent(slug)}`,
+    { cache: "no-store" }
+  );
+  if (!res.ok) return null;
+  const data = await res.json();
+  if (!data.case) return null;
+  return {
+    caseData: data.case as Record<string, unknown>,
+    sections: (data.sections ?? []) as Array<{ id: string; section_type: string; content: unknown; visible: boolean; sort_order: number }>,
+    faqs: (data.faqs ?? []) as Array<{ id: string; question: string; answer: string; sort_order: number }>,
+  };
 }
 
 // ─── Helpers ───
@@ -67,22 +52,24 @@ function getStr(content: Record<string, unknown>, key: string): string {
   return (content[key] as string) || "";
 }
 
+// Safe accessor for caseData fields (all typed as unknown from edge function)
+function caseStr(caseData: Record<string, unknown>, key: string): string {
+  return (caseData[key] as string) || "";
+}
+
 // ─── Page component ───
 
 type PageParams = { params: Promise<{ slug: string }> };
 
 export default async function CasePreviewPage({ params }: PageParams) {
   const { slug } = await params;
-  const caseData = await getCaseBySlug(slug);
-  if (!caseData) notFound();
+  const preview = await getPreviewData(slug);
+  if (!preview) notFound();
 
-  const [sections, faqs] = await Promise.all([
-    getCaseSections(caseData.id),
-    getCaseFaqs(caseData.id),
-  ]);
+  const { caseData, sections, faqs } = preview;
 
-  const phoneNumber = caseData.phone_number || "1-800-HELP-LAW";
-  const displayNumber = caseData.display_number || "1-800-HELP-LAW";
+  const phoneNumber = caseStr(caseData, "phone_number") || "1-800-HELP-LAW";
+  const displayNumber = caseStr(caseData, "display_number") || "1-800-HELP-LAW";
 
   // Extract headings for sticky ToC
   const tocHeadings = sections
@@ -106,14 +93,14 @@ export default async function CasePreviewPage({ params }: PageParams) {
     <>
       {/* Preview banner */}
       <div className="bg-amber-500 text-navy-950 text-center py-2 px-4 text-sm font-semibold sticky top-0 z-50">
-        PREVIEW MODE — This case is currently <span className="uppercase">{(caseData.status as string) || "draft"}</span> and not visible on the public site
+        PREVIEW MODE — This case is currently <span className="uppercase">{caseStr(caseData, "status") || "draft"}</span> and not visible on the public site
       </div>
 
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
           { label: "Cases", href: "/cases" },
-          { label: caseData.title as string },
+          { label: caseStr(caseData, "title") },
         ]}
       />
 
@@ -144,13 +131,13 @@ export default async function CasePreviewPage({ params }: PageParams) {
             case "hero-with-form":
               return wrapper(
                 <HeroWithForm
-                  backgroundImage={getStr(content, "backgroundImage") || caseData.hero_background_image || ""}
-                  eyebrow={getStr(content, "eyebrow") || caseData.hero_eyebrow || ""}
-                  headline={getStr(content, "headline") || caseData.hero_headline || ""}
-                  subheadline={getStr(content, "subheadline") || caseData.hero_subheadline || ""}
+                  backgroundImage={getStr(content, "backgroundImage") || caseStr(caseData, "hero_background_image") || ""}
+                  eyebrow={getStr(content, "eyebrow") || caseStr(caseData, "hero_eyebrow") || ""}
+                  headline={getStr(content, "headline") || caseStr(caseData, "hero_headline") || ""}
+                  subheadline={getStr(content, "subheadline") || caseStr(caseData, "hero_subheadline") || ""}
                   content={getStr(content, "content") || undefined}
                   leadFormId={getStr(content, "leadFormId") || undefined}
-                  caseId={caseData.id}
+                  caseId={caseStr(caseData, "id")}
                   caseSlug={slug}
                   phoneNumber={phoneNumber}
                   displayNumber={displayNumber}
@@ -179,7 +166,7 @@ export default async function CasePreviewPage({ params }: PageParams) {
                         dangerouslySetInnerHTML={{ __html: getStr(content, "content") }}
                       />
                     )}
-                    <LeadFormRenderer leadFormId={lfId} caseId={caseData.id} caseSlug={slug} />
+                    <LeadFormRenderer leadFormId={lfId} caseId={caseStr(caseData, "id")} caseSlug={slug} />
                   </div>
                 </section>
               );
@@ -326,11 +313,11 @@ export default async function CasePreviewPage({ params }: PageParams) {
             case "final-cta-band":
               return wrapper(
                 <FinalCTABand
-                  headline={getStr(content, "headline") || caseData.final_cta_headline || ""}
+                  headline={getStr(content, "headline") || caseStr(caseData, "final_cta_headline") || ""}
                   content={getStr(content, "content") || undefined}
-                  ctaText={getStr(content, "ctaText") || caseData.final_cta_button || "Start Your Free Case Review"}
+                  ctaText={getStr(content, "ctaText") || caseStr(caseData, "final_cta_button") || "Start Your Free Case Review"}
                   ctaHref="#form"
-                  backgroundImage={getStr(content, "backgroundImage") || caseData.final_cta_background_image || ""}
+                  backgroundImage={getStr(content, "backgroundImage") || caseStr(caseData, "final_cta_background_image") || ""}
                   variant={(variant as "dark" | "light") || "dark"}
                 />
               );
