@@ -1,11 +1,20 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
+import sharp from "sharp";
 
-// Use anon key — relies on INSERT RLS policies
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+
+// Anon client for general inserts (cases, sections, etc.)
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  SUPABASE_URL,
   process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+// Service role client for storage uploads (bypasses RLS)
+const supabaseAdmin = createClient(
+  SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 );
 
 // ─── Types ───
@@ -159,6 +168,118 @@ function matchCategory(input: string): string {
 // Strip HTML tags from text (for plain-text contexts like card descriptions)
 function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, "").trim();
+}
+
+// ─── Image Optimization ───
+
+const IMAGE_MAX_WIDTH = 1920;
+const IMAGE_MAX_FILE_SIZE = 500 * 1024; // 500KB threshold to trigger optimization
+const IMAGE_WEBP_QUALITY = 80;
+
+interface ImageOptResult {
+  url: string;
+  optimized: boolean;
+  originalSize: number;
+  finalSize: number;
+  originalDimensions: { width: number; height: number } | null;
+  finalDimensions: { width: number; height: number } | null;
+  error?: string;
+}
+
+async function fetchAndOptimizeImage(sourceUrl: string, slug: string): Promise<ImageOptResult> {
+  const result: ImageOptResult = {
+    url: sourceUrl,
+    optimized: false,
+    originalSize: 0,
+    finalSize: 0,
+    originalDimensions: null,
+    finalDimensions: null,
+  };
+
+  try {
+    // 1. Fetch the source image
+    const response = await fetch(sourceUrl, { redirect: "follow" });
+    if (!response.ok) {
+      result.error = `Failed to fetch image (${response.status})`;
+      return result;
+    }
+
+    const buffer = Buffer.from(await response.arrayBuffer());
+    result.originalSize = buffer.length;
+
+    // 2. Read metadata (dimensions)
+    const metadata = await sharp(buffer).metadata();
+    if (metadata.width && metadata.height) {
+      result.originalDimensions = { width: metadata.width, height: metadata.height };
+    }
+
+    // 3. Decide if optimization is needed
+    const needsResize = (metadata.width || 0) > IMAGE_MAX_WIDTH;
+    const needsCompress = buffer.length > IMAGE_MAX_FILE_SIZE;
+    const isAlreadyWebp = metadata.format === "webp";
+
+    if (!needsResize && !needsCompress && isAlreadyWebp) {
+      // Image is already small and optimized — upload as-is for hosting consistency
+      result.finalSize = buffer.length;
+      result.finalDimensions = result.originalDimensions;
+    }
+
+    // 4. Optimize with sharp
+    let pipeline = sharp(buffer);
+
+    if (needsResize) {
+      pipeline = pipeline.resize(IMAGE_MAX_WIDTH, undefined, {
+        withoutEnlargement: true,
+        fit: "inside",
+      });
+    }
+
+    const optimizedBuffer = await pipeline
+      .webp({ quality: IMAGE_WEBP_QUALITY })
+      .toBuffer();
+
+    const optimizedMeta = await sharp(optimizedBuffer).metadata();
+    result.finalSize = optimizedBuffer.length;
+    result.finalDimensions = {
+      width: optimizedMeta.width || metadata.width || 0,
+      height: optimizedMeta.height || metadata.height || 0,
+    };
+
+    // 5. Upload to Supabase Storage
+    const filename = `${slug}-hero-${Date.now()}.webp`;
+    const { error: uploadErr } = await supabaseAdmin.storage
+      .from("case-images")
+      .upload(filename, optimizedBuffer, {
+        contentType: "image/webp",
+        cacheControl: "public, max-age=31536000, immutable",
+        upsert: false,
+      });
+
+    if (uploadErr) {
+      result.error = `Upload failed: ${uploadErr.message}`;
+      return result;
+    }
+
+    // 6. Get public URL
+    const { data: publicUrlData } = supabaseAdmin.storage
+      .from("case-images")
+      .getPublicUrl(filename);
+
+    result.url = publicUrlData.publicUrl;
+    result.optimized = true;
+
+    return result;
+  } catch (err: any) {
+    result.error = `Image optimization failed: ${err.message}`;
+    return result;
+  }
+}
+
+function formatBytes(bytes: number): string {
+  if (bytes === 0) return "0 B";
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }
 
 // ─── Text → HTML converter ───
@@ -1095,6 +1216,35 @@ async function createCaseFromDoc(docUrl: string) {
   const { data: existing } = await supabase.from("cases").select("id").eq("slug", doc.slug).maybeSingle();
   if (existing) throw new Error(`A case with slug "${doc.slug}" already exists. Delete or rename the existing case first.`);
 
+  // ── Image optimization ──
+  let heroImageUrl = doc.backgroundImage;
+  let imageOptResult: ImageOptResult | null = null;
+
+  if (heroImageUrl && heroImageUrl.startsWith("http")) {
+    imageOptResult = await fetchAndOptimizeImage(heroImageUrl, doc.slug);
+
+    if (imageOptResult.optimized) {
+      heroImageUrl = imageOptResult.url;
+      doc.qcWarnings.push({
+        field: "backgroundImage",
+        severity: "warning",
+        message: `Image optimized: ${formatBytes(imageOptResult.originalSize)} → ${formatBytes(imageOptResult.finalSize)} `
+          + `(${Math.round((1 - imageOptResult.finalSize / imageOptResult.originalSize) * 100)}% reduction)`
+          + (imageOptResult.originalDimensions
+            ? `, ${imageOptResult.originalDimensions.width}×${imageOptResult.originalDimensions.height}`
+              + ` → ${imageOptResult.finalDimensions?.width}×${imageOptResult.finalDimensions?.height}`
+            : "")
+          + `, converted to WebP`,
+      });
+    } else if (imageOptResult.error) {
+      doc.qcWarnings.push({
+        field: "backgroundImage",
+        severity: "warning",
+        message: `Could not optimize image: ${imageOptResult.error}. Using original URL.`,
+      });
+    }
+  }
+
   // Create lead form
   const formId = randomUUID();
   const { error: formErr } = await supabase.from("lead_forms").insert({
@@ -1128,7 +1278,7 @@ async function createCaseFromDoc(docUrl: string) {
     hero_eyebrow: doc.eyebrow || "Fighting for Survivors",
     hero_headline: doc.title,
     hero_subheadline: heroSubheadline,
-    hero_background_image: doc.backgroundImage,
+    hero_background_image: heroImageUrl,
     final_cta_headline: doc.closingCta?.headline || "Take the First Step Toward Justice",
     final_cta_button: doc.closingCta?.cta_text || "Start Your Free Case Review",
     final_cta_background_image: "",
@@ -1157,7 +1307,7 @@ async function createCaseFromDoc(docUrl: string) {
       headline: doc.title,
       subheadline: heroSubheadline,
       content: "",
-      backgroundImage: doc.backgroundImage,
+      backgroundImage: heroImageUrl,
       leadFormId: formId,
       anchorId: "",
       textAlign: "",
@@ -1285,6 +1435,21 @@ async function createCaseFromDoc(docUrl: string) {
     faqCount: doc.faqs.length,
     formFieldCount: doc.leadForm.fields.length,
     qcWarnings: doc.qcWarnings,
+    imageOptimization: imageOptResult
+      ? {
+          optimized: imageOptResult.optimized,
+          originalSize: formatBytes(imageOptResult.originalSize),
+          finalSize: formatBytes(imageOptResult.finalSize),
+          originalDimensions: imageOptResult.originalDimensions,
+          finalDimensions: imageOptResult.finalDimensions,
+          savedBytes: imageOptResult.optimized
+            ? formatBytes(imageOptResult.originalSize - imageOptResult.finalSize)
+            : null,
+          reduction: imageOptResult.optimized
+            ? `${Math.round((1 - imageOptResult.finalSize / imageOptResult.originalSize) * 100)}%`
+            : null,
+        }
+      : null,
   };
 }
 

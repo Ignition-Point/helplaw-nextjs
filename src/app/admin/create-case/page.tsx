@@ -142,6 +142,52 @@ export default function CreateCasePage() {
               <div className="text-amber-600 font-medium">Draft</div>
             </div>
 
+            {/* Image Optimization */}
+            {result.imageOptimization && (
+              <div className={`mt-3 p-4 rounded-lg border ${result.imageOptimization.optimized ? "bg-blue-50 border-blue-200" : "bg-slate-50 border-slate-200"}`}>
+                <p className={`font-semibold text-sm mb-2 ${result.imageOptimization.optimized ? "text-blue-800" : "text-slate-600"}`}>
+                  Hero Image
+                </p>
+                <div className="grid grid-cols-2 gap-1 text-xs">
+                  {result.imageOptimization.optimized ? (
+                    <>
+                      <div className="text-slate-500">Original</div>
+                      <div className="text-navy-900">
+                        {result.imageOptimization.originalSize}
+                        {result.imageOptimization.originalDimensions && (
+                          <span className="text-slate-400 ml-1">
+                            ({result.imageOptimization.originalDimensions.width}×{result.imageOptimization.originalDimensions.height})
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-slate-500">Optimized</div>
+                      <div className="text-green-700 font-medium">
+                        {result.imageOptimization.finalSize}
+                        {result.imageOptimization.finalDimensions && (
+                          <span className="text-slate-400 ml-1">
+                            ({result.imageOptimization.finalDimensions.width}×{result.imageOptimization.finalDimensions.height})
+                          </span>
+                        )}
+                      </div>
+                      <div className="text-slate-500">Saved</div>
+                      <div className="text-green-700 font-medium">
+                        {result.imageOptimization.savedBytes} ({result.imageOptimization.reduction})
+                      </div>
+                      <div className="text-slate-500">Format</div>
+                      <div className="text-navy-900">WebP</div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-slate-500">Size</div>
+                      <div className="text-navy-900">{result.imageOptimization.originalSize}</div>
+                      <div className="text-slate-500">Status</div>
+                      <div className="text-slate-500 italic">No optimization needed</div>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
+
             {/* QC Warnings */}
             {result.qcWarnings && result.qcWarnings.length > 0 && (
               <div className="mt-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
