@@ -114,6 +114,52 @@ function isDisclaimer(line: string): boolean {
   return /^(?:\*\*)?attorney\s+advertising/i.test(clean(line));
 }
 
+// Detect instructional/brief blocks that should NOT become page content
+function isInstructionalBlock(firstLine: string, blockText: string): boolean {
+  const fl = firstLine.toLowerCase();
+
+  // Heading-level detection: block starts with a known instructional heading
+  const instructionalHeadings = [
+    /^seo\s+keyword\s+report/i,
+    /^seo\s+report/i,
+    /^keyword\s+report/i,
+    /^content\s+brief/i,
+    /^writing\s+(notes|instructions|brief)/i,
+    /^editorial\s+(notes|brief|instructions)/i,
+    /^internal\s+notes/i,
+    /^notes\s+for\s+(writer|editor|content)/i,
+    /^page\s+brief/i,
+    /^content\s+strategy/i,
+    /^seo\s+strategy/i,
+    /^seo\s+notes/i,
+    /^keyword\s+strategy/i,
+    /^keyword\s+placement/i,
+    /^on-?page\s+seo/i,
+  ];
+  if (instructionalHeadings.some((re) => re.test(firstLine))) return true;
+
+  // Content-level detection: block contains multiple instructional phrases
+  const instructionalPhrases = [
+    /primary\s+keyword/i,
+    /secondary\s+keywords?/i,
+    /used\s+in\s+the\s+h[1-6]/i,
+    /woven\s+into/i,
+    /used\s+in\s+the\s+(title|heading|section|body|faq)/i,
+    /keyword\s+density/i,
+    /content\s+outline/i,
+    /word\s+count\s*:/i,
+    /target\s+audience/i,
+    /search\s+intent/i,
+    /competitor\s+analysis/i,
+    /meta\s+title\s*:/i,
+    /appears\s+in\s+(body|content|section)/i,
+  ];
+  const phraseMatches = instructionalPhrases.filter((re) => re.test(blockText)).length;
+  if (phraseMatches >= 2) return true;
+
+  return false;
+}
+
 function extractField(line: string, prefix: string): string | null {
   const cleaned = clean(line);
   // Match "Field Name:" or "Field Name (anything):" — the parenthetical is part of the label, not the value
@@ -802,6 +848,32 @@ function runQcChecks(input: QcInput): QCWarning[] {
     if (input.sections.length < 3) {
       w.push({ field: "sections", severity: "warning", message: `Only ${input.sections.length} content section(s) — most case pages have 6-12` });
     }
+
+    // Detect instructional/brief content that leaked into sections
+    const instructionalPatterns = [
+      { re: /primary\s+keyword/i, label: "primary keyword" },
+      { re: /secondary\s+keywords?/i, label: "secondary keywords" },
+      { re: /used\s+in\s+the\s+h[1-6]/i, label: "H-tag placement instructions" },
+      { re: /woven\s+into\s+(the\s+)?(body|section|content)/i, label: "keyword weaving instructions" },
+      { re: /keyword\s+density/i, label: "keyword density" },
+      { re: /seo\s+keyword\s+report/i, label: "SEO keyword report" },
+      { re: /content\s+brief/i, label: "content brief" },
+      { re: /word\s+count\s*:/i, label: "word count target" },
+      { re: /target\s+audience\s*:/i, label: "target audience" },
+      { re: /search\s+intent/i, label: "search intent" },
+      { re: /appears\s+in\s+(body|content|section)/i, label: "placement instructions" },
+    ];
+    for (const s of input.sections) {
+      const sectionText = `${s.headline} ${stripHtml(s.content)}`;
+      const matches = instructionalPatterns.filter((p) => p.re.test(sectionText));
+      if (matches.length >= 2) {
+        w.push({
+          field: "sections",
+          severity: "error",
+          message: `Section "${s.headline || "(no headline)"}" contains instructional/SEO brief content that should not be on the page (detected: ${matches.map((m) => m.label).join(", ")})`,
+        });
+      }
+    }
   }
 
   // ════════════════════════════════════════
@@ -1022,6 +1094,10 @@ function parseDocument(rawText: string): ParsedDoc {
 
     // Skip SEO metadata blocks (already consumed in phase 1)
     if (/^(?:SEO Title|Meta Title|Meta Description|Focus Keyword|Secondary Keywords)/i.test(firstLine)) continue;
+
+    // Skip instructional/brief blocks — these are writer notes, not page content
+    const blockText = block.map((l) => clean(l)).join(" ").toLowerCase();
+    if (isInstructionalBlock(firstLine, blockText)) continue;
 
     // Lead Form
     if (/^lead\s+form:/i.test(firstLine)) {
