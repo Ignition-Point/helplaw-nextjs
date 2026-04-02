@@ -31,6 +31,12 @@ interface ParsedSection {
   cta_text?: string;
 }
 
+interface QCWarning {
+  field: string;
+  severity: "error" | "warning";
+  message: string;
+}
+
 interface ParsedDoc {
   title: string;
   slug: string;
@@ -50,7 +56,22 @@ interface ParsedDoc {
     case_type: string;
     category: string;
   };
+  qcWarnings: QCWarning[];
 }
+
+// ─── Allowed categories (must match CaseGrid FILTER_CATEGORIES) ───
+
+const ALLOWED_CATEGORIES = [
+  "Clergy and Religious Institution Abuse",
+  "Medical Abuse",
+  "Online Platform Harm",
+  "Social Media Addiction",
+  "Sexual Abuse and Institutional Harm",
+  "Juvenile Detention Abuse",
+  "Foster Care Abuse",
+  "Rideshare Assault",
+  "Unsafe Products",
+];
 
 // ─── Google Doc Fetcher ───
 
@@ -86,11 +107,58 @@ function isDisclaimer(line: string): boolean {
 
 function extractField(line: string, prefix: string): string | null {
   const cleaned = clean(line);
-  const regex = new RegExp(`^${prefix}\\s*(?:\\(.*?\\))?\\s*:\\s*(.+)`, "i");
+  // Match "Field Name:" or "Field Name (anything):" — the parenthetical is part of the label, not the value
+  const regex = new RegExp(`^${prefix}\\s*(?:\\([^)]*\\))?\\s*:\\s*(.+)`, "i");
   const m = cleaned.match(regex);
   if (!m) return null;
-  // Strip trailing character counts like "(60 characters)"
-  return m[1].replace(/\s*\(\d+\s+characters?\)\s*$/i, "").trim();
+  let val = m[1].trim();
+  // Strip trailing character counts like "(60 characters)", "(148 characters)", "60 characters"
+  val = val.replace(/\s*\(?\d+\s+characters?\)?\s*$/i, "").trim();
+  // Strip leading/trailing quotes that sometimes appear in docs
+  val = val.replace(/^["']+|["']+$/g, "").trim();
+  return val;
+}
+
+// Fuzzy-match a category string to the closest allowed category
+function matchCategory(input: string): string {
+  if (!input || input === "Uncategorized") return "Uncategorized";
+
+  // Exact match (case-insensitive)
+  const exact = ALLOWED_CATEGORIES.find(
+    (c) => c.toLowerCase() === input.toLowerCase()
+  );
+  if (exact) return exact;
+
+  // Partial match: input contains the category name or vice versa
+  const inputLower = input.toLowerCase();
+  const partial = ALLOWED_CATEGORIES.find(
+    (c) => inputLower.includes(c.toLowerCase()) || c.toLowerCase().includes(inputLower)
+  );
+  if (partial) return partial;
+
+  // Keyword match
+  const keywordMap: [RegExp, string][] = [
+    [/clergy|church|diocese|religious/i, "Clergy and Religious Institution Abuse"],
+    [/medical|doctor|dr\.|hospital|physician|nurse/i, "Medical Abuse"],
+    [/online\s*platform/i, "Online Platform Harm"],
+    [/social\s*media/i, "Social Media Addiction"],
+    [/juvenile|detention|youth\s*facility|youth\s*center|juvenile\s*hall/i, "Juvenile Detention Abuse"],
+    [/foster\s*care/i, "Foster Care Abuse"],
+    [/rideshare|uber|lyft/i, "Rideshare Assault"],
+    [/unsafe\s*product|product\s*liability|defective/i, "Unsafe Products"],
+    [/sexual\s*abuse|sexual\s*assault|institutional\s*harm|survivor/i, "Sexual Abuse and Institutional Harm"],
+  ];
+
+  for (const [regex, category] of keywordMap) {
+    if (regex.test(input)) return category;
+  }
+
+  return "Uncategorized";
+}
+
+// Strip HTML tags from text (for plain-text contexts like card descriptions)
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]+>/g, "").trim();
 }
 
 // ─── Text → HTML converter ───
@@ -292,6 +360,406 @@ function parseFaqs(lines: string[]): FAQ[] {
   }
   if (question && answer.length > 0) faqs.push({ question, answer: answer.join("\n") });
   return faqs;
+}
+
+// ─── QC Engine ───
+
+// Category keyword signatures: what words we expect to appear in content for each category
+const CATEGORY_CONTENT_SIGNALS: Record<string, RegExp[]> = {
+  "Juvenile Detention Abuse": [/juvenile/i, /detention/i, /youth\s*(facility|center|hall)/i, /probation/i, /incarcerat/i],
+  "Clergy and Religious Institution Abuse": [/clergy/i, /church/i, /priest/i, /diocese/i, /parish/i, /religious/i, /bishop/i, /archdiocese/i],
+  "Medical Abuse": [/doctor/i, /physician/i, /hospital/i, /patient/i, /medical/i, /clinic/i, /OB-?GYN/i, /nurse/i],
+  "Foster Care Abuse": [/foster/i, /placement/i, /child\s*welfare/i, /CPS/i, /DCFS/i, /group\s*home/i],
+  "Rideshare Assault": [/uber/i, /lyft/i, /rideshare/i, /driver/i, /ride-?hail/i],
+  "Social Media Addiction": [/social\s*media/i, /instagram/i, /tiktok/i, /facebook/i, /snapchat/i, /algorithm/i, /addiction/i],
+  "Online Platform Harm": [/online\s*platform/i, /internet/i, /website/i, /app\b/i, /digital/i],
+  "Sexual Abuse and Institutional Harm": [/sexual\s*(abuse|assault)/i, /survivor/i, /institutional/i, /molestation/i],
+  "Unsafe Products": [/product/i, /defect/i, /recall/i, /manufacturer/i, /consumer/i, /injury/i, /toxic/i],
+};
+
+// Extract significant words from a string (for cross-field coherence checks)
+function extractKeyTerms(text: string): string[] {
+  const stopWords = new Set([
+    "the", "a", "an", "and", "or", "but", "in", "on", "at", "to", "for", "of", "with",
+    "by", "from", "is", "are", "was", "were", "be", "been", "being", "have", "has", "had",
+    "do", "does", "did", "will", "would", "could", "should", "may", "might", "can", "shall",
+    "this", "that", "these", "those", "it", "its", "not", "no", "nor", "so", "if", "then",
+    "than", "too", "very", "just", "about", "up", "out", "how", "what", "when", "where",
+    "who", "which", "their", "our", "your", "my", "we", "you", "he", "she", "they",
+    "help", "law", "group", "case", "review", "free", "legal", "lawsuit", "lawsuits",
+    "attorney", "attorneys", "learn", "more", "find", "options", "contact",
+  ]);
+  return text
+    .toLowerCase()
+    .replace(/<[^>]+>/g, "")
+    .replace(/[^a-z0-9\s'-]/g, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 2 && !stopWords.has(w));
+}
+
+// Count how many of the given regexes match in the text
+function countSignalMatches(text: string, signals: RegExp[]): number {
+  return signals.filter((re) => re.test(text)).length;
+}
+
+interface QcInput {
+  title: string;
+  slug: string;
+  eyebrow: string;
+  subheadline: string;
+  backgroundImage: string;
+  sections: ParsedSection[];
+  faqs: FAQ[];
+  closingCta: { headline: string; content: string; cta_text: string } | null;
+  seoTitle: string;
+  seoDescription: string;
+  seoFocusKeyword: string;
+  seoSecondaryKeywords: string;
+  category: string;
+}
+
+function runQcChecks(input: QcInput): QCWarning[] {
+  const w: QCWarning[] = [];
+
+  // Gather all body content as one string for semantic checks
+  const allContentText = [
+    input.subheadline,
+    ...input.sections.map((s) => `${s.headline} ${stripHtml(s.content)}`),
+    ...input.faqs.map((f) => `${f.question} ${f.answer}`),
+    input.closingCta?.headline || "",
+    input.closingCta?.content || "",
+  ].join(" ");
+
+  const allContentLower = allContentText.toLowerCase();
+
+  // ════════════════════════════════════════
+  // FORMAT CHECKS (garbage-in detection)
+  // ════════════════════════════════════════
+
+  // Character count contamination — check every metadata field
+  const metaFields = [
+    { name: "title", val: input.title },
+    { name: "eyebrow", val: input.eyebrow },
+    { name: "subheadline", val: input.subheadline },
+    { name: "seo_title", val: input.seoTitle },
+    { name: "seo_description", val: input.seoDescription },
+    { name: "seo_focus_keyword", val: input.seoFocusKeyword },
+    { name: "seo_secondary_keywords", val: input.seoSecondaryKeywords },
+  ];
+  for (const f of metaFields) {
+    if (f.val && /\d+\s*characters?/i.test(f.val)) {
+      w.push({ field: f.name, severity: "error", message: `Contains a character count hint: "${f.val}"` });
+    }
+    // Detect if the value is just a number (likely parsed a line number or count instead of content)
+    if (f.val && /^\d+$/.test(f.val.trim())) {
+      w.push({ field: f.name, severity: "error", message: `Value is just a number "${f.val}" — likely a parsing error` });
+    }
+  }
+
+  // HTML tag contamination
+  if (/<[^>]+>/.test(input.subheadline)) {
+    w.push({ field: "subheadline", severity: "warning", message: "Contains HTML tags — will be auto-stripped" });
+  }
+  if (/<[^>]+>/.test(input.title)) {
+    w.push({ field: "title", severity: "error", message: `Title contains HTML tags: "${input.title}"` });
+  }
+
+  // ════════════════════════════════════════
+  // TITLE CHECKS
+  // ════════════════════════════════════════
+
+  if (!input.title) {
+    w.push({ field: "title", severity: "error", message: "No title found in document" });
+  } else {
+    if (input.title.length > 80) {
+      w.push({ field: "title", severity: "warning", message: `Title is ${input.title.length} chars (recommended: under 80)` });
+    }
+    if (input.title.length < 10) {
+      w.push({ field: "title", severity: "error", message: `Title seems too short (${input.title.length} chars): "${input.title}"` });
+    }
+    // Title should contain a label prefix (likely parsed wrong)
+    if (/^(title|headline|heading|name)\s*:/i.test(input.title)) {
+      w.push({ field: "title", severity: "error", message: `Title starts with a field label: "${input.title}"` });
+    }
+    // Title should end with "Lawsuit" or "Lawsuits" for case pages
+    if (!/lawsuit/i.test(input.title)) {
+      w.push({ field: "title", severity: "warning", message: `Title doesn't contain "Lawsuit(s)" — expected for case pages: "${input.title}"` });
+    }
+
+    // Title-to-content coherence: key terms from title should appear in body
+    const titleTerms = extractKeyTerms(input.title);
+    const significantTitleTerms = titleTerms.filter(
+      (t) => t.length > 3 && !["abuse", "sexual", "assault"].includes(t)
+    );
+    if (significantTitleTerms.length > 0) {
+      const missingFromContent = significantTitleTerms.filter(
+        (term) => !allContentLower.includes(term)
+      );
+      if (missingFromContent.length > significantTitleTerms.length * 0.5) {
+        w.push({
+          field: "title",
+          severity: "error",
+          message: `Title doesn't match content — key terms not found in body: "${missingFromContent.join('", "')}"`,
+        });
+      }
+    }
+  }
+
+  // ════════════════════════════════════════
+  // SUBHEADLINE CHECKS
+  // ════════════════════════════════════════
+
+  if (!input.subheadline) {
+    w.push({ field: "subheadline", severity: "warning", message: "No subheadline found — will use default fallback" });
+  } else {
+    // Should reference Help Law Group or relate to the title
+    const subPlain = stripHtml(input.subheadline).toLowerCase();
+    if (!subPlain.includes("help law") && !subPlain.includes("attorney") && !subPlain.includes("advocate")) {
+      w.push({ field: "subheadline", severity: "warning", message: "Subheadline doesn't mention Help Law Group or attorneys — may want to add brand context" });
+    }
+    // Should be 1-2 sentences, not a paragraph
+    const sentenceCount = (input.subheadline.match(/[.!?]+/g) || []).length;
+    if (sentenceCount > 3) {
+      w.push({ field: "subheadline", severity: "warning", message: `Subheadline has ${sentenceCount} sentences — recommended: 1-2 for hero readability` });
+    }
+  }
+
+  // ════════════════════════════════════════
+  // EYEBROW CHECKS
+  // ════════════════════════════════════════
+
+  if (!input.eyebrow) {
+    w.push({ field: "eyebrow", severity: "warning", message: "No eyebrow found — using default" });
+  } else if (input.eyebrow.length > 80) {
+    w.push({ field: "eyebrow", severity: "warning", message: `Eyebrow is ${input.eyebrow.length} chars — may be too long for the hero UI` });
+  }
+
+  // ════════════════════════════════════════
+  // CATEGORY SEMANTIC CHECKS
+  // ════════════════════════════════════════
+
+  if (input.category && input.category !== "Uncategorized") {
+    const signals = CATEGORY_CONTENT_SIGNALS[input.category];
+    if (signals) {
+      const matchCount = countSignalMatches(allContentText, signals);
+      if (matchCount === 0) {
+        w.push({
+          field: "category",
+          severity: "error",
+          message: `Category "${input.category}" has zero keyword matches in the content — likely wrong category`,
+        });
+      } else if (matchCount === 1) {
+        w.push({
+          field: "category",
+          severity: "warning",
+          message: `Category "${input.category}" has only 1 keyword match in content — double-check it's correct`,
+        });
+      }
+    }
+
+    // Check if a different category is a stronger match
+    let bestCategory = input.category;
+    let bestScore = signals ? countSignalMatches(allContentText, signals) : 0;
+    for (const [cat, sigs] of Object.entries(CATEGORY_CONTENT_SIGNALS)) {
+      if (cat === input.category) continue;
+      const score = countSignalMatches(allContentText, sigs);
+      if (score > bestScore + 2) {
+        bestCategory = cat;
+        bestScore = score;
+      }
+    }
+    if (bestCategory !== input.category) {
+      w.push({
+        field: "category",
+        severity: "error",
+        message: `Content matches "${bestCategory}" much better than "${input.category}" (${bestScore} vs ${signals ? countSignalMatches(allContentText, signals) : 0} keyword hits) — likely miscategorized`,
+      });
+    }
+  } else {
+    w.push({ field: "category", severity: "error", message: `Could not determine category. Add "Category: ..." to the doc. Allowed: ${ALLOWED_CATEGORIES.join(", ")}` });
+  }
+
+  // ════════════════════════════════════════
+  // SEO CHECKS
+  // ════════════════════════════════════════
+
+  if (!input.seoTitle) {
+    w.push({ field: "seo_title", severity: "warning", message: "No SEO title — using fallback" });
+  } else {
+    if (input.seoTitle.length > 70) {
+      w.push({ field: "seo_title", severity: "warning", message: `SEO title is ${input.seoTitle.length} chars (recommended: under 70)` });
+    }
+    if (!/help\s*law/i.test(input.seoTitle)) {
+      w.push({ field: "seo_title", severity: "warning", message: "SEO title doesn't contain 'Help Law' — brand name should be in the meta title" });
+    }
+  }
+
+  if (!input.seoDescription) {
+    w.push({ field: "seo_description", severity: "warning", message: "No meta description found" });
+  } else {
+    if (input.seoDescription.length > 160) {
+      w.push({ field: "seo_description", severity: "warning", message: `Meta description is ${input.seoDescription.length} chars (recommended: under 160)` });
+    }
+    if (input.seoDescription.length < 50) {
+      w.push({ field: "seo_description", severity: "warning", message: `Meta description is only ${input.seoDescription.length} chars — too short for search snippets (aim for 120-155)` });
+    }
+  }
+
+  // Focus keyword should appear in title, SEO title, and content
+  if (input.seoFocusKeyword) {
+    const kw = input.seoFocusKeyword.toLowerCase();
+    if (!input.title.toLowerCase().includes(kw)) {
+      w.push({ field: "seo_focus_keyword", severity: "warning", message: `Focus keyword "${input.seoFocusKeyword}" not found in page title` });
+    }
+    if (input.seoTitle && !input.seoTitle.toLowerCase().includes(kw)) {
+      w.push({ field: "seo_focus_keyword", severity: "warning", message: `Focus keyword "${input.seoFocusKeyword}" not found in SEO title` });
+    }
+    if (input.seoDescription && !input.seoDescription.toLowerCase().includes(kw)) {
+      w.push({ field: "seo_focus_keyword", severity: "warning", message: `Focus keyword "${input.seoFocusKeyword}" not found in meta description` });
+    }
+    // Count keyword occurrences in body content
+    const kwRegex = new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+    const kwCount = (allContentText.match(kwRegex) || []).length;
+    if (kwCount === 0) {
+      w.push({ field: "seo_focus_keyword", severity: "error", message: `Focus keyword "${input.seoFocusKeyword}" not found anywhere in body content` });
+    } else if (kwCount < 3) {
+      w.push({ field: "seo_focus_keyword", severity: "warning", message: `Focus keyword appears only ${kwCount} time(s) in body — aim for 3-8 for SEO` });
+    }
+  } else {
+    w.push({ field: "seo_focus_keyword", severity: "warning", message: "No focus keyword found" });
+  }
+
+  // ════════════════════════════════════════
+  // BACKGROUND IMAGE CHECKS
+  // ════════════════════════════════════════
+
+  if (!input.backgroundImage) {
+    w.push({ field: "backgroundImage", severity: "warning", message: "No background image URL — hero will use default" });
+  } else if (!input.backgroundImage.startsWith("http")) {
+    w.push({ field: "backgroundImage", severity: "error", message: `Background image doesn't look like a URL: "${input.backgroundImage}"` });
+  }
+
+  // ════════════════════════════════════════
+  // CONTENT STRUCTURE CHECKS
+  // ════════════════════════════════════════
+
+  if (input.sections.length === 0) {
+    w.push({ field: "sections", severity: "error", message: "No content sections found — document may not have horizontal rule separators" });
+  } else {
+    // Check for expected section types
+    const hasWYNTK = input.sections.some((s) => /what\s+you\s+need\s+to\s+know/i.test(s.headline));
+    if (!hasWYNTK) {
+      w.push({ field: "sections", severity: "warning", message: 'No "What You Need to Know" section found — recommended for all case pages' });
+    }
+
+    const hasMidCta = input.sections.some((s) => s.type === "mid-page-cta");
+    if (!hasMidCta) {
+      w.push({ field: "sections", severity: "warning", message: "No mid-page CTA found — recommended to break up long content" });
+    }
+
+    // Check for duplicate section headlines
+    const headlines = input.sections.map((s) => s.headline.toLowerCase()).filter(Boolean);
+    const dupes = headlines.filter((h, i) => headlines.indexOf(h) !== i);
+    if (dupes.length > 0) {
+      w.push({ field: "sections", severity: "warning", message: `Duplicate section headlines found: "${[...new Set(dupes)].join('", "')}"` });
+    }
+
+    // Check for empty sections (headline but no content)
+    for (const s of input.sections) {
+      if (s.headline && stripHtml(s.content).trim().length < 20) {
+        w.push({ field: "sections", severity: "warning", message: `Section "${s.headline}" has very little content (${stripHtml(s.content).trim().length} chars)` });
+      }
+    }
+
+    // Check for sections with no headline (after the intro)
+    const headlessSections = input.sections.filter((s) => !s.headline && s.type === "narrative");
+    if (headlessSections.length > 1) {
+      w.push({ field: "sections", severity: "warning", message: `${headlessSections.length} sections have no headline — may be parser issue or missing headings in doc` });
+    }
+
+    // Section count reasonableness
+    if (input.sections.length < 3) {
+      w.push({ field: "sections", severity: "warning", message: `Only ${input.sections.length} content section(s) — most case pages have 6-12` });
+    }
+  }
+
+  // ════════════════════════════════════════
+  // FAQ CHECKS
+  // ════════════════════════════════════════
+
+  if (input.faqs.length === 0) {
+    w.push({ field: "faqs", severity: "warning", message: "No FAQs found — recommended for SEO (FAQ schema)" });
+  } else {
+    // Check for very short answers
+    for (const faq of input.faqs) {
+      if (faq.answer.length < 30) {
+        w.push({ field: "faqs", severity: "warning", message: `FAQ answer too short (${faq.answer.length} chars): "${faq.question}"` });
+      }
+    }
+    // Check if any FAQ question doesn't end with ?
+    for (const faq of input.faqs) {
+      if (!faq.question.trim().endsWith("?")) {
+        w.push({ field: "faqs", severity: "warning", message: `FAQ doesn't end with "?": "${faq.question}"` });
+      }
+    }
+    // Check for FAQ answers that contain what looks like a section heading (parser bleed)
+    for (const faq of input.faqs) {
+      if (/^[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+/.test(faq.answer) && faq.answer.includes("\n")) {
+        w.push({ field: "faqs", severity: "warning", message: `FAQ answer for "${faq.question}" may contain a section heading — check for parser bleed` });
+      }
+    }
+  }
+
+  // ════════════════════════════════════════
+  // CLOSING CTA CHECKS
+  // ════════════════════════════════════════
+
+  if (!input.closingCta) {
+    w.push({ field: "closingCta", severity: "warning", message: "No closing CTA found — will use default" });
+  }
+
+  // ════════════════════════════════════════
+  // CROSS-FIELD COHERENCE CHECKS
+  // ════════════════════════════════════════
+
+  // Title should appear (or be referenced) in the subheadline or intro content
+  if (input.title && input.sections.length > 0) {
+    const titleTerms = extractKeyTerms(input.title).filter((t) => t.length > 4);
+    const introContent = input.sections[0]?.content || "";
+    const introText = (input.subheadline + " " + stripHtml(introContent)).toLowerCase();
+    const introMatches = titleTerms.filter((t) => introText.includes(t));
+    if (titleTerms.length > 0 && introMatches.length === 0) {
+      w.push({
+        field: "coherence",
+        severity: "warning",
+        message: `Title key terms not referenced in subheadline or intro section — content may not match the title`,
+      });
+    }
+  }
+
+  // SEO title and page title should be related
+  if (input.seoTitle && input.title) {
+    const titleTerms = extractKeyTerms(input.title).filter((t) => t.length > 4);
+    const seoLower = input.seoTitle.toLowerCase();
+    const overlap = titleTerms.filter((t) => seoLower.includes(t));
+    if (titleTerms.length > 0 && overlap.length === 0) {
+      w.push({
+        field: "seo_title",
+        severity: "warning",
+        message: `SEO title "${input.seoTitle}" shares no key terms with page title "${input.title}"`,
+      });
+    }
+  }
+
+  // Slug should match title
+  if (input.title && input.slug) {
+    const expectedSlug = input.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    if (input.slug !== expectedSlug) {
+      w.push({ field: "slug", severity: "warning", message: `Slug "${input.slug}" doesn't match auto-generated slug from title "${expectedSlug}"` });
+    }
+  }
+
+  return w;
 }
 
 // ─── Main Document Parser ───
@@ -562,18 +1030,25 @@ function parseDocument(rawText: string): ParsedDoc {
   // Build intro HTML
   const introHtml = introLines.length > 0 ? textToHtml(introLines) : "";
 
-  // Auto-detect category from title if still uncategorized
+  // ── Category resolution ──
+  // 1. If doc specified a category, validate/fuzzy-match it
+  // 2. If still uncategorized, try auto-detecting from title
+  if (category !== "Uncategorized") {
+    category = matchCategory(category);
+  }
   if (category === "Uncategorized" && title) {
-    const tl = title.toLowerCase();
-    if (tl.includes("juvenile detention") || tl.includes("juvenile hall")) category = "Juvenile Detention Abuse";
-    else if (tl.includes("clergy") || tl.includes("diocese")) category = "Clergy and Religious Institution Abuse";
-    else if (tl.includes("foster care")) category = "Foster Care Abuse";
-    else if (tl.includes("rideshare") || tl.includes("uber") || tl.includes("lyft")) category = "Rideshare Assault";
-    else if (tl.includes("social media")) category = "Social Media Addiction";
-    else if (tl.includes("dr.") || tl.includes("doctor") || tl.includes("medical") || tl.includes("hospital")) category = "Medical Abuse";
-    else if (tl.includes("sexual abuse") || tl.includes("sexual assault")) category = "Sexual Abuse and Institutional Harm";
-    else if (tl.includes("online platform")) category = "Online Platform Harm";
-    else if (tl.includes("product") || tl.includes("unsafe")) category = "Unsafe Products";
+    category = matchCategory(title);
+  }
+
+  // ── QC Validation ──
+  const qcWarnings: QCWarning[] = runQcChecks({
+    title, slug, eyebrow, subheadline, backgroundImage, sections, faqs, closingCta,
+    seoTitle, seoDescription, seoFocusKeyword, seoSecondaryKeywords, category,
+  });
+
+  // Auto-fix: strip HTML from subheadline if detected
+  if (/<[^>]+>/.test(subheadline)) {
+    subheadline = stripHtml(subheadline);
   }
 
   return {
@@ -595,6 +1070,7 @@ function parseDocument(rawText: string): ParsedDoc {
       case_type: caseType,
       category,
     },
+    qcWarnings,
   };
 }
 
@@ -605,6 +1081,15 @@ async function createCaseFromDoc(docUrl: string) {
   const doc = parseDocument(rawText);
 
   if (!doc.title) throw new Error("Could not find a title in the document");
+
+  // Block creation if there are QC errors
+  const qcErrors = doc.qcWarnings.filter((w) => w.severity === "error");
+  if (qcErrors.length > 0) {
+    const errorList = qcErrors.map((e) => `• [${e.field}] ${e.message}`).join("\n");
+    throw new Error(
+      `QC check failed with ${qcErrors.length} error(s). Fix these in the Google Doc and retry:\n${errorList}`
+    );
+  }
 
   // Check for existing slug (note: anon key may not see draft cases due to RLS)
   const { data: existing } = await supabase.from("cases").select("id").eq("slug", doc.slug).maybeSingle();
@@ -623,9 +1108,9 @@ async function createCaseFromDoc(docUrl: string) {
   });
   if (formErr) throw new Error(`Failed to create lead form: ${formErr.message}`);
 
-  // Create case
+  // Create case — store subheadline as plain text, NOT wrapped in <h3>
   const caseId = randomUUID();
-  const heroSubheadline = doc.subheadline ? `<h3>${doc.subheadline}</h3>` : "";
+  const heroSubheadline = doc.subheadline || "Help Law Group advocates for survivors affected by this case.";
   const { error: caseErr } = await supabase.from("cases").insert({
     id: caseId,
     title: doc.title,
@@ -642,7 +1127,7 @@ async function createCaseFromDoc(docUrl: string) {
     seo_secondary_keywords: doc.meta.seo_secondary_keywords,
     hero_eyebrow: doc.eyebrow || "Fighting for Survivors",
     hero_headline: doc.title,
-    hero_subheadline: heroSubheadline || `<h3>Help Law Group advocates for survivors affected by this case.</h3>`,
+    hero_subheadline: heroSubheadline,
     hero_background_image: doc.backgroundImage,
     final_cta_headline: doc.closingCta?.headline || "Take the First Step Toward Justice",
     final_cta_button: doc.closingCta?.cta_text || "Start Your Free Case Review",
@@ -799,6 +1284,7 @@ async function createCaseFromDoc(docUrl: string) {
     sectionCount: sectionsToInsert.length,
     faqCount: doc.faqs.length,
     formFieldCount: doc.leadForm.fields.length,
+    qcWarnings: doc.qcWarnings,
   };
 }
 
@@ -818,8 +1304,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       ...result,
-      previewUrl: `https://helplaw-nextjs.vercel.app/cases/${result.slug}`,
-      message: `Case "${result.title}" created as draft with category "${result.category}". Set to active in Lovable CMS to publish.`,
+      previewUrl: `https://helplaw-nextjs.vercel.app/cases/preview/${result.slug}`,
+      qcWarnings: result.qcWarnings,
+      message: `Case "${result.title}" created as draft with category "${result.category}". ${result.qcWarnings.length > 0 ? `⚠️ ${result.qcWarnings.length} QC warning(s) — review below.` : "✅ All QC checks passed."} Preview the page, then set to active to publish.`,
     });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });

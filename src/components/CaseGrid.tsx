@@ -77,7 +77,7 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
               </h3>
               {c.hero_subheadline && (
                 <p className="mt-2 text-sm text-slate-warm-500 line-clamp-3 leading-relaxed">
-                  {c.hero_subheadline}
+                  {c.hero_subheadline.replace(/<[^>]+>/g, "")}
                 </p>
               )}
             </Link>

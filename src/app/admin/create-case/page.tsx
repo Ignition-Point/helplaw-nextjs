@@ -142,14 +142,42 @@ export default function CreateCasePage() {
               <div className="text-amber-600 font-medium">Draft</div>
             </div>
 
+            {/* QC Warnings */}
+            {result.qcWarnings && result.qcWarnings.length > 0 && (
+              <div className="mt-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                <p className="text-amber-800 font-semibold text-sm mb-2">
+                  QC Warnings ({result.qcWarnings.length})
+                </p>
+                <ul className="text-xs text-amber-700 space-y-1">
+                  {result.qcWarnings.map(
+                    (w: { field: string; severity: string; message: string }, i: number) => (
+                      <li key={i} className="flex items-start gap-1.5">
+                        <span className={`mt-0.5 flex-shrink-0 w-2 h-2 rounded-full ${w.severity === "error" ? "bg-red-500" : "bg-amber-400"}`} />
+                        <span>
+                          <strong className="font-medium">{w.field}:</strong> {w.message}
+                        </span>
+                      </li>
+                    )
+                  )}
+                </ul>
+              </div>
+            )}
+
+            {result.qcWarnings && result.qcWarnings.length === 0 && (
+              <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                <p className="text-green-700 text-sm font-medium">All QC checks passed</p>
+              </div>
+            )}
+
             <div className="pt-3 border-t border-green-200 space-y-2">
               <p className="text-sm text-slate-600">
                 <strong>Next steps:</strong>
               </p>
               <ol className="text-sm text-slate-600 list-decimal list-inside space-y-1">
-                <li>Review the page in Lovable CMS</li>
+                <li>Preview the page using the link below</li>
+                <li>Review any QC warnings above and fix in the Google Doc if needed</li>
                 <li>Verify category, sections, and FAQs look correct</li>
-                <li>Set status to &quot;Active&quot; to publish</li>
+                <li>Set status to &quot;Active&quot; in Supabase to publish</li>
               </ol>
             </div>
 
@@ -157,9 +185,10 @@ export default function CreateCasePage() {
               href={result.previewUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-2 text-sm text-gold-600 hover:text-gold-700 underline"
+              className="inline-flex items-center gap-2 mt-2 px-4 py-2 bg-navy-900 text-white text-sm font-semibold rounded-lg hover:bg-navy-800 transition-colors"
             >
-              Preview on Vercel (after publishing)
+              Preview Case Page
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             </a>
           </div>
         )}
