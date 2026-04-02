@@ -1469,7 +1469,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       ...result,
-      previewUrl: `https://helplaw-nextjs.vercel.app/cases/preview/${result.slug}`,
+      previewUrl: `https://helplaw.com/cases/preview/${result.slug}`,
       qcWarnings: result.qcWarnings,
       message: `Case "${result.title}" created as draft with category "${result.category}". ${result.qcWarnings.length > 0 ? `⚠️ ${result.qcWarnings.length} QC warning(s) — review below.` : "✅ All QC checks passed."} Preview the page, then set to active to publish.`,
     });
