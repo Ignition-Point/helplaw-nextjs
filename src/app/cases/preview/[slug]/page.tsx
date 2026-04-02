@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/server";
 
 import { HeroWithForm } from "@/components/blocks/HeroWithForm";
 import { TrustBanner } from "@/components/blocks/TrustBanner";
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 // ─── Data fetching (no status filter — shows draft + active) ───
 
 async function getCaseBySlug(slug: string) {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data } = await supabase
     .from("cases")
     .select("*")
@@ -41,7 +41,7 @@ async function getCaseBySlug(slug: string) {
 }
 
 async function getCaseSections(caseId: string) {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data } = await supabase
     .from("case_sections")
     .select("*")
@@ -52,7 +52,7 @@ async function getCaseSections(caseId: string) {
 }
 
 async function getCaseFaqs(caseId: string) {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data } = await supabase
     .from("case_faqs")
     .select("*")
