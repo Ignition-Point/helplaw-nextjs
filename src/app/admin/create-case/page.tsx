@@ -188,23 +188,44 @@ export default function CreateCasePage() {
               </div>
             )}
 
-            {/* QC Warnings */}
-            {result.qcWarnings && result.qcWarnings.length > 0 && (
-              <div className="mt-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                <p className="text-amber-800 font-semibold text-sm mb-2">
-                  QC Warnings ({result.qcWarnings.length})
+            {/* QC Errors */}
+            {result.qcWarnings && result.qcWarnings.filter((w: { severity: string }) => w.severity === "error").length > 0 && (
+              <div className="mt-3 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-800 font-semibold text-sm mb-2">
+                  QC Errors ({result.qcWarnings.filter((w: { severity: string }) => w.severity === "error").length}) — fix in the Google Doc
                 </p>
-                <ul className="text-xs text-amber-700 space-y-1">
-                  {result.qcWarnings.map(
-                    (w: { field: string; severity: string; message: string }, i: number) => (
+                <ul className="text-xs text-red-700 space-y-1">
+                  {result.qcWarnings
+                    .filter((w: { severity: string }) => w.severity === "error")
+                    .map((w: { field: string; severity: string; message: string }, i: number) => (
                       <li key={i} className="flex items-start gap-1.5">
-                        <span className={`mt-0.5 flex-shrink-0 w-2 h-2 rounded-full ${w.severity === "error" ? "bg-red-500" : "bg-amber-400"}`} />
+                        <span className="mt-0.5 flex-shrink-0 w-2 h-2 rounded-full bg-red-500" />
                         <span>
                           <strong className="font-medium">{w.field}:</strong> {w.message}
                         </span>
                       </li>
-                    )
-                  )}
+                    ))}
+                </ul>
+              </div>
+            )}
+
+            {/* QC Warnings */}
+            {result.qcWarnings && result.qcWarnings.filter((w: { severity: string }) => w.severity === "warning").length > 0 && (
+              <div className="mt-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                <p className="text-amber-800 font-semibold text-sm mb-2">
+                  QC Warnings ({result.qcWarnings.filter((w: { severity: string }) => w.severity === "warning").length})
+                </p>
+                <ul className="text-xs text-amber-700 space-y-1">
+                  {result.qcWarnings
+                    .filter((w: { severity: string }) => w.severity === "warning")
+                    .map((w: { field: string; severity: string; message: string }, i: number) => (
+                      <li key={i} className="flex items-start gap-1.5">
+                        <span className="mt-0.5 flex-shrink-0 w-2 h-2 rounded-full bg-amber-400" />
+                        <span>
+                          <strong className="font-medium">{w.field}:</strong> {w.message}
+                        </span>
+                      </li>
+                    ))}
                 </ul>
               </div>
             )}

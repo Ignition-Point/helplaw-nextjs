@@ -583,19 +583,26 @@ interface QcInput {
   seoFocusKeyword: string;
   seoSecondaryKeywords: string;
   category: string;
+  rawContentText: string;
 }
 
 function runQcChecks(input: QcInput): QCWarning[] {
   const w: QCWarning[] = [];
 
-  // Gather all body content as one string for semantic checks
-  const allContentText = [
+  // Gather all body content as one string for semantic checks.
+  // Fall back to raw document text when section parsing yields little content
+  // (e.g. Google Doc export without recognisable horizontal-rule separators).
+  const parsedContentText = [
     input.subheadline,
     ...input.sections.map((s) => `${s.headline} ${stripHtml(s.content)}`),
     ...input.faqs.map((f) => `${f.question} ${f.answer}`),
     input.closingCta?.headline || "",
     input.closingCta?.content || "",
   ].join(" ");
+
+  const allContentText = parsedContentText.trim().length > 200
+    ? parsedContentText
+    : input.rawContentText || parsedContentText;
 
   const allContentLower = allContentText.toLowerCase();
 
@@ -1238,9 +1245,11 @@ function parseDocument(rawText: string): ParsedDoc {
   }
 
   // ── QC Validation ──
+  const rawContentText = contentLines.join("\n");
   const qcWarnings: QCWarning[] = runQcChecks({
     title, slug, eyebrow, subheadline, backgroundImage, sections, faqs, closingCta,
     seoTitle, seoDescription, seoFocusKeyword, seoSecondaryKeywords, category,
+    rawContentText,
   });
 
   // Auto-fix: strip HTML from subheadline if detected
@@ -1279,14 +1288,8 @@ async function createCaseFromDoc(docUrl: string) {
 
   if (!doc.title) throw new Error("Could not find a title in the document");
 
-  // Block creation if there are QC errors
-  const qcErrors = doc.qcWarnings.filter((w) => w.severity === "error");
-  if (qcErrors.length > 0) {
-    const errorList = qcErrors.map((e) => `• [${e.field}] ${e.message}`).join("\n");
-    throw new Error(
-      `QC check failed with ${qcErrors.length} error(s). Fix these in the Google Doc and retry:\n${errorList}`
-    );
-  }
+  // QC errors no longer block creation — they are returned alongside the case
+  // so the agent can review and address them after upload.
 
   // Check for existing slug (note: anon key may not see draft cases due to RLS)
   const { data: existing } = await supabase.from("cases").select("id").eq("slug", doc.slug).maybeSingle();
@@ -1547,7 +1550,16 @@ export async function POST(request: NextRequest) {
       ...result,
       previewUrl: `https://helplaw.com/cases/preview/${result.slug}`,
       qcWarnings: result.qcWarnings,
-      message: `Case "${result.title}" created as draft with category "${result.category}". ${result.qcWarnings.length > 0 ? `⚠️ ${result.qcWarnings.length} QC warning(s) — review below.` : "✅ All QC checks passed."} Preview the page, then set to active to publish.`,
+      message: (() => {
+        const errors = result.qcWarnings.filter((w: QCWarning) => w.severity === "error");
+        const warnings = result.qcWarnings.filter((w: QCWarning) => w.severity === "warning");
+        const parts = [`Case "${result.title}" created as draft with category "${result.category}".`];
+        if (errors.length > 0) parts.push(`🔴 ${errors.length} QC error(s) — fix in the Google Doc.`);
+        if (warnings.length > 0) parts.push(`⚠️ ${warnings.length} QC warning(s) — review below.`);
+        if (errors.length === 0 && warnings.length === 0) parts.push("✅ All QC checks passed.");
+        parts.push("Preview the page, then set to active to publish.");
+        return parts.join(" ");
+      })(),
     });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
