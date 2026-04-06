@@ -18,7 +18,11 @@ async function getPosts() {
     .select("id, title, slug, excerpt, category, published_at")
     .eq("status", "published")
     .order("published_at", { ascending: false });
-  return data ?? [];
+  // Normalize slugs — strip any path prefix (e.g. "/resources/foo" → "foo")
+  return (data ?? []).map((post) => ({
+    ...post,
+    slug: post.slug.replace(/^.*\//, ""),
+  }));
 }
 
 export default async function ResourcesPage() {

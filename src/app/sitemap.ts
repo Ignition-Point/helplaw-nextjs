@@ -43,7 +43,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .eq("seo_noindex", false);
 
   const blogPages: MetadataRoute.Sitemap = (posts ?? []).map((p) => ({
-    url: `${baseUrl}/resources/${p.slug}`,
+    url: `${baseUrl}/resources/${p.slug.replace(/^.*\//, "")}`,
     lastModified: new Date(p.updated_at),
     changeFrequency: "weekly" as const,
     priority: 0.7,

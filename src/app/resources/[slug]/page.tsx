@@ -14,13 +14,24 @@ type PageParams = { params: Promise<{ slug: string }> };
 
 async function getPost(slug: string) {
   const supabase = await createClient();
+
+  // Try exact slug match first
   const { data } = await supabase
     .from("blog_posts")
     .select("*")
     .eq("slug", slug)
     .eq("status", "published")
     .single();
-  return data;
+  if (data) return data;
+
+  // Fallback: slug may have been stored with a path prefix (e.g. "/resources/slug")
+  const { data: fallback } = await supabase
+    .from("blog_posts")
+    .select("*")
+    .like("slug", `%${slug}`)
+    .eq("status", "published")
+    .single();
+  return fallback;
 }
 
 async function getPostFaqs(postId: string) {
