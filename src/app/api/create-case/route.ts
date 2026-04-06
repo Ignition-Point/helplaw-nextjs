@@ -1017,7 +1017,7 @@ function parseDocument(rawText: string): ParsedDoc {
     val = extractField(line, "Meta Description");
     if (val) { seoDescription = val; metaFieldsConsumed.add(i); continue; }
 
-    val = extractField(line, "Focus Keyword");
+    val = extractField(line, "Focus Keyword") || extractField(line, "Primary Keyword");
     if (val) { seoFocusKeyword = val; metaFieldsConsumed.add(i); continue; }
 
     val = extractField(line, "Secondary Keywords");
@@ -1100,7 +1100,7 @@ function parseDocument(rawText: string): ParsedDoc {
     if (/^table\s+of\s+contents$/i.test(firstLine)) continue;
 
     // Skip SEO metadata blocks (already consumed in phase 1)
-    if (/^(?:SEO Title|Meta Title|Meta Description|Focus Keyword|Secondary Keywords)/i.test(firstLine)) continue;
+    if (/^(?:SEO Title|Meta Title|Meta Description|Focus Keyword|Primary Keyword|Secondary Keywords)/i.test(firstLine)) continue;
 
     // Skip instructional/brief blocks — these are writer notes, not page content
     const blockText = block.map((l) => clean(l)).join(" ").toLowerCase();
