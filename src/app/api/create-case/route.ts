@@ -791,13 +791,35 @@ function runQcChecks(input: QcInput): QCWarning[] {
     if (input.seoDescription && !input.seoDescription.toLowerCase().includes(kw)) {
       w.push({ field: "seo_focus_keyword", severity: "warning", message: `Focus keyword "${input.seoFocusKeyword}" not found in meta description` });
     }
-    // Count keyword occurrences in body content
-    const kwRegex = new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
-    const kwCount = (allContentText.match(kwRegex) || []).length;
-    if (kwCount === 0) {
-      w.push({ field: "seo_focus_keyword", severity: "error", message: `Focus keyword "${input.seoFocusKeyword}" not found anywhere in body content` });
-    } else if (kwCount < 3) {
-      w.push({ field: "seo_focus_keyword", severity: "warning", message: `Focus keyword appears only ${kwCount} time(s) in body — aim for 3-8 for SEO` });
+    // Count keyword occurrences with heading weighting.
+    // Headings (H1-H3) carry ~3x the SEO weight of body text.
+    const kwEscaped = kw.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const kwRegex = new RegExp(kwEscaped, "gi");
+
+    // Count in headings (title + section headlines)
+    const headingText = [
+      input.title,
+      ...input.sections.map((s) => s.headline),
+    ].join(" ").toLowerCase();
+    const headingHits = (headingText.match(kwRegex) || []).length;
+
+    // Count in body content (excluding headings)
+    const bodyText = [
+      input.subheadline,
+      ...input.sections.map((s) => stripHtml(s.content)),
+      ...input.faqs.map((f) => `${f.question} ${f.answer}`),
+      input.closingCta?.content || "",
+    ].join(" ").toLowerCase();
+    const bodyHits = (bodyText.match(kwRegex) || []).length;
+
+    // Weighted score: each heading hit counts as 3, each body hit counts as 1
+    const weightedScore = headingHits * 3 + bodyHits;
+    const rawCount = headingHits + bodyHits;
+
+    if (rawCount === 0) {
+      w.push({ field: "seo_focus_keyword", severity: "error", message: `Focus keyword "${input.seoFocusKeyword}" not found anywhere in page content` });
+    } else if (weightedScore < 6) {
+      w.push({ field: "seo_focus_keyword", severity: "warning", message: `Focus keyword appears ${headingHits} time(s) in headings and ${bodyHits} time(s) in body (weighted score: ${weightedScore}) — aim for 6+ (headings count 3x)` });
     }
   } else {
     w.push({ field: "seo_focus_keyword", severity: "warning", message: "No focus keyword found" });
