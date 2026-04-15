@@ -68,7 +68,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   }
 
   const canonical = post.seo_canonical || `https://helplaw.com/resources/${slug}`;
-  const ogImage = post.seo_image || post.featured_image || "/assets/og-default.jpg";
+  const ogImage = post.seo_image || post.featured_image || "/sample/assets/og-default.jpg";
 
   return {
     title: post.seo_title || post.title,
