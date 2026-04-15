@@ -29,23 +29,23 @@ const placeholderPosts = [
 
 export function HomeBlogCards() {
   return (
-    <section className="py-[80px]  bg-[#1A365E]">
+    <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
       <div className="mx-auto max-w-7xl px-5">
-         <div className="mx-auto flex items-end justify-between gap-[30px] mb-[30px]">
+         <div className="mx-auto flex flex-wrap items-end justify-between gap-[20px] lg:gap-[30px] mb-[30px]">
           <div className="max-w-[796px] w-full">
-           <h2 className="heading text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-white">
+           <h2 className="heading text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-white">
               Information That  <span className="text-[#FFBF0F]">Can Help</span>
             </h2>
 
-            <p className="mt-[7px] font-normal text-[18px] leading-[140%] tracking-[-0.03em] text-white">
+            <p className="mt-[7px] font-normal text-[16px] lg:text-[18px] leading-[140%] tracking-[-0.03em] text-white">
              Our resources cover common questions about case eligibility, the legal process, and what to expect at each stage.
             </p>
           </div>
 
-          <div className="shrink-0 ml-auto">
+          <div className="shrink-0 lg:ml-auto">
 
             <Link
-              href="/resource"
+              href="/resources"
               className="inline-flex items-center gap-2 rounded-full font-medium text-[16px] leading-[100%] tracking-[0%] bg-white px-[18px] py-[15px] text-[#122D56] hover:text-white hover:bg-[#152E51] transition-all"
             >
               View All
@@ -78,7 +78,7 @@ export function HomeBlogCards() {
             <Link
               key={post.title}
               href={post.href}
-              className="group border border-[#F0F0F0] p-[24px] rounded-[20px] transition-all bg-white hover:bg-[#F6F6F6] hover:border-[#D4AD4A] "
+              className="group border border-[#F0F0F0] p-[16px] lg:p-[24px] rounded-[12px] md:rounded-[16px] lg:rounded-[20px] transition-all bg-white hover:bg-[#F6F6F6] hover:border-[#D4AD4A] "
             >
               <div className="">
                 <span className="heading font-normal text-[14px] leading-[100%] tracking-[0%] text-[#D4AD4A]">
@@ -144,14 +144,14 @@ export function HomeBlogCards() {
           ))}
         </div>
 
-        <div className="mt-8 text-center sm:hidden">
+        {/* <div className="mt-8 text-center sm:hidden">
           <Link
             href="/resources"
             className="text-sm font-semibold text-navy-700"
           >
             View All Resources
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

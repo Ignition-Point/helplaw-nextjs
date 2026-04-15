@@ -61,7 +61,7 @@ export function Header() {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-navy-700 hover:bg-navy-50"
+          className="lg:hidden inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-navy-50"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-expanded={mobileOpen}
           aria-label="Toggle navigation menu"

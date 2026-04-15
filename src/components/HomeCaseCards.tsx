@@ -51,16 +51,16 @@ const caseCategories = [
 
 export function HomeCaseCards() {
   return (
-    <section className="py-[80px]  bg-white">
+    <section className="py-[40px] md:py-[60px] lg:py-[80px]  bg-white">
       <div className="mx-auto max-w-7xl px-5">
-        <div className="mx-auto flex items-end justify-between gap-[30px] mb-[30px]">
+        <div className="mx-auto flex flex-wrap items-end justify-between gap-[20px] lg:gap-[30px] mb-[30px]">
           <div className="max-w-[950px] w-full">
-            <h2 className="heading text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-[#17335D]">
+            <h2 className="heading text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-[#17335D]">
               Cases We Are{" "}
               <span className="text-[#FFBF0F]">Currently Reviewing</span>
             </h2>
 
-            <p className="mt-[15px] text-[18px] leading-[140%] font-normal text-[#5C6F8B] max-w-[690px]">
+            <p className="mt-[15px] text-[16px] lg:text-[18px] leading-[140%] font-normal text-[#5C6F8B] max-w-[690px]">
               Attorneys in our network are actively reviewing cases in these
               areas. If you or someone you know experienced this kind of harm,
               you may have legal options.

@@ -34,9 +34,9 @@ const testimonials = [
 
 export function TestimonialSection() {
   return (
-    <section className="relative overflow-hidden bg-[#09162A] py-[80px]">
+    <section className="relative overflow-hidden bg-[#09162A] py-[40px] md:py-[60px] lg:py-[80px]">
       <div className="relative mx-auto max-w-7xl px-5">
-        <button className="testimonial-prev absolute left-[20px] top-1/2 z-10 flex h-[72px] w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white/80 transition hover:bg-white/10 md:left-0">
+        <button className="testimonial-prev absolute left-[20px] top-1/2 z-10 flex h-[48px] w-[48px] md:h-[58px] md:w-[58px] lg:h-[72px] lg:w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white/80 transition hover:bg-white/10 md:left-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"
@@ -51,7 +51,7 @@ export function TestimonialSection() {
           </svg>
         </button>
 
-        <button className="testimonial-next absolute right-[20px] top-1/2 z-10 flex h-[72px] w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white transition hover:bg-[#122036] md:right-0">
+        <button className="testimonial-next absolute right-[20px] top-1/2 z-10 flex h-[48px] w-[48px] md:h-[58px] md:w-[58px] lg:h-[72px] lg:w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white transition hover:bg-[#122036] md:right-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"
@@ -79,7 +79,7 @@ export function TestimonialSection() {
           {testimonials.map((item, index) => (
             <SwiperSlide key={index}>
               <div className="mx-auto flex max-w-[940px] flex-col items-center text-center">
-                <div className="mb-[20px] flex items-center justify-center gap-[6px]">
+                <div className="mb-[14px] md:mb-[16px] lg:mb-[20px] flex items-center justify-center gap-[6px]">
                   {Array.from({ length: item.rating }).map((_, starIndex) => (
                     <svg
                       key={starIndex}
@@ -98,7 +98,7 @@ export function TestimonialSection() {
                   ))}
                 </div>
 
-                <p className="font-normal text-[24px] leading-[152%] tracking-[-0.05em] text-center text-white mb-[40px]">
+                <p className="font-normal  text-[18px] md:text-[20px] lg:text-[24px] leading-[152%] tracking-[-0.05em] text-center text-white mb-[20px] md:mb-[30px] lg:mb-[40px]">
                   “{item.description}”
                 </p>
 
@@ -109,11 +109,11 @@ export function TestimonialSection() {
                     className="h-[65px] w-[65px] rounded-full object-cover"
                   />
 
-                  <h4 className="mt-[15px] font-medium text-[22px] leading-[90%] tracking-[-1.5px] text-center text-white">
+                  <h4 className="mt-[10px] lg:font-medium text-[16px] md:text-[18px] lg:text-[22px] leading-[90%] tracking-[-1.5px] text-center text-white">
                     {item.name}
                   </h4>
 
-                  <span className="mt-[12px] ont-medium text-[18px] leading-[90%] tracking-[-0.03em] text-center text-[#9DA2AA]">
+                  <span className="mt-[12px] font-medium text-[16px] md:text-[18px] leading-[90%] tracking-[-0.03em] text-center text-[#9DA2AA]">
                     {item.role}
                   </span>
                 </div>

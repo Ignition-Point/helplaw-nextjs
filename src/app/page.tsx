@@ -106,7 +106,7 @@ export default async function HomePage() {
               </svg>
             </div>
 
-            <div className="mt-15 flex flex-col sm:flex-row items-center gap-4">
+            <div className="mt-6 md:mt-15 flex flex-wrap items-center gap-4">
               <Link
                 href="/cases"
                 className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
@@ -123,11 +123,11 @@ export default async function HomePage() {
 
             {/* Attorney avatar row */}
           </div>
-          <div className="absolute right-0 bottom-[92px] flex items-center justify-center gap-3">
+          <div className="md:absolute right-0 bottom-[92px] mt-[20px] md:mt-[0]">
             <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[20px] backdrop-blur-[34px]">
-              <div className="flex items-center justify-between mb-8">
+              <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-8">
                 <div className="">
-                  <div className="font-bold text-[60px] leading-[50px]  capitalize text-[#FFBF0F] mb-3">
+                  <div className="font-bold text-[32px] md:text-[40px] lg:text-[60px] leading-[110%]  capitalize text-[#FFBF0F] mb-3">
                     150+
                   </div>
                   <p className="font-normal text-[16px] leading-[100%]  capitalize text-white">
@@ -152,7 +152,7 @@ export default async function HomePage() {
                   ))}
                 </div>
               </div>
-              <p className="font-bold text-[16px] leading-[120%] tracking-[-0.03em] text-white">
+              <p className="font-bold text-[14px] md:text-[16px] leading-[120%] tracking-[-0.03em] text-white">
                 Guidance from experienced attorneys and legal professionals
               </p>
             </div>
@@ -189,38 +189,39 @@ export default async function HomePage() {
         style={{
           backgroundImage: "url(/assets/alt/section-2-image-new.png)",
           backgroundSize: "cover",
-          backgroundPosition: "center -55px",
+          backgroundPosition: "center 0",
+          backgroundRepeat: "no-repeat",
         }}
       >
         {/* <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(9,22,42,0)_0%,#09162A_100%)]" /> */}
-        <div className="relative mx-auto max-w-7xl px-5 py-[80px]">
+        <div className="relative mx-auto max-w-7xl px-5 py-[40px] md:py-[60px] lg:py-[80px]">
           <div className="max-w-[578px] ml-auto">
-            <h2 className="heading font-bold text-[42px] leading-[1.2] align-middle capitalize text-white tracking-normal">
+            <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] align-middle capitalize text-white tracking-normal">
               The <span className="text-[#FFBF0F]">First Step</span> Is Always
               the Hardest...
             </h2>
 
-            <p className="mt-[20px] font-normal text-[18px] leading-[140%] text-white">
+            <p className="mt-[16px] md:mt-[18px] lg:mt-[20px] font-normal text-[16px] md:text-[18px] leading-[140%] text-white">
               If you’re here, it’s because something serious happened.
             </p>
-            <p className="mt-[18px] font-normal text-[18px] leading-[140%] text-white">
+            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-white">
               When you’re ready to take the first step, we carry the burden from
               there. We take on powerful companies and individuals who believe
               they’re untouchable.
             </p>
-            <p className="mt-[18px] font-normal text-[18px] leading-[140%] text-white">
+            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-white">
               We fight for accountability and we don’t stop until the work is
               done.
             </p>
 
             <Link
               href="/cases"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
+              className="mt-4 md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
             >
               Take the First Step Here
             </Link>
 
-            <p className="inline-flex items-center gap-[10px] mt-6 font-medium text-[18px] text-white">
+            <p className="inline-flex items-center gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[16px] text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -241,28 +242,28 @@ export default async function HomePage() {
       </section>
 
       {/* ─── "Guidance You Can Trust" ─── */}
-      <section className="bg-white overflow-hidden">
-        <div className="relative mx-auto max-w-7xl px-5 pt-24 pb-14">
-          <div className="grid lg:grid-cols-[48%_45.3%] gap-x-[80px]">
+      <section className="bg-white overflow-hidden py-[40px] md:py-[60px] lg:py-[80px]">
+        <div className="relative mx-auto max-w-7xl px-5">
+          <div className="grid lg:grid-cols-[48%_45.3%] gap-y-[30px] gap-x-[80px]">
             {/* Copy — right side */}
             <div className="flex items-center">
               <div className="w-full">
-                <h2 className="heading font-bold text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
+                <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
                   Guidance <span className="text-[#FFBF0F]">You Can Trust</span>
                   <br /> No Guesswork. No Pressure.
                 </h2>
 
                 <div className="max-w-[565px]">
-                  <p className="mt-[18px] font-normal text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885]">
                     When something serious happens, the hardest part is knowing
                     what to do next, especially when the other side has power.
                   </p>
-                  <p className="mt-[14px]font-normal text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[14px]font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885]">
                     Our role is simple: listen carefully, review what happened,
                     and help you understand whether accountability applies, and
                     whether compensation may be available.
                   </p>
-                  <p className="mt-[14px] font-normal text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[14px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885]">
                     You decide if and when to move forward. We handle the
                     complexity, the pressure, and the fight.
                   </p>
@@ -282,13 +283,13 @@ export default async function HomePage() {
                 src="/assets/alt/section-3-image-new.png"
                 alt="Help Law Group Team"
                 fill
-                className="rounded-[26px] object-cover object-top"
+                className="rounded-[14px] md:rounded-[16px] lg:rounded-[26px] object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 55vw"
               />
               {/* Fade-out gradient on right edge */}
               {/* <div className="hidden lg:block absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-white to-transparent" /> */}
               {/* Fade-out gradient on bottom for mobile */}
-              <div className="lg:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
+              {/* <div className="lg:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" /> */}
               <div className="absolute top-1/2 -translate-y-1/2 -left-[65px] right-auto flex items-center justify-center size-[123px] rounded-full bg-white shadow-[0px_0px_80px_0px_#0000001A]">
                 <div className="animate-spin [animation-duration:12s]">
                   <div className="relative flex items-center justify-center  ">
@@ -343,7 +344,7 @@ export default async function HomePage() {
           </div>
           <div className="mt-[30px]">
             <div className="grid md:grid-cols-3 gap-[21px]">
-              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[18px] px-[30px] py-[20px]">
+              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
                     src="/assets/alt/free-review.svg"
@@ -353,12 +354,12 @@ export default async function HomePage() {
                     className="rounded-full h-[70px] w-[70px] object-contain"
                   />
                 </div>
-                <p className="heading text-[20px] leading-[140%] font-medium text-[#161D27]">
+                <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
                   Free Review
                 </p>
               </div>
 
-              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[18px] px-[30px] py-[20px]">
+              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
                     src="/assets/alt/private-icon.svg"
@@ -368,12 +369,12 @@ export default async function HomePage() {
                     className="rounded-full h-[70px] w-[70px] object-contain"
                   />
                 </div>
-                <p className="heading text-[20px] leading-[140%] font-medium text-[#161D27]">
+                <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
                   Private & Confidential 
                 </p>
               </div>
 
-              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[18px] px-[30px] py-[20px]">
+              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
                     src="/assets/alt/no-obligation.svg"
@@ -383,7 +384,7 @@ export default async function HomePage() {
                     className="rounded-full h-[70px] w-[70px] object-contain"
                   />
                 </div>
-                <p className="heading text-[20px] leading-[140%] font-medium text-[#161D27]">
+                <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
                   No obligation
                 </p>
               </div>
@@ -394,23 +395,24 @@ export default async function HomePage() {
 
       {/* ─── How It Works ─── */}
       <section
-        className="relative overflow-hidden"
+        className="relative overflow-hidden py-[40px] md:py-[60px] lg:py-[80px]"
         style={{
           backgroundImage: "url(/assets/alt/section-4-image-new.png)",
           backgroundSize: "cover",
           backgroundPosition: "center top",
+           backgroundRepeat: "no-repeat",
         }}
       >
         <div className="-rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
 
-        <div className="relative mx-auto max-w-7xl px-5 py-[80px]">
+        <div className="relative mx-auto max-w-7xl px-5">
           <div className="max-w-[735px] w-full ml-auto">
             <div className="mb-[30px]">
-              <h2 className="heading font-bold text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
+              <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
                 <span className="text-[#FFBF0F]">Your Terms</span>
               </h2>
-              <p className="mt-[10px] font-normal text-[18px] leading-[140%] text-[#546885]">
+              <p className="mt-[10px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
                 You don’t need to prepare, explain everything, or make decisions
                 right now. This starts with a conversation - private,
                 respectful, and focused on listening.
@@ -454,7 +456,7 @@ export default async function HomePage() {
                     {step}
                   </span>
                   <div>
-                    <h3 className="font-bold text-[20px] leading-[1.2] align-middle text-[#132F55]">
+                    <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] align-middle text-[#132F55]">
                       {title}
                     </h3>
                     <p className="mt-[10px] font-normal text-[16px] leading-[140%] text-[#546885]">
@@ -465,10 +467,10 @@ export default async function HomePage() {
               ))}
             </div>
 
-            <div className="my-[28px]">
+            <div className="my-[20px] md:my-[26px] lg:my-[28px]">
               <Link
                 href="/cases"
-                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[10px] text-[18px] font-semibold text-white transition-all"
+                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[10px] text-[16px] lg:text-[18px] font-semibold text-white transition-all"
               >
                 Speak With Our Team
               </Link>
@@ -505,7 +507,7 @@ export default async function HomePage() {
       {/* ─── What Help Law Group Can Do For You + Lead Form ─── */}
       <section className="">
         <div className="">
-          <div className="grid lg:grid-cols-2 items-center">
+          <div className="grid md:grid-cols-[40%_60%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}
             <div
               className="relative z-10 py-[80px] px-[60px]"
@@ -513,6 +515,7 @@ export default async function HomePage() {
                 backgroundImage: "url(/assets/alt/contect-info-bg.jpg)",
                 backgroundSize: "cover",
                 backgroundPosition: "center top",
+                  backgroundRepeat: "no-repeat",
               }}
             >
               <div className="absolute bg-[#19263799] inset-0 -z-10" />
