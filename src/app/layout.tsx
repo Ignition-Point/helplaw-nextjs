@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     siteName: "Help Law Group",
     images: [
       {
-        url: "/assets/og-default.jpg",
+        url: "/sample/assets/og-default.jpg",
         width: 1200,
         height: 630,
         alt: "Help Law Group — Mass Tort & Class Action Attorneys",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/assets/og-default.jpg"],
+    images: ["/sample/assets/og-default.jpg"],
   },
   robots: {
     index: true,
@@ -64,7 +64,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Help Law Group",
               url: "https://helplaw.com",
-              logo: "https://helplaw.com/assets/og-default.jpg",
+              logo: "https://helplaw.com/sample/assets/og-default.jpg",
               description:
                 "Help Law Group connects survivors of abuse, unsafe products, and institutional harm with experienced mass tort and class action attorneys.",
               contactPoint: {

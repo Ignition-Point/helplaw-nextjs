@@ -56,7 +56,7 @@ export default async function HomePage() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/assets/alt/section-1-video.mp4" type="video/mp4" />
+          <source src="/sample/assets/alt/section-1-video.mp4" type="video/mp4" />
         </video>
         {/* Overlay to keep text legible */}
         <div className="absolute inset-0 bg-white/60" />
@@ -93,7 +93,7 @@ export default async function HomePage() {
               {["sarah-mitchell", "michael-chen", "jennifer-rodriguez", "david-park"].map((name) => (
                 <Image
                   key={name}
-                  src={`/assets/attorneys/${name}.jpg`}
+                  src={`/sample/assets/attorneys/${name}.jpg`}
                   alt="Attorney"
                   width={44}
                   height={44}
@@ -111,7 +111,7 @@ export default async function HomePage() {
       {/* ─── "When You Are Ready. We Are Here." ─── */}
       <section
         className="relative overflow-hidden"
-        style={{ backgroundImage: "url(/assets/alt/section-2-image.png)", backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundImage: "url(/sample/assets/alt/section-2-image.png)", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="absolute inset-0 bg-navy-950/80" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
@@ -152,7 +152,7 @@ export default async function HomePage() {
           {/* Image — left side with fade */}
           <div className="relative min-h-[400px] lg:min-h-[600px]">
             <Image
-              src="/assets/alt/section-3-image.png"
+              src="/sample/assets/alt/section-3-image.png"
               alt="Help Law Group Team"
               fill
               className="object-cover object-center"
@@ -206,7 +206,7 @@ export default async function HomePage() {
       {/* ─── How It Works ─── */}
       <section
         className="relative overflow-hidden"
-        style={{ backgroundImage: "url(/assets/alt/section-4-image.png)", backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundImage: "url(/sample/assets/alt/section-4-image.png)", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="absolute inset-0 bg-slate-warm-50/95" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
