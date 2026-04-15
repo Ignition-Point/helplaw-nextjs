@@ -26,11 +26,11 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/sample",
-        destination: "https://helplaw-nextjs-old.vercel.app",
+        destination: "https://helplaw-nextjs-old.vercel.app/sample",
       },
       {
         source: "/sample/:path*",
-        destination: "https://helplaw-nextjs-old.vercel.app/:path*",
+        destination: "https://helplaw-nextjs-old.vercel.app/sample/:path*",
       },
     ];
   },
