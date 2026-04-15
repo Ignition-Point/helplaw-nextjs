@@ -5,6 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { HomeCaseCards } from "@/components/HomeCaseCards";
 import { HomeBlogCards } from "@/components/HomeBlogCards";
 import { HomeLeadForm } from "@/components/HomeLeadForm";
+import { TestimonialSection } from "@/components/TestimonialSection";
 
 export const metadata: Metadata = {
   title: "Help Law Group | Mass Tort & Class Action Attorneys",
@@ -37,7 +38,7 @@ export default async function HomePage() {
           src="/assets/alt/hero-img.png"
           alt="Hero Image"
           fill
-          className="absolute inset-0 w-full h-full object-cover object-top"
+          className="absolute inset-0 w-full h-full object-cover object-top border-t-2 border-white"
         />
         {/* <video
           autoPlay
@@ -74,11 +75,11 @@ export default async function HomePage() {
                 5.0 <span className="text-[#C1C3C6]">from</span> 50+ reviews
               </span>
             </div>
-            <h1 className="heading font-bold text-[32px] md:text-[50px] lg:text-[70px] leading-[1.2]  align-middle capitalize text-white">
+            <h1 className="heading font-bold text-[32px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
               Standing With People When It Matters Most
             </h1>
 
-            <p className="max-w-[580px] my-[20px] font-medium text-[16px] md:text-[18px] lg:text-[20px] leading-[140%]  text-white">
+            <p className="max-w-[580px] mt-[5px] mb-[20px] font-medium text-[16px] md:text-[18px] lg:text-[20px] leading-[140%]  text-white">
               Clear guidance to help you understand what comes next. Whether
               caused by a product, a company, a platform, or an individual,
               we’re here to help and we don't back down.
@@ -133,7 +134,7 @@ export default async function HomePage() {
                     attorneys in our network
                   </p>
                 </div>
-                <div className="flex -space-x-3">
+                <div className="flex -space-x-5">
                   {[
                     "sarah-mitchell",
                     "michael-chen",
@@ -160,7 +161,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── Scrolling Trust Bar ─── */}
-      <div className="bg-[#FFBF0F] py-7 overflow-hidden">
+      <div className="bg-[#FFBF0F] py-4 overflow-hidden">
         <div className="animate-scroll-x flex whitespace-nowrap gap-5">
           {[...Array(4)].flatMap((_, setIdx) =>
             [
@@ -193,8 +194,8 @@ export default async function HomePage() {
       >
         {/* <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(9,22,42,0)_0%,#09162A_100%)]" /> */}
         <div className="relative mx-auto max-w-7xl px-5 py-[80px]">
-          <div className="max-w-[610px] ml-auto">
-            <h2 className="heading font-bold text-[42px] leading-[1.2] align-middle capitalize text-white">
+          <div className="max-w-[578px] ml-auto">
+            <h2 className="heading font-bold text-[42px] leading-[1.2] align-middle capitalize text-white tracking-normal">
               The <span className="text-[#FFBF0F]">First Step</span> Is Always
               the Hardest...
             </h2>
@@ -214,7 +215,7 @@ export default async function HomePage() {
 
             <Link
               href="/cases"
-              className="mt-8 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
+              className="mt-8 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
             >
               Take the First Step Here
             </Link>
@@ -268,7 +269,7 @@ export default async function HomePage() {
 
                   <Link
                     href="/cases"
-                    className="mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#152E51]"
+                    className="mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#1A365E]"
                   >
                     Start a Confidential Review
                   </Link>
@@ -290,15 +291,15 @@ export default async function HomePage() {
               <div className="lg:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" />
               <div className="absolute top-1/2 -translate-y-1/2 -left-[65px] right-auto flex items-center justify-center size-[123px] rounded-full bg-white shadow-[0px_0px_80px_0px_#0000001A]">
                 <div className="animate-spin [animation-duration:12s]">
-                <div className="relative flex items-center justify-center  ">
-                  <Image
-                    src="/assets/alt/Happy-iconCustomers.svg"
-                    alt="Icon"
-                    width={110}
-                    height={110}
-                    className="rounded-full h-[112px] w-[112px] object-contain"
-                  />
-                </div>
+                  <div className="relative flex items-center justify-center  ">
+                    <Image
+                      src="/assets/alt/Happy-iconCustomers.svg"
+                      alt="Icon"
+                      width={110}
+                      height={110}
+                      className="rounded-full h-[112px] w-[112px] object-contain"
+                    />
+                  </div>
                 </div>
 
                 <div className="absolute top-1/2 -translate-y-1/2 text-center mx-auto z-10">
@@ -400,10 +401,10 @@ export default async function HomePage() {
           backgroundPosition: "center top",
         }}
       >
-        <div className="absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
+        <div className="-rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-[80px]">
-          <div className="max-w-[735px] w-full">
+          <div className="max-w-[735px] w-full ml-auto">
             <div className="mb-[30px]">
               <h2 className="heading font-bold text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
@@ -416,7 +417,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-[7px] gap-y-[20px]">
+            <div className="grid grid-cols-1 gap-[20px] md:grid-cols-[333px_365px] lg:grid-cols-[333px_365px] xl:grid-cols-[350px_382px] justify-center gap-[7px] gap-y-[20px]">
               {[
                 {
                   step: "1",
@@ -433,8 +434,13 @@ export default async function HomePage() {
                 {
                   step: "3",
                   title: "You Decide Next Steps",
-                  description:
-                    "If options may be available, we explain them clearly. You decide how to move forward.",
+                  description: (
+                    <>
+                      If options may be available, we explain them clearly. You
+                      decide how to <br className="hidden md:block" /> move
+                      forward.
+                    </>
+                  ),
                 },
                 {
                   step: "4",
@@ -444,7 +450,7 @@ export default async function HomePage() {
                 },
               ].map(({ step, title, description }) => (
                 <div key={step} className="flex gap-[16px]">
-                  <span className="flex w-[34px] h-[46px] border border-[#FFBF0F] rounded-[120px] shrink-0 items-center justify-center rounded-fullfont-semibold text-[22px] leading-[26px] align-middle text-[#132F55] ">
+                  <span className="flex w-[25px] h-[38px] border border-[#FFBF0F] rounded-[120px] shrink-0 items-center justify-center rounded-full font-semibold text-[18px] leading-[120%] align-middle text-[#132F55] ">
                     {step}
                   </span>
                   <div>
@@ -462,7 +468,7 @@ export default async function HomePage() {
             <div className="my-[28px]">
               <Link
                 href="/cases"
-                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#152E51] px-[24px] py-[10px] text-[18px] font-semibold text-white transition-all"
+                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[10px] text-[18px] font-semibold text-white transition-all"
               >
                 Speak With Our Team
               </Link>
@@ -486,6 +492,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ─── TestimonialSection ─── */}
+      <TestimonialSection />
 
       {/* ─── Cases We Are Currently Reviewing ─── */}
       <HomeCaseCards />

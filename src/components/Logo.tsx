@@ -9,7 +9,7 @@ export function Logo({ variant = "dark" }: { variant?: "dark" | "light" }) {
         alt="Help Law Group"
         width={120}
         height={48}
-        className={variant === "light" ? "brightness-0 invert" : ""}
+        className={`max-h-[60px] w-auto ${variant === "light" ? "brightness-0 invert" : ""}`}
         priority
       />
     </Link>

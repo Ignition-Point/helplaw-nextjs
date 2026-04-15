@@ -70,7 +70,7 @@ export function HomeCaseCards() {
           <div className="shrink-0">
             <Link
               href="/cases"
-              className="inline-flex items-center gap-2 rounded-full font-medium text-[16px] leading-[100%] tracking-[0%] bg-[#122D56] px-[18px] py-[15px] text-white hover:bg-[#152E51] transition-all"
+              className="inline-flex items-center gap-2 rounded-full font-medium text-[16px] leading-[100%] tracking-[0%] bg-[#122D56] px-[18px] py-[15px] text-white hover:bg-[#1A365E] transition-all"
             >
               See All Cases
               <svg
