@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   }
 
   const canonical = caseData.seo_canonical || `https://helplaw.com/cases/${slug}`;
-  const ogImage = caseData.seo_image || "/sample/assets/og-default.jpg";
+  const ogImage = caseData.seo_image || "/assets/og-default.jpg";
 
   return {
     title: caseData.seo_title || `${caseData.title} | Free Case Review`,
@@ -135,7 +135,7 @@ function buildJsonLd(
     description: caseData.seo_description || caseData.hero_subheadline || "",
     url: `https://helplaw.com/cases/${caseData.slug}`,
     ...(caseData.updated_at ? { dateModified: caseData.updated_at } : {}),
-    ...(caseData.seo_image ? { image: caseData.seo_image } : { image: "/sample/assets/og-default.jpg" }),
+    ...(caseData.seo_image ? { image: caseData.seo_image } : { image: "/assets/og-default.jpg" }),
     author: { "@type": "Organization", name: "Help Law Group" },
     publisher: { "@type": "Organization", name: "Help Law Group", url: "https://helplaw.com" },
   });

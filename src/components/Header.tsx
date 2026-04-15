@@ -22,7 +22,7 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full bg-[linear-gradient(90deg,rgba(12,12,12,0.2)_0%,rgba(12,12,12,0.2)_100%)] backdrop-blur-[24px] py-[18px]">
       <div className="absolute -z-10 inset-0 h-[100px] w-full">
         <Image
-          src="/sample/assets/alt/header-bg.svg"
+          src="/assets/alt/header-bg.svg"
           alt="Header Shape"
           fill
           className=" object-cover w-full"

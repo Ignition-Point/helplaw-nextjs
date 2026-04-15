@@ -35,7 +35,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         {/* Background video */}
         <Image
-          src="/sample/assets/alt/hero-img.png"
+          src="/assets/alt/hero-img.png"
           alt="Hero Image"
           fill
           className="absolute inset-0 w-full h-full object-cover object-top border-t-2 border-white"
@@ -48,7 +48,7 @@ export default async function HomePage() {
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/sample/assets/alt/section-1-video.mp4" type="video/mp4" />
+          <source src="/assets/alt/section-1-video.mp4" type="video/mp4" />
         </video> */}
         {/* Overlay to keep text legible */}
         <div className="absolute inset-0 bg-[linear-gradient(127.16deg,rgba(9,22,42,0.7)_34.14%,rgba(9,22,42,0.62454)_39.46%,rgba(9,22,42,0)_57.5%,rgba(9,22,42,0.12601)_71.6%,rgba(9,22,42,0.378)_76.49%,rgba(9,22,42,0.63)_88.82%)]" />
@@ -143,7 +143,7 @@ export default async function HomePage() {
                   ].map((name) => (
                     <Image
                       key={name}
-                      src={`/sample/assets/attorneys/${name}.jpg`}
+                      src={`/assets/attorneys/${name}.jpg`}
                       alt="Attorney"
                       width={55}
                       height={55}
@@ -187,7 +187,7 @@ export default async function HomePage() {
       <section
         className="relative overflow-hidden"
         style={{
-          backgroundImage: "url(/sample/assets/alt/section-2-image-new.png)",
+          backgroundImage: "url(/assets/alt/section-2-image-new.png)",
           backgroundSize: "cover",
           backgroundPosition: "center 0",
           backgroundRepeat: "no-repeat",
@@ -280,7 +280,7 @@ export default async function HomePage() {
             {/* Image — left side with fade */}
             <div className="relative h-[400px] lg:h-[389px]">
               <Image
-                src="/sample/assets/alt/section-3-image-new.png"
+                src="/assets/alt/section-3-image-new.png"
                 alt="Help Law Group Team"
                 fill
                 className="rounded-[14px] md:rounded-[16px] lg:rounded-[26px] object-cover object-top"
@@ -294,7 +294,7 @@ export default async function HomePage() {
                 <div className="animate-spin [animation-duration:12s]">
                   <div className="relative flex items-center justify-center  ">
                     <Image
-                      src="/sample/assets/alt/Happy-iconCustomers.svg"
+                      src="/assets/alt/Happy-iconCustomers.svg"
                       alt="Icon"
                       width={110}
                       height={110}
@@ -347,7 +347,7 @@ export default async function HomePage() {
               <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
-                    src="/sample/assets/alt/free-review.svg"
+                    src="/assets/alt/free-review.svg"
                     alt="Icon"
                     width={70}
                     height={70}
@@ -362,7 +362,7 @@ export default async function HomePage() {
               <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
-                    src="/sample/assets/alt/private-icon.svg"
+                    src="/assets/alt/private-icon.svg"
                     alt="Icon"
                     width={70}
                     height={70}
@@ -377,7 +377,7 @@ export default async function HomePage() {
               <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
-                    src="/sample/assets/alt/no-obligation.svg"
+                    src="/assets/alt/no-obligation.svg"
                     alt="Icon"
                     width={70}
                     height={70}
@@ -397,7 +397,7 @@ export default async function HomePage() {
       <section
         className="relative overflow-hidden py-[40px] md:py-[60px] lg:py-[80px]"
         style={{
-          backgroundImage: "url(/sample/assets/alt/section-4-image-new.png)",
+          backgroundImage: "url(/assets/alt/section-4-image-new.png)",
           backgroundSize: "cover",
           backgroundPosition: "center top",
            backgroundRepeat: "no-repeat",
@@ -511,7 +511,7 @@ export default async function HomePage() {
             <div
               className="relative z-10 py-[40px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px]"
               style={{
-                backgroundImage: "url(/sample/assets/alt/contect-info-bg.jpg)",
+                backgroundImage: "url(/assets/alt/contect-info-bg.jpg)",
                 backgroundSize: "cover",
                 backgroundPosition: "center top",
                   backgroundRepeat: "no-repeat",

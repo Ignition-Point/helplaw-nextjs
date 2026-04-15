@@ -5,7 +5,7 @@ export function Logo({ variant = "dark" }: { variant?: "dark" | "light" }) {
   return (
     <Link href="/" className="flex items-center" aria-label="Help Law Group - Home">
       <Image
-        src="/sample/assets/logo-dark.png"
+        src="/assets/logo-dark.png"
         alt="Help Law Group"
         width={120}
         height={48}
