@@ -21,6 +21,19 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  async rewrites() {
+    return [
+      {
+        source: "/sample",
+        destination: "https://helplaw-nextjs-old.vercel.app",
+      },
+      {
+        source: "/sample/:path*",
+        destination: "https://helplaw-nextjs-old.vercel.app/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
