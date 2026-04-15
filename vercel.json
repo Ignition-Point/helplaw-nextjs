@@ -1,0 +1,13 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "rewrites": [
+      {
+        "source": "/sample",
+        "destination": "helplaw-nextjs-old.vercel.app"
+      },
+      {
+        "source": "/sample/:path*",
+        "destination": "https://helplaw-nextjs-old.vercel.app/:path*"
+      }
+    ]
+  }
