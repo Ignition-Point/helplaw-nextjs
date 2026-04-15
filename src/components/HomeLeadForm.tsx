@@ -56,7 +56,7 @@ export function HomeLeadForm() {
           required
           value={values.first_name}
           onChange={(e) => setValues((v) => ({ ...v, first_name: e.target.value }))}
-          className="w-full rounded-lg border border-navy-200 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:border-navy-400 focus:ring-1 focus:ring-navy-400 outline-none transition-colors"
+          className="w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors"
         />
         <input
           type="text"
@@ -64,16 +64,17 @@ export function HomeLeadForm() {
           required
           value={values.last_name}
           onChange={(e) => setValues((v) => ({ ...v, last_name: e.target.value }))}
-          className="w-full rounded-lg border border-navy-200 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:border-navy-400 focus:ring-1 focus:ring-navy-400 outline-none transition-colors"
+          className="w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors"
         />
       </div>
+      <div className="grid grid-cols-2 gap-4">
       <input
         type="email"
         placeholder="Email*"
         required
         value={values.email}
         onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
-        className="w-full rounded-lg border border-navy-200 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:border-navy-400 focus:ring-1 focus:ring-navy-400 outline-none transition-colors"
+        className="w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors"
       />
       <input
         type="tel"
@@ -81,19 +82,20 @@ export function HomeLeadForm() {
         required
         value={values.phone}
         onChange={(e) => setValues((v) => ({ ...v, phone: e.target.value }))}
-        className="w-full rounded-lg border border-navy-200 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:border-navy-400 focus:ring-1 focus:ring-navy-400 outline-none transition-colors"
+        className="w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors"
       />
+      </div>
       <textarea
         placeholder="BRIEFLY DESCRIBE YOUR CASE"
         rows={4}
         value={values.description}
         onChange={(e) => setValues((v) => ({ ...v, description: e.target.value }))}
-        className="w-full rounded-lg border border-navy-200 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:border-navy-400 focus:ring-1 focus:ring-navy-400 outline-none transition-colors resize-none"
+        className="w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors resize-none"
       />
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-lg bg-navy-800 px-6 py-3.5 text-base font-semibold text-white transition-all hover:bg-navy-700 disabled:opacity-50 shadow-sm"
+        className="cursor-pointer block w-full max-w-[300px] mx-auto rounded-[100px] bg-[#122D56] hover:bg-[#152E51] px-[20px] py-[12px] text-[18px] font-semibold tracking-[-0.02em] text-white"
       >
         {submitting ? (
           <span className="flex items-center justify-center gap-2">

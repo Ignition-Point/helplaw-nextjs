@@ -85,7 +85,12 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --radius-2xl: calc(var(--radius) + 8px);
+
 }
+.heading {
+  font-family: var(--font-montserrat);
+}
+
 
 :root {
   --radius: 0.5rem;
