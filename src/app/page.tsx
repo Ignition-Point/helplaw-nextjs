@@ -406,7 +406,7 @@ export default async function HomePage() {
         <div className="-rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5">
-          <div className="max-w-[735px] w-full ml-auto">
+          <div className="max-w-[650px] w-full ml-auto">
             <div className="mb-[30px]">
               <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
@@ -419,7 +419,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-[20px] md:grid-cols-[333px_365px] lg:grid-cols-[333px_365px] xl:grid-cols-[350px_382px] justify-center gap-[7px] gap-y-[20px]">
+            <div className="grid grid-cols-1 gap-[20px] md:grid-cols-[333px_365px] lg:grid-cols-[290px_335px] xl:grid-cols-[300px_335px] justify-center gap-[7px] gap-y-[20px]">
               {[
                 {
                   step: "1",
@@ -439,8 +439,7 @@ export default async function HomePage() {
                   description: (
                     <>
                       If options may be available, we explain them clearly. You
-                      decide how to <br className="hidden md:block" /> move
-                      forward.
+                      decide how to move forward.
                     </>
                   ),
                 },
@@ -510,7 +509,7 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-[40%_60%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}
             <div
-              className="relative z-10 py-[80px] px-[60px]"
+              className="relative z-10 py-[40px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px]"
               style={{
                 backgroundImage: "url(/assets/alt/contect-info-bg.jpg)",
                 backgroundSize: "cover",
@@ -519,7 +518,7 @@ export default async function HomePage() {
               }}
             >
               <div className="absolute bg-[#19263799] inset-0 -z-10" />
-              <h2 className="heading font-bold text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white">
+              <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white">
                 Why <span className="text-[#FFBF0F]">Clients Choose</span> Help
                 Law Group
               </h2>
@@ -582,8 +581,8 @@ export default async function HomePage() {
 
             {/* Right: Lead form */}
             <div>
-              <div className="px-[40px]">
-                <h3 className="font-bold text-[30px] leading-[60px] tracking-[0%] text-[#1F3044] text-center mb-[40px]">
+              <div className="py-[40px] md:py-[60px] lg:px-[40px]">
+                <h3 className="font-bold text-[30px] leading-[60px] tracking-[0%] text-[#1F3044] text-center mb-[18px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review
                 </h3>
                 <HomeLeadForm />
