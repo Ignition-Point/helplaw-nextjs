@@ -71,13 +71,13 @@ export default function YourRightsPage() {
       />
 
       {/* Hero */}
-      <section className="bg-navy-950 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-              Your Rights
+            <h1 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
+              <span className="text-[#FFBF0F]">Your</span> Rights
             </h1>
-            <p className="mt-4 text-lg text-navy-200 leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
               If you were seriously harmed by a person, company, or institution,
               you have legal rights. Understanding them is the first step.
             </p>
@@ -86,19 +86,19 @@ export default function YourRightsPage() {
       </section>
 
       {/* Right to take legal action */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 tracking-tight">
-            You have the right to take legal action.
+          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight">
+            You have the right to take <span className="text-[#FFBF0F]">legal action</span>.
           </h2>
-          <p className="mt-6 text-base sm:text-lg text-slate-warm-600 leading-relaxed">
+          <p className="mt-4 lg:mt-6 text-base sm:text-lg leading-[140%] font-normal text-[#5C6F8B] leading-relaxed">
             Civil lawsuits are separate from criminal proceedings. You do not
             need a police report, a criminal conviction, or any prior legal
             action to pursue a civil claim. The burden of proof in a civil case
             is lower than in a criminal one, which means cases can succeed even
             when no criminal charges were ever filed.
           </p>
-          <p className="mt-4 text-base sm:text-lg text-slate-warm-600 leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg leading-[140%] font-normal text-[#5C6F8B] leading-relaxed">
             Institutions — hospitals, churches, detention centers, platforms, and
             companies — can be held accountable alongside the individual who
             caused harm. When an organization knew about misconduct and failed to
@@ -108,7 +108,7 @@ export default function YourRightsPage() {
       </section>
 
       {/* Rights cards grid */}
-      <section className="py-16 sm:py-20 bg-slate-warm-50">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-slate-warm-50">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 gap-6">
             {RIGHTS_CARDS.map(({ icon: Icon, title, description }) => (
@@ -116,13 +116,13 @@ export default function YourRightsPage() {
                 key={title}
                 className="rounded-xl border border-navy-100 bg-white p-6 shadow-sm"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-navy-800 mb-4">
-                  <Icon className="h-5 w-5 text-gold-400" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#122D56] mb-4">
+                  <Icon className="h-5 w-5 text-[#FFBF0F]" />
                 </div>
-                <h3 className="text-base font-semibold text-navy-900">
+                <h3 className="text-base heading font-bold text-[#122D56] ">
                   {title}
                 </h3>
-                <p className="mt-2 text-sm text-slate-warm-500 leading-relaxed">
+                <p className="mt-2 text-sm  text-[#5C6F8B] leading-relaxed">
                   {description}
                 </p>
               </div>
@@ -132,19 +132,19 @@ export default function YourRightsPage() {
       </section>
 
       {/* Statute of limitations */}
-      <section className="py-16 sm:py-20 bg-navy-950">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            What about the statute of limitations?
+          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
+            What about the statute of <span className="text-[#FFBF0F]">limitations?</span>
           </h2>
-          <p className="mt-6 text-base sm:text-lg text-navy-200 leading-relaxed">
+          <p className="mt-6 text-base sm:text-lg text-white leading-relaxed">
             Every state sets deadlines for filing civil claims. For sexual abuse
             cases, many states have passed laws that extend or reopen those
             deadlines, sometimes by decades. Whether your situation falls within
             a current filing window depends on where the harm occurred, when it
             happened, and who was responsible.
           </p>
-          <p className="mt-4 text-base sm:text-lg text-navy-200 leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
             The only reliable way to know whether your claim is still within a
             filing window is to speak with an attorney. Do not assume it is too
             late without checking first.
@@ -153,28 +153,28 @@ export default function YourRightsPage() {
       </section>
 
       {/* Common questions about your rights */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 tracking-tight mb-8">
-            Common questions about your rights
+          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight mb-8">
+            Common questions about <span className="text-[#FFBF0F]">your rights</span>
           </h2>
           <FAQAccordion items={RIGHTS_FAQ} />
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 sm:py-20 bg-navy-950">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Ready to understand your options?
+          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
+            Ready to understand your <span className="text-[#FFBF0F]">options?</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-navy-200 leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
             A free case evaluation is a conversation. You share what happened and
             an attorney tells you what your rights are.
           </p>
           <Link
             href="/get-legal-help"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-gold-500 px-8 py-3.5 text-base font-semibold text-navy-950 transition-all hover:bg-gold-400"
+            className="mt-6 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
           >
             Get a Free Case Evaluation
           </Link>

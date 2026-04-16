@@ -19,13 +19,13 @@ export default function GetLegalHelpPage() {
       />
 
       {/* Hero */}
-      <section className="bg-navy-950 py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-              Get Legal Help
+            <h1 className="heading font-bold text-[32px] md:text-[42px] lg:text-[56px] leading-[1.2] align-middle capitalize text-white tracking-normal">
+              Get Legal <span className="text-[#FFBF0F]">Help</span>
             </h1>
-            <p className="mt-4 text-lg text-navy-200 leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
               Tell us what happened. A member of our team will review your
               situation and follow up with you directly. The first conversation
               is free.
@@ -35,7 +35,7 @@ export default function GetLegalHelpPage() {
       </section>
 
       {/* Trust bar */}
-      <div className="bg-navy-900 py-3">
+      <div className="bg-[#FFBF0F] py-4 ">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-x-8 gap-y-2">
           {[
             "Free case evaluation",
@@ -45,9 +45,9 @@ export default function GetLegalHelpPage() {
           ].map((item) => (
             <span
               key={item}
-              className="inline-flex items-center gap-2 text-sm text-white/90 font-medium"
+              className="inline-flex items-center gap-2 font-medium text-[16px] lg:text-[18px] leading-[100%]  text-center align-middle  text-[#122D56]"
             >
-              <span className="h-2 w-2 rounded-full bg-gold-500" />
+              <span className="h-2 w-2 rounded-full bg-[#122D56]" />
               {item}
             </span>
           ))}
@@ -55,20 +55,20 @@ export default function GetLegalHelpPage() {
       </div>
 
       {/* Form section */}
-      <section className="py-16 sm:py-20 bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="grid lg:grid-cols-2 gap-14 lg:gap-20">
             {/* Left: reassurance copy */}
             <div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-navy-900 tracking-tight">
-                You do not need to have everything figured out.
+              <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] text-[#122D56] leading-[1.2] tracking-tight">
+                You do not need to <span className="text-[#FFBF0F]">have everything</span> figured out.
               </h2>
-              <p className="mt-6 text-base sm:text-lg text-slate-warm-600 leading-relaxed">
+              <p className="mt-6 text-base sm:text-lg leading-[140%] text-[#546885] leading-relaxed">
                 Most people who reach out are not sure where to start. That is
                 okay. Share what you are comfortable sharing and we will take it
                 from there.
               </p>
-              <p className="mt-4 text-base sm:text-lg text-slate-warm-600 leading-relaxed">
+              <p className="mt-4 text-base sm:text-lg leading-[140%] text-[#546885] leading-relaxed">
                 Someone from our team reviews every inquiry and follows up
                 directly. We do not use automated systems.
               </p>
@@ -95,14 +95,14 @@ export default function GetLegalHelpPage() {
                   },
                 ].map(({ step, title, description }) => (
                   <div key={step} className="flex gap-4">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold-500 text-sm font-bold text-navy-950">
+                    <span className="flex w-[25px] h-[38px] border border-[#FFBF0F] rounded-[120px] shrink-0 items-center justify-center rounded-full font-semibold text-[18px] leading-[120%] align-middle text-[#132F55] ">
                       {step}
                     </span>
                     <div>
-                      <h3 className="text-base font-semibold text-navy-900">
+                      <h3 className="heading text-base font-semibold text-[#122D56]">
                         {title}
                       </h3>
-                      <p className="mt-1 text-sm text-slate-warm-500 leading-relaxed">
+                      <p className="mt-1 text-sm text-[#546885] leading-relaxed">
                         {description}
                       </p>
                     </div>
@@ -114,10 +114,10 @@ export default function GetLegalHelpPage() {
             {/* Right: form */}
             <div>
               <div className="rounded-2xl bg-white border border-navy-100 p-8 sm:p-10 shadow-xl">
-                <h3 className="text-2xl font-bold text-navy-900 mb-2">
+                <h3 className="text-2xl font-bold text-[#122D56] mb-2">
                   Request a Private Case Review
                 </h3>
-                <p className="text-sm text-slate-warm-500 mb-6">
+                <p className="text-sm text-[#546885] mb-6">
                   All information is confidential and will not be shared without
                   your consent.
                 </p>

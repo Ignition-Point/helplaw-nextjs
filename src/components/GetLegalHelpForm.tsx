@@ -62,13 +62,13 @@ export function GetLegalHelpForm() {
   }
 
   const inputClass =
-    "w-full rounded-lg border border-navy-200 px-4 py-3 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:border-navy-400 focus:ring-1 focus:ring-navy-400 outline-none transition-colors";
+    "w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-sm lg:text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-navy-800 mb-1.5">
+          <label className="block text-sm font-medium text-[#122D56] mb-1.5">
             First Name
           </label>
           <input
@@ -83,7 +83,7 @@ export function GetLegalHelpForm() {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-navy-800 mb-1.5">
+          <label className="block text-sm font-medium text-[#122D56] mb-1.5">
             Last Name
           </label>
           <input
@@ -100,7 +100,7 @@ export function GetLegalHelpForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-navy-800 mb-1.5">
+        <label className="block text-sm font-medium text-[#122D56] mb-1.5">
           Email
         </label>
         <input
@@ -116,7 +116,7 @@ export function GetLegalHelpForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-navy-800 mb-1.5">
+        <label className="block text-sm font-medium text-[#122D56] mb-1.5">
           Phone
         </label>
         <input
@@ -132,7 +132,7 @@ export function GetLegalHelpForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-navy-800 mb-1.5">
+        <label className="block text-sm font-medium text-[#122D56] mb-1.5">
           Type of harm
         </label>
         <select
@@ -154,7 +154,7 @@ export function GetLegalHelpForm() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-navy-800 mb-1.5">
+        <label className="block text-sm font-medium text-[#122D56] mb-1.5">
           Briefly describe your situation
         </label>
         <textarea
@@ -171,7 +171,7 @@ export function GetLegalHelpForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-lg bg-navy-800 px-6 py-3.5 text-base font-semibold text-white transition-all hover:bg-navy-700 disabled:opacity-50 shadow-sm"
+        className="cursor-pointer block w-full rounded-[100px] bg-[#122D56] hover:bg-[#1A365E] px-[20px] py-[12px] text-[18px] font-semibold tracking-[-0.02em] text-white"
       >
         {submitting ? (
           <span className="flex items-center justify-center gap-2">
