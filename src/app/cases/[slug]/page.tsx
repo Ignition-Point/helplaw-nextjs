@@ -19,12 +19,22 @@ import { LeadFormRenderer } from "@/components/LeadFormRenderer";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyTableOfContents } from "@/components/StickyTableOfContents";
 import { DesktopTocWrapper } from "@/components/DesktopTocWrapper";
+import {
+  getDummyCaseBySlug,
+  getDummyCaseFaqs,
+  getDummyCaseSections,
+} from "@/lib/dummyCases";
+import { shouldUseDummyCases } from "@/lib/featureFlags";
 
 export const revalidate = 60;
 
 // ─── Data fetching ───
 
 async function getCaseBySlug(slug: string) {
+  if (shouldUseDummyCases()) {
+    return getDummyCaseBySlug(slug);
+  }
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("cases")
@@ -36,6 +46,10 @@ async function getCaseBySlug(slug: string) {
 }
 
 async function getCaseSections(caseId: string) {
+  if (shouldUseDummyCases()) {
+    return getDummyCaseSections(caseId);
+  }
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("case_sections")
@@ -47,6 +61,10 @@ async function getCaseSections(caseId: string) {
 }
 
 async function getCaseFaqs(caseId: string) {
+  if (shouldUseDummyCases()) {
+    return getDummyCaseFaqs(caseId);
+  }
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("case_faqs")
@@ -172,8 +190,8 @@ export default async function CasePage({ params }: PageParams) {
   if (!caseData) notFound();
 
   const [sections, faqs] = await Promise.all([
-    getCaseSections(caseData.id),
-    getCaseFaqs(caseData.id),
+    getCaseSections(shouldUseDummyCases() ? slug : caseData.id),
+    getCaseFaqs(shouldUseDummyCases() ? slug : caseData.id),
   ]);
 
   const phoneNumber = caseData.phone_number || "1-800-HELP-LAW";

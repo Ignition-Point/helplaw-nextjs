@@ -1,0 +1,117 @@
+{
+  "resources": [
+    {
+      "id": "dummy-resource-clergy-guide",
+      "title": "What To Do After Abuse by a Clergy Member",
+      "slug": "what-to-do-after-abuse-by-a-clergy-member",
+      "excerpt": "A practical overview of the first steps survivors and families often consider after clergy abuse, including safety, support, and preserving helpful information.",
+      "category": "Clergy abuse",
+      "published_at": "2026-04-08T12:00:00.000Z"
+    },
+    {
+      "id": "dummy-resource-platform-liability",
+      "title": "Can a Social Platform Be Held Responsible for Harm to Teens?",
+      "slug": "can-a-social-platform-be-held-responsible-for-harm-to-teens",
+      "excerpt": "An introduction to how civil lawsuits examine platform design, warning signs of addiction-related harm, and the role of parents in early legal reviews.",
+      "category": "Online platforms",
+      "published_at": "2026-04-06T12:00:00.000Z"
+    },
+    {
+      "id": "dummy-resource-general-intake",
+      "title": "What Happens During a Free Case Review?",
+      "slug": "what-happens-during-a-free-case-review",
+      "excerpt": "A free case review is a private conversation focused on what happened, what questions you have, and whether a legal claim may be worth exploring.",
+      "category": "General",
+      "published_at": "2026-04-04T12:00:00.000Z"
+    }
+  ],
+  "resourceDetails": {
+    "what-to-do-after-abuse-by-a-clergy-member": {
+      "id": "dummy-resource-clergy-guide",
+      "title": "What To Do After Abuse by a Clergy Member",
+      "slug": "what-to-do-after-abuse-by-a-clergy-member",
+      "excerpt": "A practical overview of the first steps survivors and families often consider after clergy abuse, including safety, support, and preserving helpful information.",
+      "category": "Clergy abuse",
+      "author_name": "Help Law Group",
+      "featured_image": "/assets/alt/section-3-image-new.png",
+      "content": "<h2>Your safety and support come first</h2><p>If the abuse is ongoing or you feel unsafe, your immediate safety matters more than anything else. Reach out to trusted support, emergency services, or a local advocate if that is what you need right now.</p><p>Many survivors also choose to speak with a therapist, counselor, family member, or support organization before making any legal decision.</p><h2>Write down what you remember</h2><p>You do not need a perfect timeline, but it can help to note names, locations, approximate dates, related institutions, and anything that may help you reconstruct what happened later.</p><p>Even partial details can become important when a legal team starts reviewing whether an institution had notice of prior misconduct or failed to protect others.</p><h2>Keep records without pressuring yourself</h2><p>Helpful records may include emails, texts, journal entries, church bulletins, school records, therapy records, or contact information for people who may remember the situation. You do not need to gather everything before asking questions.</p><h3>Why this matters legally</h3><p>Civil claims often focus not only on the abuser, but also on whether the institution ignored red flags, concealed complaints, or placed others in danger.</p>",
+      "seo_title": "What To Do After Abuse by a Clergy Member",
+      "seo_description": "Learn the first practical steps survivors and families often consider after clergy abuse, and how institutions may be investigated in civil claims.",
+      "seo_canonical": "https://helplaw.com/resources/what-to-do-after-abuse-by-a-clergy-member",
+      "seo_image": "/assets/og-default.jpg",
+      "seo_noindex": false,
+      "published_at": "2026-04-08T12:00:00.000Z",
+      "updated_at": "2026-04-10T12:00:00.000Z",
+      "created_at": "2026-04-08T12:00:00.000Z",
+      "faqs": [
+        {
+          "id": "dummy-resource-faq-1",
+          "blog_post_id": "dummy-resource-clergy-guide",
+          "question": "Do I need to decide about a lawsuit immediately?",
+          "answer": "No. Many people begin with support, information gathering, and a private legal consultation before deciding whether they want to move forward.",
+          "sort_order": 0
+        },
+        {
+          "id": "dummy-resource-faq-2",
+          "blog_post_id": "dummy-resource-clergy-guide",
+          "question": "What if I only remember part of what happened?",
+          "answer": "That is common. A legal review can still begin with partial information such as names, places, age ranges, or the institution involved.",
+          "sort_order": 1
+        }
+      ]
+    },
+    "can-a-social-platform-be-held-responsible-for-harm-to-teens": {
+      "id": "dummy-resource-platform-liability",
+      "title": "Can a Social Platform Be Held Responsible for Harm to Teens?",
+      "slug": "can-a-social-platform-be-held-responsible-for-harm-to-teens",
+      "excerpt": "An introduction to how civil lawsuits examine platform design, warning signs of addiction-related harm, and the role of parents in early legal reviews.",
+      "category": "Online platforms",
+      "author_name": "Help Law Group",
+      "featured_image": "/assets/alt/hero-img.png",
+      "content": "<h2>What these lawsuits look at</h2><p>Platform-harm cases often examine whether a company designed its product to maximize engagement while understanding the risks to young users. This can include recommendation systems, push notifications, endless feeds, social validation loops, and weak age protections.</p><h2>What kinds of harm may be relevant</h2><p>Families often raise concerns about anxiety, depression, eating-disorder symptoms, sleep disruption, social withdrawal, compulsive use, and self-harm. The key legal question is usually whether the platform helped create or intensify foreseeable harm.</p><h2>What parents can do early</h2><p>Parents often begin by saving screenshots, documenting changes in behavior, noting the platforms involved, and preserving relevant medical or school records. A legal review can help sort out what matters most.</p><h3>Why timing matters</h3><p>Case timelines, user age, and when harm became clear can all affect how a claim is evaluated.</p>",
+      "seo_title": "Can a Social Platform Be Held Responsible for Harm to Teens?",
+      "seo_description": "Learn how civil lawsuits evaluate social platform design, teen mental health harm, and what records families often preserve early on.",
+      "seo_canonical": "https://helplaw.com/resources/can-a-social-platform-be-held-responsible-for-harm-to-teens",
+      "seo_image": "/assets/og-default.jpg",
+      "seo_noindex": false,
+      "published_at": "2026-04-06T12:00:00.000Z",
+      "updated_at": "2026-04-09T12:00:00.000Z",
+      "created_at": "2026-04-06T12:00:00.000Z",
+      "faqs": [
+        {
+          "id": "dummy-resource-faq-3",
+          "blog_post_id": "dummy-resource-platform-liability",
+          "question": "Do families need app usage data before asking for help?",
+          "answer": "No. Usage records can be helpful, but many case reviews start with a basic timeline, the platforms involved, and the types of harm the family observed.",
+          "sort_order": 0
+        },
+        {
+          "id": "dummy-resource-faq-4",
+          "blog_post_id": "dummy-resource-platform-liability",
+          "question": "Are these claims only about one social media company?",
+          "answer": "No. Eligibility depends on the specific platform, product features, user age, timeline, and injuries involved.",
+          "sort_order": 1
+        }
+      ]
+    },
+    "what-happens-during-a-free-case-review": {
+      "id": "dummy-resource-general-intake",
+      "title": "What Happens During a Free Case Review?",
+      "slug": "what-happens-during-a-free-case-review",
+      "excerpt": "A free case review is a private conversation focused on what happened, what questions you have, and whether a legal claim may be worth exploring.",
+      "category": "General",
+      "author_name": "Help Law Group",
+      "featured_image": "/assets/alt/section-2-image-new.png",
+      "content": "<h2>It starts with your story</h2><p>You share what happened in your own words. You do not need legal language, a complete timeline, or every document before reaching out.</p><h2>The goal is clarity, not pressure</h2><p>A case review is meant to help you understand whether your situation may fit an active case or civil claim. It is not a commitment to hire a lawyer or file a lawsuit.</p><h2>You can ask practical questions</h2><p>People often ask about deadlines, privacy, fees, what evidence matters, and what would happen next if they decide to move forward.</p>",
+      "seo_title": "What Happens During a Free Case Review?",
+      "seo_description": "See what a free case review usually covers, what information helps, and why the first conversation is about clarity rather than pressure.",
+      "seo_canonical": "https://helplaw.com/resources/what-happens-during-a-free-case-review",
+      "seo_image": "/assets/og-default.jpg",
+      "seo_noindex": false,
+      "published_at": "2026-04-04T12:00:00.000Z",
+      "updated_at": "2026-04-07T12:00:00.000Z",
+      "created_at": "2026-04-04T12:00:00.000Z",
+      "faqs": []
+    }
+  }
+}

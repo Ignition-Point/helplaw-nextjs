@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ResourceGrid } from "@/components/ResourceGrid";
+import { getDummyResources } from "@/lib/dummyResources";
+import { shouldUseDummyResources } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
   title: "Resources",
@@ -12,6 +14,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 async function getPosts() {
+  if (shouldUseDummyResources()) {
+    return getDummyResources();
+  }
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("blog_posts")

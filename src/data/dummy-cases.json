@@ -1,0 +1,351 @@
+{
+  "cases": [
+    {
+      "id": "dummy-case-nyc-clergy-abuse",
+      "title": "NYC Clergy Abuse Lawsuits",
+      "slug": "nyc-clergy-abuse-lawsuits",
+      "case_type": "sexual-abuse",
+      "category": "Clergy and Religious Institution Abuse",
+      "hero_eyebrow": "Now Reviewing Claims",
+      "hero_headline": "NYC Clergy Abuse Lawsuits",
+      "hero_subheadline": "<p>Survivors abused by clergy or religious institutions in New York City may still have options to pursue accountability and compensation.</p>",
+      "hero_background_image": "/assets/alt/section-2-image-new.png",
+      "page_type": "content",
+      "status": "active",
+      "phone_number": "1-800-HELP-LAW",
+      "display_number": "1-800-HELP-LAW",
+      "seo_title": "NYC Clergy Abuse Lawsuits | Free Case Review",
+      "seo_description": "Learn how NYC clergy abuse lawsuits work, who may qualify, and what evidence can help support a confidential civil claim.",
+      "seo_canonical": "https://helplaw.com/cases/nyc-clergy-abuse-lawsuits",
+      "seo_image": "/assets/og-default.jpg",
+      "seo_schema_type": "LegalService",
+      "updated_at": "2026-04-10T12:00:00.000Z",
+      "final_cta_headline": "Speak With Our Team in Confidence",
+      "final_cta_button": "Start Your Free Case Review",
+      "final_cta_background_image": "/assets/alt/contect-info-bg.jpg"
+    },
+    {
+      "id": "dummy-case-social-media-addiction",
+      "title": "Social Media Addiction Lawsuits",
+      "slug": "social-media-addiction-lawsuits",
+      "case_type": "platform-harm",
+      "category": "Social Media Addiction",
+      "hero_eyebrow": "Investigating Harm",
+      "hero_headline": "Social Media Addiction Lawsuits",
+      "hero_subheadline": "<p>Families are filing claims over design choices that may have contributed to compulsive use, mental health decline, and self-harm among young users.</p>",
+      "hero_background_image": "/assets/alt/hero-img.png",
+      "page_type": "content",
+      "status": "active",
+      "phone_number": "1-800-HELP-LAW",
+      "display_number": "1-800-HELP-LAW",
+      "seo_title": "Social Media Addiction Lawsuits | Free Case Review",
+      "seo_description": "See who may qualify for a social media addiction lawsuit and what facts attorneys often review when evaluating platform-harm claims.",
+      "seo_canonical": "https://helplaw.com/cases/social-media-addiction-lawsuits",
+      "seo_image": "/assets/og-default.jpg",
+      "seo_schema_type": "LegalService",
+      "updated_at": "2026-04-09T12:00:00.000Z",
+      "final_cta_headline": "Find Out Whether Your Family May Qualify",
+      "final_cta_button": "Request a Confidential Review",
+      "final_cta_background_image": "/assets/alt/section-4-image-new.png"
+    }
+  ],
+  "caseDetails": {
+    "nyc-clergy-abuse-lawsuits": {
+      "sections": [
+        {
+          "id": "dummy-section-nyc-hero",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "hero-with-form",
+          "sort_order": 0,
+          "visible": true,
+          "content": {
+            "eyebrow": "Now Reviewing Claims",
+            "headline": "NYC Clergy Abuse Lawsuits",
+            "subheadline": "<p>Survivors abused by clergy or religious institutions in New York City may still have options to pursue accountability and compensation.</p>",
+            "content": "<p>Our team helps people understand whether a church, diocese, school, or religious order may share responsibility for the abuse and the harm that followed.</p>",
+            "backgroundImage": "/assets/alt/section-2-image-new.png",
+            "leadFormId": "",
+            "anchorId": "",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-nyc-toc",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "table-of-contents",
+          "sort_order": 1,
+          "visible": true,
+          "content": {
+            "headline": "Table of Contents",
+            "items": "Who May Qualify | who-may-qualify\nWhy Institutions Can Be Liable | why-institutions-can-be-liable\nWhat Evidence Helps | what-evidence-helps\nWhat You Need to Know | what-you-need-to-know\nFrequently Asked Questions | frequently-asked-questions",
+            "variant": "",
+            "anchorId": "",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-nyc-narrative",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "narrative",
+          "sort_order": 2,
+          "visible": true,
+          "content": {
+            "eyebrow": "Eligibility",
+            "headline": "Who May Qualify",
+            "content": "<p>You may have a claim if you were abused by a clergy member, church employee, volunteer, or another person placed in a position of trust by a religious institution. Civil claims may also be possible when the institution ignored complaints, transferred the abuser, or failed to protect children and vulnerable adults.</p><p>Even if the abuse happened years ago, recent changes in the law and case-specific facts may still matter.</p>",
+            "variant": "light",
+            "anchorId": "who-may-qualify",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-nyc-side-image",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "narrative-side-image",
+          "sort_order": 3,
+          "visible": true,
+          "content": {
+            "eyebrow": "Accountability",
+            "headline": "Why Institutions Can Be Liable",
+            "content": "<p>These cases are not only about the individual abuser. They may also involve the larger institution when leaders knew of prior misconduct, failed to supervise dangerous individuals, or concealed abuse complaints.</p><p>Civil lawsuits can expose patterns of negligence and push institutions to answer for decisions that put others at risk.</p>",
+            "imageUrl": "/assets/alt/section-3-image-new.png",
+            "imagePosition": "right",
+            "variant": "light",
+            "anchorId": "why-institutions-can-be-liable",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-nyc-conditions",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "condition-grid",
+          "sort_order": 4,
+          "visible": true,
+          "content": {
+            "headline": "What Evidence Helps",
+            "subheadline": "You do not need every record before speaking with someone, but these details often help attorneys evaluate a claim.",
+            "conditions": "Names of the church, school, parish, order, or program involved\nApproximate dates or age ranges when the abuse occurred\nAny prior reports, letters, emails, or disclosures to trusted adults\nTherapy records, medical records, or personal notes documenting harm\nNames of possible witnesses or others abused by the same person",
+            "variant": "dark",
+            "anchorId": "what-evidence-helps",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-nyc-knowledge",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "what-you-need-to-know",
+          "sort_order": 5,
+          "visible": true,
+          "content": {
+            "headline": "What You Need to Know",
+            "content": "<p>Speaking with a legal team does not obligate you to file a lawsuit. It is simply a way to understand whether a civil claim may be possible, what deadlines could apply, and whether an institution may be legally responsible.</p><p>Conversations are private, and you can share only what you are comfortable sharing at this stage.</p>",
+            "variant": "light",
+            "anchorId": "what-you-need-to-know",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-nyc-faq",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "faq-section",
+          "sort_order": 6,
+          "visible": true,
+          "content": {
+            "headline": "Frequently Asked Questions",
+            "variant": "",
+            "anchorId": "frequently-asked-questions",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-nyc-final",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "section_type": "final-cta-band",
+          "sort_order": 7,
+          "visible": true,
+          "content": {
+            "headline": "Speak With Our Team in Confidence",
+            "content": "<p>If you are ready to understand your options, start with a private conversation. There is no pressure and no fee for an initial review.</p>",
+            "ctaText": "Start Your Free Case Review",
+            "backgroundImage": "/assets/alt/contect-info-bg.jpg",
+            "variant": "dark",
+            "anchorId": "",
+            "textAlign": ""
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "id": "dummy-case-faq-1",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "question": "Can I still bring a claim if the abuse happened a long time ago?",
+          "answer": "Possibly. Time limits depend on the state, the type of claim, and whether any revival windows or exceptions apply. An attorney can review your timeline and explain what may still be possible.",
+          "sort_order": 0
+        },
+        {
+          "id": "dummy-case-faq-2",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "question": "Do I need police reports or church records before I ask for help?",
+          "answer": "No. Many survivors start with only partial information. A legal team can help identify what documents may exist and what evidence may be worth gathering.",
+          "sort_order": 1
+        },
+        {
+          "id": "dummy-case-faq-3",
+          "case_id": "dummy-case-nyc-clergy-abuse",
+          "question": "Can a church or diocese be sued even if the abuser is dead?",
+          "answer": "In some cases, yes. Civil liability may focus on what the institution knew, what it failed to do, and how its decisions exposed others to danger.",
+          "sort_order": 2
+        }
+      ]
+    },
+    "social-media-addiction-lawsuits": {
+      "sections": [
+        {
+          "id": "dummy-section-sm-hero",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "hero-with-form",
+          "sort_order": 0,
+          "visible": true,
+          "content": {
+            "eyebrow": "Investigating Harm",
+            "headline": "Social Media Addiction Lawsuits",
+            "subheadline": "<p>Families are filing claims over design choices that may have contributed to compulsive use, mental health decline, and self-harm among young users.</p>",
+            "content": "<p>These cases often focus on whether platforms knowingly used features that intensified engagement while failing to warn users and parents about foreseeable risks.</p>",
+            "backgroundImage": "/assets/alt/hero-img.png",
+            "leadFormId": "",
+            "anchorId": "",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-sm-toc",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "table-of-contents",
+          "sort_order": 1,
+          "visible": true,
+          "content": {
+            "headline": "Table of Contents",
+            "items": "Who These Cases Focus On | who-these-cases-focus-on\nHow Platforms May Be Held Responsible | how-platforms-may-be-held-responsible\nCommon Warning Signs | common-warning-signs\nWhat You Need to Know | what-you-need-to-know\nFrequently Asked Questions | frequently-asked-questions",
+            "variant": "",
+            "anchorId": "",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-sm-narrative",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "narrative-with-image",
+          "sort_order": 2,
+          "visible": true,
+          "content": {
+            "eyebrow": "Eligibility",
+            "headline": "Who These Cases Focus On",
+            "content": "<p>Many claims involve teenagers or young adults who experienced severe anxiety, depression, eating-disorder behaviors, sleep disruption, compulsive use, or self-harm after prolonged exposure to platform features designed to maximize engagement.</p><p>Parents may also have questions about whether they can pursue a claim on behalf of a child.</p>",
+            "imageUrl": "/assets/alt/section-4-image-new.png",
+            "variant": "dark",
+            "anchorId": "who-these-cases-focus-on",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-sm-side",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "narrative-side-image",
+          "sort_order": 3,
+          "visible": true,
+          "content": {
+            "eyebrow": "Platform Design",
+            "headline": "How Platforms May Be Held Responsible",
+            "content": "<p>Lawsuits may examine features such as infinite scroll, push notifications, algorithmic amplification, social comparison loops, and weak age-safety controls. The legal question is often whether the company understood these risks and still prioritized growth over user safety.</p>",
+            "imageUrl": "/assets/alt/section-2-image-new.png",
+            "imagePosition": "left",
+            "variant": "light",
+            "anchorId": "how-platforms-may-be-held-responsible",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-sm-checklist",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "qualification-checklist",
+          "sort_order": 4,
+          "visible": true,
+          "content": {
+            "headline": "Common Warning Signs",
+            "items": "Compulsive daily use that became hard to control\nDeclining mental health linked to platform use\nSleep loss, isolation, or severe mood changes\nDocumented self-harm, suicidal ideation, or eating-disorder symptoms\nA parent or guardian looking into options for a minor",
+            "ctaText": "See If You May Qualify",
+            "variant": "light",
+            "anchorId": "common-warning-signs",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-sm-knowledge",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "what-you-need-to-know",
+          "sort_order": 5,
+          "visible": true,
+          "content": {
+            "headline": "What You Need to Know",
+            "content": "<p>You do not need a final diagnosis or a complete package of records before asking questions. What matters most at the start is understanding the timeline, the platform involved, the age of the user, and the kinds of harm that followed.</p>",
+            "variant": "light",
+            "anchorId": "what-you-need-to-know",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-sm-faq",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "faq-section",
+          "sort_order": 6,
+          "visible": true,
+          "content": {
+            "headline": "Frequently Asked Questions",
+            "variant": "",
+            "anchorId": "frequently-asked-questions",
+            "textAlign": ""
+          }
+        },
+        {
+          "id": "dummy-section-sm-final",
+          "case_id": "dummy-case-social-media-addiction",
+          "section_type": "final-cta-band",
+          "sort_order": 7,
+          "visible": true,
+          "content": {
+            "headline": "Find Out Whether Your Family May Qualify",
+            "content": "<p>We can review what happened, answer your questions, and explain whether the facts may fit an active platform-harm lawsuit.</p>",
+            "ctaText": "Request a Confidential Review",
+            "backgroundImage": "/assets/alt/section-4-image-new.png",
+            "variant": "dark",
+            "anchorId": "",
+            "textAlign": ""
+          }
+        }
+      ],
+      "faqs": [
+        {
+          "id": "dummy-case-faq-4",
+          "case_id": "dummy-case-social-media-addiction",
+          "question": "Do these lawsuits only apply to children?",
+          "answer": "Many active claims focus on harm to minors and young adults, but case eligibility depends on the person involved, the platform, the timeline, and the nature of the injuries.",
+          "sort_order": 0
+        },
+        {
+          "id": "dummy-case-faq-5",
+          "case_id": "dummy-case-social-media-addiction",
+          "question": "What kinds of records may help support a claim?",
+          "answer": "Attorneys may review therapy records, hospitalization records, school records, screenshots, usage history, and communications showing how platform use affected daily life and mental health.",
+          "sort_order": 1
+        },
+        {
+          "id": "dummy-case-faq-6",
+          "case_id": "dummy-case-social-media-addiction",
+          "question": "Can a parent ask for a review even if they are unsure about filing a case?",
+          "answer": "Yes. An initial review is meant to help families understand their options, not pressure them into litigation.",
+          "sort_order": 2
+        }
+      ]
+    }
+  }
+}

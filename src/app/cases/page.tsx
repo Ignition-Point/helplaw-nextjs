@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CaseGrid } from "@/components/CaseGrid";
+import { getDummyCases } from "@/lib/dummyCases";
+import { shouldUseDummyCases } from "@/lib/featureFlags";
 
 export const metadata: Metadata = {
   title: "Our Cases",
@@ -13,6 +15,10 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 async function getCases() {
+  if (shouldUseDummyCases()) {
+    return getDummyCases();
+  }
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("cases")

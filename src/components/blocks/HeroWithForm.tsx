@@ -1,5 +1,6 @@
 import { Phone } from "lucide-react";
 import { LeadFormRenderer } from "@/components/LeadFormRenderer";
+import { shouldUseDummyCases } from "@/lib/featureFlags";
 
 interface HeroWithFormProps {
   backgroundImage?: string;
@@ -26,6 +27,8 @@ export function HeroWithForm({
   phoneNumber = "1-800-HELP-LAW",
   displayNumber = "1-800-HELP-LAW",
 }: HeroWithFormProps) {
+  const shouldShowLeadForm = Boolean(leadFormId) || shouldUseDummyCases();
+
   return (
     <section className="relative overflow-hidden bg-navy-950">
       {/* Background image layer */}
@@ -103,10 +106,27 @@ export function HeroWithForm({
               <p className="text-sm text-slate-warm-500 mb-6">
                 Fill out the form below to see if you qualify
               </p>
-              {leadFormId ? (
-                <LeadFormRenderer leadFormId={leadFormId} caseId={caseId} caseSlug={caseSlug} />
+              {shouldShowLeadForm ? (
+                <LeadFormRenderer
+                  leadFormId={leadFormId || "__dummy_case_form__"}
+                  caseId={caseId}
+                  caseSlug={caseSlug}
+                />
               ) : (
-                <p className="text-sm text-slate-warm-400 italic">No form configured.</p>
+                <div className="rounded-lg border border-slate-200 bg-slate-50 p-5 text-center">
+                  <p className="text-sm font-medium text-navy-900">
+                    Speak with our team for a free, confidential review.
+                  </p>
+                  <a
+                    href={`tel:${phoneNumber}`}
+                    className="mt-4 inline-flex items-center justify-center rounded-md bg-gold-500 px-5 py-3 text-sm font-semibold text-navy-950 transition-all hover:bg-gold-400"
+                  >
+                    Call {displayNumber}
+                  </a>
+                  <p className="mt-3 text-xs text-slate-warm-400">
+                    No pressure. No obligation. No fee unless you win.
+                  </p>
+                </div>
               )}
               <div className="mt-4 pt-4 border-t border-slate-200 flex items-center justify-center gap-4 text-xs text-slate-warm-400">
                 <span className="inline-flex items-center gap-1.5"><svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg>Secure</span>

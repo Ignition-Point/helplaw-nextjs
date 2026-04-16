@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Loader2, CheckCircle } from "lucide-react";
+import { shouldUseDummyCases } from "@/lib/featureFlags";
 
 interface LeadFormRendererProps {
   leadFormId: string;
@@ -37,6 +38,45 @@ interface LeadForm {
   thank_you_message?: string;
 }
 
+const DUMMY_LEAD_FORM_ID = "__dummy_case_form__";
+const dummyLeadForm: LeadForm = {
+  id: DUMMY_LEAD_FORM_ID,
+  name: "Dummy Case Review",
+  fields: [
+    {
+      key: "fullName",
+      type: "text",
+      label: "Full Name",
+      required: true,
+      placeholder: "Enter your full name",
+    },
+    {
+      key: "phone",
+      type: "phone",
+      label: "Phone",
+      required: true,
+      placeholder: "Enter your phone number",
+    },
+    {
+      key: "email",
+      type: "email",
+      label: "Email",
+      required: true,
+      placeholder: "Enter your email address",
+    },
+    {
+      key: "state",
+      type: "text",
+      label: "State",
+      required: true,
+      placeholder: "Enter your state",
+    },
+  ],
+  cta_text: "Get Your Free Case Review",
+  thank_you_message:
+    "Your demo information has been submitted. A member of our team will reach out shortly.",
+};
+
 export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRendererProps) {
   const [form, setForm] = useState<LeadForm | null>(null);
   const [loading, setLoading] = useState(true);
@@ -45,6 +85,12 @@ export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRende
   const [values, setValues] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    if (leadFormId === DUMMY_LEAD_FORM_ID && shouldUseDummyCases()) {
+      setForm(dummyLeadForm);
+      setLoading(false);
+      return;
+    }
+
     const supabase = createClient();
     supabase
       .from("lead_forms")
@@ -63,6 +109,12 @@ export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRende
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form) return;
+
+    if (form.id === DUMMY_LEAD_FORM_ID) {
+      setSubmitted(true);
+      return;
+    }
+
     setSubmitting(true);
 
     try {

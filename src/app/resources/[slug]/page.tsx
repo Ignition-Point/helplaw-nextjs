@@ -7,12 +7,21 @@ import { FAQSection } from "@/components/blocks/FAQSection";
 import { ArrowLeft } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { StickyTableOfContents } from "@/components/StickyTableOfContents";
+import {
+  getDummyResourceBySlug,
+  getDummyResourceFaqs,
+} from "@/lib/dummyResources";
+import { shouldUseDummyResources } from "@/lib/featureFlags";
 
 export const revalidate = 60;
 
 type PageParams = { params: Promise<{ slug: string }> };
 
 async function getPost(slug: string) {
+  if (shouldUseDummyResources()) {
+    return getDummyResourceBySlug(slug);
+  }
+
   const supabase = await createClient();
 
   // Try exact slug match first
@@ -35,6 +44,10 @@ async function getPost(slug: string) {
 }
 
 async function getPostFaqs(postId: string) {
+  if (shouldUseDummyResources()) {
+    return getDummyResourceFaqs(postId);
+  }
+
   const supabase = await createClient();
   const { data } = await supabase
     .from("blog_post_faqs")
@@ -119,7 +132,7 @@ export default async function BlogPostPage({ params }: PageParams) {
   const post = await getPost(slug);
   if (!post) notFound();
 
-  const faqs = await getPostFaqs(post.id);
+  const faqs = await getPostFaqs(shouldUseDummyResources() ? slug : post.id);
   const headings = extractHeadings(post.content || "");
   const contentWithAnchors = injectAnchors(post.content || "", headings);
 
