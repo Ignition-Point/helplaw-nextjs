@@ -24,7 +24,7 @@ export function Footer() {
 
       <div className="mx-auto max-w-7xl px-5">
         {/* Main footer grid */}
-        <div className="flex flex-wrap items-center justify-center gap-[40px] py-[8px]">
+        <div className="flex flex-wrap items-center justify-center gap-[14px] md:gap-[40px] lg:gap-[40px] pt-[15px] lg:py-[8px]">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Logo variant="light" />
@@ -45,12 +45,12 @@ export function Footer() {
             {/* <h3 className="text-xs font-semibold uppercase tracking-wider text-navy-400 mb-4">
               Navigate
             </h3> */}
-            <ul className="flex flex-wrap items-center gap-[24px]">
+            <ul className="flex flex-wrap items-center justify-center gap-y-[6px] gap-[14px] md:gap-[20px] lg:gap-[24px]">
               {NAV_LINKS.map((link, i) => (
                 <li key={`${link.href}-${i}`}>
                   <Link
                     href={link.href}
-                    className="font-normal text-[18px] leading-[120%] tracking-[0%] text-white hover:text-[#FFBF0F] transition-colors"
+                    className="font-normal text-[14px] md:text-[16px] lg:text-[18px] leading-[120%] tracking-[0%] text-white hover:text-[#FFBF0F] transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -81,7 +81,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="border-t border-[#596C89]">
-          <p className="font-normal text-[16px] leading-[26px] tracking-[0%] py-[20px] text-white text-center">
+          <p className="font-normal text-[14px] lg:text-[16px] leading-[26px] tracking-[0%] py-[15px] lg:py-[20px] text-white text-center">
             &copy; {currentYear} Help Law Group. All rights reserved.
           </p>
         </div>
@@ -89,7 +89,7 @@ export function Footer() {
       {/* Disclaimer bar */}
         <div className="bg-[#000000] py-[20px]">
           <div className="mx-auto max-w-7xl px-5">
-          <p className="font-normal text-[14px] leading-[140%] tracking-[0%] text-white">
+          <p className="font-normal text-[12px] lg:text-[14px] leading-[140%] tracking-[0%] text-white">
             <strong className="font-medium">DISCLAIMER:</strong> This website is for informational purposes only and constitutes a paid legal advertisement. The information provided does not constitute legal or medical advice, and no attorney client relationship is formed by use of this website. Results are not guaranteed. Information may not be complete or up to date. You should consult a licensed attorney regarding your specific legal situation and a qualified medical professional regarding any medical concerns. Do not disregard professional advice based on information found on this site. Help Law Group is not responsible for actions taken based on the content of this website. Our goal is to help connect individuals with information and legal resources to fight for their rights.
           </p>
           </div>

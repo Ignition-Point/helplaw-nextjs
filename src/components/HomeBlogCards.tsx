@@ -46,7 +46,7 @@ export function HomeBlogCards() {
 
             <Link
               href="/resources"
-              className="inline-flex items-center gap-2 rounded-full font-medium text-[16px] leading-[100%] tracking-[0%] bg-white px-[18px] py-[15px] text-[#122D56] hover:text-white hover:bg-[#152E51] transition-all"
+              className="inline-flex items-center gap-2 rounded-full font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] bg-white px-[18px] py-[15px] text-[#122D56] hover:text-white hover:bg-[#152E51] transition-all"
             >
               View All
               <svg
@@ -84,13 +84,13 @@ export function HomeBlogCards() {
                 <span className="heading font-normal text-[14px] leading-[100%] tracking-[0%] text-[#D4AD4A]">
                   {post.category}
                 </span>
-                <h3 className="mt-2 lg:min-h-[52px] font-bold text-[20px] leading-[26px] tracking-[-0.04em] align-middle text-[#132F55] group-hover:text-navy-700">
+                <h3 className="mt-2 lg:min-h-[52px] font-bold text-[16px] md:text-[18px]lg:text-[20px] leading-[26px] tracking-[-0.04em] align-middle text-[#132F55] group-hover:text-navy-700">
                   {post.title}
                 </h3>
                 <p className="mt-2 font-normal text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">
                   {post.description}
                 </p>
-                <div className="mt-[20px]">
+                <div className="mt-[12px] lg:mt-[20px]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="350"
@@ -121,7 +121,7 @@ export function HomeBlogCards() {
                     </defs>
                   </svg>
                 </div>
-                <span className="mt-[15px] inline-flex items-center gap-1 font-medium text-[16px] leading-[100%] tracking-[0%] text-[#D4AD4A] group-hover:text-[#132F55] transition-colors">
+                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#D4AD4A] group-hover:text-[#132F55] transition-colors">
                   Learn More
                       <svg
                 xmlns="http://www.w3.org/2000/svg"

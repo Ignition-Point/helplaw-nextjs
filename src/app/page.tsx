@@ -92,6 +92,7 @@ export default async function HomePage() {
                 height="76"
                 viewBox="0 0 46 79"
                 fill="none"
+                className="h-[35px] md:h-[45px] w-[46px] lg:h-[78px] lg:w-[46px] object-contain"
               >
                 <path
                   d="M22.7529 0L22.7529 76.7414"
@@ -106,16 +107,16 @@ export default async function HomePage() {
               </svg>
             </div>
 
-            <div className="mt-6 md:mt-15 flex flex-wrap items-center gap-4">
+            <div className="mt-6 md:mt-8 lg:mt-15 flex flex-wrap items-center gap-4">
               <Link
                 href="/cases"
-                className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
+                className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
               >
                 Check Eligibility
               </Link>
               <Link
                 href="/how-it-works"
-                className="inline-flex items-center justify-center rounded-full border-2 border-white px-[24px] py-[15px] font-semibold text-[18px] leading-[100%] text-white transition-all hover:bg-white hover:text-[#122D56]"
+                className="inline-flex items-center justify-center rounded-full border-2 border-white px-[24px] py-[15px] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] text-white transition-all hover:bg-white hover:text-[#122D56]"
               >
                 How It Works
               </Link>
@@ -123,7 +124,7 @@ export default async function HomePage() {
 
             {/* Attorney avatar row */}
           </div>
-          <div className="md:absolute right-0 bottom-[92px] mt-[20px] md:mt-[0]">
+          <div className="lg:absolute right-0 bottom-[92px] mt-[20px] lg:mt-[0]">
             <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[20px] backdrop-blur-[34px]">
               <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-8">
                 <div className="">
@@ -173,7 +174,7 @@ export default async function HomePage() {
             ].map((item, i) => (
               <span
                 key={`${setIdx}-${i}`}
-                className="inline-flex items-center gap-[20px] heading font-normal text-[18px] leading-[100%]  text-center align-middle uppercase text-[#122D56] shrink-0"
+                className="inline-flex items-center gap-[20px] heading font-normal text-[16px] lg:text-[18px] leading-[100%]  text-center align-middle uppercase text-[#122D56] shrink-0"
               >
                 <Check className="h-6 w-6 text-[#122D56] shrink-0" />
                 {item}
@@ -216,7 +217,7 @@ export default async function HomePage() {
 
             <Link
               href="/cases"
-              className="mt-4 md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
+              className="mt-4 md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
             >
               Take the First Step Here
             </Link>
@@ -246,31 +247,31 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid lg:grid-cols-[48%_45.3%] gap-y-[30px] gap-x-[80px]">
             {/* Copy — right side */}
-            <div className="flex items-center">
+            <div className="flex items-center mb-[50px] lg:mb-0">
               <div className="w-full">
                 <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
                   Guidance <span className="text-[#FFBF0F]">You Can Trust</span>
                   <br /> No Guesswork. No Pressure.
                 </h2>
 
-                <div className="max-w-[565px]">
-                  <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885]">
+                <div className="lg:max-w-[565px]">
+                  <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] lgmd:text-[18px] leading-[140%] text-[#546885]">
                     When something serious happens, the hardest part is knowing
                     what to do next, especially when the other side has power.
                   </p>
-                  <p className="mt-[14px]font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[14px]font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
                     Our role is simple: listen carefully, review what happened,
                     and help you understand whether accountability applies, and
                     whether compensation may be available.
                   </p>
-                  <p className="mt-[14px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[14px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
                     You decide if and when to move forward. We handle the
                     complexity, the pressure, and the fight.
                   </p>
 
                   <Link
                     href="/cases"
-                    className="mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#1A365E]"
+                    className="mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#1A365E]"
                   >
                     Start a Confidential Review
                   </Link>
@@ -290,7 +291,7 @@ export default async function HomePage() {
               {/* <div className="hidden lg:block absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-white to-transparent" /> */}
               {/* Fade-out gradient on bottom for mobile */}
               {/* <div className="lg:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" /> */}
-              <div className="absolute top-1/2 -translate-y-1/2 -left-[65px] right-auto flex items-center justify-center size-[123px] rounded-full bg-white shadow-[0px_0px_80px_0px_#0000001A]">
+              <div className="absolute -top-[65px] left-0 right-0 mx-auto lg:top-1/2 lg:-translate-y-1/2 lg:-left-[65px] lg:right-auto flex items-center justify-center size-[123px] rounded-full bg-white shadow-[0px_0px_80px_0px_#0000001A]">
                 <div className="animate-spin [animation-duration:12s]">
                   <div className="relative flex items-center justify-center  ">
                     <Image
@@ -351,7 +352,7 @@ export default async function HomePage() {
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[70px] w-[70px] object-contain"
+                    className="rounded-full h-[56px] w-[56px] lg:h-[70px] lg:w-[70px] object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -366,7 +367,7 @@ export default async function HomePage() {
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[70px] w-[70px] object-contain"
+                    className="rounded-full h-[56px] w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -381,7 +382,7 @@ export default async function HomePage() {
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[70px] w-[70px] object-contain"
+                    className="rounded-full h-[56px] w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -419,7 +420,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-[20px] md:grid-cols-[333px_365px] lg:grid-cols-[290px_335px] xl:grid-cols-[300px_335px] justify-center gap-[7px] gap-y-[20px]">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-[20px] lg:grid-cols-[290px_335px] xl:grid-cols-[300px_335px] justify-center gap-[7px] gap-y-[20px]">
               {[
                 {
                   step: "1",
@@ -458,7 +459,7 @@ export default async function HomePage() {
                     <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] align-middle text-[#132F55]">
                       {title}
                     </h3>
-                    <p className="mt-[10px] font-normal text-[16px] leading-[140%] text-[#546885]">
+                    <p className="mt-[10px] font-normal text-[14px] lg:text-[16px] leading-[140%] text-[#546885]">
                       {description}
                     </p>
                   </div>
@@ -469,12 +470,12 @@ export default async function HomePage() {
             <div className="my-[20px] md:my-[26px] lg:my-[28px]">
               <Link
                 href="/cases"
-                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[10px] text-[16px] lg:text-[18px] font-semibold text-white transition-all"
+                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[10px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold text-white transition-all"
               >
                 Speak With Our Team
               </Link>
             </div>
-            <p className="inline-flex items-center gap-[10px] font-medium text-base text-[#122D56]">
+            <p className="inline-flex items-center gap-[10px] font-medium text-[14px] lg:text-base text-[#122D56]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -506,7 +507,7 @@ export default async function HomePage() {
       {/* ─── What Help Law Group Can Do For You + Lead Form ─── */}
       <section className="">
         <div className="">
-          <div className="grid md:grid-cols-[40%_60%] lg:grid-cols-[38%_62%] items-center">
+          <div className="grid md:grid-cols-[50%_50%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}
             <div
               className="relative z-10 py-[40px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px]"
@@ -581,8 +582,8 @@ export default async function HomePage() {
 
             {/* Right: Lead form */}
             <div>
-              <div className="py-[40px] md:py-[60px] lg:px-[40px]">
-                <h3 className="font-bold text-[30px] leading-[60px] tracking-[0%] text-[#1F3044] text-center mb-[18px] md:mb-[30px]lg:mb-[40px]">
+              <div className="py-[40px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
+                <h3 className="font-bold text-[18px] md:text-[22px] lg:text-[30px] leading-[110%] tracking-[0%] text-[#1F3044] text-center mb-[18px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review
                 </h3>
                 <HomeLeadForm />

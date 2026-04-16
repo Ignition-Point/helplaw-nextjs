@@ -70,7 +70,7 @@ export function HomeCaseCards() {
           <div className="shrink-0">
             <Link
               href="/cases"
-              className="inline-flex items-center gap-2 rounded-full font-medium text-[16px] leading-[100%] tracking-[0%] bg-[#122D56] px-[18px] py-[15px] text-white hover:bg-[#1A365E] transition-all"
+              className="inline-flex items-center gap-2 rounded-full font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] bg-[#122D56] px-[18px] py-[15px] text-white hover:bg-[#1A365E] transition-all"
             >
               See All Cases
               <svg
@@ -98,9 +98,9 @@ export function HomeCaseCards() {
             <Link
               key={c.title}
               href={c.href}
-              className="group relative overflow-hidden bg-white border border-[#F0F0F0] p-[18px] rounded-[20px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] transition-all"
+              className="group relative overflow-hidden bg-white border border-[#F0F0F0] p-[12px] lg:p-[18px] rounded-[12px] lg:rounded-[20px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] transition-all"
             >
-              <div className="relative h-44 overflow-hidden rounded-[14px]">
+              <div className="relative h-44 overflow-hidden rounded-[12px] lg:rounded-[14px]">
                 <Image
                   src={c.image}
                   alt={c.title}
@@ -110,13 +110,13 @@ export function HomeCaseCards() {
                 />
               </div>
               <div className="pt-[10px]">
-                <h3 className="font-bold text-[20px] leading-[1.2] tracking-[-0.04em] align-middle text-[#132F55] mb-2">
+                <h3 className="font-bold text-[14px] md:text-[16px] lg:text-[20px] leading-[1.2] tracking-[-0.04em] align-middle text-[#132F55] mb-2">
                   {c.title}
                 </h3>
-                <p className="font-normal text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">
+                <p className="font-normal text-[14px] lg:text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">
                   {c.description}
                 </p>
-                <div className="mt-[20px]">
+                <div className="mt-[12px] lg:mt-[20px]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="350"
@@ -147,7 +147,7 @@ export function HomeCaseCards() {
                     </defs>
                   </svg>
                 </div>
-                <span className="mt-[15px] inline-flex items-center gap-1 font-medium text-[16px] leading-[100%] tracking-[0%] text-[#D4AD4A] group-hover:text-[#132F55] transition-colors">
+                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#D4AD4A] group-hover:text-[#132F55] transition-colors">
                   Check Eligibility
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
