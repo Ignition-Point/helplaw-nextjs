@@ -222,7 +222,7 @@ export default async function HomePage() {
               Take the First Step Here
             </Link>
 
-            <p className="inline-flex items-center gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[16px] text-white">
+            <p className="inline-flex items-start leading-[130%] gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[16px] text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -255,7 +255,7 @@ export default async function HomePage() {
                 </h2>
 
                 <div className="lg:max-w-[565px]">
-                  <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] lgmd:text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
                     When something serious happens, the hardest part is knowing
                     what to do next, especially when the other side has power.
                   </p>
@@ -396,15 +396,14 @@ export default async function HomePage() {
 
       {/* ─── How It Works ─── */}
       <section
-        className="relative overflow-hidden py-[40px] md:py-[60px] lg:py-[80px]"
+        className="relative overflow-hidden py-[40px] md:py-[60px] lg:py-[80px] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]"
         style={{
           backgroundImage: "url(/assets/alt/section-4-image-new.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="-rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
+        <div className="absolute inset-0 bg-white/60 md:hidden"></div>
+
+        <div className="hidden md:block  -rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="max-w-[650px] w-full ml-auto">
@@ -413,7 +412,7 @@ export default async function HomePage() {
                 A Private Conversation On 
                 <span className="text-[#FFBF0F]">Your Terms</span>
               </h2>
-              <p className="mt-[10px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
+              <p className="mt-[10px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-black md:text-[#546885]">
                 You don’t need to prepare, explain everything, or make decisions
                 right now. This starts with a conversation - private,
                 respectful, and focused on listening.
@@ -459,7 +458,7 @@ export default async function HomePage() {
                     <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] align-middle text-[#132F55]">
                       {title}
                     </h3>
-                    <p className="mt-[10px] font-normal text-[14px] lg:text-[16px] leading-[140%] text-[#546885]">
+                    <p className="mt-[10px] font-normal text-[14px] lg:text-[16px] leading-[140%] text-black md:text-[#546885]">
                       {description}
                     </p>
                   </div>
@@ -475,7 +474,7 @@ export default async function HomePage() {
                 Speak With Our Team
               </Link>
             </div>
-            <p className="inline-flex items-center gap-[10px] font-medium text-[14px] lg:text-base text-[#122D56]">
+            <p className="inline-flex items-start leading-[130%] gap-[10px] font-medium text-[14px] lg:text-base text-[#122D56]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -515,7 +514,7 @@ export default async function HomePage() {
                 backgroundImage: "url(/assets/alt/contect-info-bg.jpg)",
                 backgroundSize: "cover",
                 backgroundPosition: "center top",
-                  backgroundRepeat: "no-repeat",
+                backgroundRepeat: "no-repeat",
               }}
             >
               <div className="absolute bg-[#19263799] inset-0 -z-10" />

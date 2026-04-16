@@ -178,13 +178,13 @@ export default function FAQPage() {
       />
 
       {/* Hero */}
-      <section className="bg-navy-950 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-              Frequently Asked Questions
+            <h1 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
+              Frequently Asked <span className="text-[#FFBF0F]">Questions</span>
             </h1>
-            <p className="mt-4 text-lg text-navy-200 leading-relaxed">
+            <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
               Common questions about working with Help Law Group, the legal
               process, and what to expect.
             </p>
@@ -193,11 +193,11 @@ export default function FAQPage() {
       </section>
 
       {/* FAQ Sections */}
-      <section className="py-16 sm:py-20 bg-white">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-14">
           {FAQ_SECTIONS.map((section) => (
             <div key={section.heading}>
-              <h2 className="text-xl sm:text-2xl font-bold text-navy-900 tracking-tight mb-6">
+              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight mb-4 lg:mb-6">
                 {section.heading}
               </h2>
               <FAQAccordion items={section.items} />
@@ -207,10 +207,10 @@ export default function FAQPage() {
       </section>
 
       {/* Footer CTA */}
-      <section className="py-16 sm:py-20 bg-navy-950">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Still Have Questions?
+          <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
+            Still Have <span className="text-[#FFBF0F]">Questions</span>?
           </h2>
           <p className="mt-4 text-base sm:text-lg text-navy-200 leading-relaxed">
             A free case evaluation is a conversation. You share what happened and
@@ -219,13 +219,13 @@ export default function FAQPage() {
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/cases"
-              className="inline-flex items-center justify-center rounded-full bg-gold-500 px-8 py-3.5 text-base font-semibold text-navy-950 transition-all hover:bg-gold-400"
+              className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
             >
               Get a Free Case Evaluation
             </Link>
             <Link
               href="/about"
-              className="inline-flex items-center justify-center rounded-full border-2 border-white/80 px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-white hover:text-navy-900"
+              className="inline-flex items-center justify-center rounded-full border-2 border-white px-[24px] py-[15px] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] text-white transition-all hover:bg-white hover:text-[#122D56]"
             >
               Contact Us
             </Link>

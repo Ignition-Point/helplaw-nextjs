@@ -21,10 +21,10 @@ export function FAQAccordion({ items }: { items: FAQItem[] }) {
           value={`item-${i}`}
           className="border-navy-100"
         >
-          <AccordionTrigger className="text-base font-semibold text-navy-900 hover:no-underline hover:text-navy-700">
+          <AccordionTrigger className="heading cursor-pointer text-base font-semibold text-[#122D56] hover:no-underline hover:text-navy-700">
             {item.q}
           </AccordionTrigger>
-          <AccordionContent className="text-base text-slate-warm-600 leading-relaxed">
+          <AccordionContent className="text-base leading-[140%] text-[#546885] leading-relaxed">
             {item.a}
           </AccordionContent>
         </AccordionItem>
