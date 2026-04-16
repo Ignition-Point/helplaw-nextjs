@@ -420,7 +420,7 @@ export default async function HomePage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-[20px] lg:grid-cols-[290px_335px] xl:grid-cols-[300px_335px] justify-center gap-[7px] gap-y-[20px]">
+            <div className="grid  grid-cols-1 md:grid-cols-2 gap-[20px] lg:grid-cols-[290px_335px] xl:grid-cols-[300px_335px] justify-center gap-[7px] gap-y-[20px]">
               {[
                 {
                   step: "1",
