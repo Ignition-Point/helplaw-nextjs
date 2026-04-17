@@ -55,26 +55,7 @@ export default async function HomePage() {
 
         <div className="relative mx-auto  max-w-7xl items-center justify-between px-5  pt-[40px] pb-[40px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
           <div className="max-w-[785px] w-full">
-            <div className="inline-flex items-center gap-2 text-white ">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M10.7895 3.20997C11.2375 2.13297 12.7655 2.13297 13.2135 3.20997L15.2955 8.21597L20.6995 8.64997C21.8635 8.74297 22.3355 10.195 21.4485 10.955L17.3315 14.482L18.5885 19.755C18.8595 20.891 17.6245 21.788 16.6285 21.18L12.0015 18.354L7.37447 21.18C6.37847 21.788 5.14347 20.89 5.41447 19.755L6.67147 14.482L2.55447 10.955C1.66747 10.195 2.13947 8.74297 3.30347 8.64997L8.70747 8.21597L10.7895 3.20997Z"
-                  fill="white"
-                />
-              </svg>
-
-              <span className="font-semibold md:text-[16px] lg:text-[18px] leading-[1.2] text-white">
-                5.0 <span className="text-[#C1C3C6]">from</span> 50+ reviews
-              </span>
-            </div>
+        
             <h1 className="heading font-bold text-[32px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
               Standing With People When It Matters Most
             </h1>
@@ -337,7 +318,7 @@ export default async function HomePage() {
                     </svg>
                   </div>
                   <div className="font-semibold text-[17px] leading-[100%] tracking-[0%] text-center align-middle text-[#161D27]">
-                    1500+
+                    150+
                   </div>
                 </div>
               </div>
@@ -493,9 +474,6 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ─── TestimonialSection ─── */}
-      <TestimonialSection />
 
       {/* ─── Cases We Are Currently Reviewing ─── */}
       <HomeCaseCards />
