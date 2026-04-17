@@ -16,7 +16,7 @@ export function TableOfContents({
   if (!items.length) return null;
 
   return (
-    <section className={cn("py-10 sm:py-12", isDark ? "bg-navy-900" : "bg-navy-50")}>
+    <section className={cn(" py-10 sm:py-12", isDark ? "bg-navy-900" : "bg-navy-50")}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <nav
           className={cn(
@@ -40,7 +40,7 @@ export function TableOfContents({
                   href={`#${item.anchor}`}
                   className={cn(
                     "text-sm font-medium underline-offset-2 hover:underline transition-colors",
-                    isDark ? "text-navy-200 hover:text-gold-400" : "text-navy-600 hover:text-gold-600"
+                    isDark ? "text-navy-200 hover:text-gold-400" : "text-[#122D56] hover:text-[#1A365E]"
                   )}
                 >
                   {item.label}

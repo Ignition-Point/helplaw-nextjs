@@ -63,9 +63,9 @@ export function StickyTableOfContents({ headings }: StickyTableOfContentsProps) 
                 <li key={h.id}>
                   <button
                     onClick={() => handleClick(h.id)}
-                    className={`block w-full text-left text-sm py-1 transition-colors ${
-                      h.level > 2 ? "pl-4" : ""
-                    } ${activeId === h.id ? "text-navy-800 font-semibold" : "text-slate-500 hover:text-navy-600"}`}
+                    className={`cursor-pointer block w-full text-left text-sm py-1 transition-colors ${
+                      h.level > 2 ? "pl-4" : "pl-4"
+                    } ${activeId === h.id ? "text-[#122D56] font-semibold" : "text-[#546885] hover:text-navy-600"}`}
                   >
                     {h.text}
                   </button>
@@ -77,8 +77,8 @@ export function StickyTableOfContents({ headings }: StickyTableOfContentsProps) 
       </div>
 
       {/* Desktop: sticky sidebar */}
-      <nav className="hidden lg:block sticky top-24 self-start">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+      <nav className="hidden lg:block sticky top-28 self-start">
+        <p className="text-xs font-semibold uppercase tracking-wider text-[#122D56] mb-3">
           On this page
         </p>
         <ul className="space-y-1 border-l border-slate-200">
@@ -86,12 +86,12 @@ export function StickyTableOfContents({ headings }: StickyTableOfContentsProps) 
             <li key={`${h.id}-${idx}`}>
               <button
                 onClick={() => handleClick(h.id)}
-                className={`block w-full text-left text-sm py-1 transition-colors border-l-2 -ml-px ${
-                  h.level > 2 ? "pl-6" : "pl-4"
+                className={`cursor-pointer block w-full text-left text-sm py-1 transition-colors border-l-2 -ml-px ${
+                  h.level > 2 ? "pl-4" : "pl-4"
                 } ${
                   activeId === h.id
-                    ? "border-gold-500 text-navy-800 font-semibold"
-                    : "border-transparent text-slate-400 hover:text-navy-600 hover:border-slate-300"
+                    ? "border-[#FFBF0F] text-[#122D56] font-semibold"
+                    : "border-transparent text-[#546885] hover:text-navy-600 hover:border-slate-300"
                 }`}
               >
                 {h.text}

@@ -44,13 +44,13 @@ export default async function ResourcesPage() {
       />
 
       {/* Hero */}
-      <section className="bg-navy-950 py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+            <h1 className="heading text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
               Resources
             </h1>
-            <p className="mt-4 text-lg text-navy-200 leading-relaxed">
+            <p className="mt-4 text-lg text-white leading-relaxed">
               Information to help you understand your legal rights, recognize
               harm, and know your options — before you decide anything.
             </p>

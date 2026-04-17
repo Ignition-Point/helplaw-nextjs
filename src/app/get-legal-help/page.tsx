@@ -57,13 +57,13 @@ export default function GetLegalHelpPage() {
       {/* Form section */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="grid lg:grid-cols-2 gap-14 lg:gap-20">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20">
             {/* Left: reassurance copy */}
             <div>
               <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] text-[#122D56] leading-[1.2] tracking-tight">
                 You do not need to <span className="text-[#FFBF0F]">have everything</span> figured out.
               </h2>
-              <p className="mt-6 text-base sm:text-lg leading-[140%] text-[#546885] leading-relaxed">
+              <p className="mt-4 lg:mt-6 text-base sm:text-lg leading-[140%] text-[#546885] leading-relaxed">
                 Most people who reach out are not sure where to start. That is
                 okay. Share what you are comfortable sharing and we will take it
                 from there.
@@ -113,7 +113,7 @@ export default function GetLegalHelpPage() {
 
             {/* Right: form */}
             <div>
-              <div className="rounded-2xl bg-white border border-navy-100 p-8 sm:p-10 shadow-xl">
+              <div className="rounded-[12px] lg:rounded-2xl bg-white border border-navy-100 p-6 md:p-8 sm:p-10 shadow-xl">
                 <h3 className="text-2xl font-bold text-[#122D56] mb-2">
                   Request a Private Case Review
                 </h3>

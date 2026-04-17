@@ -17,39 +17,39 @@ export function ConditionGrid({
   const isDark = variant === "dark";
 
   return (
-    <section className={cn("py-20 sm:py-28", isDark ? "bg-navy-900" : "bg-slate-warm-50")}>
+    <section className={cn("py-[40px] md:py-[60px] lg:py-[80px]", isDark ? "bg-[#1A365E]" : "bg-slate-warm-50")}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {headline && (
-          <h2 className={cn("text-2xl sm:text-3xl font-bold tracking-tight text-center", isDark ? "text-white" : "text-navy-900")}>
+          <h2 className={cn("heading text-2xl sm:text-3xl font-bold tracking-tight text-center", isDark ? "text-white" : "text-navy-900")}>
             {headline}
           </h2>
         )}
         {subheadline && (
-          <p className={cn("mt-3 text-base text-center max-w-2xl mx-auto", isDark ? "text-navy-300" : "text-slate-warm-600")}>
+          <p className={cn("mt-3 text-base text-center max-w-2xl mx-auto", isDark ? "text-white" : "text-slate-warm-600")}>
             {subheadline}
           </p>
         )}
-        <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {conditions.map((condition, i) => (
             <div
               key={i}
               className={cn(
                 "flex items-start gap-3 rounded-lg p-4 transition-colors",
                 isDark
-                  ? "bg-navy-800/60 border border-navy-700/50"
+                  ? "bg-[white]/[0.1] border border-navy-700/50"
                   : "bg-white border border-navy-100 shadow-sm"
               )}
             >
               <AlertCircle
                 className={cn(
                   "h-5 w-5 shrink-0 mt-0.5",
-                  isDark ? "text-gold-400" : "text-gold-600"
+                  isDark ? "text-[#FFBF0F]" : "text-[#FFBF0F]"
                 )}
               />
               <span
                 className={cn(
                   "text-sm font-medium leading-snug",
-                  isDark ? "text-navy-100" : "text-navy-800"
+                  isDark ? "text-white" : "text-navy-800"
                 )}
               >
                 {condition}

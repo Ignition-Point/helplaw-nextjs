@@ -194,10 +194,10 @@ export default function FAQPage() {
 
       {/* FAQ Sections */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-14">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-10 lg:space-y-14">
           {FAQ_SECTIONS.map((section) => (
             <div key={section.heading}>
-              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight mb-4 lg:mb-6">
+              <h2 className="heading font-bold text-[22px] md:text-[32px] lg:text-[38px] leading-[1.2] text-[#122D56] tracking-tight mb-4 lg:mb-6">
                 {section.heading}
               </h2>
               <FAQAccordion items={section.items} />
@@ -212,7 +212,7 @@ export default function FAQPage() {
           <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
             Still Have <span className="text-[#FFBF0F]">Questions</span>?
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-navy-200 leading-relaxed">
+          <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
             A free case evaluation is a conversation. You share what happened and
             an attorney tells you what your options are.
           </p>

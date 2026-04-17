@@ -24,10 +24,10 @@ export function FAQSection({
   if (!items.length) return null;
 
   return (
-    <section className={cn("py-20 sm:py-28", isDark ? "bg-navy-900" : "bg-slate-warm-50")}>
+    <section className={cn("py-[40px] md:py-[60px] lg:py-[80px]", isDark ? "bg-[#1A365E]" : "bg-slate-warm-50")}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {headline && (
-          <h2 className={cn("text-2xl sm:text-3xl font-bold tracking-tight mb-8", isDark ? "text-white" : "text-navy-900")}>
+          <h2 className={cn("heading text-2xl sm:text-3xl font-bold tracking-tight mb-8", isDark ? "text-white" : "text-[#122D56]")}>
             {headline}
           </h2>
         )}
@@ -43,7 +43,7 @@ export function FAQSection({
             >
               <AccordionTrigger
                 className={cn(
-                  "text-left text-base font-medium hover:no-underline py-4",
+                  "text-left heading cursor-pointer text-base font-medium hover:no-underline py-4",
                   isDark ? "text-white" : "text-navy-900"
                 )}
               >

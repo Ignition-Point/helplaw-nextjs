@@ -46,7 +46,7 @@ export function DesktopTocWrapper({ headings }: DesktopTocWrapperProps) {
 
   return (
     <div
-      className={`hidden lg:block fixed right-[max(1.5rem,calc((100vw-80rem)/2))] top-28 w-56 xl:w-64 z-30 transition-all duration-300 ${
+      className={`hidden lg:block fixed bg-white p-[15px] rounded-[12px] right-[max(1.5rem,calc((100vw-80rem)/2))] top-28 w-56 xl:w-64 z-30 transition-all duration-300 ${
         visible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 pointer-events-none"
       }`}
     >

@@ -27,8 +27,8 @@ export function TrustBanner({ items, variant = "gold" }: TrustBannerProps) {
     <section
       className={cn(
         "py-4 sm:py-5",
-        variant === "gold" && "bg-gold-500",
-        variant === "dark" && "bg-navy-900 border-y border-navy-800",
+        variant === "gold" && "bg-[#FFBF0F]",
+        variant === "dark" && "bg-[#122D56] border-y border-navy-800",
         variant === "light" && "bg-navy-50 border-y border-navy-100"
       )}
     >

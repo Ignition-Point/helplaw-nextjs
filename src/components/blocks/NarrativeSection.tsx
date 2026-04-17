@@ -20,7 +20,7 @@ export function NarrativeSection({
   return (
     <section
       className={cn(
-        "py-20 sm:py-28",
+        "py-[40px] md:py-[60px] lg:py-[80px]",
         isDark ? "bg-navy-900" : "bg-white"
       )}
     >
@@ -29,7 +29,7 @@ export function NarrativeSection({
           <span
             className={cn(
               "text-sm font-medium tracking-wider uppercase",
-              isDark ? "text-gold-400" : "text-gold-600"
+              isDark ? "text-[#FFBF0F]" : "text-[#FFBF0F]"
             )}
           >
             {eyebrow}
@@ -38,8 +38,8 @@ export function NarrativeSection({
         {headline && (
           <h2
             className={cn(
-              "mt-2 text-2xl sm:text-3xl font-bold tracking-tight",
-              isDark ? "text-white" : "text-navy-900"
+              "heading mt-2 text-2xl sm:text-3xl font-bold tracking-tight",
+              isDark ? "text-white" : "text-[#122D56]"
             )}
           >
             {headline}
@@ -55,12 +55,12 @@ export function NarrativeSection({
           />
         )}
         {quote && (
-          <blockquote className="mt-8 border-l-4 border-gold-400 pl-5 py-2">
-            <p className={cn("text-lg italic", isDark ? "text-navy-200" : "text-slate-warm-600")}>
+          <blockquote className="mt-8 border-l-4 border-[#FFBF0F] pl-5 py-2">
+            <p className={cn("text-lg italic", isDark ? "text-[#5C6F8B]" : "text-slate-warm-600")}>
               &ldquo;{quote.text}&rdquo;
             </p>
             {quote.attribution && (
-              <cite className={cn("mt-2 block text-sm not-italic", isDark ? "text-navy-400" : "text-slate-warm-400")}>
+              <cite className={cn("mt-2 block text-sm not-italic", isDark ? "text-[#5C6F8B]" : "text-slate-warm-400")}>
                 &mdash; {quote.attribution}
               </cite>
             )}

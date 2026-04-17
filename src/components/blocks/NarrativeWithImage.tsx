@@ -24,26 +24,26 @@ export function NarrativeWithImage({
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-          <div className={cn("absolute inset-0", isDark ? "bg-navy-950/85" : "bg-white/90")} />
+          <div className={cn("absolute inset-0", isDark ? "bg-[#122D56]/65" : "bg-white/90")} />
         </div>
       )}
-      <div className={cn("relative py-20 sm:py-28", !backgroundImage && (isDark ? "bg-navy-900" : "bg-slate-warm-50"))}>
+      <div className={cn("relative py-[40px] md:py-[60px] lg:py-[80px]", !backgroundImage && (isDark ? "bg-[#122D56]" : "bg-slate-warm-50"))}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {eyebrow && (
-            <span className={cn("text-sm font-medium tracking-wider uppercase", isDark ? "text-gold-400" : "text-gold-600")}>
+            <span className={cn("text-sm font-medium tracking-wider uppercase", isDark ? "text-[#FFBF0F]" : "text-[#FFBF0F]")}>
               {eyebrow}
             </span>
           )}
           {headline && (
-            <h2 className={cn("mt-2 text-2xl sm:text-3xl font-bold tracking-tight", isDark ? "text-white" : "text-navy-900")}>
+            <h2 className={cn("mt-2 heading text-2xl sm:text-3xl font-bold tracking-tight", isDark ? "text-white" : "text-navy-900")}>
               {headline}
             </h2>
           )}
           {content && (
             <div
               className={cn(
-                "mt-6 prose-helplaw",
-                isDark && "[&_p]:!text-navy-200 [&_h2]:!text-white [&_h3]:!text-navy-100 [&_h4]:!text-navy-200 [&_strong]:!text-white [&_li]:!text-navy-200 [&_a]:!text-gold-400"
+                "mt-4 prose-helplaw",
+                isDark && "[&_p]:!text-white [&_h2]:!text-white [&_h3]:!text-navy-100 [&_h4]:!text-navy-200 [&_strong]:!text-white [&_li]:!text-navy-200 [&_a]:!text-gold-400"
               )}
               dangerouslySetInnerHTML={{ __html: content }}
             />

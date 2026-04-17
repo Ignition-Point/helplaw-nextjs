@@ -213,7 +213,7 @@ export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRende
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-md bg-gold-500 px-6 py-3 text-base font-semibold text-navy-950 transition-all hover:bg-gold-400 disabled:opacity-50 shadow-sm"
+        className="cursor-pointer block w-full mx-auto rounded-[100px] bg-[#122D56] hover:bg-[#1A365E] px-[20px] py-[12px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold tracking-[-0.02em] text-white"
       >
         {submitting ? (
           <span className="flex items-center justify-center gap-2">
@@ -224,11 +224,11 @@ export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRende
           form.cta_text || "Get Your Free Case Review"
         )}
       </button>
-      <p className="text-xs text-slate-warm-400 text-center leading-relaxed">
+      <p className="text-xs text-[#546885] text-center leading-relaxed">
         By submitting, you agree to our{" "}
-        <a href="/privacy" className="underline hover:text-navy-600">Privacy Policy</a>
+        <a href="/privacy" className="underline hover:text-[#122D56]">Privacy Policy</a>
         {" "}and{" "}
-        <a href="/disclaimer" className="underline hover:text-navy-600">Disclaimer</a>.
+        <a href="/disclaimer" className="underline hover:text-[#122D56]">Disclaimer</a>.
       </p>
     </form>
   );

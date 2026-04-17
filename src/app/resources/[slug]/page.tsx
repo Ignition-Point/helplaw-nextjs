@@ -57,7 +57,9 @@ async function getPostFaqs(postId: string) {
   return data ?? [];
 }
 
-export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageParams): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPost(slug);
   if (!post) return { title: "Not Found" };
@@ -80,8 +82,10 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
     }
   }
 
-  const canonical = post.seo_canonical || `https://helplaw.com/resources/${slug}`;
-  const ogImage = post.seo_image || post.featured_image || "/assets/og-default.jpg";
+  const canonical =
+    post.seo_canonical || `https://helplaw.com/resources/${slug}`;
+  const ogImage =
+    post.seo_image || post.featured_image || "/assets/og-default.jpg";
 
   return {
     title: post.seo_title || post.title,
@@ -111,13 +115,19 @@ function extractHeadings(html: string) {
   let match;
   while ((match = regex.exec(html)) !== null) {
     const text = match[2].replace(/<[^>]*>/g, "").trim();
-    const anchor = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    const anchor = text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
     headings.push({ level: parseInt(match[1]), text, anchor });
   }
   return headings;
 }
 
-function injectAnchors(html: string, headings: { text: string; anchor: string }[]) {
+function injectAnchors(
+  html: string,
+  headings: { text: string; anchor: string }[],
+) {
   let result = html;
   headings.forEach((h) => {
     const escaped = h.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -144,11 +154,20 @@ export default async function BlogPostPage({ params }: PageParams) {
         "@type": "Article",
         headline: post.title,
         description: post.seo_description || post.excerpt || "",
-        author: { "@type": "Person", name: post.author_name || "Help Law Group" },
+        author: {
+          "@type": "Person",
+          name: post.author_name || "Help Law Group",
+        },
         datePublished: post.published_at || post.created_at,
         dateModified: post.updated_at,
-        publisher: { "@type": "Organization", name: "Help Law Group", url: "https://helplaw.com" },
-        ...(post.seo_image || post.featured_image ? { image: post.seo_image || post.featured_image } : {}),
+        publisher: {
+          "@type": "Organization",
+          name: "Help Law Group",
+          url: "https://helplaw.com",
+        },
+        ...(post.seo_image || post.featured_image
+          ? { image: post.seo_image || post.featured_image }
+          : {}),
       },
       ...(faqs.length > 0
         ? [
@@ -181,21 +200,36 @@ export default async function BlogPostPage({ params }: PageParams) {
       />
 
       {/* Hero */}
-      <section className="bg-navy-950 py-16 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-xs font-semibold uppercase tracking-wider text-gold-400">
+      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-xs font-semibold uppercase tracking-wider text-[#FFBF0F]">
             {post.category}
           </span>
-          <h1 className="mt-3 text-3xl sm:text-4xl font-bold text-white tracking-tight leading-tight">
+          <h1 className="mt-3 heading text-[32px] md:text-[42px] lg:text-[52px] leading-[120%] text-white tracking-tight">
             {post.title}
           </h1>
-          <p className="mt-4 text-sm text-navy-300">
+          <p className="mt-4 text-sm text-white">
             By {post.author_name || "Help Law Group"}
             {post.published_at && (
-              <> &middot; {new Date(post.published_at).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</>
+              <>
+                {" "}
+                &middot;{" "}
+                {new Date(post.published_at).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </>
             )}
             {post.updated_at && (
-              <> &middot; Updated {new Date(post.updated_at as string).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</>
+              <>
+                {" "}
+                &middot; Updated{" "}
+                {new Date(post.updated_at as string).toLocaleDateString(
+                  "en-US",
+                  { year: "numeric", month: "long", day: "numeric" },
+                )}
+              </>
             )}
           </p>
         </div>
@@ -224,7 +258,11 @@ export default async function BlogPostPage({ params }: PageParams) {
           {headings.length > 2 && (
             <div className="lg:hidden max-w-3xl mx-auto">
               <StickyTableOfContents
-                headings={headings.map((h) => ({ id: h.anchor, text: h.text, level: h.level }))}
+                headings={headings.map((h) => ({
+                  id: h.anchor,
+                  text: h.text,
+                  level: h.level,
+                }))}
               />
             </div>
           )}
@@ -238,22 +276,11 @@ export default async function BlogPostPage({ params }: PageParams) {
                 dangerouslySetInnerHTML={{ __html: contentWithAnchors }}
               />
 
-              {/* FAQs */}
-              {faqs.length > 0 && (
-                <div className="mt-12">
-                  <FAQSection
-                    headline="Frequently Asked Questions"
-                    items={faqs.map((f) => ({ question: f.question, answer: f.answer }))}
-                    variant="light"
-                  />
-                </div>
-              )}
-
               {/* Back link */}
               <div className="mt-12 pt-8 border-t border-navy-100">
                 <Link
                   href="/resources"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-navy-700 hover:text-gold-600 transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#122D56] hover:text-[#FFBF0F] transition-colors"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   Back to Resources
@@ -265,13 +292,30 @@ export default async function BlogPostPage({ params }: PageParams) {
             {headings.length > 2 && (
               <div className="hidden lg:block">
                 <StickyTableOfContents
-                  headings={headings.map((h) => ({ id: h.anchor, text: h.text, level: h.level }))}
+                  headings={headings.map((h) => ({
+                    id: h.anchor,
+                    text: h.text,
+                    level: h.level,
+                  }))}
                 />
               </div>
             )}
           </div>
         </div>
       </article>
+      {/* FAQs */}
+      {faqs.length > 0 && (
+        <div className="mt-12">
+          <FAQSection
+            headline="Frequently Asked Questions"
+            items={faqs.map((f) => ({
+              question: f.question,
+              answer: f.answer,
+            }))}
+            variant="light"
+          />
+        </div>
+      )}
     </>
   );
 }

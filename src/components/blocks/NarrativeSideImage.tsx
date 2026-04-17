@@ -22,18 +22,18 @@ export function NarrativeSideImage({
   const isDark = variant === "dark";
 
   return (
-    <section className={cn("py-20 sm:py-28", isDark ? "bg-navy-900" : "bg-white")}>
+    <section className={cn("py-[40px] md:py-[60px] lg:py-[80px]", isDark ? "bg-[#122D56]" : "bg-white")}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={cn("grid lg:grid-cols-2 gap-10 lg:gap-16 items-center", imagePosition === "left" && "lg:[direction:rtl] lg:[&>*]:[direction:ltr]")}>
           {/* Text */}
           <div>
             {eyebrow && (
-              <span className={cn("text-sm font-medium tracking-wider uppercase", isDark ? "text-gold-400" : "text-gold-600")}>
+              <span className={cn("text-sm font-medium tracking-wider uppercase", isDark ? "text-[#FFBF0F]" : "text-[#FFBF0F]")}>
                 {eyebrow}
               </span>
             )}
             {headline && (
-              <h2 className={cn("mt-2 text-2xl sm:text-3xl font-bold tracking-tight", isDark ? "text-white" : "text-navy-900")}>
+              <h2 className={cn("mt-2 heading text-2xl sm:text-3xl font-bold tracking-tight", isDark ? "text-white" : "text-[#122D56]")}>
                 {headline}
               </h2>
             )}

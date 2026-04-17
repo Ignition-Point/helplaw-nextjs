@@ -137,7 +137,7 @@ export default function YourRightsPage() {
           <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
             What about the statute of <span className="text-[#FFBF0F]">limitations?</span>
           </h2>
-          <p className="mt-6 text-base sm:text-lg text-white leading-relaxed">
+          <p className="mt-4 lg:mt-6 text-base sm:text-lg text-white leading-relaxed">
             Every state sets deadlines for filing civil claims. For sexual abuse
             cases, many states have passed laws that extend or reopen those
             deadlines, sometimes by decades. Whether your situation falls within
@@ -155,7 +155,7 @@ export default function YourRightsPage() {
       {/* Common questions about your rights */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight mb-8">
+          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight mb-4 md:mb-6 lg:mb-8">
             Common questions about <span className="text-[#FFBF0F]">your rights</span>
           </h2>
           <FAQAccordion items={RIGHTS_FAQ} />

@@ -66,7 +66,7 @@ export function GetLegalHelpForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-[#122D56] mb-1.5">
             First Name
@@ -171,7 +171,7 @@ export function GetLegalHelpForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="cursor-pointer block w-full rounded-[100px] bg-[#122D56] hover:bg-[#1A365E] px-[20px] py-[12px] text-[18px] font-semibold tracking-[-0.02em] text-white"
+        className="cursor-pointer block w-full rounded-[100px] bg-[#122D56] hover:bg-[#1A365E] px-[20px] py-[12px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold tracking-[-0.02em] text-white"
       >
         {submitting ? (
           <span className="flex items-center justify-center gap-2">

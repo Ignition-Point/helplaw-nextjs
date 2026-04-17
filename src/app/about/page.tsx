@@ -52,13 +52,13 @@ export default function AboutPage() {
       {/* ─── SECTION 2 & 3: Who We Are + By the Numbers ─── */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="grid lg:grid-cols-2 items-center gap-14 lg:gap-20">
+          <div className="grid lg:grid-cols-2 items-center gap-8 md:gap-14 lg:gap-20">
             {/* Left: Who We Are */}
             <div>
               <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#17335D] tracking-tight">
                 Who <span className="text-[#FFBF0F]">We Are</span>
               </h2>
-              <p className="mt-6 text-[16px] lg:text-[18px] leading-[140%] font-normal text-[#5C6F8B] leading-relaxed">
+              <p className="mt-4 lg:mt-6 text-[16px] lg:text-[18px] leading-[140%] font-normal text-[#5C6F8B] leading-relaxed">
                 Help Law Group was built around a straightforward idea: people
                 who have been seriously harmed deserve access to attorneys who
                 know how to handle those specific cases. We connect survivors
@@ -114,7 +114,7 @@ export default function AboutPage() {
             How We Approach <span className="text-[#FFBF0F]">Every Case</span>
           </h2>
 
-          <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="mt-6 md:mt-8 lg:mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 icon: Ear,
@@ -166,7 +166,7 @@ export default function AboutPage() {
           <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#17335D] tracking-tight">
             The <span className="text-[#FFBF0F]">Cases</span> We Handle
           </h2>
-          <p className="mt-6 text-[16px] lg:text-[18px] leading-[140%] text-[#546885] leading-relaxed">
+          <p className="mt-4 lg:mt-6 text-[16px] lg:text-[18px] leading-[140%] text-[#546885] leading-relaxed">
             The attorneys in our network handle cases involving serious harm,
             including sexual abuse by medical professionals, clergy, and
             institutions; exploitation facilitated by online platforms; harm
@@ -193,7 +193,7 @@ export default function AboutPage() {
           <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2]  text-white tracking-tight mb-4 md:mb-6 lg:mb-8">
             Available Across <span className="text-[#FFBF0F]">the Country</span>
           </h2>
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 align-super">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-14 lg:gap-20 items-start">
             {/* Left: copy */}
             <div>
               <p className="text-base sm:text-lg text-white leading-relaxed">

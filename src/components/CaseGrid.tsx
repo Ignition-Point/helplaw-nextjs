@@ -37,18 +37,18 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
       : cases.filter((c) => c.category === activeFilter);
 
   return (
-    <section className="py-16 sm:py-20 bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
+      <div className="mx-auto max-w-7xl px-5">
         {/* Filter bar */}
         <div className="flex flex-wrap gap-2 mb-10">
           {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-full cursor-pointer px-4 py-2 text-sm font-medium transition-colors ${
                 activeFilter === cat
-                  ? "bg-navy-800 text-white"
-                  : "bg-navy-50 text-navy-700 hover:bg-navy-100"
+                  ? "bg-[#122D56] text-white"
+                  : "bg-navy-50 text-[#122D56] hover:bg-navy-100"
               }`}
             >
               {cat}
@@ -62,21 +62,21 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
             <Link
               key={c.id}
               href={`/cases/${c.slug}`}
-              className="group relative rounded-xl border border-navy-100 bg-white p-6 shadow-sm transition-all hover:shadow-lg hover:border-navy-200 hover:-translate-y-0.5"
+              className="group relative bg-white border border-[#F0F0F0] p-[15px] lg:p-[24px] rounded-[12px] lg:rounded-[16px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] hover:bg-[#F6F6F6] hover:border-[#D4AD4A]  transition-all hover:-translate-y-0.5"
             >
               <div className="flex items-start justify-between">
                 {c.category && (
-                  <span className="inline-flex items-center rounded-full bg-navy-50 px-2.5 py-0.5 text-xs font-medium text-navy-700 uppercase tracking-wide">
+                  <span className="max-w-[calc(100%-30px)] inline-flex items-center rounded-full bg-navy-50 px-3 py-1.5 text-xs font-medium text-navy-700 uppercase tracking-wide">
                     {c.category}
                   </span>
                 )}
-                <ArrowRight className="h-4 w-4 text-navy-300 transition-transform group-hover:translate-x-1 group-hover:text-gold-500" />
+                <ArrowRight className="h-4 w-4 text-[#122D56] transition-transform group-hover:translate-x-1 group-hover:text-[#D4AD4A]" />
               </div>
-              <h3 className="mt-4 text-lg font-semibold text-navy-900 leading-snug group-hover:text-navy-700">
+              <h3 className="heading mt-4 text-lg font-semibold text-[#122D56] leading-snug group-hover:text-[#09162A]">
                 {c.title}
               </h3>
               {c.hero_subheadline && (
-                <p className="mt-2 text-sm text-slate-warm-500 line-clamp-3 leading-relaxed">
+                <p className="mt-2 text-sm text-[#546885] line-clamp-3 leading-relaxed">
                   {c.hero_subheadline.replace(/<[^>]+>/g, "")}
                 </p>
               )}
