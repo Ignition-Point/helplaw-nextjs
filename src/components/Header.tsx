@@ -25,7 +25,7 @@ export function Header() {
           src="/assets/alt/header-bg.svg"
           alt="Header Shape"
           fill
-          className=" object-cover w-full"
+          className=" object-cover w-full object-bottom"
         />
       </div>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5">

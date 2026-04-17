@@ -38,7 +38,7 @@ export default async function HomePage() {
           src="/assets/alt/hero-img.png"
           alt="Hero Image"
           fill
-          className="absolute inset-0 w-full h-full object-cover object-top border-t-2 border-white"
+          className="absolute inset-0 w-full h-full object-cover object-[88%_top] md:object-top border-t-2 border-white"
         />
         {/* <video
           autoPlay
