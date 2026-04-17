@@ -222,7 +222,7 @@ export default async function HomePage() {
               Take the First Step Here
             </Link>
 
-            <p className="inline-flex items-start leading-[130%] gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[16px] text-white">
+            <p className="inline-flex items-start leading-[130%] gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-white">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"
@@ -352,7 +352,7 @@ export default async function HomePage() {
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[56px] w-[56px] lg:h-[70px] lg:w-[70px] object-contain"
+                    className="rounded-full h-[56px] min-w-[56px] w-[56px] lg:h-[70px] lg:w-[70px] object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -367,7 +367,7 @@ export default async function HomePage() {
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[56px] w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
+                    className="rounded-full h-[56px] w-[56px] min-w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -382,7 +382,7 @@ export default async function HomePage() {
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[56px] w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
+                    className="rounded-full h-[56px] min-w-[56px] w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -474,7 +474,7 @@ export default async function HomePage() {
                 Speak With Our Team
               </Link>
             </div>
-            <p className="inline-flex items-start leading-[130%] gap-[10px] font-medium text-[14px] lg:text-base text-[#122D56]">
+            <p className="inline-flex items-start leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="18"

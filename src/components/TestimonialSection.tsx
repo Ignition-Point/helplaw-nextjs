@@ -36,7 +36,7 @@ export function TestimonialSection() {
   return (
     <section className="relative overflow-hidden bg-[#09162A] py-[40px] md:py-[60px] lg:py-[80px]">
       <div className="relative mx-auto max-w-7xl px-5">
-        <button className="testimonial-prev absolute left-[20px] top-1/2 z-10 flex h-[48px] w-[48px] md:h-[58px] md:w-[58px] lg:h-[72px] lg:w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white/80 transition hover:bg-white/10 md:left-0">
+        <button className="cursor-pointer testimonial-prev absolute left-[20px] top-1/2 z-10 flex h-[48px] w-[48px] md:h-[58px] md:w-[58px] lg:h-[72px] lg:w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white/80 transition hover:bg-white/10 md:left-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"
@@ -51,7 +51,7 @@ export function TestimonialSection() {
           </svg>
         </button>
 
-        <button className="testimonial-next absolute right-[20px] top-1/2 z-10 flex h-[48px] w-[48px] md:h-[58px] md:w-[58px] lg:h-[72px] lg:w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white transition hover:bg-[#122036] md:right-0">
+        <button className="cursor-pointer testimonial-next absolute right-[20px] top-1/2 z-10 flex h-[48px] w-[48px] md:h-[58px] md:w-[58px] lg:h-[72px] lg:w-[72px] -translate-y-1/2 items-center justify-center rounded-full border border-[#14253D] text-white transition hover:bg-[#122036] md:right-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"

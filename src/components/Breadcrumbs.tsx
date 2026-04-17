@@ -46,7 +46,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
                     {item.label}
                   </Link>
                 ) : (
-                  <span className="text-slate-700 font-medium" aria-current="page">
+                  <span className="text-[#122D56] font-medium" aria-current="page">
                     {item.label}
                   </span>
                 )}

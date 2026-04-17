@@ -162,7 +162,7 @@ export default function AboutPage() {
 
       {/* ─── SECTION 5: The Cases We Handle ─── */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px]">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mx-auto max-w-7xl px-5">
           <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#17335D] tracking-tight">
             The <span className="text-[#FFBF0F]">Cases</span> We Handle
           </h2>

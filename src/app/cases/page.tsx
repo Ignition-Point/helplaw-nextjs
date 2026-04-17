@@ -48,7 +48,7 @@ export default async function CasesPage() {
             <h1 className="heading text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
               Our <span className="text-[#FFBF0F]">Cases</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
               Attorneys in our network are actively reviewing cases in these
               areas. If you or someone you know experienced this kind of harm,
               you may have legal options. Select a case to learn more.

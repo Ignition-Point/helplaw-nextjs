@@ -19,12 +19,12 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#122D56] text-white">
+    <footer className="bg-[#122D56] text-white mb-[58px] md:mb-[0px]">
       {/* Gold accent line */}
 
       <div className="mx-auto max-w-7xl px-5">
         {/* Main footer grid */}
-        <div className="flex flex-wrap items-center justify-center gap-[14px] md:gap-[40px] lg:gap-[40px] pt-[15px] lg:py-[8px]">
+        <div className="flex flex-wrap items-center justify-center gap-[14px] md:gap-[40px] lg:gap-[40px] py-[15px] lg:py-[8px]">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Logo variant="light" />

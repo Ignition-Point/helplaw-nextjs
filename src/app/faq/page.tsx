@@ -184,7 +184,7 @@ export default function FAQPage() {
             <h1 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
               Frequently Asked <span className="text-[#FFBF0F]">Questions</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
               Common questions about working with Help Law Group, the legal
               process, and what to expect.
             </p>

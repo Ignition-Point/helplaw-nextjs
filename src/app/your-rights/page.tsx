@@ -77,7 +77,7 @@ export default function YourRightsPage() {
             <h1 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
               <span className="text-[#FFBF0F]">Your</span> Rights
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
               If you were seriously harmed by a person, company, or institution,
               you have legal rights. Understanding them is the first step.
             </p>

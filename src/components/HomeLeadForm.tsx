@@ -70,7 +70,7 @@ export function HomeLeadForm() {
       <div className="grid lg:grid-cols-2 gap-4">
       <input
         type="email"
-        placeholder="Email*"
+        placeholder="Email Address *"
         required
         value={values.email}
         onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
@@ -78,7 +78,7 @@ export function HomeLeadForm() {
       />
       <input
         type="tel"
-        placeholder="Phone*"
+        placeholder="Phone Number *"
         required
         value={values.phone}
         onChange={(e) => setValues((v) => ({ ...v, phone: e.target.value }))}
@@ -86,7 +86,7 @@ export function HomeLeadForm() {
       />
       </div>
       <textarea
-        placeholder="BRIEFLY DESCRIBE YOUR CASE"
+        placeholder="Briefly Describe Your Case"
         rows={4}
         value={values.description}
         onChange={(e) => setValues((v) => ({ ...v, description: e.target.value }))}

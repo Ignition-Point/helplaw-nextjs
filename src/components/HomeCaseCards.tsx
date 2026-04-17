@@ -123,6 +123,7 @@ export function HomeCaseCards() {
                     height="1"
                     viewBox="0 0 350 1"
                     fill="none"
+                    className="w-full"
                   >
                     <line
                       opacity="0.2"

@@ -50,7 +50,7 @@ export default async function ResourcesPage() {
             <h1 className="heading text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
               Resources
             </h1>
-            <p className="mt-4 text-lg text-white leading-relaxed">
+            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
               Information to help you understand your legal rights, recognize
               harm, and know your options — before you decide anything.
             </p>

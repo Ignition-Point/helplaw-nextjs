@@ -25,7 +25,7 @@ export default function GetLegalHelpPage() {
             <h1 className="heading font-bold text-[32px] md:text-[42px] lg:text-[56px] leading-[1.2] align-middle capitalize text-white tracking-normal">
               Get Legal <span className="text-[#FFBF0F]">Help</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+            <p className="mt-4 mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
               Tell us what happened. A member of our team will review your
               situation and follow up with you directly. The first conversation
               is free.

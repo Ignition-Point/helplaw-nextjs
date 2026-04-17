@@ -109,12 +109,12 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
 
         {/* Cards */}
         {filtered.length > 0 ? (
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map((post) => (
               <Link
                 key={post.id}
                 href={`/resources/${post.slug}`}
-                className="group flex flex-col overflow-hidden bg-white border border-[#F0F0F0] p-[12px] lg:p-[18px] rounded-[12px] lg:rounded-[16px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] hover:bg-[#F6F6F6] hover:border-[#D4AD4A]  transition-all hover:-translate-y-0.5"
+                className="group flex flex-col overflow-hidden bg-white border border-[#F0F0F0] p-[15px] lg:p-[18px] rounded-[12px] lg:rounded-[16px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] hover:bg-[#F6F6F6] hover:border-[#D4AD4A]  transition-all hover:-translate-y-0.5"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span
