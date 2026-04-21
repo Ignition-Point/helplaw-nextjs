@@ -182,6 +182,23 @@ function getStr(content: Record<string, unknown>, key: string): string {
   return (content[key] as string) || "";
 }
 
+function getSectionContent(raw: unknown): Record<string, unknown> {
+  if (typeof raw === "object" && raw !== null && !Array.isArray(raw)) {
+    return raw as Record<string, unknown>;
+  }
+  if (typeof raw === "string" && raw.trim().startsWith("{")) {
+    try {
+      const parsed = JSON.parse(raw) as unknown;
+      if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
+        return parsed as Record<string, unknown>;
+      }
+    } catch {
+      // fall through
+    }
+  }
+  return {};
+}
+
 // ─── Page component ───
 
 export default async function CasePage({ params }: PageParams) {
@@ -201,9 +218,7 @@ export default async function CasePage({ params }: PageParams) {
   // Extract headings for sticky ToC from sections that have anchorId + headline
   const tocHeadings = sections
     .map((section) => {
-      const content = (typeof section.content === "object" && section.content !== null && !Array.isArray(section.content)
-        ? section.content
-        : {}) as Record<string, unknown>;
+      const content = getSectionContent(section.content);
       const anchorId = (content.anchorId as string) || "";
       const headline = (content.headline as string) || "";
       // Skip hero, trust-banner, mid-page-cta, final-cta-band, table-of-contents, inline-cta from ToC
@@ -263,9 +278,7 @@ export default async function CasePage({ params }: PageParams) {
         )}
 
         {sections.map((section) => {
-          const content = (typeof section.content === "object" && section.content !== null && !Array.isArray(section.content)
-            ? section.content
-            : {}) as Record<string, unknown>;
+          const content = getSectionContent(section.content);
 
           const headline = getStr(content, "headline");
           const anchorId = getStr(content, "anchorId") || (headline ? headline.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") : undefined);
