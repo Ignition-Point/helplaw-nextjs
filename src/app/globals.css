@@ -203,7 +203,7 @@
     @apply text-navy-600 underline underline-offset-2 hover:text-gold-600 transition-colors;
   }
   blockquote {
-    @apply border-l-4 border-gold-400 pl-5 py-1 my-6 italic text-slate-warm-600 bg-gold-50/50 rounded-r-lg;
+    @apply border-l-4 border-[#FFBF0F] pl-5 py-1 my-6 italic text-slate-warm-600 bg-gold-50/50 rounded-r-lg;
   }
   table {
     @apply w-full border-collapse mb-6;

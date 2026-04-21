@@ -31,28 +31,28 @@ export function FAQSection({
             {headline}
           </h2>
         )}
-        <Accordion type="single" collapsible className="space-y-3">
+        <Accordion type="single" collapsible className="">
           {items.map((faq, i) => (
             <AccordionItem
               key={i}
               value={`faq-${i}`}
               className={cn(
-                "rounded-lg border px-5",
-                isDark ? "bg-navy-800/40 border-navy-700/40" : "bg-white border-navy-100 shadow-sm"
+                "border-navy-100",
+                isDark ? "border-navy-100" : "border-navy-100"
               )}
             >
               <AccordionTrigger
                 className={cn(
-                  "text-left heading cursor-pointer text-base font-medium hover:no-underline py-4",
-                  isDark ? "text-white" : "text-navy-900"
+                  "heading cursor-pointer text-base font-semibold text-[#122D56] hover:no-underline hover:text-navy-700",
+                  isDark ? "text-[#122D56]" : "text-[#122D56]"
                 )}
               >
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent
                 className={cn(
-                  "text-base leading-relaxed pb-4",
-                  isDark ? "text-navy-200" : "text-slate-warm-600"
+                  "text-base leading-[140%]  leading-relaxed",
+                  isDark ? "text-[#546885]" : "text-[#546885]"
                 )}
               >
                 <div dangerouslySetInnerHTML={{ __html: faq.answer }} />

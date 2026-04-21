@@ -41,16 +41,16 @@ export function TrustBanner({ items, variant = "gold" }: TrustBannerProps) {
                 <IconComp
                   className={cn(
                     "h-4 w-4 shrink-0",
-                    variant === "gold" && "text-navy-900",
-                    variant === "dark" && "text-gold-400",
+                    variant === "gold" && "text-[#122D56]",
+                    variant === "dark" && "text-[#122D56]",
                     variant === "light" && "text-gold-600"
                   )}
                 />
                 <span
                   className={cn(
                     "text-sm font-medium",
-                    variant === "gold" && "text-navy-950",
-                    variant === "dark" && "text-navy-100",
+                    variant === "gold" && "text-[#122D56]",
+                    variant === "dark" && "text-[#122D56]",
                     variant === "light" && "text-navy-800"
                   )}
                 >

@@ -87,7 +87,7 @@ export default function YourRightsPage() {
 
       {/* Right to take legal action */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight">
             You have the right to take <span className="text-[#FFBF0F]">legal action</span>.
           </h2>
@@ -109,7 +109,7 @@ export default function YourRightsPage() {
 
       {/* Rights cards grid */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-slate-warm-50">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="grid sm:grid-cols-2 gap-6">
             {RIGHTS_CARDS.map(({ icon: Icon, title, description }) => (
               <div
@@ -133,7 +133,7 @@ export default function YourRightsPage() {
 
       {/* Statute of limitations */}
       <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-5">
           <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
             What about the statute of <span className="text-[#FFBF0F]">limitations?</span>
           </h2>

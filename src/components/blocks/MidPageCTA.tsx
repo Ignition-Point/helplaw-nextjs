@@ -26,7 +26,7 @@ export function MidPageCTA({
     <section
       className={cn(
         "py-14 sm:py-16",
-        variant === "gold" && "bg-gold-500",
+        variant === "gold" && "bg-[#FFBF0F]",
         variant === "dark" && "bg-navy-900",
         variant === "light" && "bg-navy-50"
       )}
@@ -35,9 +35,9 @@ export function MidPageCTA({
         {headline && (
           <h2
             className={cn(
-              "text-2xl sm:text-3xl font-bold tracking-tight",
-              variant === "gold" && "text-navy-950",
-              variant === "dark" && "text-white",
+              "heading text-2xl sm:text-3xl font-bold tracking-tight",
+              variant === "gold" && "text-[#122D56]",
+              variant === "dark" && "text-[#122D56]",
               variant === "light" && "text-navy-900"
             )}
           >
@@ -48,8 +48,8 @@ export function MidPageCTA({
           <p
             className={cn(
               "mt-3 text-base",
-              variant === "gold" && "text-navy-800",
-              variant === "dark" && "text-navy-200",
+              variant === "gold" && "text-[#122D56]",
+              variant === "dark" && "text-[#122D56]",
               variant === "light" && "text-slate-warm-600"
             )}
           >
@@ -59,9 +59,9 @@ export function MidPageCTA({
         {content && (
           <div
             className={cn(
-              "mt-4 text-sm prose-helplaw",
-              variant === "gold" && "[&_p]:text-navy-800",
-              variant === "dark" && "[&_p]:text-navy-200",
+              "mt-4 text-[14px] md:text-[16px] lg:text-[18px] ",
+              variant === "gold" && "[&_p]:text-[#122D56]",
+              variant === "dark" && "[&_p]:text-[#122D56]",
             )}
             dangerouslySetInnerHTML={{ __html: content }}
           />
@@ -70,8 +70,8 @@ export function MidPageCTA({
           <a
             href={ctaHref}
             className={cn(
-              "inline-flex items-center justify-center rounded-md px-7 py-3 text-base font-semibold transition-all",
-              variant === "gold" && "bg-navy-900 text-white hover:bg-navy-800 shadow-lg",
+              "inline-flex items-center justify-center rounded-full font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px]  transition-all",
+              variant === "gold" && "bg-white text-[#122D56] hover:bg-navy-800 hover:text-white",
               variant === "dark" && "bg-gold-500 text-navy-950 hover:bg-gold-400 shadow-lg",
               variant === "light" && "bg-navy-800 text-white hover:bg-navy-700 shadow-lg"
             )}
@@ -82,8 +82,8 @@ export function MidPageCTA({
           <a
             href={`tel:${phoneNumber}`}
             className={cn(
-              "inline-flex items-center gap-2 text-sm font-medium transition-colors",
-              variant === "gold" && "text-navy-800 hover:text-navy-950",
+              "inline-flex items-center justify-center rounded-full font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px]  transition-all",
+              variant === "gold" && "border-2 border-[#122D56] hover:border-white text-[#122D56] transition-all hover:bg-white hover:text-[#122D56]",
               variant === "dark" && "text-navy-300 hover:text-white",
               variant === "light" && "text-navy-600 hover:text-navy-800"
             )}
