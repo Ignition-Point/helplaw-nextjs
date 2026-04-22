@@ -24,7 +24,7 @@ export function Footer() {
 
       <div className="mx-auto max-w-7xl px-5">
         {/* Main footer grid */}
-        <div className="flex flex-wrap items-center justify-center gap-[14px] md:gap-[40px] lg:gap-[40px] py-[15px] lg:py-[8px]">
+        <div className="flex flex-wrap items-center justify-center gap-[0] md:gap-[10px] lg:gap-[40px] py-[15px] lg:pt-[14px] lg:py-[8px]">
           {/* Brand column */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Logo variant="light" />
@@ -99,7 +99,7 @@ export function Footer() {
       {/* Disclaimer bar */}
         <div className="bg-[#000000] py-[20px]">
           <div className="mx-auto max-w-7xl px-5">
-          <p className="font-normal text-[12px] lg:text-[14px] leading-[140%] tracking-[0%] text-white">
+          <p className="font-normal text-[10px] md:text-[12px] lg:text-[14px] leading-[140%] tracking-[0%] text-white">
             <strong className="font-medium">DISCLAIMER:</strong> This website is for informational purposes only and constitutes a paid legal advertisement. The information provided does not constitute legal or medical advice, and no attorney-client relationship is formed by use of this website. Results are not guaranteed. Information may not be complete or up to date. You should consult a licensed attorney regarding your specific legal situation and a qualified medical professional regarding any medical concerns. Do not disregard professional advice based on information found on this site. Some content on this website, including certain images, may be AI-generated, simulated, or illustrative only and may not depict actual Help Law Group offices, personnel, or events. Help Law Group is not responsible for actions taken based on the content of this website. Our goal is to help connect individuals with information and legal resources to fight for their rights.
           </p>
           </div>

@@ -38,7 +38,7 @@ export default async function HomePage() {
           src="/assets/alt/hero-img.png"
           alt="Hero Image"
           fill
-          className="absolute inset-0 w-full h-full object-cover object-[88%_top] md:object-top border-t-2 border-white"
+          className="!relative md:!absolute !inset-auto md:!inset-0 w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
         {/* <video
           autoPlay
@@ -51,12 +51,12 @@ export default async function HomePage() {
           <source src="/assets/alt/section-1-video.mp4" type="video/mp4" />
         </video> */}
         {/* Overlay to keep text legible */}
-        <div className="absolute inset-0 bg-[linear-gradient(127.16deg,rgba(9,22,42,0.7)_34.14%,rgba(9,22,42,0.62454)_39.46%,rgba(9,22,42,0)_57.5%,rgba(9,22,42,0.12601)_71.6%,rgba(9,22,42,0.378)_76.49%,rgba(9,22,42,0.63)_88.82%)]" />
+        <div className="hidden md:block absolute inset-0 bg-[linear-gradient(127.16deg,rgba(9,22,42,0.7)_34.14%,rgba(9,22,42,0.62454)_39.46%,rgba(9,22,42,0)_57.5%,rgba(9,22,42,0.12601)_71.6%,rgba(9,22,42,0.378)_76.49%,rgba(9,22,42,0.63)_88.82%)]" />
 
-        <div className="relative mx-auto  max-w-7xl items-center justify-between px-5  pt-[40px] pb-[40px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
+        <div className="bg-[#122d56] md:bg-transparent relative mx-auto  max-w-7xl items-center justify-between px-5  pt-[30px] pb-[30px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
           <div className="max-w-[785px] w-full">
         
-            <h1 className="heading font-bold text-[32px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
+            <h1 className="heading font-bold text-[26px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
               Standing With People When It Matters Most
             </h1>
 
@@ -109,7 +109,7 @@ export default async function HomePage() {
             <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[20px] backdrop-blur-[34px]">
               <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-8">
                 <div className="">
-                  <div className="font-bold text-[32px] md:text-[40px] lg:text-[60px] leading-[110%]  capitalize text-[#FFBF0F] mb-3">
+                  <div className="font-bold text-[24px] md:text-[40px] lg:text-[60px] leading-[110%]  capitalize text-[#FFBF0F] mb-3">
                     150+
                   </div>
                   <p className="font-normal text-[16px] leading-[100%]  capitalize text-white">
@@ -166,56 +166,44 @@ export default async function HomePage() {
       </div>
 
       {/* ─── "When You Are Ready. We Are Here." ─── */}
-      <section
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage: "url(/assets/alt/section-2-image-new.png)",
-          backgroundSize: "cover",
-          backgroundPosition: "center 0",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
+          <section
+            className="relative overflow-hidden bg-none md:bg-[url('/assets/alt/section-2-image-new.png')] md:bg-cover md:bg-no-repeat md:bg-[center_0]"
+          >
+         <Image
+          src="/assets/alt/section-2-image-mobile-new.png"
+          alt="section-2-image"
+          fill
+          className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
+        />
         {/* <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(9,22,42,0)_0%,#09162A_100%)]" /> */}
-        <div className="relative mx-auto max-w-7xl px-5 py-[40px] md:py-[60px] lg:py-[80px]">
+        <div className="relative mx-auto max-w-7xl px-5 py-[30px] md:py-[60px] lg:py-[80px]">
           <div className="max-w-[578px] ml-auto">
-            <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] align-middle capitalize text-white tracking-normal">
+            <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] align-middle capitalize text-[#122D56] md:text-white tracking-normal">
               The <span className="text-[#FFBF0F]">First Step</span> Is Always
               the Hardest...
             </h2>
 
-            <p className="mt-[16px] md:mt-[18px] lg:mt-[20px] font-normal text-[16px] md:text-[18px] leading-[140%] text-white">
+            <p className="mt-[16px] md:mt-[18px] lg:mt-[20px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
               If you’re here, it’s because something serious happened.
             </p>
-            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-white">
+            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
               When you’re ready to take the first step, we carry the burden from
               there. We take on powerful companies and individuals who believe
               they’re untouchable.
             </p>
-            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-white">
+            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
               We fight for accountability and we don’t stop until the work is
               done.
             </p>
 
             <Link
               href="/cases"
-              className="mt-4 md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
+              className="mt-4 md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-[#122D56] md:bg-white text-white md:text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
             >
               Take the First Step Here
             </Link>
 
-            <p className="inline-flex items-start leading-[130%] gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-white">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="22"
-                viewBox="0 0 18 22"
-                fill="none"
-              >
-                <path
-                  d="M0.78307 1.82598L9 0L17.2169 1.82598C17.6745 1.92766 18 2.33347 18 2.80217V12.7889C18 14.795 16.9974 16.6684 15.3282 17.7812L9 22L2.6718 17.7812C1.00261 16.6684 0 14.795 0 12.7889V2.80217C0 2.33347 0.32553 1.92766 0.78307 1.82598ZM2 3.60434V12.7889C2 14.1263 2.6684 15.3752 3.7812 16.1171L9 19.5963L14.2188 16.1171C15.3316 15.3752 16 14.1263 16 12.7889V3.60434L9 2.04879L2 3.60434Z"
-                  fill="#FFBF0F"
-                />
-              </svg>
+            <p className="inline-flex items-start leading-[130%] gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#546885] md:text-white">
               Free review &bull; Private &amp; confidential &bull; No cost
               unless you win
             </p>
@@ -224,13 +212,13 @@ export default async function HomePage() {
       </section>
 
       {/* ─── "Guidance You Can Trust" ─── */}
-      <section className="bg-white overflow-hidden py-[40px] md:py-[60px] lg:py-[80px]">
+      <section className="bg-white overflow-hidden py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid lg:grid-cols-[48%_45.3%] gap-y-[30px] gap-x-[80px]">
             {/* Copy — right side */}
             <div className="flex items-center mb-[50px] lg:mb-0">
               <div className="w-full">
-                <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
+                <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
                   Guidance <span className="text-[#FFBF0F]">You Can Trust</span>
                   <br /> No Guesswork. No Pressure.
                 </h2>
@@ -260,12 +248,12 @@ export default async function HomePage() {
               </div>
             </div>
             {/* Image — left side with fade */}
-            <div className="relative h-[400px] lg:h-[389px]">
+            <div className="relative h-full lg:h-[389px]">
               <Image
                 src="/assets/alt/section-3-image-new.png"
                 alt="Help Law Group Team"
                 fill
-                className="rounded-[14px] md:rounded-[16px] lg:rounded-[26px] object-cover object-top"
+                className="!relative md:!absolute rounded-[14px] md:rounded-[16px] lg:rounded-[26px] object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 55vw"
               />
               {/* Fade-out gradient on right edge */}
@@ -324,16 +312,16 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-          <div className="mt-[30px]">
-            <div className="grid md:grid-cols-3 gap-[21px]">
-              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
+          <div className="mt-[16px] md:mt-[22px] lg:mt-[30px]">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-[12px] md:gap-[16px] lg:gap-[21px]">
+              <div className="order-1 md:order-1 border border-[#e8edf3] md:border-0 flex md:flex-row flex-col text-center md:text-left items-center gap-2 md:gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[12px] py-[10px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
                     src="/assets/alt/free-review.svg"
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[56px] min-w-[56px] w-[56px] lg:h-[70px] lg:w-[70px] object-contain"
+                    className="rounded-full h-[42px] min-w-[42px] w-[42px] lg:h-[70px] lg:w-[70px] object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -341,14 +329,14 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
+              <div className="order-3 md:order-2 col-span-2 md:col-span-1 border border-[#e8edf3] md:border-0 flex md:flex-row flex-col text-center md:text-left items-center gap-2 md:gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[12px] py-[10px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
                     src="/assets/alt/private-icon.svg"
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[56px] w-[56px] min-w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
+                    className="rounded-full h-[42px] w-[42px] min-w-[42px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -356,14 +344,14 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[16px] py-[14px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
+              <div className="order-2 md:order-3 flex md:flex-row flex-col border border-[#e8edf3] md:border-0 text-center md:text-left items-center gap-2 md:gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[12px] py-[10px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
                     src="/assets/alt/no-obligation.svg"
                     alt="Icon"
                     width={70}
                     height={70}
-                    className="rounded-full h-[56px] min-w-[56px] w-[56px] lg:h-[70px] lg:w-[70px]  object-contain"
+                    className="rounded-full h-[42px] min-w-[42px] w-[42px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
                 <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
@@ -377,23 +365,27 @@ export default async function HomePage() {
 
       {/* ─── How It Works ─── */}
       <section
-        className="relative overflow-hidden py-[40px] md:py-[60px] lg:py-[80px] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]"
-        style={{
-          backgroundImage: "url(/assets/alt/section-4-image-new.png)",
-        }}
+        className="relative overflow-hidden py-[30px] md:py-[60px] lg:py-[80px] bg-none md:bg-[url('/assets/alt/section-4-image-new.png')] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]"
       >
         <div className="absolute inset-0 bg-white/60 md:hidden"></div>
+
+         <Image
+          src="/assets/alt/section-4-image-new.png"
+          alt="section-2-image"
+          fill
+          className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
+        />
 
         <div className="hidden md:block  -rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5">
-          <div className="max-w-[650px] w-full ml-auto">
+          <div className="max-w-[650px] w-full ml-auto pt-[30px]">
             <div className="mb-[30px]">
-              <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
+              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
                 <span className="text-[#FFBF0F]">Your Terms</span>
               </h2>
-              <p className="mt-[10px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-black md:text-[#546885]">
+              <p className="mt-[10px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
                 You don’t need to prepare, explain everything, or make decisions
                 right now. This starts with a conversation - private,
                 respectful, and focused on listening.
@@ -439,7 +431,7 @@ export default async function HomePage() {
                     <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] align-middle text-[#132F55]">
                       {title}
                     </h3>
-                    <p className="mt-[10px] font-normal text-[14px] lg:text-[16px] leading-[140%] text-black md:text-[#546885]">
+                    <p className="mt-[10px] font-normal text-[14px] lg:text-[16px] leading-[140%] text-[#546885]">
                       {description}
                     </p>
                   </div>
@@ -456,18 +448,6 @@ export default async function HomePage() {
               </Link>
             </div>
             <p className="inline-flex items-start leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56]">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="22"
-                viewBox="0 0 18 22"
-                fill="none"
-              >
-                <path
-                  d="M0.78307 1.82598L9 0L17.2169 1.82598C17.6745 1.92766 18 2.33347 18 2.80217V12.7889C18 14.795 16.9974 16.6684 15.3282 17.7812L9 22L2.6718 17.7812C1.00261 16.6684 0 14.795 0 12.7889V2.80217C0 2.33347 0.32553 1.92766 0.78307 1.82598ZM2 3.60434V12.7889C2 14.1263 2.6684 15.3752 3.7812 16.1171L9 19.5963L14.2188 16.1171C15.3316 15.3752 16 14.1263 16 12.7889V3.60434L9 2.04879L2 3.60434Z"
-                  fill="#FFBF0F"
-                />
-              </svg>
               Private & confidential &bull; No obligation &bull; No cost unless
               your case wins
             </p>
@@ -486,22 +466,22 @@ export default async function HomePage() {
         <div className="">
           <div className="grid md:grid-cols-[50%_50%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}
+                  <Image
+          src="/assets/alt/contect-info-bg.jpg"
+          alt="section-2-image"
+          fill
+          className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
+        />
             <div
-              className="relative z-10 py-[40px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px]"
-              style={{
-                backgroundImage: "url(/assets/alt/contect-info-bg.jpg)",
-                backgroundSize: "cover",
-                backgroundPosition: "center top",
-                backgroundRepeat: "no-repeat",
-              }}
-            >
-              <div className="absolute bg-[#19263799] inset-0 -z-10" />
-              <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white">
+              className="relative z-10 py-[30px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px] bg-[#1A365E] md:bg-[url('/assets/alt/contect-info-bg.jpg')] md:bg-cover md:bg-no-repeat md:bg-top">
+              <div className="hidden md:block absolute bg-[#19263799] inset-0 -z-10" />
+
+              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white">
                 Why <span className="text-[#FFBF0F]">Clients Choose</span> Help
                 Law Group
               </h2>
 
-              <div className="mt-10 space-y-6">
+              <div className="mt-4 md:mt-6 lg:mt-10 space-y-6 w-full max-w-[430px]">
                 {[
                   {
                     title: "We Take On the Powerful",
@@ -559,7 +539,7 @@ export default async function HomePage() {
 
             {/* Right: Lead form */}
             <div>
-              <div className="py-[40px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
+              <div className="py-[30px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
                 <h3 className="font-bold text-[18px] md:text-[22px] lg:text-[30px] leading-[110%] tracking-[0%] text-[#1F3044] text-center mb-[18px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review
                 </h3>

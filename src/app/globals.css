@@ -300,3 +300,14 @@
 .animate-scroll-x {
   animation: scroll-x 30s linear infinite;
 }
+
+@media (max-width: 767px) {
+  .animate-scroll-x {
+    animation-duration: 10s;
+  }
+}
+@media (max-width: 576px) {
+p {
+    text-wrap: balance;
+}
+}

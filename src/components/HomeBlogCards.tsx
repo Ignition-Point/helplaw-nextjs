@@ -29,11 +29,11 @@ const placeholderPosts = [
 
 export function HomeBlogCards() {
   return (
-    <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
+    <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
       <div className="mx-auto max-w-7xl px-5">
          <div className="mx-auto flex flex-wrap items-end justify-between gap-[20px] lg:gap-[30px] mb-[30px]">
-          <div className="max-w-[796px] w-full">
-           <h2 className="heading text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-white">
+          <div className="max-w-[670px] w-full">
+           <h2 className="heading text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-white">
               Information That  <span className="text-[#FFBF0F]">Can Help</span>
             </h2>
 

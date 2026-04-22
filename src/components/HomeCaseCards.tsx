@@ -51,11 +51,11 @@ const caseCategories = [
 
 export function HomeCaseCards() {
   return (
-    <section className="py-[40px] md:py-[60px] lg:py-[80px]  bg-white">
+    <section className="py-[30px] md:py-[60px] lg:py-[80px]  bg-white">
       <div className="mx-auto max-w-7xl px-5">
         <div className="mx-auto flex flex-wrap items-end justify-between gap-[20px] lg:gap-[30px] mb-[30px]">
           <div className="max-w-[950px] w-full">
-            <h2 className="heading text-[28px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-[#17335D]">
+            <h2 className="heading text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-[#17335D]">
               Cases We Are{" "}
               <span className="text-[#FFBF0F]">Currently Reviewing</span>
             </h2>
