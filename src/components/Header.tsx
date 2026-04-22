@@ -76,7 +76,7 @@ export function Header() {
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="absolute left-0 right-auto top-[100px] w-full lg:hidden border-t border-navy-100/60 bg-white">
+        <div className="absolute left-0 right-auto top-[100px] w-full lg:hidden border-t border-navy-100/60 bg-white shadow-[0_12px_30px_rgba(0,0,0,0.12)]">
           <nav
             className="mx-auto max-w-7xl px-4 py-4 space-y-1"
             aria-label="Mobile navigation"

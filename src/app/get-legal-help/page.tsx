@@ -117,7 +117,7 @@ export default function GetLegalHelpPage() {
                 <h3 className="text-2xl font-bold text-[#122D56] mb-2">
                   Request a Private Case Review
                 </h3>
-                <p className="text-sm text-[#546885] mb-6">
+                <p className="text-sm text-[#546885] mb-2">
                   All information is confidential and will not be shared without
                   your consent.
                 </p>

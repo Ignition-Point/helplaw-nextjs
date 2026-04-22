@@ -59,7 +59,7 @@ export function MidPageCTA({
         {content && (
           <div
             className={cn(
-              "mt-4 text-[14px] md:text-[16px] lg:text-[18px] ",
+              "mt-4 text-[16px] lg:text-[18px] ",
               variant === "gold" && "[&_p]:text-[#122D56]",
               variant === "dark" && "[&_p]:text-[#122D56]",
             )}

@@ -84,7 +84,7 @@ export function HomeBlogCards() {
                 <span className="heading font-normal text-[14px] leading-[100%] tracking-[0%] text-[#D4AD4A]">
                   {post.category}
                 </span>
-                <h3 className="mt-2 lg:min-h-[52px] font-bold text-[16px] md:text-[18px]lg:text-[20px] leading-[26px] tracking-[-0.04em] align-middle text-[#132F55] group-hover:text-navy-700">
+                <h3 className="mt-2 lg:min-h-[52px] font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] tracking-[-0.04em] align-middle text-[#132F55] group-hover:text-navy-700">
                   {post.title}
                 </h3>
                 <p className="mt-2 font-normal text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">

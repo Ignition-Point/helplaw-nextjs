@@ -43,7 +43,7 @@ export function FAQSection({
             >
               <AccordionTrigger
                 className={cn(
-                  "heading cursor-pointer text-base font-semibold text-[#122D56] hover:no-underline hover:text-navy-700",
+                  "heading cursor-pointer text-small sm:text-base font-semibold text-[#122D56] hover:no-underline hover:text-navy-700",
                   isDark ? "text-[#122D56]" : "text-[#122D56]"
                 )}
               >
