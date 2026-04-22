@@ -200,7 +200,7 @@
     @apply mb-1.5 leading-relaxed;
   }
   a {
-    @apply text-navy-600 underline underline-offset-2 hover:text-gold-600 transition-colors;
+    @apply text-[#122D56] underline underline-offset-2 hover:text-[#1A365E] transition-colors;
   }
   blockquote {
     @apply border-l-4 border-[#FFBF0F] pl-5 py-1 my-6 italic text-slate-warm-600 bg-gold-50/50 rounded-r-lg;
