@@ -56,6 +56,16 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="font-normal text-[14px] md:text-[16px] lg:text-[18px] leading-[120%] tracking-[0%] text-white hover:text-[#FFBF0F] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
