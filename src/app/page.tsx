@@ -109,7 +109,7 @@ export default async function HomePage() {
             <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[12px] md:p-[20px] backdrop-blur-[34px]">
               <div className="flex items-center justify-between mb-2 md:mb-6 lg:mb-8">
                 <div className="">
-                  <div className="font-bold text-[24px] md:text-[40px] lg:text-[60px] leading-[110%]  capitalize text-[#FFBF0F] mb-3">
+                  <div className="font-bold text-[22px] md:text-[40px] lg:text-[60px] leading-[110%]  capitalize text-[#FFBF0F] mb-3">
                     150+
                   </div>
                   <p className="font-normal text-[16px] leading-[100%]  capitalize text-white">
@@ -180,7 +180,7 @@ export default async function HomePage() {
         {/* <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(9,22,42,0)_0%,#09162A_100%)]" /> */}
         <div className="relative mx-auto max-w-7xl px-5 py-[30px] md:py-[60px] lg:py-[80px]">
           <div className="max-w-[578px] ml-auto text-center md:text-left">
-            <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] align-middle capitalize text-[#122D56] md:text-white tracking-normal">
+            <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[1.2] align-middle capitalize text-[#122D56] md:text-white tracking-normal">
               The <span className="text-[#FFBF0F]">First Step</span> Is Always
               the Hardest...
             </h2>
@@ -220,7 +220,7 @@ export default async function HomePage() {
             {/* Copy — right side */}
             <div className="flex items-center mb-[50px] lg:mb-0">
               <div className="w-full text-center md:text-left">
-                <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
+                <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
                   Guidance <span className="text-[#FFBF0F]">You Can Trust</span>
                   <br /> No Guesswork. No Pressure.
                 </h2>
@@ -383,7 +383,7 @@ export default async function HomePage() {
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="max-w-[650px] w-full ml-auto pt-[30px]">
             <div className="mb-[20px] md:mb-[30px] text-center md:text-left">
-              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
+              <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
                 <span className="text-[#FFBF0F]">Your Terms</span>
               </h2>
@@ -478,7 +478,7 @@ export default async function HomePage() {
               className="relative z-10 py-[30px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px] bg-[#1A365E] md:bg-[url('/assets/alt/contect-info-bg.jpg')] md:bg-cover md:bg-no-repeat md:bg-top">
               <div className="hidden md:block absolute bg-[#19263799] inset-0 -z-10" />
 
-              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white text-center md:text-left">
+              <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white text-center md:text-left">
                 Why <span className="text-[#FFBF0F]">Clients Choose</span> Help
                 Law Group
               </h2>
@@ -542,7 +542,7 @@ export default async function HomePage() {
             {/* Right: Lead form */}
             <div>
               <div className="py-[30px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
-                <h3 className="font-bold text-[18px] md:text-[22px] lg:text-[30px] leading-[110%] tracking-[0%] text-[#1F3044] text-center mb-[18px] md:mb-[30px]lg:mb-[40px]">
+                <h3 className="font-bold text-[22px] md:text-[26px] lg:text-[30px] leading-[110%] tracking-[0%] text-[#1F3044] text-center mb-[18px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review
                 </h3>
                 <HomeLeadForm />

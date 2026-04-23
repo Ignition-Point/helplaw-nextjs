@@ -19,8 +19,8 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[linear-gradient(90deg,rgba(12,12,12,0.2)_0%,rgba(12,12,12,0.2)_100%)] backdrop-blur-[24px] py-[18px]">
-      <div className="absolute -z-10 inset-0 h-[100px] w-full">
+    <header className="sticky top-0 z-50 w-full bg-[linear-gradient(90deg,rgba(12,12,12,0.2)_0%,rgba(12,12,12,0.2)_100%)] backdrop-blur-[24px] py-[6px] md:py-[18px]">
+      <div className="absolute -z-10 inset-0 h-[76px] md:h-[100px] w-full">
         <Image
           src="/assets/alt/header-bg.svg"
           alt="Header Shape"
@@ -67,9 +67,9 @@ export function Header() {
           aria-label="Toggle navigation menu"
         >
           {mobileOpen ? (
-            <X className="h-5 w-5" />
+            <X className="h-7 w-7" />
           ) : (
-            <Menu className="h-5 w-5" />
+            <Menu className="h-7 w-7" />
           )}
         </button>
       </div>
