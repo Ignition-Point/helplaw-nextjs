@@ -54,7 +54,7 @@ export default async function HomePage() {
         <div className="hidden md:block absolute inset-0 bg-[linear-gradient(127.16deg,rgba(9,22,42,0.7)_34.14%,rgba(9,22,42,0.62454)_39.46%,rgba(9,22,42,0)_57.5%,rgba(9,22,42,0.12601)_71.6%,rgba(9,22,42,0.378)_76.49%,rgba(9,22,42,0.63)_88.82%)]" />
 
         <div className="bg-[#122d56] md:bg-transparent relative mx-auto  max-w-7xl items-center justify-between px-5  pt-[30px] pb-[30px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
-          <div className="max-w-[785px] w-full">
+          <div className="max-w-[785px] w-full text-center md:text-left">
         
             <h1 className="heading font-bold text-[26px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
               Standing With People When It Matters Most
@@ -73,7 +73,7 @@ export default async function HomePage() {
                 height="76"
                 viewBox="0 0 46 79"
                 fill="none"
-                className="h-[35px] md:h-[45px] w-[46px] lg:h-[78px] lg:w-[46px] object-contain"
+                className="h-[35px] md:h-[45px] w-[46px] lg:h-[78px] lg:w-[46px] object-contain mx-auto md:mx-0"
               >
                 <path
                   d="M22.7529 0L22.7529 76.7414"
@@ -88,7 +88,7 @@ export default async function HomePage() {
               </svg>
             </div>
 
-            <div className="mt-6 md:mt-8 lg:mt-15 flex flex-wrap items-center gap-4">
+            <div className="mt-6 md:mt-8 lg:mt-15 flex flex-wrap items-center justify-center md:justify-start gap-4">
               <Link
                 href="/cases"
                 className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
@@ -106,8 +106,8 @@ export default async function HomePage() {
             {/* Attorney avatar row */}
           </div>
           <div className="lg:absolute right-0 bottom-[92px] mt-[20px] lg:mt-[0]">
-            <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[20px] backdrop-blur-[34px]">
-              <div className="flex items-center justify-between mb-4 md:mb-6 lg:mb-8">
+            <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[12px] md:p-[20px] backdrop-blur-[34px]">
+              <div className="flex items-center justify-between mb-2 md:mb-6 lg:mb-8">
                 <div className="">
                   <div className="font-bold text-[24px] md:text-[40px] lg:text-[60px] leading-[110%]  capitalize text-[#FFBF0F] mb-3">
                     150+
@@ -129,7 +129,7 @@ export default async function HomePage() {
                       alt="Attorney"
                       width={55}
                       height={55}
-                      className="rounded-full h-[53px] w-[53px] border-4 border-black object-cover"
+                      className="rounded-full h-[46px] w-[48px] min-w-[46px] lg:h-[53px] lg:w-[53px] border-2 lg:border-4 border-black object-cover"
                     />
                   ))}
                 </div>
@@ -143,8 +143,8 @@ export default async function HomePage() {
       </section>
 
       {/* ─── Scrolling Trust Bar ─── */}
-      <div className="bg-[#FFBF0F] py-4 overflow-hidden">
-        <div className="animate-scroll-x flex whitespace-nowrap gap-5">
+      <div className="bg-[#FFBF0F] py-3 md:py-4 overflow-hidden">
+        <div className="animate-scroll-x flex whitespace-nowrap gap-3 lg:gap-5">
           {[...Array(4)].flatMap((_, setIdx) =>
             [
               "Free Case Evaluation",
@@ -155,9 +155,9 @@ export default async function HomePage() {
             ].map((item, i) => (
               <span
                 key={`${setIdx}-${i}`}
-                className="inline-flex items-center gap-[20px] heading font-normal text-[16px] lg:text-[18px] leading-[100%]  text-center align-middle uppercase text-[#122D56] shrink-0"
+                className="inline-flex items-center gap-[20px] heading font-normal text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  text-center align-middle uppercase text-[#122D56] shrink-0"
               >
-                <Check className="h-6 w-6 text-[#122D56] shrink-0" />
+                <Check className="h-5 w-5 lg:h-6 lg:w-6 text-[#122D56] shrink-0" />
                 {item}
               </span>
             )),
@@ -169,15 +169,17 @@ export default async function HomePage() {
           <section
             className="relative overflow-hidden bg-none md:bg-[url('/assets/alt/section-2-image-new.png')] md:bg-cover md:bg-no-repeat md:bg-[center_0]"
           >
+          <div className="aspect-video md:hidden">
          <Image
-          src="/assets/alt/section-2-image-mobile-new.png"
+          src="/assets/alt/section-2-image-mobile-new-1.png"
           alt="section-2-image"
           fill
-          className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
+          className="!relative md:!absolute  w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
+        </div>
         {/* <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(9,22,42,0)_0%,#09162A_100%)]" /> */}
         <div className="relative mx-auto max-w-7xl px-5 py-[30px] md:py-[60px] lg:py-[80px]">
-          <div className="max-w-[578px] ml-auto">
+          <div className="max-w-[578px] ml-auto text-center md:text-left">
             <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] align-middle capitalize text-[#122D56] md:text-white tracking-normal">
               The <span className="text-[#FFBF0F]">First Step</span> Is Always
               the Hardest...
@@ -204,7 +206,7 @@ export default async function HomePage() {
             </Link>
 
             <p className="inline-flex items-start leading-[130%] gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#546885] md:text-white">
-              Free review &bull; Private &amp; confidential &bull; No cost
+              &bull; Free review &bull; Private &amp; confidential &bull; No cost
               unless you win
             </p>
           </div>
@@ -212,12 +214,12 @@ export default async function HomePage() {
       </section>
 
       {/* ─── "Guidance You Can Trust" ─── */}
-      <section className="bg-white overflow-hidden py-[30px] md:py-[60px] lg:py-[80px]">
+      <section className="bg-white overflow-hidden pt-0 py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid lg:grid-cols-[48%_45.3%] gap-y-[30px] gap-x-[80px]">
             {/* Copy — right side */}
             <div className="flex items-center mb-[50px] lg:mb-0">
-              <div className="w-full">
+              <div className="w-full text-center md:text-left">
                 <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-[#122D56]">
                   Guidance <span className="text-[#FFBF0F]">You Can Trust</span>
                   <br /> No Guesswork. No Pressure.
@@ -262,9 +264,9 @@ export default async function HomePage() {
               {/* <div className="lg:hidden absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white to-transparent" /> */}
               <div className="absolute -top-[65px] left-0 right-0 mx-auto lg:top-1/2 lg:-translate-y-1/2 lg:-left-[65px] lg:right-auto flex items-center justify-center size-[123px] rounded-full bg-white shadow-[0px_0px_80px_0px_#0000001A]">
                 <div className="animate-spin [animation-duration:12s]">
-                  <div className="relative flex items-center justify-center  ">
+                  <div className="relative flex items-center justify-center p-[8px  ] ">
                     <Image
-                      src="/assets/alt/Happy-iconCustomers.svg"
+                      src="/assets/alt/Happy-Customers.svg"
                       alt="Icon"
                       width={110}
                       height={110}
@@ -324,7 +326,7 @@ export default async function HomePage() {
                     className="rounded-full h-[42px] min-w-[42px] w-[42px] lg:h-[70px] lg:w-[70px] object-contain"
                   />
                 </div>
-                <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
+                <p className="heading text-[14px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
                   Free Review
                 </p>
               </div>
@@ -339,7 +341,7 @@ export default async function HomePage() {
                     className="rounded-full h-[42px] w-[42px] min-w-[42px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
-                <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
+                <p className="heading text-[14px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
                   Private & Confidential 
                 </p>
               </div>
@@ -354,7 +356,7 @@ export default async function HomePage() {
                     className="rounded-full h-[42px] min-w-[42px] w-[42px] lg:h-[70px] lg:w-[70px]  object-contain"
                   />
                 </div>
-                <p className="heading text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
+                <p className="heading text-[14px] md:text-[18px] lg:text-[20px] leading-[140%] font-medium text-[#161D27]">
                   No obligation
                 </p>
               </div>
@@ -365,12 +367,12 @@ export default async function HomePage() {
 
       {/* ─── How It Works ─── */}
       <section
-        className="relative overflow-hidden py-[30px] md:py-[60px] lg:py-[80px] bg-none md:bg-[url('/assets/alt/section-4-image-new.png')] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]"
+        className="relative overflow-hidden pt-0 py-[30px] md:py-[60px] lg:py-[80px] bg-none md:bg-[url('/assets/alt/section-4-image-new.png')] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]"
       >
         <div className="absolute inset-0 bg-white/60 md:hidden"></div>
 
          <Image
-          src="/assets/alt/section-4-image-new.png"
+          src="/assets/alt/section-4-image-new-mobile.png"
           alt="section-2-image"
           fill
           className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
@@ -380,7 +382,7 @@ export default async function HomePage() {
 
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="max-w-[650px] w-full ml-auto pt-[30px]">
-            <div className="mb-[30px]">
+            <div className="mb-[20px] md:mb-[30px] text-center md:text-left">
               <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
                 <span className="text-[#FFBF0F]">Your Terms</span>
@@ -439,7 +441,7 @@ export default async function HomePage() {
               ))}
             </div>
 
-            <div className="my-[20px] md:my-[26px] lg:my-[28px]">
+            <div className="my-[20px] md:my-[26px] lg:my-[28px] text-center md:text-left">
               <Link
                 href="/cases"
                 className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[10px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold text-white transition-all"
@@ -447,8 +449,8 @@ export default async function HomePage() {
                 Speak With Our Team
               </Link>
             </div>
-            <p className="inline-flex items-start leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56]">
-              Private & confidential &bull; No obligation &bull; No cost unless
+            <p className="text-center md:text-left inline-flex items-start leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56]">
+              &bull; Private & confidential &bull; No obligation &bull; No cost unless
               your case wins
             </p>
           </div>
@@ -467,16 +469,16 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-[50%_50%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}
                   <Image
-          src="/assets/alt/contect-info-bg.jpg"
+          src="/assets/alt/contect-info-bg-mobile.jpg"
           alt="section-2-image"
           fill
-          className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
+          className="!relative md:!absolute md:hidden aspect-video w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
             <div
               className="relative z-10 py-[30px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px] bg-[#1A365E] md:bg-[url('/assets/alt/contect-info-bg.jpg')] md:bg-cover md:bg-no-repeat md:bg-top">
               <div className="hidden md:block absolute bg-[#19263799] inset-0 -z-10" />
 
-              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white">
+              <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white text-center md:text-left">
                 Why <span className="text-[#FFBF0F]">Clients Choose</span> Help
                 Law Group
               </h2>
@@ -510,7 +512,7 @@ export default async function HomePage() {
                   },
                 ].map(({ title, description }) => (
                   <div key={title} className="flex items-start gap-[10px]">
-                    <div className="w-[16px] min-w-[16px]">
+                    <div className="w-[16px] min-w-[16px] -mt-[2px]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
