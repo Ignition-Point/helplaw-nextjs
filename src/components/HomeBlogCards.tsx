@@ -122,7 +122,7 @@ export function HomeBlogCards() {
                     </defs>
                   </svg>
                 </div>
-                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
+                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-semibold text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
                   Learn More
                       <svg
                 xmlns="http://www.w3.org/2000/svg"
