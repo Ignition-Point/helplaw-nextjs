@@ -5,7 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { HomeCaseCards } from "@/components/HomeCaseCards";
 import { HomeBlogCards } from "@/components/HomeBlogCards";
 import { HomeLeadForm } from "@/components/HomeLeadForm";
-import { TestimonialSection } from "@/components/TestimonialSection";
+import PreventWidowText from "@/components/PreventWidowText";
 
 export const metadata: Metadata = {
   title: "Help Law Group | Mass Tort & Class Action Attorneys",
@@ -31,6 +31,7 @@ export const revalidate = 60;
 export default async function HomePage() {
   return (
     <>
+      <PreventWidowText />
       {/* ─── Hero: "You Deserve Answers" ─── */}
       <section className="relative overflow-hidden">
         {/* Background video */}
@@ -38,7 +39,7 @@ export default async function HomePage() {
           src="/assets/alt/hero-img.png"
           alt="Hero Image"
           fill
-          className="!relative md:!absolute !inset-auto md:!inset-0 w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
+          className="!relative md:!absolute !inset-auto md:!inset-0 aspect-video md:aspect-auto w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
         {/* <video
           autoPlay
@@ -60,13 +61,13 @@ export default async function HomePage() {
               Standing With People When It Matters Most
             </h1>
 
-            <p className="max-w-[580px] mt-[5px] mb-[20px] font-medium text-[16px] md:text-[18px] lg:text-[20px] leading-[140%]  text-white">
+            <p className="max-w-[580px] mt-[8px] md:mt-[5px] mb-[20px] font-medium text-[14px] md:text-[18px] lg:text-[20px] leading-[140%]  text-white">
               Clear guidance to help you understand what comes next. Whether
               caused by a product, a company, a platform, or an individual,
               we’re here to help and we don't back down.
             </p>
 
-            <div className="">
+            <div className="hidden md:block">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="46"
@@ -107,12 +108,12 @@ export default async function HomePage() {
           </div>
           <div className="lg:absolute right-0 bottom-[92px] mt-[20px] lg:mt-[0]">
             <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[12px] md:p-[20px] backdrop-blur-[34px]">
-              <div className="flex items-center justify-between mb-2 md:mb-6 lg:mb-8">
+              <div className="flex items-center justify-between mb-2 md:mb-5 lg:mb-7">
                 <div className="">
                   <div className="font-bold text-[22px] md:text-[40px] lg:text-[60px] leading-[110%]  capitalize text-[#FFBF0F] mb-3">
                     150+
                   </div>
-                  <p className="font-normal text-[16px] leading-[100%]  capitalize text-white">
+                  <p className="font-normal text-[16px] leading-[140%]  capitalize text-white">
                     attorneys in our network
                   </p>
                 </div>
@@ -134,7 +135,7 @@ export default async function HomePage() {
                   ))}
                 </div>
               </div>
-              <p className="font-bold text-[14px] md:text-[16px] leading-[120%] tracking-[-0.03em] text-white">
+              <p className="font-bold text-[14px] md:text-[16px] leading-[140%] tracking-[-0.03em] text-white">
                 Guidance from experienced attorneys and legal professionals
               </p>
             </div>
@@ -185,15 +186,15 @@ export default async function HomePage() {
               the Hardest...
             </h2>
 
-            <p className="mt-[16px] md:mt-[18px] lg:mt-[20px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
+            <p className="mt-[14px] md:mt-[18px] lg:mt-[20px] font-normal text-[14px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
               If you’re here, it’s because something serious happened.
             </p>
-            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
+            <p className="mt-[10px] md:mt-[16px] lg:mt-[18px] font-normal text-[14px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
               When you’re ready to take the first step, we carry the burden from
               there. We take on powerful companies and individuals who believe
               they’re untouchable.
             </p>
-            <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
+            <p className="mt-[10px] md:mt-[16px] lg:mt-[18px] font-normal text-[14px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
               We fight for accountability and we don’t stop until the work is
               done.
             </p>
@@ -213,8 +214,10 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <div className="border-b lg:border-0"></div>
+
       {/* ─── "Guidance You Can Trust" ─── */}
-      <section className="bg-white overflow-hidden pt-0 py-[30px] md:py-[60px] lg:py-[80px]">
+      <section className="bg-white overflow-hidden py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="grid lg:grid-cols-[48%_45.3%] gap-y-[30px] gap-x-[80px]">
             {/* Copy — right side */}
@@ -226,16 +229,16 @@ export default async function HomePage() {
                 </h2>
 
                 <div className="lg:max-w-[565px]">
-                  <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[14px] md:mt-[16px] lg:mt-[18px] font-normal text-[14px] lg:text-[18px] leading-[140%] text-[#546885]">
                     When something serious happens, the hardest part is knowing
                     what to do next, especially when the other side has power.
                   </p>
-                  <p className="mt-[14px]font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[10px] md:mt-[14px] font-normal text-[14px] lg:text-[18px] leading-[140%] text-[#546885]">
                     Our role is simple: listen carefully, review what happened,
                     and help you understand whether accountability applies, and
                     whether compensation may be available.
                   </p>
-                  <p className="mt-[14px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
+                  <p className="mt-[10px] md:mt-[14px] font-normal text-[14px] lg:text-[18px] leading-[140%] text-[#546885]">
                     You decide if and when to move forward. We handle the
                     complexity, the pressure, and the fight.
                   </p>
@@ -255,7 +258,7 @@ export default async function HomePage() {
                 src="/assets/alt/section-3-image-new.png"
                 alt="Help Law Group Team"
                 fill
-                className="!relative md:!absolute rounded-[14px] md:rounded-[16px] lg:rounded-[26px] object-cover object-top"
+                className="!relative lg:!absolute rounded-[14px] md:rounded-[16px] lg:rounded-[26px] object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 55vw"
               />
               {/* Fade-out gradient on right edge */}
@@ -373,7 +376,7 @@ export default async function HomePage() {
 
          <Image
           src="/assets/alt/section-4-image-new-mobile.png"
-          alt="section-2-image"
+          alt="section-4-image"
           fill
           className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
@@ -387,14 +390,14 @@ export default async function HomePage() {
                 A Private Conversation On 
                 <span className="text-[#FFBF0F]">Your Terms</span>
               </h2>
-              <p className="mt-[10px] font-normal text-[16px] lg:text-[18px] leading-[140%] text-[#546885]">
+              <p className="mt-[10px] font-normal text-[14px] lg:text-[18px] leading-[140%] text-[#546885]">
                 You don’t need to prepare, explain everything, or make decisions
                 right now. This starts with a conversation - private,
                 respectful, and focused on listening.
               </p>
             </div>
 
-            <div className="grid  grid-cols-1 md:grid-cols-2 gap-[20px] lg:grid-cols-[290px_335px] xl:grid-cols-[300px_335px] justify-center gap-[7px] gap-y-[20px]">
+            <div className="grid  grid-cols-1 md:grid-cols-2 gap-[12px] md:gap-[20px] lg:grid-cols-[290px_335px] xl:grid-cols-[300px_335px] justify-center gap-[7px] gap-y-[20px]">
               {[
                 {
                   step: "1",
@@ -425,7 +428,7 @@ export default async function HomePage() {
                     "This begins with a review, not a commitment. We don’t push, rush, or pressure - we help you understand your options first.",
                 },
               ].map(({ step, title, description }) => (
-                <div key={step} className="flex gap-[16px]">
+                <div key={step} className="flex gap-[12px] md:gap-[16px]">
                   <span className="flex w-[25px] h-[38px] border border-[#FFBF0F] rounded-[120px] shrink-0 items-center justify-center rounded-full font-semibold text-[18px] leading-[120%] align-middle text-[#132F55] ">
                     {step}
                   </span>
@@ -457,6 +460,8 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <div className="border-b lg:border-0"></div>
+
       {/* ─── Cases We Are Currently Reviewing ─── */}
       <HomeCaseCards />
 
@@ -475,7 +480,7 @@ export default async function HomePage() {
           className="!relative md:!absolute md:hidden aspect-video w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
             <div
-              className="relative z-10 py-[30px] md:py-[60px] lg:py-[80px] px-[30px] md:px-[40px] lg:px-[60px] bg-[#1A365E] md:bg-[url('/assets/alt/contect-info-bg.jpg')] md:bg-cover md:bg-no-repeat md:bg-top">
+              className="relative z-10 py-[30px] md:py-[60px] lg:py-[80px] px-5 md:px-[40px] lg:px-[60px] bg-[#1A365E] md:bg-[url('/assets/alt/contect-info-bg.jpg')] md:bg-cover md:bg-no-repeat md:bg-top">
               <div className="hidden md:block absolute bg-[#19263799] inset-0 -z-10" />
 
               <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] tracking-[-0.045em] align-middle capitalize text-white text-center md:text-left">
@@ -542,7 +547,7 @@ export default async function HomePage() {
             {/* Right: Lead form */}
             <div>
               <div className="py-[30px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
-                <h3 className="font-bold text-[22px] md:text-[26px] lg:text-[30px] leading-[110%] tracking-[0%] text-[#1F3044] text-center mb-[18px] md:mb-[30px]lg:mb-[40px]">
+                <h3 className="font-bold text-[22px] md:text-[26px] lg:text-[30px] leading-[110%] tracking-[0%] text-[#1F3044] text-center mb-[20px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review
                 </h3>
                 <HomeLeadForm />

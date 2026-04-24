@@ -17,7 +17,7 @@ export function StickyMobileCTA() {
 
   return (
     <div
-      className={`fixed bottom-0 inset-x-0 z-50 md:hidden h-[60px] bg-navy-950 shadow-[0_-2px_8px_rgba(0,0,0,0.25)] flex items-center justify-between px-4 transition-transform duration-300 ${
+      className={`fixed bottom-0 inset-x-0 z-50 md:hidden h-[60px] bg-[#132F55] shadow-[0_-2px_8px_rgba(0,0,0,0.25)] flex items-center justify-between px-4 transition-transform duration-300 ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >
@@ -31,7 +31,7 @@ export function StickyMobileCTA() {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
-          className="w-6 h-6 text-gold-400"
+          className="w-6 h-6 text-[#FFBF0F]"
         >
           <path
             fillRule="evenodd"
@@ -45,7 +45,7 @@ export function StickyMobileCTA() {
       {/* Free Case Review button */}
       <a
         href="#get-help"
-        className="bg-gold-400 hover:bg-gold-500 text-navy-950 font-bold text-sm px-5 py-2.5 rounded-md transition-colors"
+        className="bg-[#FFBF0F] hover:bg-gold-500 text-[#122D56] font-bold text-sm px-5 py-2.5 rounded-md transition-colors"
       >
         Free Case Review
       </a>

@@ -51,7 +51,7 @@ const caseCategories = [
 
 export function HomeCaseCards() {
   return (
-    <section className="pt-0 py-[30px] md:py-[60px] lg:py-[80px]  bg-white">
+    <section className="py-[30px] md:py-[60px] lg:py-[80px]  bg-white">
       <div className="mx-auto max-w-7xl px-5">
         <div className="mx-auto flex flex-wrap items-end justify-center md:justify-between gap-[20px] lg:gap-[30px] mb-[30px]">
           <div className="max-w-[950px] w-full text-center md:text-left">
@@ -60,7 +60,7 @@ export function HomeCaseCards() {
               <span className="text-[#FFBF0F]">Currently Reviewing</span>
             </h2>
 
-            <p className="mt-[15px] text-[16px] lg:text-[18px] leading-[140%] font-normal text-[#5C6F8B] max-w-[690px]">
+            <p className="mt-[15px] text-[14px] lg:text-[18px] leading-[140%] font-normal text-[#5C6F8B] max-w-[690px]">
               Attorneys in our network are actively reviewing cases in these
               areas. If you or someone you know experienced this kind of harm,
               you may have legal options.
@@ -110,7 +110,7 @@ export function HomeCaseCards() {
                 />
               </div>
               <div className="pt-[10px]">
-                <h3 className="font-bold text-[14px] md:text-[16px] lg:text-[20px] leading-[1.2] tracking-[-0.04em] align-middle text-[#132F55] mb-2">
+                <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] tracking-[-0.04em] align-middle text-[#132F55] mb-2">
                   {c.title}
                 </h3>
                 <p className="font-normal text-[14px] lg:text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">
@@ -148,7 +148,7 @@ export function HomeCaseCards() {
                     </defs>
                   </svg>
                 </div>
-                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#D4AD4A] group-hover:text-[#132F55] transition-colors">
+                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#FFBF0F] group-hover:text-[#132F55] transition-colors">
                   Check Eligibility
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
