@@ -36,9 +36,11 @@ export default async function HomePage() {
       <section className="relative overflow-hidden">
         {/* Background video */}
         <Image
-          src="/assets/alt/hero-img.png"
+          src="/assets/alt/hero-img-new.png"
           alt="Hero Image"
           fill
+          unoptimized
+          quality={100}
           className="!relative md:!absolute !inset-auto md:!inset-0 aspect-video md:aspect-auto w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
         {/* <video
@@ -325,7 +327,7 @@ export default async function HomePage() {
               <div className="order-1 md:order-1 border border-[#e8edf3] md:border-0 flex md:flex-row flex-col text-center md:text-left items-center gap-2 md:gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[12px] py-[10px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
-                    src="/assets/alt/free-review.svg"
+                    src="/assets/alt/free-review-1.svg"
                     alt="Icon"
                     width={70}
                     height={70}
@@ -340,7 +342,7 @@ export default async function HomePage() {
               <div className="order-3 md:order-2 col-span-2 md:col-span-1 border border-[#e8edf3] md:border-0 flex md:flex-row flex-col text-center md:text-left items-center gap-2 md:gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[12px] py-[10px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
-                    src="/assets/alt/private-icon.svg"
+                    src="/assets/alt/private-icon-1.svg"
                     alt="Icon"
                     width={70}
                     height={70}
@@ -355,7 +357,7 @@ export default async function HomePage() {
               <div className="order-2 md:order-3 flex md:flex-row flex-col border border-[#e8edf3] md:border-0 text-center md:text-left items-center gap-2 md:gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[12px] py-[10px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
                   <Image
-                    src="/assets/alt/no-obligation.svg"
+                    src="/assets/alt/no-obligation-1.svg"
                     alt="Icon"
                     width={70}
                     height={70}
@@ -530,7 +532,7 @@ export default async function HomePage() {
                       >
                         <path
                           d="M8 3C3.58866 3 0 6.58866 0 11C0 15.4113 3.58866 19 8 19C12.4113 19 16 15.4113 16 11C16 6.58866 12.4113 3 8 3ZM10.4713 11.4713L7.138 14.8047C7.07617 14.8666 7.0027 14.9158 6.92181 14.9493C6.84093 14.9829 6.75421 15.0001 6.66666 15C6.5791 15.0001 6.49239 14.9829 6.4115 14.9493C6.33062 14.9158 6.25715 14.8666 6.19531 14.8047C5.93466 14.544 5.93466 14.1227 6.19531 13.862L9.05734 11L6.19534 8.138C5.93469 7.87734 5.93469 7.456 6.19534 7.19534C6.456 6.93469 6.87734 6.93469 7.138 7.19534L10.4713 10.5287C10.732 10.7893 10.732 11.2107 10.4713 11.4713Z"
-                          fill="#D4AD4A"
+                          fill="#FFBF0F"
                         />
                       </svg>
                     </div>

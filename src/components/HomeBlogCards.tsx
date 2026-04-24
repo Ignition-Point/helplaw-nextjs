@@ -78,10 +78,10 @@ export function HomeBlogCards() {
             <Link
               key={post.title}
               href={post.href}
-              className="group border border-[#F0F0F0] p-[16px] lg:p-[24px] rounded-[12px] md:rounded-[16px] lg:rounded-[20px] transition-all bg-white hover:bg-[#F6F6F6] hover:border-[#D4AD4A] "
+              className="group border border-[#F0F0F0] p-[16px] lg:p-[24px] rounded-[12px] md:rounded-[16px] lg:rounded-[20px] transition-all bg-white hover:bg-[#F6F6F6] hover:border-[#FFBF0F]"
             >
               <div className="">
-                <span className="heading font-normal text-[14px] leading-[100%] tracking-[0%] text-[#D4AD4A]">
+                <span className="heading font-normal text-[14px] leading-[100%] tracking-[0%] text-[#FFBF0F] font-semibold">
                   {post.category}
                 </span>
                 <h3 className="mt-2 lg:min-h-[52px] font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[140%] tracking-[-0.04em] align-middle text-[#132F55] group-hover:text-navy-700">
