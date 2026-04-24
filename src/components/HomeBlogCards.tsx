@@ -31,13 +31,13 @@ export function HomeBlogCards() {
   return (
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
       <div className="mx-auto max-w-7xl px-5">
-         <div className="mx-auto flex flex-wrap items-end justify-center md:justify-between gap-[20px] lg:gap-[30px] mb-[30px]">
+         <div className="mx-auto flex flex-wrap items-end justify-center md:justify-between gap-[13px] lg:gap-[30px] mb-[14px] lg:mb-[30px]">
           <div className="max-w-[670px] w-full text-center md:text-left">
            <h2 className="heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-white">
               Information That  <span className="text-[#FFBF0F]">Can Help</span>
             </h2>
 
-            <p className="mt-[7px] font-normal text-[14px] lg:text-[18px] leading-[140%] tracking-[-0.03em] text-white">
+            <p className="mt-[14px] lg:mt-[7px] font-normal text-[14px] lg:text-[18px] leading-[140%] tracking-[-0.03em] text-white">
              Our resources cover common questions about case eligibility, the legal process, and what to expect at each stage.
             </p>
           </div>
@@ -46,7 +46,7 @@ export function HomeBlogCards() {
 
             <Link
               href="/resources"
-              className="inline-flex items-center gap-2 rounded-full font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] bg-white px-[18px] py-[15px] text-[#122D56] hover:text-white hover:bg-[#152E51] transition-all"
+              className="inline-flex items-center gap-2 rounded-full px-[24px] py-[13px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold leading-[100%] tracking-[0%] bg-white text-[#122D56] hover:text-white hover:bg-[#152E51] transition-all"
             >
               View All
               <svg
@@ -73,7 +73,7 @@ export function HomeBlogCards() {
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-[12px] md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {placeholderPosts.map((post) => (
             <Link
               key={post.title}
@@ -122,7 +122,7 @@ export function HomeBlogCards() {
                     </defs>
                   </svg>
                 </div>
-                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#FFBF0F] group-hover:text-[#132F55] transition-colors">
+                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
                   Learn More
                       <svg
                 xmlns="http://www.w3.org/2000/svg"

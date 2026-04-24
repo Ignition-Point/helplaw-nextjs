@@ -57,11 +57,11 @@ export default async function HomePage() {
         <div className="bg-[#122d56] md:bg-transparent relative mx-auto  max-w-7xl items-center justify-between px-5  pt-[30px] pb-[30px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
           <div className="max-w-[785px] w-full text-center md:text-left">
         
-            <h1 className="heading font-bold text-[26px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
+            <h1 className="heading font-bold text-[22px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
               Standing With People When It Matters Most
             </h1>
 
-            <p className="max-w-[580px] mt-[8px] md:mt-[5px] mb-[20px] font-medium text-[14px] md:text-[18px] lg:text-[20px] leading-[140%]  text-white">
+            <p className="max-w-[298px] md:max-w-[580px] mx-auto md:mx-0 mt-[8px] md:mt-[5px] -mb-[2px] lg:mb-[20px] font-medium text-[14px] md:text-[18px] lg:text-[20px] leading-[140%]  text-white">
               Clear guidance to help you understand what comes next. Whether
               caused by a product, a company, a platform, or an individual,
               we’re here to help and we don't back down.
@@ -89,7 +89,7 @@ export default async function HomePage() {
               </svg>
             </div>
 
-            <div className="mt-6 md:mt-8 lg:mt-15 flex flex-wrap items-center justify-center md:justify-start gap-4">
+            <div className="mt-[14px] md:mt-8 lg:mt-15 flex flex-wrap items-center justify-center md:justify-start gap-4">
               <Link
                 href="/cases"
                 className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
@@ -106,7 +106,7 @@ export default async function HomePage() {
 
             {/* Attorney avatar row */}
           </div>
-          <div className="lg:absolute right-0 bottom-[92px] mt-[20px] lg:mt-[0]">
+          <div className="lg:absolute right-0 bottom-[92px] mt-[14px] lg:mt-[0]">
             <div className="max-w-[435px] bg-[linear-gradient(90deg,rgba(12,12,12,0.4)_0%,rgba(12,12,12,0.4)_100%)] border border-[2px] border-white/12 p-[12px] md:p-[20px] backdrop-blur-[34px]">
               <div className="flex items-center justify-between mb-2 md:mb-5 lg:mb-7">
                 <div className="">
@@ -181,7 +181,7 @@ export default async function HomePage() {
         {/* <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(9,22,42,0)_0%,#09162A_100%)]" /> */}
         <div className="relative mx-auto max-w-7xl px-5 py-[30px] md:py-[60px] lg:py-[80px]">
           <div className="max-w-[578px] ml-auto text-center md:text-left">
-            <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[1.2] align-middle capitalize text-[#122D56] md:text-white tracking-normal">
+            <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56] md:text-white tracking-normal">
               The <span className="text-[#FFBF0F]">First Step</span> Is Always
               the Hardest...
             </h2>
@@ -195,18 +195,21 @@ export default async function HomePage() {
               they’re untouchable.
             </p>
             <p className="mt-[10px] md:mt-[16px] lg:mt-[18px] font-normal text-[14px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
-              We fight for accountability and we don’t stop until the work is
-              done.
+             <>
+              We fight for accountability and we don’t stop
+              <br className="md:hidden" />
+              until the work is done.
+            </>
             </p>
 
             <Link
               href="/cases"
-              className="mt-4 md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-[#122D56] md:bg-white text-white md:text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
+              className="mt-[14px] md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-[#122D56] md:bg-white text-white md:text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
             >
               Take the First Step Here
             </Link>
 
-            <p className="inline-flex items-start leading-[130%] gap-[10px] mt-4 md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#546885] md:text-white">
+            <p className="inline-flex items-start leading-[130%] gap-[10px] mt-[14px] md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#546885] md:text-white max-w-[250px] md:max-w-none">
               &bull; Free review &bull; Private &amp; confidential &bull; No cost
               unless you win
             </p>
@@ -245,7 +248,7 @@ export default async function HomePage() {
 
                   <Link
                     href="/cases"
-                    className="mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#1A365E]"
+                    className="mt-[14px] md:mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#1A365E]"
                   >
                     Start a Confidential Review
                   </Link>
@@ -317,7 +320,7 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
-          <div className="mt-[16px] md:mt-[22px] lg:mt-[30px]">
+          <div className="mt-[14px] md:mt-[22px] lg:mt-[30px]">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-[12px] md:gap-[16px] lg:gap-[21px]">
               <div className="order-1 md:order-1 border border-[#e8edf3] md:border-0 flex md:flex-row flex-col text-center md:text-left items-center gap-2 md:gap-4 bg-[#FBFBFB] rounded-[12px] md:rounded-[18px] px-[12px] py-[10px] md:px-[22px] md:py-[16px] lg:px-[30px] lg:py-[20px]">
                 <div className="relative flex items-center justify-center  ">
@@ -385,12 +388,12 @@ export default async function HomePage() {
 
         <div className="relative mx-auto max-w-7xl px-5">
           <div className="max-w-[650px] w-full ml-auto pt-[30px]">
-            <div className="mb-[20px] md:mb-[30px] text-center md:text-left">
+            <div className="mb-[14px] md:mb-[30px] text-center md:text-left">
               <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
                 <span className="text-[#FFBF0F]">Your Terms</span>
               </h2>
-              <p className="mt-[10px] font-normal text-[14px] lg:text-[18px] leading-[140%] text-[#546885]">
+              <p className="mt-[14px] md:mt-[10px] font-normal text-[14px] lg:text-[18px] leading-[140%] text-[#546885]">
                 You don’t need to prepare, explain everything, or make decisions
                 right now. This starts with a conversation - private,
                 respectful, and focused on listening.
@@ -433,7 +436,7 @@ export default async function HomePage() {
                     {step}
                   </span>
                   <div>
-                    <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] align-middle text-[#132F55]">
+                    <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[120%] align-middle text-[#132F55]">
                       {title}
                     </h3>
                     <p className="mt-[10px] font-normal text-[14px] lg:text-[16px] leading-[140%] text-[#546885]">
@@ -444,15 +447,15 @@ export default async function HomePage() {
               ))}
             </div>
 
-            <div className="my-[20px] md:my-[26px] lg:my-[28px] text-center md:text-left">
+            <div className="my-[14px] md:my-[26px] lg:my-[28px] text-center md:text-left">
               <Link
                 href="/cases"
-                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[10px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold text-white transition-all"
+                className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[16px] text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] font-semibold text-white transition-all"
               >
                 Speak With Our Team
               </Link>
             </div>
-            <p className="text-center md:text-left inline-flex items-start leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56]">
+            <p className="text-center md:text-left leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56] max-w-[260px] md:max-w-none mx-auto md:mx-unset">
               &bull; Private & confidential &bull; No obligation &bull; No cost unless
               your case wins
             </p>
@@ -488,7 +491,7 @@ export default async function HomePage() {
                 Law Group
               </h2>
 
-              <div className="mt-4 md:mt-6 lg:mt-10 space-y-6 w-full max-w-[430px]">
+              <div className="mt-[14px] md:mt-6 lg:mt-10 space-y-[14px] md:space-y-6 w-full max-w-[430px]">
                 {[
                   {
                     title: "We Take On the Powerful",
@@ -547,7 +550,7 @@ export default async function HomePage() {
             {/* Right: Lead form */}
             <div>
               <div className="py-[30px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
-                <h3 className="font-bold text-[22px] md:text-[26px] lg:text-[30px] leading-[110%] tracking-[0%] text-[#1F3044] text-center mb-[20px] md:mb-[30px]lg:mb-[40px]">
+                <h3 className="font-bold text-[22px] md:text-[26px] lg:text-[30px] leading-[120%] tracking-[0%] text-[#1F3044] text-center mb-[14px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review
                 </h3>
                 <HomeLeadForm />

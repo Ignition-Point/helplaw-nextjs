@@ -53,14 +53,14 @@ export function HomeCaseCards() {
   return (
     <section className="py-[30px] md:py-[60px] lg:py-[80px]  bg-white">
       <div className="mx-auto max-w-7xl px-5">
-        <div className="mx-auto flex flex-wrap items-end justify-center md:justify-between gap-[20px] lg:gap-[30px] mb-[30px]">
+        <div className="mx-auto flex flex-wrap items-end justify-center md:justify-between gap-[12px] lg:gap-[30px] mb-[14px] lg:mb-[30px]">
           <div className="max-w-[950px] w-full text-center md:text-left">
             <h2 className="heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-[-0.04em] text-[#17335D]">
               Cases We Are{" "}
               <span className="text-[#FFBF0F]">Currently Reviewing</span>
             </h2>
 
-            <p className="mt-[15px] text-[14px] lg:text-[18px] leading-[140%] font-normal text-[#5C6F8B] max-w-[690px]">
+            <p className="mt-[14px] text-[14px] lg:text-[18px] leading-[140%] font-normal text-[#5C6F8B] max-w-[690px]">
               Attorneys in our network are actively reviewing cases in these
               areas. If you or someone you know experienced this kind of harm,
               you may have legal options.
@@ -70,7 +70,7 @@ export function HomeCaseCards() {
           <div className="shrink-0">
             <Link
               href="/cases"
-              className="inline-flex items-center gap-2 rounded-full font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] bg-[#122D56] px-[18px] py-[15px] text-white hover:bg-[#1A365E] transition-all"
+              className="inline-flex items-center gap-2 rounded-full px-[24px] py-[13px] text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] font-semibold tracking-[0%] bg-[#122D56] text-white hover:bg-[#1A365E] transition-all"
             >
               See All Cases
               <svg
@@ -93,7 +93,7 @@ export function HomeCaseCards() {
           </div>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-[12px] md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {caseCategories.map((c) => (
             <Link
               key={c.title}
@@ -148,7 +148,7 @@ export function HomeCaseCards() {
                     </defs>
                   </svg>
                 </div>
-                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#FFBF0F] group-hover:text-[#132F55] transition-colors">
+                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
                   Check Eligibility
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
