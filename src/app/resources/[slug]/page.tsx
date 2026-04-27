@@ -82,7 +82,6 @@ export async function generateMetadata({
   // SEO title: ensure brand presence and length cap
   const seoTitle = sanitizeSeoTitle(post.seo_title as string | undefined, post.title as string | undefined).value;
 
-  const canonical = sanitizeCanonical(post.seo_canonical as string | undefined, `resources/${slug}`).value;
   const ogImage =
     post.seo_image || post.featured_image || "/assets/og-default.jpg";
 
