@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
 
@@ -46,6 +46,30 @@ function formatDate(dateStr: string | null): string {
 export function ResourceGrid({ posts }: { posts: Post[] }) {
   const [activeFilter, setActiveFilter] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const filterBarRef = useRef<HTMLDivElement | null>(null);
+  const filterButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const centerActiveFilter = (cat: string) => {
+    const bar = filterBarRef.current;
+    const btn = filterButtonRefs.current[cat];
+    if (!bar || !btn) return;
+    // Only auto-center when the row is actually scrollable (mobile).
+    if (bar.scrollWidth <= bar.clientWidth) return;
+
+    const barRect = bar.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta =
+      btnRect.left + btnRect.width / 2 - (barRect.left + barRect.width / 2);
+    const targetLeft = bar.scrollLeft + delta;
+
+    const maxLeft = Math.max(0, bar.scrollWidth - bar.clientWidth);
+    const nextLeft = Math.min(maxLeft, Math.max(0, targetLeft));
+
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    bar.scrollTo({ left: nextLeft, behavior: reduceMotion ? "auto" : "smooth" });
+  };
 
   const filtered = useMemo(() => {
     let result = posts;
@@ -70,6 +94,11 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
     return result;
   }, [posts, activeFilter, searchQuery]);
 
+  useEffect(() => {
+    const id = requestAnimationFrame(() => centerActiveFilter(activeFilter));
+    return () => cancelAnimationFrame(id);
+  }, [activeFilter]);
+
   return (
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
@@ -85,11 +114,20 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
               className="w-full sm:w-64 rounded-full border border-navy-200 bg-white pl-10 pr-4 py-2 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:outline-none focus:ring-2 focus:ring-navy-300 focus:border-navy-300"
             />
           </div>
-          <div className=" flex flex-nowrap whitespace-nowrap md:whitespace-normal overflow-auto md:flex-wrap scrollbar-hide gap-2">
+          <div
+            ref={filterBarRef}
+            className=" flex flex-nowrap whitespace-nowrap md:whitespace-normal overflow-auto md:flex-wrap scrollbar-hide gap-2"
+          >
             {FILTER_CATEGORIES.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveFilter(cat)}
+                ref={(el) => {
+                  filterButtonRefs.current[cat] = el;
+                }}
+                onClick={() => {
+                  setActiveFilter(cat);
+                  requestAnimationFrame(() => centerActiveFilter(cat));
+                }}
                 className={`rounded-full cursor-pointer px-4 py-2 text-sm font-medium transition-colors ${
                   activeFilter === cat
                     ? "bg-[#122D56] text-white"
