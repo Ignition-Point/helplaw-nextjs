@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "audit:pages": "node scripts/audit-static-pages.js",
+    "audit:pages:fix": "node scripts/audit-static-pages.js --fix",
+    "prebuild": "node scripts/audit-static-pages.js || (echo '\\n[prebuild] Static-page audit found errors. Fix above issues or run pnpm audit:pages:fix to auto-compress images.' && exit 1)"
   },
   "dependencies": {
     "@supabase/ssr": "^0.9.0",

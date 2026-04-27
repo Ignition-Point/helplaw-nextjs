@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Disclaimer",
+  title: "Legal Disclaimer | Help Law Group",
   description:
-    "Attorney advertising disclaimer for Help Law Group. This website provides general information and is not a substitute for legal advice.",
+    "Attorney advertising disclaimer for Help Law Group. This site provides general information and is not a substitute for legal advice.",
+  alternates: { canonical: "https://helplaw.com/disclaimer" },
 };
 
 export default function DisclaimerPage() {

@@ -6,9 +6,10 @@ import { Info, Lock, Layers, CreditCard } from "lucide-react";
 import PreventWidowText from "@/components/PreventWidowText";
 
 export const metadata: Metadata = {
-  title: "Your Rights",
+  title: "Know Your Rights as a Survivor | Help Law Group",
   description:
     "If you were seriously harmed by a person, company, or institution, you have legal rights. Understanding them is the first step.",
+  alternates: { canonical: "https://helplaw.com/your-rights" },
 };
 
 const RIGHTS_CARDS = [

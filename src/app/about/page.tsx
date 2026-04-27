@@ -6,9 +6,10 @@ import { Ear, Search, ShieldCheck, Lock, Users, Globe } from "lucide-react";
 import PreventWidowText from "@/components/PreventWidowText";
 
 export const metadata: Metadata = {
-  title: "About Us",
+  title: "About Help Law Group | Mass Tort Advocates",
   description:
-    "Help Law Group connects survivors of abuse, unsafe products, and institutional harm with experienced attorneys. Free case evaluations, no fees unless you win.",
+    "Help Law Group connects survivors of abuse, unsafe products, and institutional harm with attorneys. Free case review, no fees unless you win.",
+  alternates: { canonical: "https://helplaw.com/about" },
 };
 
 export default function AboutPage() {

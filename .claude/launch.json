@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "helplaw-dev",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "export PATH=/opt/homebrew/bin:$PATH && npm run dev"],
+      "port": 3000,
+      "cwd": "/Users/sarahmenkesservold/help-law"
+    },
+    {
+      "name": "hm-dashboard",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "3001"],
+      "port": 3001,
+      "cwd": "../hm-dashboard"
+    }
+  ]
+}

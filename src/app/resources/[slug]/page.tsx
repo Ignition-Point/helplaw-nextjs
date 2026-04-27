@@ -3,6 +3,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
+import {
+  sanitizeMetaDescription,
+  sanitizeSeoTitle,
+  sanitizeCanonical,
+  sanitizeHtml,
+} from "@/lib/content-sanitize";
 import { FAQSection } from "@/components/blocks/FAQSection";
 import { ArrowLeft } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -65,37 +71,29 @@ export async function generateMetadata({
   const post = await getPost(slug);
   if (!post) return { title: "Not Found" };
 
-  // Smart description fallback
-  let description = post.seo_description;
-  if (!description) {
-    const excerpt = (post.excerpt as string) || "";
-    if (excerpt) {
-      const suffix = " Learn more about your legal options.";
-      if (excerpt.length <= 155 - suffix.length) {
-        description = excerpt + suffix;
-      } else if (excerpt.length <= 155) {
-        description = excerpt;
-      } else {
-        description = excerpt.slice(0, 152) + "...";
-      }
-    } else {
-      description = "";
-    }
-  }
+  // Description: sanitizer truncates at word boundary if needed
+  const descSource = (post.seo_description as string)
+    || ((post.excerpt as string) ? `${post.excerpt} Learn more about your legal options.` : "");
+  const description = sanitizeMetaDescription(descSource).value;
 
-  const canonical =
-    post.seo_canonical || `https://helplaw.com/resources/${slug}`;
+  // Canonical: sanitizer fills missing, forces https, strips trailing slash
+  const canonical = sanitizeCanonical(post.seo_canonical as string | undefined, `resources/${slug}`).value;
+
+  // SEO title: ensure brand presence and length cap
+  const seoTitle = sanitizeSeoTitle(post.seo_title as string | undefined, post.title as string | undefined).value;
+
+  const canonical = sanitizeCanonical(post.seo_canonical as string | undefined, `resources/${slug}`).value;
   const ogImage =
     post.seo_image || post.featured_image || "/assets/og-default.jpg";
 
   return {
-    title: post.seo_title || post.title,
+    title: seoTitle,
     description,
     robots: post.seo_noindex ? { index: false } : { index: true, follow: true },
     alternates: { canonical },
     openGraph: {
       type: "article",
-      title: post.seo_title || post.title,
+      title: seoTitle,
       description,
       images: [{ url: ogImage }],
       publishedTime: post.published_at || undefined,
@@ -103,7 +101,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: post.seo_title || post.title,
+      title: seoTitle,
       description,
       images: [ogImage],
     },
@@ -144,8 +142,11 @@ export default async function BlogPostPage({ params }: PageParams) {
   if (!post) notFound();
 
   const faqs = await getPostFaqs(shouldUseDummyResources() ? slug : post.id);
-  const headings = extractHeadings(post.content || "");
-  const contentWithAnchors = injectAnchors(post.content || "", headings);
+  // Sanitize body HTML before extracting headings — strips inline h1/h2,
+  // ensures img attrs, removes empty paragraphs.
+  const sanitizedContent = sanitizeHtml(post.content || "").value;
+  const headings = extractHeadings(sanitizedContent);
+  const contentWithAnchors = injectAnchors(sanitizedContent, headings);
 
   // JSON-LD
   const schema: Record<string, unknown> = {
