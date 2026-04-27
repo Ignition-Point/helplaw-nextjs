@@ -49,12 +49,12 @@ export function HeroWithForm({
       <div className="absolute inset-0 bg-gradient-to-br from-bg-[#122D56]/40 via-bg-[#122D56]/20 to-bg-[#122D56]/60" />
 
       <div className="relative mx-auto max-w-7xl px-5">
-        <div className="grid lg:grid-cols-5 gap-[18px] md:gap-12 lg:gap-16 items-start pt-[22px] md:pt-[0]">
+        <div className="grid lg:grid-cols-5 gap-[18px] md:gap-12 lg:gap-16 items-start pt-[30px] md:pt-[0]">
           {/* Left: copy */}
-          <div className="lg:col-span-3 pt-2 text-center md:text-left">
+          <div className="lg:col-span-3 md:pt-2 text-center md:text-left">
             {eyebrow && (
-              <div className="flex items-center gap-2 mb-5">
-                <div className="hidden md:block -px w-8 bg-[#FFBF0F]" />
+              <div className="flex items-center gap-2 mb-[14px] md:mb-5">
+                <div className="hidden md:block h-px w-8 bg-[#FFBF0F]" />
                 <span className="text-sm font-medium tracking-wider uppercase text-[#FFBF0F]">
                   {eyebrow}
                 </span>
@@ -69,7 +69,7 @@ export function HeroWithForm({
 
             {subheadline && (
               <div
-                className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%] max-w-xl font-normal tracking-normal [&_h3]:text-xl [&_h3]:font-medium [&_h3]:text-white [&_p]:text-white [&_strong]:text-white"
+                className="mt-[12px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%] max-w-xl font-normal tracking-normal [&_h3]:text-[14px] md:[&_h3]:text-[16px] lg:[&_h3]:text-lg  [&_h3]:font-medium [&_h3]:text-white [&_p]:text-white [&_strong]:text-white"
                 dangerouslySetInnerHTML={{ __html: subheadline }}
               />
             )}

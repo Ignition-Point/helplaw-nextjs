@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import PreventWidowText from "./PreventWidowText";
 
 const FILTER_CATEGORIES = [
   "All",
@@ -68,6 +69,8 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
   }, [activeFilter]);
 
   return (
+    <>
+    <PreventWidowText />
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
         {/* Filter bar */}
@@ -126,12 +129,13 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
 
         {filtered.length === 0 && (
           <div className="text-center py-4 md:py-6 lg:py-12">
-            <p className="text-[14px] md:text-[16px] text-[#546885] leading-[140%]">
+            <p className="text-[14px] md:text-[16px] text-[#546885] leading-[140%] font-normal">
               No cases in this category yet. Check back soon.
             </p>
           </div>
         )}
       </div>
     </section>
+    </>
   );
 }

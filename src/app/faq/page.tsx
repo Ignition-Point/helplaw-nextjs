@@ -209,16 +209,16 @@ export default function FAQPage() {
       </section>
 
       {/* Footer CTA */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
             Still Have <span className="text-[#FFBF0F]">Questions</span>?
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+          <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
             A free case evaluation is a conversation. You share what happened and
             an attorney tells you what your options are.
           </p>
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-[14px] md:mt-5  flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/cases"
               className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"

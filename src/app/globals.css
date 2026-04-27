@@ -331,10 +331,14 @@
   .animate-scroll-x {
     animation-duration: 8s;
   }
-  .prose-helplaw h3,
   .prose-helplaw h2{
     font-size: 22px;
     text-align: center;
+  }
+
+  .prose-helplaw h3{
+    text-align: center;
+    font-size: 18px;
   }
   .prose-helplaw p{
     font-size: 14px;

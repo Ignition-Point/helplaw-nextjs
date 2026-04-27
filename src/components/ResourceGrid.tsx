@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
+import PreventWidowText from "./PreventWidowText";
 
 const FILTER_CATEGORIES = [
   "All",
@@ -100,6 +101,8 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
   }, [activeFilter]);
 
   return (
+    <>
+    <PreventWidowText />
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
         {/* Search + Filters */}
@@ -237,5 +240,6 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
         )}
       </div>
     </section>
+    </>
   );
 }
