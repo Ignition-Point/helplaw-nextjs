@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -30,21 +30,61 @@ interface CaseItem {
 
 export function CaseGrid({ cases }: { cases: CaseItem[] }) {
   const [activeFilter, setActiveFilter] = useState("All");
+  const filterBarRef = useRef<HTMLDivElement | null>(null);
+  const filterButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const centerActiveFilter = (cat: string) => {
+    const bar = filterBarRef.current;
+    const btn = filterButtonRefs.current[cat];
+    if (!bar || !btn) return;
+    // Only auto-center when the row is actually scrollable (mobile).
+    if (bar.scrollWidth <= bar.clientWidth) return;
+
+    const barRect = bar.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const delta =
+      btnRect.left + btnRect.width / 2 - (barRect.left + barRect.width / 2);
+    const targetLeft = bar.scrollLeft + delta;
+
+    const maxLeft = Math.max(0, bar.scrollWidth - bar.clientWidth);
+    const nextLeft = Math.min(maxLeft, Math.max(0, targetLeft));
+
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    bar.scrollTo({ left: nextLeft, behavior: reduceMotion ? "auto" : "smooth" });
+  };
 
   const filtered =
     activeFilter === "All"
       ? cases
       : cases.filter((c) => c.category === activeFilter);
 
+  useEffect(() => {
+    // Keep active tab visible/centered when filter changes.
+    // rAF ensures layout measurements are correct after React updates.
+    const id = requestAnimationFrame(() => centerActiveFilter(activeFilter));
+    return () => cancelAnimationFrame(id);
+  }, [activeFilter]);
+
   return (
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
         {/* Filter bar */}
-        <div className="flex flex-nowrap whitespace-nowrap md:whitespace-normal overflow-auto md:flex-wrap scrollbar-hide gap-2 mb-[20px] md:mb-6 lg:mb-10">
+        <div
+          ref={filterBarRef}
+          className="flex flex-nowrap whitespace-nowrap md:whitespace-normal overflow-auto md:flex-wrap scrollbar-hide gap-2 mb-[20px] md:mb-6 lg:mb-10"
+        >
           {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat}
-              onClick={() => setActiveFilter(cat)}
+              ref={(el) => {
+                filterButtonRefs.current[cat] = el;
+              }}
+              onClick={() => {
+                setActiveFilter(cat);
+                requestAnimationFrame(() => centerActiveFilter(cat));
+              }}
               className={` rounded-full cursor-pointer px-4 py-2 text-sm font-medium transition-colors ${
                 activeFilter === cat
                   ? "bg-[#122D56] text-white"
