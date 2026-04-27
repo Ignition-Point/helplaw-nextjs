@@ -200,15 +200,15 @@ export default async function BlogPostPage({ params }: PageParams) {
       />
 
       {/* Hero */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
           <span className="text-xs font-semibold uppercase tracking-wider text-[#FFBF0F]">
             {post.category}
           </span>
-          <h1 className="mt-3 heading text-[32px] md:text-[42px] lg:text-[52px] leading-[120%] text-white tracking-tight">
+          <h1 className="mt-3 heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
             {post.title}
           </h1>
-          <p className="mt-4 text-sm text-white">
+          <p className="mt-[14px] md:mt-4 mb-[14px] md:mb-0 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
             By {post.author_name || "Help Law Group"}
             {post.published_at && (
               <>
@@ -252,7 +252,7 @@ export default async function BlogPostPage({ params }: PageParams) {
       )}
 
       {/* Article body */}
-      <article className="py-12 sm:py-16">
+      <article className="py-[30px] md:py-[40px] lg:py-[60px]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Mobile ToC */}
           {headings.length > 2 && (

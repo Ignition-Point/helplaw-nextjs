@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FAQAccordion } from "@/components/FAQAccordion";
 import { Info, Lock, Layers, CreditCard } from "lucide-react";
+import PreventWidowText from "@/components/PreventWidowText";
 
 export const metadata: Metadata = {
   title: "Your Rights",
@@ -63,6 +64,7 @@ const RIGHTS_FAQ = [
 export default function YourRightsPage() {
   return (
     <>
+     <PreventWidowText />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
@@ -71,13 +73,13 @@ export default function YourRightsPage() {
       />
 
       {/* Hero */}
-      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+      <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
+            <h1 className="text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
               <span className="text-[#FFBF0F]">Your</span> Rights
             </h1>
-            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
+            <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
               If you were seriously harmed by a person, company, or institution,
               you have legal rights. Understanding them is the first step.
             </p>
@@ -86,19 +88,19 @@ export default function YourRightsPage() {
       </section>
 
       {/* Right to take legal action */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-7xl px-5">
           <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight">
             You have the right to take <span className="text-[#FFBF0F]">legal action</span>.
           </h2>
-          <p className="mt-4 lg:mt-6 text-base sm:text-lg leading-[140%] font-normal text-[#5C6F8B] leading-relaxed">
+          <p className="mt-[14px] md:mt-4 lg:mt-6 text-[14px] md:text-base lg:text-lg leading-[140%] font-normal text-[#5C6F8B]">
             Civil lawsuits are separate from criminal proceedings. You do not
             need a police report, a criminal conviction, or any prior legal
             action to pursue a civil claim. The burden of proof in a civil case
             is lower than in a criminal one, which means cases can succeed even
             when no criminal charges were ever filed.
           </p>
-          <p className="mt-4 text-base sm:text-lg leading-[140%] font-normal text-[#5C6F8B] leading-relaxed">
+          <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg leading-[140%] font-normal text-[#5C6F8B]">
             Institutions — hospitals, churches, detention centers, platforms, and
             companies — can be held accountable alongside the individual who
             caused harm. When an organization knew about misconduct and failed to
@@ -108,9 +110,9 @@ export default function YourRightsPage() {
       </section>
 
       {/* Rights cards grid */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-slate-warm-50">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-slate-warm-50">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-[14px] md:gap-6">
             {RIGHTS_CARDS.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
@@ -119,10 +121,10 @@ export default function YourRightsPage() {
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#122D56] mb-4">
                   <Icon className="h-5 w-5 text-[#FFBF0F]" />
                 </div>
-                <h3 className="text-base heading font-bold text-[#122D56] ">
+                <h3 className="text-base heading font-bold text-[#122D56] leading-[120%]">
                   {title}
                 </h3>
-                <p className="mt-2 text-sm  text-[#5C6F8B] leading-relaxed">
+                <p className="mt-2 text-sm  text-[#5C6F8B] leading-[140%]">
                   {description}
                 </p>
               </div>
@@ -132,19 +134,19 @@ export default function YourRightsPage() {
       </section>
 
       {/* Statute of limitations */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
         <div className="mx-auto max-w-7xl px-5">
-          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
+          <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
             What about the statute of <span className="text-[#FFBF0F]">limitations?</span>
           </h2>
-          <p className="mt-4 lg:mt-6 text-base sm:text-lg text-white leading-relaxed">
+          <p className="mt-[14px] md:mt-4 lg:mt-6 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
             Every state sets deadlines for filing civil claims. For sexual abuse
             cases, many states have passed laws that extend or reopen those
             deadlines, sometimes by decades. Whether your situation falls within
             a current filing window depends on where the harm occurred, when it
             happened, and who was responsible.
           </p>
-          <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+          <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
             The only reliable way to know whether your claim is still within a
             filing window is to speak with an attorney. Do not assume it is too
             late without checking first.
@@ -153,9 +155,9 @@ export default function YourRightsPage() {
       </section>
 
       {/* Common questions about your rights */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight mb-4 md:mb-6 lg:mb-8">
+          <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#122D56] tracking-tight mb-0 md:mb-6 lg:mb-8">
             Common questions about <span className="text-[#FFBF0F]">your rights</span>
           </h2>
           <FAQAccordion items={RIGHTS_FAQ} />
@@ -163,18 +165,18 @@ export default function YourRightsPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
+          <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
             Ready to understand your <span className="text-[#FFBF0F]">options?</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+          <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
             A free case evaluation is a conversation. You share what happened and
             an attorney tells you what your rights are.
           </p>
           <Link
             href="/get-legal-help"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
+            className="mt-[14px] md:mt-6 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
           >
             Get a Free Case Evaluation
           </Link>

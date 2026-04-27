@@ -19,10 +19,10 @@ export function QualificationChecklist({
   const isDark = variant === "dark";
 
   return (
-    <section className={cn("py-[40px] md:py-[60px] lg:py-[80px]", isDark ? "bg-navy-900" : "bg-white")}>
+    <section className={cn("py-[30px] md:py-[40px] lg:py-[60px]", isDark ? "bg-[#1A365E]" : "bg-white")}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {headline && (
-          <h2 className={cn("text-2xl heading sm:text-3xl font-bold tracking-tight mb-8", isDark ? "text-white" : "text-[#122D56]")}>
+          <h2 className={cn("text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-tight mb-8", isDark ? "text-white" : "text-[#122D56]")}>
             {headline}
           </h2>
         )}

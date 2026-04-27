@@ -20,7 +20,7 @@ export function InlineCTA({ content }: InlineCTAProps) {
     <section className="py-10 sm:py-12">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-xl border border-slate-200 bg-slate-100 px-6 py-10 sm:py-12 text-center shadow-sm">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-navy-900">
+          <h2 className="text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-tight text-[#122D56]">
             {headline}
           </h2>
 

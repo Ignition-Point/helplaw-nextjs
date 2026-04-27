@@ -33,7 +33,7 @@ export function TrustBanner({ items, variant = "gold" }: TrustBannerProps) {
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-1.5 md:gap-y-3">
           {trustItems.map((item, i) => {
             const IconComp = ICON_MAP[item.icon || "shield"] || Shield;
             return (

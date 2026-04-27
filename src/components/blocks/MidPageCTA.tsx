@@ -25,7 +25,7 @@ export function MidPageCTA({
   return (
     <section
       className={cn(
-        "py-14 sm:py-16",
+        "py-[30px] md:py-[40px] lg:py-[60px]",
         variant === "gold" && "bg-[#FFBF0F]",
         variant === "dark" && "bg-navy-900",
         variant === "light" && "bg-navy-50"
@@ -35,7 +35,7 @@ export function MidPageCTA({
         {headline && (
           <h2
             className={cn(
-              "heading text-2xl sm:text-3xl font-bold tracking-tight",
+              "heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-tight",
               variant === "gold" && "text-[#122D56]",
               variant === "dark" && "text-[#122D56]",
               variant === "light" && "text-navy-900"

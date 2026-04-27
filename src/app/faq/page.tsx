@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FAQAccordion } from "@/components/FAQAccordion";
+import PreventWidowText from "@/components/PreventWidowText";
 
 export const metadata: Metadata = {
   title: "Frequently Asked Questions",
@@ -166,6 +167,7 @@ function buildFaqJsonLd() {
 export default function FAQPage() {
   return (
     <>
+     <PreventWidowText />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildFaqJsonLd()) }}
@@ -178,13 +180,13 @@ export default function FAQPage() {
       />
 
       {/* Hero */}
-      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+      <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
+            <h1 className="text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
               Frequently Asked <span className="text-[#FFBF0F]">Questions</span>
             </h1>
-            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
+            <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
               Common questions about working with Help Law Group, the legal
               process, and what to expect.
             </p>
@@ -193,11 +195,11 @@ export default function FAQPage() {
       </section>
 
       {/* FAQ Sections */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 space-y-6 md:space-y-10 lg:space-y-14">
           {FAQ_SECTIONS.map((section) => (
             <div key={section.heading}>
-              <h2 className="heading font-bold text-[22px] md:text-[32px] lg:text-[38px] leading-[1.2] text-[#122D56] tracking-tight mb-4 lg:mb-6">
+              <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#122D56] tracking-tight mb-0 md:mb-2 lg:mb-4">
                 {section.heading}
               </h2>
               <FAQAccordion items={section.items} />

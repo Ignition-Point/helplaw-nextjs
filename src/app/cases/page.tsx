@@ -42,13 +42,13 @@ export default async function CasesPage() {
       />
 
       {/* Hero */}
-      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+      <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="heading text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
+            <h1 className="heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] leading-[120%] text-white tracking-tight">
               Our <span className="text-[#FFBF0F]">Cases</span>
             </h1>
-            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
+            <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
               Attorneys in our network are actively reviewing cases in these
               areas. If you or someone you know experienced this kind of harm,
               you may have legal options. Select a case to learn more.
@@ -61,19 +61,19 @@ export default async function CasesPage() {
       <CaseGrid cases={cases} />
 
       {/* Bottom CTA */}
-      <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
+      <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="heading font-bold text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
+          <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[1.2] text-white tracking-tight">
             Have a Situation That Is Not <span className="text-[#FFBF0F]">Listed Here?</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-white leading-relaxed">
+          <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
             We review cases across a range of harm types. If you are not sure
             whether your situation qualifies, a free case evaluation is the
             place to find out.
           </p>
           <Link
             href="/cases"
-            className="mt-6 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
+            className="mt-[14px] md:mt-6 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
           >
             Get a Free Case Evaluation
           </Link>

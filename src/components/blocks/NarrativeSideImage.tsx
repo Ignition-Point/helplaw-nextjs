@@ -33,7 +33,7 @@ export function NarrativeSideImage({
               </span>
             )}
             {headline && (
-              <h2 className={cn("mt-2 heading text-2xl sm:text-3xl font-bold tracking-tight", isDark ? "text-white" : "text-[#122D56]")}>
+              <h2 className={cn("text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-tight", isDark ? "text-white" : "text-[#122D56]")}>
                 {headline}
               </h2>
             )}

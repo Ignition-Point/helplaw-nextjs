@@ -185,7 +185,7 @@
      font-family: var(--font-montserrat);
   }
   p {
-    @apply text-base leading-relaxed text-[#546885] mb-4;
+    @apply text-base leading-[140%] text-[#546885] mb-4;
   }
   ul, ol {
     @apply mb-4 pl-6 text-[#546885];
@@ -221,7 +221,7 @@
     @apply rounded-lg my-6;
   }
   strong {
-    @apply font-semibold text-navy-900;
+    @apply font-semibold text-[#122D56];
   }
 }
 
@@ -301,9 +301,37 @@
   animation: scroll-x 30s linear infinite;
 }
 
+  .prose-helplaw h2{
+    line-height: 140%;
+    margin-top: 0;
+  }
+  .prose-helplaw li p{
+    margin-bottom: 0;
+  }
+  .prose-helplaw p:last-child {
+    margin-bottom: 0;
+  }
+  article h2.heading{
+    margin-top: 0;
+  }
+  article h2.heading + .prose-helplaw{
+    margin-top: 14px;
+  }
+
 @media (max-width: 767px) {
   .animate-scroll-x {
     animation-duration: 8s;
+  }
+  .prose-helplaw h3,
+  .prose-helplaw h2{
+    font-size: 22px;
+  }
+  .prose-helplaw p{
+    font-size: 14px;
+  }
+  article .prose-helplaw h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
   }
 }
 @media (max-width: 576px) {

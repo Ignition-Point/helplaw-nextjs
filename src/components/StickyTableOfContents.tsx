@@ -48,7 +48,7 @@ export function StickyTableOfContents({ headings }: StickyTableOfContentsProps) 
   return (
     <>
       {/* Mobile: collapsible dropdown */}
-      <div className="lg:hidden mb-6">
+      <div className="lg:hidden mb-0">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center justify-between w-full px-4 py-3 text-sm font-semibold text-navy-800 bg-slate-50 border border-slate-200 rounded-lg"

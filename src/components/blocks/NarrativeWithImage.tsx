@@ -27,7 +27,7 @@ export function NarrativeWithImage({
           <div className={cn("absolute inset-0", isDark ? "bg-[#122D56]/65" : "bg-white/90")} />
         </div>
       )}
-      <div className={cn("relative py-[40px] md:py-[60px] lg:py-[80px]", !backgroundImage && (isDark ? "bg-[#122D56]" : "bg-slate-warm-50"))}>
+      <div className={cn("relative py-[30px] md:py-[40px] lg:py-[60px]", !backgroundImage && (isDark ? "bg-[#122D56]" : "bg-slate-warm-50"))}>
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           {eyebrow && (
             <span className={cn("text-sm font-medium tracking-wider uppercase", isDark ? "text-[#FFBF0F]" : "text-[#FFBF0F]")}>
@@ -35,7 +35,7 @@ export function NarrativeWithImage({
             </span>
           )}
           {headline && (
-            <h2 className={cn("mt-2 heading text-2xl sm:text-3xl font-bold tracking-tight", isDark ? "text-white" : "text-navy-900")}>
+            <h2 className={cn("heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-tight", isDark ? "text-white" : "text-navy-900")}>
               {headline}
             </h2>
           )}

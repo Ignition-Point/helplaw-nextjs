@@ -71,10 +71,10 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
   }, [posts, activeFilter, searchQuery]);
 
   return (
-    <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
+    <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
         {/* Search + Filters */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-[14px] md:mb-6 lg:mb-8">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-warm-400" />
             <input
@@ -103,7 +103,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
         </div>
 
         {/* Article count */}
-        <p className="text-sm text-[#546885] mb-6">
+        <p className="text-sm text-[#546885] mb-[14px] md:mb-6">
           Showing {filtered.length} article{filtered.length !== 1 ? "s" : ""}
         </p>
 
@@ -114,7 +114,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
               <Link
                 key={post.id}
                 href={`/resources/${post.slug}`}
-                className="group flex flex-col overflow-hidden bg-white border border-[#F0F0F0] p-[15px] lg:p-[18px] rounded-[12px] lg:rounded-[16px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] hover:bg-[#F6F6F6] hover:border-[#D4AD4A]  transition-all hover:-translate-y-0.5"
+                className="group flex flex-col overflow-hidden bg-white border border-[#F0F0F0] p-[15px] lg:p-[18px] rounded-[12px] lg:rounded-[16px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] hover:bg-[#F6F6F6] hover:border-[#FFBF0F]  transition-all hover:-translate-y-0.5"
               >
                 <div className="flex items-center justify-between mb-3">
                   <span
@@ -169,7 +169,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
                     </defs>
                   </svg>
                 </div>
-                <span className="mt-4 inline-flex items-center gap-1 font-medium text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#D4AD4A] group-hover:text-[#132F55] transition-colors">
+                <span className="mt-4 inline-flex items-center gap-1 font-semibold text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
                   Read more
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

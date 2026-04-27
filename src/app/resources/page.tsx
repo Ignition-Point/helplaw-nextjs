@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ResourceGrid } from "@/components/ResourceGrid";
 import { getDummyResources } from "@/lib/dummyResources";
 import { shouldUseDummyResources } from "@/lib/featureFlags";
+import PreventWidowText from "@/components/PreventWidowText";
 
 export const metadata: Metadata = {
   title: "Resources",
@@ -36,6 +37,7 @@ export default async function ResourcesPage() {
 
   return (
     <>
+     <PreventWidowText />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },
@@ -44,13 +46,13 @@ export default async function ResourcesPage() {
       />
 
       {/* Hero */}
-      <section className="bg-[#1A365E] py-[40px] md:py-[60px] lg:py-[80px]">
+      <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
           <div className="max-w-3xl">
-            <h1 className="heading text-[32px] md:text-[42px] lg:text-[56px] leading-[120%] text-white tracking-tight">
+            <h1 className="heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
               Resources
             </h1>
-            <p className="mt-4 text-sm md:text-base lg:text-lg text-white leading-relaxed">
+            <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
               Information to help you understand your legal rights, recognize
               harm, and know your options — before you decide anything.
             </p>

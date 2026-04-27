@@ -213,7 +213,7 @@ export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRende
       <button
         type="submit"
         disabled={submitting}
-        className="cursor-pointer block w-full mx-auto rounded-[100px] bg-[#122D56] hover:bg-[#1A365E] px-[20px] py-[12px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold tracking-[-0.02em] text-white"
+        className="cursor-pointer leading-[100%] block w-full mx-auto rounded-[100px] bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[14px] text-[14px] md:text-[16px] lg:text-[18px] font-semibold tracking-[-0.02em] text-white"
       >
         {submitting ? (
           <span className="flex items-center justify-center gap-2">

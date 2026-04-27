@@ -17,15 +17,15 @@ export function ConditionGrid({
   const isDark = variant === "dark";
 
   return (
-    <section className={cn("py-[40px] md:py-[60px] lg:py-[80px]", isDark ? "bg-[#1A365E]" : "bg-slate-warm-50")}>
+    <section className={cn("py-[30px] md:py-[40px] lg:py-[60px]", isDark ? "bg-[#1A365E]" : "bg-slate-warm-50")}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {headline && (
-          <h2 className={cn("heading text-2xl sm:text-3xl font-bold tracking-tight text-center", isDark ? "text-white" : "text-navy-900")}>
+          <h2 className={cn("heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold tracking-tight text-center", isDark ? "text-white" : "text-navy-900")}>
             {headline}
           </h2>
         )}
         {subheadline && (
-          <p className={cn("mt-3 text-base text-center max-w-2xl mx-auto", isDark ? "text-white" : "text-slate-warm-600")}>
+          <p className={cn("mt-[14px] md:mt-3 text-[14px] md:text-base text-center max-w-2xl mx-auto", isDark ? "text-white" : "text-slate-warm-600")}>
             {subheadline}
           </p>
         )}

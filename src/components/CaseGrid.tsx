@@ -37,10 +37,10 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
       : cases.filter((c) => c.category === activeFilter);
 
   return (
-    <section className="py-[40px] md:py-[60px] lg:py-[80px] bg-white">
+    <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
         {/* Filter bar */}
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-[20px] md:mb-6 lg:mb-10">
           {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat}
@@ -57,12 +57,12 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
         </div>
 
         {/* Cards */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-[14px] md:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((c) => (
             <Link
               key={c.id}
               href={`/cases/${c.slug}`}
-              className="group relative bg-white border border-[#F0F0F0] p-[15px] lg:p-[24px] rounded-[12px] lg:rounded-[16px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] hover:bg-[#F6F6F6] hover:border-[#D4AD4A]  transition-all hover:-translate-y-0.5"
+              className="group relative bg-white border border-[#F0F0F0] p-[15px] lg:p-[24px] rounded-[12px] lg:rounded-[16px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] hover:bg-[#F6F6F6] hover:border-[#FFBF0F]  transition-all hover:-translate-y-0.5"
             >
               <div className="flex items-start justify-between">
                 {c.category && (
@@ -70,13 +70,13 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
                     {c.category}
                   </span>
                 )}
-                <ArrowRight className="h-4 w-4 text-[#122D56] transition-transform group-hover:translate-x-1 group-hover:text-[#D4AD4A]" />
+                <ArrowRight className="h-4 w-4 text-[#122D56] transition-transform group-hover:translate-x-1 group-hover:text-[#FFBF0F]" />
               </div>
-              <h3 className="heading mt-4 text-lg font-semibold text-[#122D56] leading-snug group-hover:text-[#09162A]">
+              <h3 className="heading mt-4 text-[16px] lg:text-lg font-semibold text-[#122D56] leading-[120%] group-hover:text-[#09162A]">
                 {c.title}
               </h3>
               {c.hero_subheadline && (
-                <p className="mt-2 text-sm text-[#546885] line-clamp-3 leading-relaxed">
+                <p className="mt-2 text-sm text-[#546885] line-clamp-3 leading-[140%]">
                   {c.hero_subheadline.replace(/<[^>]+>/g, "")}
                 </p>
               )}

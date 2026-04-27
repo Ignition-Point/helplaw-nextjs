@@ -30,21 +30,26 @@ export function HeroWithForm({
   const shouldShowLeadForm = Boolean(leadFormId) || shouldUseDummyCases();
 
   return (
-    <section className="relative overflow-hidden bg-navy-950 pt-[40px] pb-[40px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
+    <section className="relative overflow-hidden bg-[#1A365E] pt-0 pb-[30px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
       {/* Background image layer */}
-      {backgroundImage && (
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
-          <div className="absolute inset-0 bg-[#122D56]/60" />
-        </div>
-      )}
+{backgroundImage && (
+  <div
+    className="
+      relative md:absolute md:inset-0
+      w-full aspect-video md:aspect-auto md:h-full
+      bg-cover bg-center md:bg-center
+    "
+    style={{ backgroundImage: `url(${backgroundImage})` }}
+  >
+    <div className="hidden md:block absolute inset-0 bg-[#122D56]/60" />
+  </div>
+)}
       {/* Gradient overlay */}
+      
       <div className="absolute inset-0 bg-gradient-to-br from-bg-[#122D56]/40 via-bg-[#122D56]/20 to-bg-[#122D56]/60" />
 
       <div className="relative mx-auto max-w-7xl px-5">
-        <div className="grid lg:grid-cols-5 gap-6 md:gap-12 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-5 gap-[18px] md:gap-12 lg:gap-16 items-start pt-[22px] md:pt-[0]">
           {/* Left: copy */}
           <div className="lg:col-span-3 pt-2">
             {eyebrow && (
@@ -57,36 +62,36 @@ export function HeroWithForm({
             )}
 
             {headline && (
-              <h1 className="heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.15] sm:leading-[1.12]">
+              <h1 className="heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] font-bold text-white tracking-tight">
                 {headline}
               </h1>
             )}
 
             {subheadline && (
               <div
-                className="mt-4 lg:mt-6 text-lg sm:text-xl text-white leading-relaxed max-w-xl font-normal tracking-normal [&_h3]:text-xl [&_h3]:font-medium [&_h3]:text-white [&_p]:text-white [&_strong]:text-white"
+                className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%] max-w-xl font-normal tracking-normal [&_h3]:text-xl [&_h3]:font-medium [&_h3]:text-white [&_p]:text-white [&_strong]:text-white"
                 dangerouslySetInnerHTML={{ __html: subheadline }}
               />
             )}
 
             {content && (
               <div
-                className="mt-4 lg:mt-6 text-base text-white leading-relaxed max-w-xl prose-helplaw [&_h2]:!text-white [&_h3]:!text-navy-100 [&_p]:!text-white [&_a]:!text-gold-400 [&_strong]:!text-white [&_li]:!text-white"
+                className="mt-[14px] md:mt-4 lg:mt-6 text-[14px] md:text-base lg:text-lg text-white leading-[140%] max-w-xl prose-helplaw [&_h2]:!text-white [&_h3]:!text-navy-100 [&_p]:!text-white [&_a]:!text-gold-400 [&_strong]:!text-white [&_li]:!text-white"
                 dangerouslySetInnerHTML={{ __html: content }}
               />
             )}
 
             {/* Trust badges */}
-            <div className="mt-4 md:mt-6 lg:mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <div className="mt-[14px] md:mt-4 lg:mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               {["Free Case Review", "No Fees Unless You Win", "Confidential"].map((text) => (
                 <span key={text} className="inline-flex items-center gap-2 text-sm text-white">
-                  <span className="h-2.5 w-2.5 rounded-full bg-gold-400 shrink-0" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-[#FFBF0F] shrink-0" />
                   {text}
                 </span>
               ))}
             </div>
 
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white">
+            <div className="mt-[14px] md:mt-4 lg:mt-6 inline-flex items-center gap-2 rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[14px] transition-all hover:bg-navy-800 hover:text-white">
               <Phone className="h-4 w-4 " />
               <a
                 href={`tel:${phoneNumber}`}
@@ -100,7 +105,7 @@ export function HeroWithForm({
           {/* Right: form */}
           <div className="lg:col-span-2">
             <div className="rounded-xl bg-white p-6 sm:p-8 shadow-2xl shadow-navy-950/50">
-              <h2 className="text-xl font-bold text-[#122D56] mb-1">
+              <h2 className="heading text-xl font-bold text-[#122D56] mb-1">
                 Begin Your Free Case Review
               </h2>
               <p className="text-sm text-[#546885] mb-6">
