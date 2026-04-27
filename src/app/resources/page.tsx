@@ -48,7 +48,7 @@ export default async function ResourcesPage() {
       {/* Hero */}
       <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-center md:text-left">
             <h1 className="heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
               Resources
             </h1>

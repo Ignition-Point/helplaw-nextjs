@@ -23,7 +23,7 @@ export default function GetLegalHelpPage() {
       {/* Hero */}
       <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-center md:text-left">
             <h1 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-white tracking-normal">
               Get Legal <span className="text-[#FFBF0F]">Help</span>
             </h1>
@@ -62,15 +62,15 @@ export default function GetLegalHelpPage() {
           <div className="grid lg:grid-cols-2 gap-[20px] md:gap-12 lg:gap-20">
             {/* Left: reassurance copy */}
             <div>
-              <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#122D56] tracking-tight">
+              <h2 className="text-center md:text-left heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#122D56] tracking-tight">
                 You do not need to <span className="text-[#FFBF0F]">have everything </span> figured out.
               </h2>
-              <p className="mt-[14px] md:mt-4 lg:mt-6  text-[14px] md:text-base lg:text-lg leading-[140%] text-[#546885]">
+              <p className="text-center md:text-left mt-[14px] md:mt-4 lg:mt-6  font-normal text-[14px] md:text-base lg:text-lg leading-[140%] text-[#546885]">
                 Most people who reach out are not sure where to start. That is
                 okay. Share what you are comfortable sharing and we will take it
                 from there.
               </p>
-              <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg leading-[140%] text-[#546885]">
+              <p className="text-center md:text-left  mt-[14px] md:mt-4 text-[14px] font-normal md:text-base lg:text-lg leading-[140%] text-[#546885]">
                 Someone from our team reviews every inquiry and follows up
                 directly. We do not use automated systems.
               </p>
@@ -116,10 +116,10 @@ export default function GetLegalHelpPage() {
             {/* Right: form */}
             <div>
               <div className="rounded-[12px] lg:rounded-2xl bg-white border border-navy-100 p-4 md:p-8 sm:p-10 shadow-xl">
-                <h3 className="heading text-[22px] md:text-[34px] lg:text-[42px] font-bold text-[#122D56] leading-[120%] mb-[14px]">
+                <h3 className="text-center md:text-left heading text-[22px] md:text-[34px] lg:text-[42px] font-bold text-[#122D56] leading-[120%] mb-[14px]">
                   Request a Private Case Review
                 </h3>
-                <p className="text-[14px] md:text-base lg:text-lg text-[#546885] leading-[140%] mb-[14px]">
+                <p className="text-center md:text-left text-[14px] md:text-base lg:text-lg text-[#546885] leading-[140%] mb-[14px]">
                   All information is confidential and will not be shared without
                   your consent.
                 </p>

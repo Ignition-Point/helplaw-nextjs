@@ -182,7 +182,7 @@ export default function FAQPage() {
       {/* Hero */}
       <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-center md:text-left">
             <h1 className="text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
               Frequently Asked <span className="text-[#FFBF0F]">Questions</span>
             </h1>

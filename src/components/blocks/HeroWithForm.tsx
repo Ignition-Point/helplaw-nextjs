@@ -51,10 +51,10 @@ export function HeroWithForm({
       <div className="relative mx-auto max-w-7xl px-5">
         <div className="grid lg:grid-cols-5 gap-[18px] md:gap-12 lg:gap-16 items-start pt-[22px] md:pt-[0]">
           {/* Left: copy */}
-          <div className="lg:col-span-3 pt-2">
+          <div className="lg:col-span-3 pt-2 text-center md:text-left">
             {eyebrow && (
               <div className="flex items-center gap-2 mb-5">
-                <div className="h-px w-8 bg-[#FFBF0F]" />
+                <div className="hidden md:block -px w-8 bg-[#FFBF0F]" />
                 <span className="text-sm font-medium tracking-wider uppercase text-[#FFBF0F]">
                   {eyebrow}
                 </span>
@@ -82,7 +82,7 @@ export function HeroWithForm({
             )}
 
             {/* Trust badges */}
-            <div className="mt-[14px] md:mt-4 lg:mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <div className="mt-[14px] md:mt-4 lg:mt-6 flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-1.5 md:gap-y-3">
               {["Free Case Review", "No Fees Unless You Win", "Confidential"].map((text) => (
                 <span key={text} className="inline-flex items-center gap-2 text-sm text-white">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#FFBF0F] shrink-0" />

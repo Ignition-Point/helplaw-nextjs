@@ -75,11 +75,11 @@ export default function YourRightsPage() {
       {/* Hero */}
       <section className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px]">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="max-w-3xl">
+          <div className="max-w-3xl text-center md:text-left">
             <h1 className="text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
               <span className="text-[#FFBF0F]">Your</span> Rights
             </h1>
-            <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
+            <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white font-normal leading-[140%]">
               If you were seriously harmed by a person, company, or institution,
               you have legal rights. Understanding them is the first step.
             </p>
@@ -89,7 +89,7 @@ export default function YourRightsPage() {
 
       {/* Right to take legal action */}
       <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 text-center md:text-left">
           <h2 className="heading font-bold text-[24px] md:text-[34px] lg:text-[42px] leading-[1.2] text-[#122D56] tracking-tight">
             You have the right to take <span className="text-[#FFBF0F]">legal action</span>.
           </h2>
@@ -135,7 +135,7 @@ export default function YourRightsPage() {
 
       {/* Statute of limitations */}
       <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto max-w-7xl px-5 text-center md:text-left">
           <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-white tracking-tight">
             What about the statute of <span className="text-[#FFBF0F]">limitations?</span>
           </h2>
@@ -157,7 +157,7 @@ export default function YourRightsPage() {
       {/* Common questions about your rights */}
       <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#122D56] tracking-tight mb-0 md:mb-6 lg:mb-8">
+          <h2 className="text-center md:text-left heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#122D56] tracking-tight mb-0 md:mb-6 lg:mb-8">
             Common questions about <span className="text-[#FFBF0F]">your rights</span>
           </h2>
           <FAQAccordion items={RIGHTS_FAQ} />

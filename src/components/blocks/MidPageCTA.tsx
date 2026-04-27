@@ -59,14 +59,14 @@ export function MidPageCTA({
         {content && (
           <div
             className={cn(
-              "mt-4 text-[16px] lg:text-[18px] ",
+              "mt-[14px] md:mt-4 text-[14px] md:text-[16px] lg:text-[18px] leading-[140%] font-normal",
               variant === "gold" && "[&_p]:text-[#122D56]",
               variant === "dark" && "[&_p]:text-[#122D56]",
             )}
             dangerouslySetInnerHTML={{ __html: content }}
           />
         )}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-[14px] md:mt-6 lg:mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href={ctaHref}
             className={cn(

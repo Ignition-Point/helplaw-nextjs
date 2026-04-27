@@ -325,6 +325,7 @@
   .prose-helplaw h3,
   .prose-helplaw h2{
     font-size: 22px;
+    text-align: center;
   }
   .prose-helplaw p{
     font-size: 14px;
@@ -332,6 +333,15 @@
   article .prose-helplaw h3 {
     margin-top: 0;
     margin-bottom: 12px;
+  }
+  .prose-helplaw{
+    text-align: center;
+  }
+  article h2{
+    text-align: center;
+  }
+  .prose-helplaw ul{
+    text-align: left;
   }
 }
 @media (max-width: 576px) {

@@ -129,7 +129,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
                   </span>
                 </div>
 
-                <h2 className="heading text-lg font-semibold text-[#122D56] leading-snug group-hover:text-[#09162A]">
+                <h2 className="heading text-[16px] md:text-lg font-semibold text-[#122D56] leading-snug group-hover:text-[#09162A]">
                   {post.title}
                 </h2>
 

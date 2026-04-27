@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Ear, Search, ShieldCheck, Lock, Users, Globe } from "lucide-react";
 import PreventWidowText from "@/components/PreventWidowText";
@@ -20,17 +21,19 @@ export default function AboutPage() {
 
       {/* ─── SECTION 1: Hero ─── */}
       <section
-        className="bg-[#1A365E] py-[30px] md:py-[60px] lg:py-[80px] relative overflow-hidden z-10"
-        style={{
-          backgroundImage: "url(/assets/alt/about-bg-img.jpg)",
-          backgroundSize: "cover",
-          backgroundPosition: "center top",
-          backgroundRepeat: "no-repeat",
-        }}
+        className="bg-[#1A365E] md:bg-[url('/assets/alt/about-bg-img.jpg')] bg-cover bg-no-repeat bg-[position:50%_0] pt-0 py-[30px] md:py-[60px] lg:py-[80px] relative overflow-hidden z-10"
       >
-        <div className="absolute -rotate-180 bg-[linear-gradient(270deg,_#09162A_1.84%,_rgba(9,22,42,0)_51.09%)] inset-0 pointer-events-none -z-10" />
-        <div className="mx-auto max-w-7xl px-5">
-          <div className=" w-full max-w-[600px]">
+      <div className="hidden md:block absolute -rotate-180 bg-[linear-gradient(270deg,_#09162A_1.84%,_rgba(9,22,42,0)_51.09%)] inset-0 pointer-events-none -z-10" />
+      <Image
+          src="/assets/alt/about-bg-img-mobile.jpg"
+          alt="About Background"
+          fill
+          sizes="100vw"
+          quality={100}
+          className="!relative md:!absolute md:hidden object-cover object-center"
+        />
+        <div className="mx-auto max-w-7xl px-5 pt-[30px] md:pt-[0]">
+          <div className=" w-full max-w-[600px] text-center md:text-left">
             <h1 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-white tracking-normal">
               About <span className="text-[#FFBF0F]">Help Law</span>
             </h1>
@@ -54,7 +57,7 @@ export default function AboutPage() {
       {/* ─── SECTION 2 & 3: Who We Are + By the Numbers ─── */}
       <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="grid lg:grid-cols-2 items-center gap-[20px] md:gap-14 lg:gap-20">
+          <div className="grid lg:grid-cols-2 items-center gap-[20px] md:gap-14 lg:gap-20 text-center md:text-left">
             {/* Left: Who We Are */}
             <div>
               <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#17335D] tracking-tight">
@@ -164,7 +167,7 @@ export default function AboutPage() {
 
       {/* ─── SECTION 5: The Cases We Handle ─── */}
       <section className="py-[30px] md:py-[60px] lg:py-[80px]">
-        <div className="mx-auto mx-auto max-w-7xl px-5">
+        <div className="mx-auto mx-auto max-w-7xl px-5 text-center md:text-left">
           <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] text-[#17335D] tracking-tight">
             The <span className="text-[#FFBF0F]">Cases</span> We Handle
           </h2>
@@ -191,20 +194,20 @@ export default function AboutPage() {
 
       {/* ─── SECTION 6: Available Across the Country ─── */}
       <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#122d56]">
-        <div className="mx-auto max-w-7xl px-5">
-          <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%]  text-white tracking-tight mb-[14px] md:mb-6 lg:mb-8">
+        <div className="mx-auto max-w-7xl px-5 ">
+          <h2 className="text-center md:text-left heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%]  text-white tracking-tight mb-[14px] md:mb-6 lg:mb-8">
             Available Across <span className="text-[#FFBF0F]">the Country</span>
           </h2>
           <div className="grid lg:grid-cols-2 gap-6 md:gap-14 lg:gap-20 items-start">
             {/* Left: copy */}
             <div>
-              <p className="text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
+              <p className="text-center md:text-left text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
                 The attorneys in our network are licensed across multiple states
                 and handle cases nationwide. No matter where you are located or
                 where the harm occurred, we can review your situation and
                 connect you with the right attorney.
               </p>
-              <p className="mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
+              <p className="text-center md:text-left mt-[14px] md:mt-4 text-[14px] md:text-base lg:text-lg text-white leading-[140%]">
                 Reaching out takes minutes. A real person will follow up with
                 every inquiry directly.
               </p>
