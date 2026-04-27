@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 export default function PreventWidowText() {
   useEffect(() => {
-    document.querySelectorAll("p.font-normal,p.font-medium").forEach((el) => {
+    document.querySelectorAll("p,p.font-normal,p.font-medium").forEach((el) => {
       const text = el.textContent?.trim();
 
       if (!text) return;

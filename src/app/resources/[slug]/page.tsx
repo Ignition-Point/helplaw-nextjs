@@ -12,6 +12,7 @@ import {
   getDummyResourceFaqs,
 } from "@/lib/dummyResources";
 import { shouldUseDummyResources } from "@/lib/featureFlags";
+import PreventWidowText from "@/components/PreventWidowText";
 
 export const revalidate = 60;
 
@@ -186,6 +187,7 @@ export default async function BlogPostPage({ params }: PageParams) {
 
   return (
     <>
+     <PreventWidowText />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

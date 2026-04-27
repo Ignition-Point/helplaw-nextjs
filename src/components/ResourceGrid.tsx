@@ -74,7 +74,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
         {/* Search + Filters */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-[14px] md:mb-6 lg:mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-[16px] md:mb-6 lg:mb-8">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-warm-400" />
             <input
@@ -85,7 +85,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
               className="w-full sm:w-64 rounded-full border border-navy-200 bg-white pl-10 pr-4 py-2 text-sm text-navy-900 placeholder:text-slate-warm-400 focus:outline-none focus:ring-2 focus:ring-navy-300 focus:border-navy-300"
             />
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className=" flex flex-nowrap whitespace-nowrap md:whitespace-normal overflow-auto md:flex-wrap scrollbar-hide gap-2">
             {FILTER_CATEGORIES.map((cat) => (
               <button
                 key={cat}
@@ -103,7 +103,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
         </div>
 
         {/* Article count */}
-        <p className="text-sm text-[#546885] mb-[14px] md:mb-6">
+        <p className="text-sm text-[#546885] mb-[16px] md:mb-6">
           Showing {filtered.length} article{filtered.length !== 1 ? "s" : ""}
         </p>
 
@@ -191,8 +191,8 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <p className="text-slate-warm-500">
+          <div className="text-center py-4 md:py-6 lg:py-12">
+            <p className="text-[14px] md:text-[16px] text-[#546885] leading-[140%]">
               No articles match your search. Try a different term or category.
             </p>
           </div>

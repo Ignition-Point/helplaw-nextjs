@@ -40,12 +40,12 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-white">
       <div className="mx-auto max-w-7xl px-5">
         {/* Filter bar */}
-        <div className="flex flex-wrap gap-2 mb-[20px] md:mb-6 lg:mb-10">
+        <div className="flex flex-nowrap whitespace-nowrap md:whitespace-normal overflow-auto md:flex-wrap scrollbar-hide gap-2 mb-[20px] md:mb-6 lg:mb-10">
           {FILTER_CATEGORIES.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`rounded-full cursor-pointer px-4 py-2 text-sm font-medium transition-colors ${
+              className={` rounded-full cursor-pointer px-4 py-2 text-sm font-medium transition-colors ${
                 activeFilter === cat
                   ? "bg-[#122D56] text-white"
                   : "bg-navy-50 text-[#122D56] hover:bg-navy-100"
@@ -85,8 +85,8 @@ export function CaseGrid({ cases }: { cases: CaseItem[] }) {
         </div>
 
         {filtered.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-slate-warm-500">
+          <div className="text-center py-4 md:py-6 lg:py-12">
+            <p className="text-[14px] md:text-[16px] text-[#546885] leading-[140%]">
               No cases in this category yet. Check back soon.
             </p>
           </div>

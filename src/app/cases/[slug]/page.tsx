@@ -25,6 +25,7 @@ import {
   getDummyCaseSections,
 } from "@/lib/dummyCases";
 import { shouldUseDummyCases } from "@/lib/featureFlags";
+import PreventWidowText from "@/components/PreventWidowText";
 
 export const revalidate = 60;
 
@@ -234,6 +235,7 @@ export default async function CasePage({ params }: PageParams) {
 
   return (
     <>
+     <PreventWidowText />
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

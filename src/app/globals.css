@@ -318,6 +318,15 @@
     margin-top: 14px;
   }
 
+  .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 @media (max-width: 767px) {
   .animate-scroll-x {
     animation-duration: 8s;
