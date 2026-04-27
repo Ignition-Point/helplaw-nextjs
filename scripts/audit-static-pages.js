@@ -92,7 +92,20 @@ function checkPage(file) {
     return;
   }
 
-  const src = fs.readFileSync(file, "utf8");
+  const rawSrc = fs.readFileSync(file, "utf8");
+
+  // For tag-detection checks (raw <img>, <h1>, etc.) we need to scan ONLY
+  // JSX/HTML positions, not literal strings inside the source. The qc-guide
+  // page documents the rules using strings like "<img>" — we can't have the
+  // audit treat those as real tags. Strip out string and template literals
+  // before running tag regex.
+  const src = rawSrc; // for metadata checks (regex over the full file is fine)
+  const codeWithoutStrings = rawSrc
+    .replace(/"(?:[^"\\]|\\.)*"/g, '""')        // double-quoted strings
+    .replace(/'(?:[^'\\]|\\.)*'/g, "''")        // single-quoted strings
+    .replace(/`(?:[^`\\]|\\.)*`/g, "``")        // template literals
+    .replace(/\/\*[\s\S]*?\*\//g, "")            // block comments
+    .replace(/\/\/.*$/gm, "");                   // line comments
 
   // ── Metadata export ──
   // Look for `export const metadata` or `export async function generateMetadata`.
@@ -145,16 +158,15 @@ function checkPage(file) {
   }
 
   // ── Raw <img> tags ──
-  // Next.js's @next/next/no-img-element rule should catch these in lint, but
-  // we double-check here in case lint is bypassed.
-  const rawImgMatches = src.match(/<img\b[^>]*>/g) || [];
+  // Use codeWithoutStrings so we don't false-positive on literal strings
+  // inside the source (e.g. documentation pages that mention "<img>").
+  const rawImgMatches = codeWithoutStrings.match(/<img\b[^>]*>/g) || [];
   if (rawImgMatches.length > 0) {
     issue("error", rel, `${rawImgMatches.length} raw <img> tag(s) — use next/image Image component instead`);
   }
 
   // ── <Image> without alt ──
-  // Crude regex but catches the common case. Multiline-safe via [\s\S].
-  const imageMatches = src.match(/<Image\b[\s\S]*?\/>/g) || [];
+  const imageMatches = codeWithoutStrings.match(/<Image\b[\s\S]*?\/>/g) || [];
   for (const tag of imageMatches) {
     if (!/\balt\s*=/.test(tag)) {
       const preview = tag.replace(/\s+/g, " ").slice(0, 80);
@@ -163,9 +175,7 @@ function checkPage(file) {
   }
 
   // ── Multiple <h1> ──
-  // Exact h1 count. Some pages use <H1> components — those would need their
-  // own check. The standard case page already wraps title in <h1>.
-  const h1Count = (src.match(/<h1[\s>]/gi) || []).length;
+  const h1Count = (codeWithoutStrings.match(/<h1[\s>]/gi) || []).length;
   if (h1Count > 1) {
     issue("warning", rel, `${h1Count} <h1> tags on page — should have exactly one for SEO`);
   }
