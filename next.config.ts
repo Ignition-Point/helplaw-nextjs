@@ -46,9 +46,9 @@ const securityHeaders = [
     value: [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
-      "style-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https://kmgttaqztmsbbaethbko.supabase.co https://image2url.com https://img.sanishtech.com https://cdn.phototourl.com https://*.googleusercontent.com",
-      "font-src 'self' data:",
+      "font-src 'self' data: https://fonts.gstatic.com",
       "connect-src 'self' https://kmgttaqztmsbbaethbko.supabase.co https://va.vercel-scripts.com",
       "media-src 'self'",
       "frame-ancestors 'self'",
