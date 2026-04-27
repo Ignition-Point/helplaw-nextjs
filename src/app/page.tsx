@@ -9,7 +9,7 @@ import { HomeLeadForm } from "@/components/HomeLeadForm";
 export const metadata: Metadata = {
   title: "Help Law Group | Mass Tort & Class Action Attorneys",
   description:
-    "Were you harmed by a person, company, or institution? Help Law Group connects you with experienced attorneys for a free, confidential case evaluation. No fees unless you win.",
+    "Were you harmed by a person, company, or institution? Help Law Group connects you with experienced attorneys for a free, confidential case review.",
   openGraph: {
     title: "Help Law Group | Mass Tort & Class Action Attorneys",
     description:
@@ -111,7 +111,7 @@ export default async function HomePage() {
       {/* ─── "When You Are Ready. We Are Here." ─── */}
       <section
         className="relative overflow-hidden"
-        style={{ backgroundImage: "url(/assets/alt/section-2-image.png)", backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundImage: "url(/assets/alt/section-2-image.webp)", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="absolute inset-0 bg-navy-950/80" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
@@ -152,7 +152,7 @@ export default async function HomePage() {
           {/* Image — left side with fade */}
           <div className="relative min-h-[400px] lg:min-h-[600px]">
             <Image
-              src="/assets/alt/section-3-image.png"
+              src="/assets/alt/section-3-image.webp"
               alt="Help Law Group Team"
               fill
               className="object-cover object-center"
@@ -206,7 +206,7 @@ export default async function HomePage() {
       {/* ─── How It Works ─── */}
       <section
         className="relative overflow-hidden"
-        style={{ backgroundImage: "url(/assets/alt/section-4-image.png)", backgroundSize: "cover", backgroundPosition: "center" }}
+        style={{ backgroundImage: "url(/assets/alt/section-4-image.webp)", backgroundSize: "cover", backgroundPosition: "center" }}
       >
         <div className="absolute inset-0 bg-slate-warm-50/95" />
         <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28">

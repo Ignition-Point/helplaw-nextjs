@@ -5,9 +5,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CaseGrid } from "@/components/CaseGrid";
 
 export const metadata: Metadata = {
-  title: "Our Cases",
+  title: "Mass Tort Cases We Cover | Help Law Group",
   description:
-    "Attorneys in our network are actively reviewing cases involving abuse, unsafe products, and platform harm. Learn more and find out if you have legal options.",
+    "Attorneys in our network are reviewing cases involving abuse, unsafe products, and platform harm. Find out if you have legal options.",
+  alternates: { canonical: "https://helplaw.com/cases" },
 };
 
 export const revalidate = 60;

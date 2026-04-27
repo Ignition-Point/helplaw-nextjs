@@ -1,6 +1,17 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
+import {
+  sanitizeCaseRecord,
+  sanitizeCaseSection,
+  sanitizeFaq,
+  sanitizeMetaDescription,
+  sanitizeSeoTitle,
+  sanitizeCanonical,
+  type CaseRecord,
+  type CaseSectionRecord,
+  type CaseFaqRecord,
+} from "@/lib/content-sanitize";
 
 import { HeroWithForm } from "@/components/blocks/HeroWithForm";
 import { TrustBanner } from "@/components/blocks/TrustBanner";
@@ -24,6 +35,10 @@ export const revalidate = 60;
 
 // ─── Data fetching ───
 
+// Each fetch routes its result through the content sanitizer so render-time
+// output is clean regardless of how the underlying record was created.
+// In dev, fixes are logged so we can spot patterns from Lovable / direct edits.
+
 async function getCaseBySlug(slug: string) {
   const supabase = await createClient();
   const { data } = await supabase
@@ -32,7 +47,12 @@ async function getCaseBySlug(slug: string) {
     .eq("slug", slug)
     .eq("status", "active")
     .maybeSingle();
-  return data;
+  if (!data) return null;
+  const res = sanitizeCaseRecord(data as CaseRecord);
+  if (res.fixed.length > 0 && process.env.NODE_ENV !== "production") {
+    console.log(`[content-sanitize] case ${slug}:`, res.fixed);
+  }
+  return res.value;
 }
 
 async function getCaseSections(caseId: string) {
@@ -43,7 +63,14 @@ async function getCaseSections(caseId: string) {
     .eq("case_id", caseId)
     .eq("visible", true)
     .order("sort_order");
-  return data ?? [];
+  const rows = (data ?? []) as CaseSectionRecord[];
+  return rows.map((row) => {
+    const res = sanitizeCaseSection(row);
+    if (res.fixed.length > 0 && process.env.NODE_ENV !== "production") {
+      console.log(`[content-sanitize] section ${row.id}:`, res.fixed);
+    }
+    return res.value;
+  });
 }
 
 async function getCaseFaqs(caseId: string) {
@@ -53,7 +80,14 @@ async function getCaseFaqs(caseId: string) {
     .select("*")
     .eq("case_id", caseId)
     .order("sort_order");
-  return data ?? [];
+  const rows = (data ?? []) as CaseFaqRecord[];
+  return rows.map((row) => {
+    const res = sanitizeFaq(row);
+    if (res.fixed.length > 0 && process.env.NODE_ENV !== "production") {
+      console.log(`[content-sanitize] faq ${row.id}:`, res.fixed);
+    }
+    return res.value;
+  });
 }
 
 // ─── Dynamic metadata for SEO ───
@@ -67,40 +101,46 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 
   const isContent = caseData.page_type === "content";
 
-  // Smart description fallback: use hero_subheadline truncated to 155 chars
-  let description = caseData.seo_description;
-  if (!description) {
+  // Description: prefer the explicit seo_description, fall back to a
+  // truncated hero_subheadline, then to a generic boilerplate. Whichever
+  // we pick, route it through the sanitizer to guarantee Google-safe output.
+  let descriptionSource = caseData.seo_description as string | null | undefined;
+  if (!descriptionSource) {
     const sub = (caseData.hero_subheadline as string) || "";
-    if (sub) {
-      const suffix = " Learn more about your legal options.";
-      if (sub.length <= 155 - suffix.length) {
-        description = sub + suffix;
-      } else if (sub.length <= 155) {
-        description = sub;
-      } else {
-        description = sub.slice(0, 152) + "...";
-      }
-    } else {
-      description = "Find out if you qualify for compensation. Free, confidential case review.";
-    }
+    descriptionSource = sub
+      ? `${sub} Learn more about your legal options.`
+      : "Find out if you qualify for compensation. Free, confidential case review.";
   }
+  const description = sanitizeMetaDescription(descriptionSource).value;
 
-  const canonical = caseData.seo_canonical || `https://helplaw.com/cases/${slug}`;
-  const ogImage = caseData.seo_image || "/assets/og-default.jpg";
+  // Canonical: sanitizer fills in a derived URL when the field is empty,
+  // forces https, strips trailing slashes, and validates the URL.
+  const canonical = sanitizeCanonical(
+    caseData.seo_canonical as string | null | undefined,
+    `cases/${slug}`
+  ).value;
+
+  // SEO title: sanitizer ensures brand presence and length cap.
+  const seoTitle = sanitizeSeoTitle(
+    caseData.seo_title as string | null | undefined,
+    `${caseData.title} | Free Case Review`
+  ).value;
+
+  const ogImage = (caseData.seo_image as string | undefined) || "/assets/og-default.jpg";
 
   return {
-    title: caseData.seo_title || `${caseData.title} | Free Case Review`,
+    title: seoTitle,
     description,
     robots: isContent ? { index: true, follow: true } : { index: false, follow: false },
     alternates: { canonical },
     openGraph: {
-      title: caseData.seo_title || caseData.title,
+      title: seoTitle,
       description,
       images: [{ url: ogImage }],
     },
     twitter: {
       card: "summary_large_image",
-      title: caseData.seo_title || caseData.title,
+      title: seoTitle,
       description,
       images: [ogImage],
     },
@@ -171,13 +211,17 @@ export default async function CasePage({ params }: PageParams) {
   const caseData = await getCaseBySlug(slug);
   if (!caseData) notFound();
 
+  // After sanitizeCaseRecord, id is technically optional in the type.
+  // It always exists in the DB row, so narrow it once here.
+  const caseId = caseData.id as string;
+
   const [sections, faqs] = await Promise.all([
-    getCaseSections(caseData.id),
-    getCaseFaqs(caseData.id),
+    getCaseSections(caseId),
+    getCaseFaqs(caseId),
   ]);
 
-  const phoneNumber = caseData.phone_number || "1-800-HELP-LAW";
-  const displayNumber = caseData.display_number || "1-800-HELP-LAW";
+  const phoneNumber = (caseData.phone_number as string) || "1-800-HELP-LAW";
+  const displayNumber = (caseData.display_number as string) || "1-800-HELP-LAW";
   const isContent = caseData.page_type === "content";
 
   // Extract headings for sticky ToC from sections that have anchorId + headline
@@ -269,7 +313,7 @@ export default async function CasePage({ params }: PageParams) {
                   subheadline={getStr(content, "subheadline") || caseData.hero_subheadline || ""}
                   content={getStr(content, "content") || undefined}
                   leadFormId={getStr(content, "leadFormId") || undefined}
-                  caseId={caseData.id}
+                  caseId={caseId}
                   caseSlug={slug}
                   phoneNumber={phoneNumber}
                   displayNumber={displayNumber}
@@ -298,7 +342,7 @@ export default async function CasePage({ params }: PageParams) {
                         dangerouslySetInnerHTML={{ __html: getStr(content, "content") }}
                       />
                     )}
-                    <LeadFormRenderer leadFormId={lfId} caseId={caseData.id} caseSlug={slug} />
+                    <LeadFormRenderer leadFormId={lfId} caseId={caseId} caseSlug={slug} />
                   </div>
                 </section>
               );

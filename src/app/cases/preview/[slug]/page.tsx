@@ -39,10 +39,20 @@ async function getPreviewData(slug: string) {
   if (!res.ok) return null;
   const data = await res.json();
   if (!data.case) return null;
+
+  // Run preview content through the same sanitizer as production pages so
+  // editors see exactly what will render after publish — no surprises.
+  const { sanitizeCaseRecord, sanitizeCaseSection, sanitizeFaq } = await import("@/lib/content-sanitize");
+  const sanitizedCase = sanitizeCaseRecord(data.case).value;
+  const rawSections = (data.sections ?? []) as Array<{ id: string; section_type: string; content: unknown; visible: boolean; sort_order: number }>;
+  const rawFaqs = (data.faqs ?? []) as Array<{ id: string; question: string; answer: string; sort_order: number }>;
+  const sanitizedSections = rawSections.map((s) => sanitizeCaseSection(s as never).value as typeof s);
+  const sanitizedFaqs = rawFaqs.map((f) => sanitizeFaq(f as never).value as typeof f);
+
   return {
-    caseData: data.case as Record<string, unknown>,
-    sections: (data.sections ?? []) as Array<{ id: string; section_type: string; content: unknown; visible: boolean; sort_order: number }>,
-    faqs: (data.faqs ?? []) as Array<{ id: string; question: string; answer: string; sort_order: number }>,
+    caseData: sanitizedCase as Record<string, unknown>,
+    sections: sanitizedSections,
+    faqs: sanitizedFaqs,
   };
 }
 

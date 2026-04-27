@@ -4,9 +4,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { FAQAccordion } from "@/components/FAQAccordion";
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions",
+  title: "Mass Tort Lawsuit FAQ | Help Law Group",
   description:
-    "Common questions about working with Help Law Group — how the process works, what it costs, who qualifies, and what to expect from your free case evaluation.",
+    "Common questions about working with Help Law Group — how the process works, what it costs, who qualifies, what to expect from your free case review.",
+  alternates: { canonical: "https://helplaw.com/faq" },
 };
 
 const FAQ_SECTIONS = [

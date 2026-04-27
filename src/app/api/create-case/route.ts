@@ -2,6 +2,10 @@ import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "crypto";
 import sharp from "sharp";
+import {
+  sanitizeCaseRecord,
+  sanitizeHtml,
+} from "@/lib/content-sanitize";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 
@@ -648,6 +652,9 @@ function runQcChecks(input: QcInput): QCWarning[] {
     if (input.title.length > 80) {
       w.push({ field: "title", severity: "warning", message: `Title is ${input.title.length} chars (recommended: under 80)` });
     }
+    if (input.title.length < 30) {
+      w.push({ field: "title", severity: "warning", message: `Title is only ${input.title.length} chars — Screaming Frog flags titles under 30 chars (aim for 30-60)` });
+    }
     if (input.title.length < 10) {
       w.push({ field: "title", severity: "error", message: `Title seems too short (${input.title.length} chars): "${input.title}"` });
     }
@@ -771,8 +778,9 @@ function runQcChecks(input: QcInput): QCWarning[] {
   if (!input.seoDescription) {
     w.push({ field: "seo_description", severity: "warning", message: "No meta description found" });
   } else {
-    if (input.seoDescription.length > 160) {
-      w.push({ field: "seo_description", severity: "warning", message: `Meta description is ${input.seoDescription.length} chars (recommended: under 160)` });
+    // Screaming Frog flags > 155 chars and > 985 pixels. Tightened from 160.
+    if (input.seoDescription.length > 155) {
+      w.push({ field: "seo_description", severity: "warning", message: `Meta description is ${input.seoDescription.length} chars — Google may truncate (aim for 120-155)` });
     }
     if (input.seoDescription.length < 50) {
       w.push({ field: "seo_description", severity: "warning", message: `Meta description is only ${input.seoDescription.length} chars — too short for search snippets (aim for 120-155)` });
@@ -978,6 +986,113 @@ function runQcChecks(input: QcInput): QCWarning[] {
     const expectedSlug = input.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     if (input.slug !== expectedSlug) {
       w.push({ field: "slug", severity: "warning", message: `Slug "${input.slug}" doesn't match auto-generated slug from title "${expectedSlug}"` });
+    }
+  }
+
+  // ════════════════════════════════════════
+  // SLUG / URL HYGIENE (Screaming Frog: URL Contains Space, etc.)
+  // ════════════════════════════════════════
+
+  if (input.slug) {
+    if (/\s/.test(input.slug)) {
+      w.push({ field: "slug", severity: "error", message: `Slug contains a space: "${input.slug}" — URLs with spaces break canonical and crawlability` });
+    }
+    if (/[A-Z]/.test(input.slug)) {
+      w.push({ field: "slug", severity: "error", message: `Slug contains uppercase characters: "${input.slug}" — slugs must be lowercase` });
+    }
+    if (/[^a-z0-9-]/.test(input.slug)) {
+      w.push({ field: "slug", severity: "error", message: `Slug contains invalid characters: "${input.slug}" — only lowercase letters, numbers, and hyphens` });
+    }
+    if (input.slug.length > 75) {
+      w.push({ field: "slug", severity: "warning", message: `Slug is ${input.slug.length} chars — long URLs hurt SEO (aim for under 75)` });
+    }
+    if (/--/.test(input.slug)) {
+      w.push({ field: "slug", severity: "warning", message: `Slug contains consecutive hyphens: "${input.slug}"` });
+    }
+  }
+
+  // ════════════════════════════════════════
+  // CONTENT VOLUME (Screaming Frog: Low Content Pages)
+  // ════════════════════════════════════════
+
+  // Total word count across all body content
+  const bodyWordCount = [
+    input.subheadline,
+    ...input.sections.map((s) => `${s.headline} ${stripHtml(s.content)}`),
+    ...input.faqs.map((f) => `${f.question} ${f.answer}`),
+    input.closingCta?.headline || "",
+    input.closingCta?.content || "",
+  ].join(" ").trim().split(/\s+/).filter(Boolean).length;
+
+  if (bodyWordCount < 1000) {
+    w.push({
+      field: "content",
+      severity: "error",
+      message: `Total word count is only ${bodyWordCount} — Screaming Frog flags pages under 1,000 words as Low Content. Voice rules target 2,100-2,800.`,
+    });
+  } else if (bodyWordCount < 1800) {
+    w.push({
+      field: "content",
+      severity: "warning",
+      message: `Total word count is ${bodyWordCount} — below the 2,100-2,800 target range from the voice rules`,
+    });
+  } else if (bodyWordCount > 3200) {
+    w.push({
+      field: "content",
+      severity: "warning",
+      message: `Total word count is ${bodyWordCount} — above the 2,100-2,800 target range (consider trimming)`,
+    });
+  }
+
+  // ════════════════════════════════════════
+  // HEADING HIERARCHY (Screaming Frog: H2 Multiple/Missing/Non-Sequential)
+  // ════════════════════════════════════════
+
+  // Section headlines render as H2. Title renders as H1.
+  // - Page must have exactly one H1 (the title) — handled by template.
+  // - Page should have multiple H2s (one per content section) — that's normal for case pages.
+  // - Each section's content shouldn't contain its own <h1>/<h2> tags (parser bleed).
+
+  const headlinedSections = input.sections.filter((s) => s.headline && s.type !== "mid-page-cta");
+  if (headlinedSections.length === 0 && input.sections.length > 0) {
+    w.push({ field: "headings", severity: "error", message: "No headlined sections found — page will have no H2s, hurting SEO and accessibility" });
+  } else if (headlinedSections.length < 4) {
+    w.push({ field: "headings", severity: "warning", message: `Only ${headlinedSections.length} H2 section(s) — most case pages have 6-12` });
+  }
+
+  // Check for stray H1/H2/H3 tags inside section content (parser bleed)
+  for (const s of input.sections) {
+    if (/<h[12][\s>]/i.test(s.content)) {
+      w.push({
+        field: "headings",
+        severity: "warning",
+        message: `Section "${s.headline || "(no headline)"}" contains an inline <h1> or <h2> tag — would create non-sequential heading hierarchy`,
+      });
+    }
+  }
+
+  // ════════════════════════════════════════
+  // INLINE IMAGE HYGIENE
+  // ════════════════════════════════════════
+
+  // Detect <img> tags inside section content without width/height (Screaming Frog: Missing Size Attributes)
+  for (const s of input.sections) {
+    const imgMatches = s.content.match(/<img\b[^>]*>/gi) || [];
+    for (const tag of imgMatches) {
+      if (!/\bwidth\s*=/i.test(tag) || !/\bheight\s*=/i.test(tag)) {
+        w.push({
+          field: "images",
+          severity: "warning",
+          message: `Inline image in section "${s.headline || "(no headline)"}" is missing width/height attributes — causes CLS and Screaming Frog warnings`,
+        });
+      }
+      if (!/\balt\s*=/i.test(tag)) {
+        w.push({
+          field: "images",
+          severity: "warning",
+          message: `Inline image in section "${s.headline || "(no headline)"}" is missing alt text — accessibility issue`,
+        });
+      }
     }
   }
 
@@ -1313,6 +1428,72 @@ async function createCaseFromDoc(docUrl: string) {
   // QC errors no longer block creation — they are returned alongside the case
   // so the agent can review and address them after upload.
 
+  // Auto-fix what the sanitizer can handle (slug, meta description length,
+  // SEO title, canonical, inline HTML hygiene). The sanitizer is applied
+  // again at render time, but applying it here means the data lands clean
+  // in Supabase too, so anyone reading the DB directly (Lovable, SQL) sees
+  // the corrected values.
+  const caseSanitize = sanitizeCaseRecord({
+    slug: doc.slug,
+    title: doc.title,
+    seo_title: doc.meta.seo_title,
+    seo_description: doc.meta.seo_description,
+    seo_canonical: null,
+    hero_subheadline: doc.subheadline,
+    hero_background_image: doc.backgroundImage,
+  });
+  if (caseSanitize.fixed.length > 0) {
+    doc.slug = caseSanitize.value.slug || doc.slug;
+    doc.meta.seo_title = caseSanitize.value.seo_title || doc.meta.seo_title;
+    doc.meta.seo_description = caseSanitize.value.seo_description || doc.meta.seo_description;
+    if (caseSanitize.value.hero_background_image) {
+      doc.backgroundImage = caseSanitize.value.hero_background_image;
+    }
+    doc.qcWarnings.push(
+      ...caseSanitize.fixed.map((f) => ({
+        field: "auto-fix",
+        severity: "warning" as const,
+        message: f,
+      }))
+    );
+  }
+  // Sanitize each section's HTML body
+  for (const section of doc.sections) {
+    const res = sanitizeHtml(section.content);
+    if (res.fixed.length > 0) {
+      section.content = res.value;
+      doc.qcWarnings.push(
+        ...res.fixed.map((f) => ({
+          field: "auto-fix",
+          severity: "warning" as const,
+          message: `Section "${section.headline || "(no headline)"}": ${f}`,
+        }))
+      );
+    }
+  }
+  // Sanitize FAQ answers
+  for (const faq of doc.faqs) {
+    const res = sanitizeHtml(faq.answer);
+    if (res.fixed.length > 0) {
+      faq.answer = res.value;
+      doc.qcWarnings.push(
+        ...res.fixed.map((f) => ({
+          field: "auto-fix",
+          severity: "warning" as const,
+          message: `FAQ "${faq.question}": ${f}`,
+        }))
+      );
+    }
+    if (faq.question && !faq.question.trim().endsWith("?")) {
+      faq.question = faq.question.trim() + "?";
+      doc.qcWarnings.push({
+        field: "auto-fix",
+        severity: "warning",
+        message: `FAQ question: appended missing '?' to "${faq.question}"`,
+      });
+    }
+  }
+
   // Check for existing slug (note: anon key may not see draft cases due to RLS)
   const { data: existing } = await supabase.from("cases").select("id").eq("slug", doc.slug).maybeSingle();
   if (existing) throw new Error(`A case with slug "${doc.slug}" already exists. Delete or rename the existing case first.`);
@@ -1337,6 +1518,32 @@ async function createCaseFromDoc(docUrl: string) {
             : "")
           + `, converted to WebP`,
       });
+
+      // Post-optimization size check (Screaming Frog: Images Over 100 KB).
+      // Hero images carry the most weight — over 200 KB after compression
+      // means the source was either huge or already in a poor format.
+      if (imageOptResult.finalSize > 200 * 1024) {
+        doc.qcWarnings.push({
+          field: "backgroundImage",
+          severity: "warning",
+          message: `Hero image is still ${formatBytes(imageOptResult.finalSize)} after optimization — consider a smaller source image (target: under 200 KB)`,
+        });
+      }
+
+      // Dimensions sanity check
+      if (!imageOptResult.finalDimensions?.width || !imageOptResult.finalDimensions?.height) {
+        doc.qcWarnings.push({
+          field: "backgroundImage",
+          severity: "warning",
+          message: "Hero image dimensions could not be read — may cause layout shift (CLS)",
+        });
+      } else if (imageOptResult.finalDimensions.width < 1200) {
+        doc.qcWarnings.push({
+          field: "backgroundImage",
+          severity: "warning",
+          message: `Hero image is only ${imageOptResult.finalDimensions.width}px wide — may look soft on desktop (recommended: 1600-1920px wide)`,
+        });
+      }
     } else if (imageOptResult.error) {
       doc.qcWarnings.push({
         field: "backgroundImage",

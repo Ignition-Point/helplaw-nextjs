@@ -3,9 +3,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { GetLegalHelpForm } from "@/components/GetLegalHelpForm";
 
 export const metadata: Metadata = {
-  title: "Get Legal Help",
+  title: "Get Free Legal Help Now | Help Law Group",
   description:
     "Tell us what happened. A member of our team will review your situation and follow up with you directly. The first conversation is free.",
+  alternates: { canonical: "https://helplaw.com/get-legal-help" },
 };
 
 export default function GetLegalHelpPage() {

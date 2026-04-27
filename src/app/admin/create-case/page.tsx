@@ -2,11 +2,57 @@
 
 import { useState } from "react";
 
+interface SanitizeReport {
+  table: string;
+  id: string;
+  identifier: string;
+  fixes: string[];
+}
+
+interface SanitizeResponse {
+  success: boolean;
+  dryRun: boolean;
+  summary: {
+    total_records_checked: number;
+    records_fixed: number;
+    total_fixes_applied: number;
+    by_table: Record<string, number>;
+  };
+  reports: SanitizeReport[];
+  errors: string[];
+}
+
 export default function CreateCasePage() {
   const [docUrl, setDocUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState("");
+
+  // Batch sanitize state
+  const [sanitizeRunning, setSanitizeRunning] = useState(false);
+  const [sanitizeResult, setSanitizeResult] = useState<SanitizeResponse | null>(null);
+  const [sanitizeError, setSanitizeError] = useState("");
+
+  async function runSanitize(dryRun: boolean) {
+    setSanitizeRunning(true);
+    setSanitizeError("");
+    setSanitizeResult(null);
+    try {
+      const res = await fetch(`/api/admin/sanitize${dryRun ? "?dryRun=1" : ""}`, {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setSanitizeError(data.error || "Sanitize failed");
+      } else {
+        setSanitizeResult(data);
+      }
+    } catch {
+      setSanitizeError("Failed to connect to the API");
+    } finally {
+      setSanitizeRunning(false);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -269,6 +315,100 @@ export default function CreateCasePage() {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download Case Page Template (.docx)
           </a>
+        </div>
+
+        {/* ─── Batch CMS Sanitizer ─── */}
+        <div className="mt-8 p-6 bg-white border border-slate-200 rounded-lg">
+          <h2 className="text-lg font-semibold text-navy-900 mb-2">
+            Batch CMS Sanitizer
+          </h2>
+          <p className="text-sm text-slate-500 mb-4">
+            Walks every case, section, FAQ, and blog post in the CMS, auto-fixes
+            quality issues (slugs, meta descriptions, canonicals, inline HTML,
+            image attributes), and writes the fixes back to Supabase. Use this
+            after content edits made in Lovable or directly in Supabase, or
+            periodically for hygiene. Dry run previews the changes without
+            writing.
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => runSanitize(true)}
+              disabled={sanitizeRunning}
+              className="inline-flex items-center gap-2 rounded-lg border-2 border-navy-200 bg-white px-4 py-2 text-sm font-semibold text-navy-800 hover:border-navy-400 hover:bg-navy-50 transition-all disabled:opacity-50"
+            >
+              {sanitizeRunning ? "Running..." : "Preview (Dry Run)"}
+            </button>
+            <button
+              onClick={() => runSanitize(false)}
+              disabled={sanitizeRunning}
+              className="inline-flex items-center gap-2 rounded-lg bg-navy-900 px-4 py-2 text-sm font-semibold text-white hover:bg-navy-800 transition-all disabled:opacity-50"
+            >
+              {sanitizeRunning ? "Running..." : "Apply Fixes"}
+            </button>
+          </div>
+
+          {sanitizeError && (
+            <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-700">
+              {sanitizeError}
+            </div>
+          )}
+
+          {sanitizeResult && (
+            <div className="mt-4 space-y-3">
+              <div className={`p-3 rounded-lg border ${sanitizeResult.dryRun ? "bg-blue-50 border-blue-200" : "bg-green-50 border-green-200"}`}>
+                <p className={`font-semibold text-sm ${sanitizeResult.dryRun ? "text-blue-800" : "text-green-800"}`}>
+                  {sanitizeResult.dryRun ? "Dry run — no changes written" : "Fixes applied to Supabase"}
+                </p>
+                <div className="mt-2 grid grid-cols-2 gap-1 text-xs text-slate-600">
+                  <div>Records checked</div>
+                  <div className="font-medium">{sanitizeResult.summary.total_records_checked}</div>
+                  <div>Records with fixes</div>
+                  <div className="font-medium">{sanitizeResult.summary.records_fixed}</div>
+                  <div>Total fixes</div>
+                  <div className="font-medium">{sanitizeResult.summary.total_fixes_applied}</div>
+                  <div>Cases</div>
+                  <div className="font-medium">{sanitizeResult.summary.by_table.cases}</div>
+                  <div>Sections</div>
+                  <div className="font-medium">{sanitizeResult.summary.by_table.case_sections}</div>
+                  <div>FAQs</div>
+                  <div className="font-medium">{sanitizeResult.summary.by_table.case_faqs}</div>
+                  <div>Blog posts</div>
+                  <div className="font-medium">{sanitizeResult.summary.by_table.blog_posts}</div>
+                </div>
+              </div>
+
+              {sanitizeResult.reports.length > 0 && (
+                <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg max-h-96 overflow-y-auto">
+                  <p className="text-amber-800 font-semibold text-sm mb-2">Fix log</p>
+                  <ul className="text-xs text-amber-700 space-y-2">
+                    {sanitizeResult.reports.map((r, i) => (
+                      <li key={i}>
+                        <strong className="font-medium">
+                          [{r.table}] {r.identifier}
+                        </strong>
+                        <ul className="mt-1 ml-3 list-disc list-inside space-y-0.5">
+                          {r.fixes.map((f, j) => (
+                            <li key={j}>{f}</li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {sanitizeResult.errors.length > 0 && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                  <p className="text-red-800 font-semibold text-sm mb-2">Errors</p>
+                  <ul className="text-xs text-red-700 space-y-1">
+                    {sanitizeResult.errors.map((e, i) => (
+                      <li key={i}>{e}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <div className="mt-8 p-6 bg-white border border-slate-200 rounded-lg">

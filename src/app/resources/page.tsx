@@ -4,9 +4,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ResourceGrid } from "@/components/ResourceGrid";
 
 export const metadata: Metadata = {
-  title: "Resources",
+  title: "Survivor Resources & Legal Guides | Help Law Group",
   description:
-    "Information to help you understand your legal rights, recognize harm, and know your options.",
+    "Information to help you understand your legal rights, recognize harm, and know your options when an institution or company has caused harm.",
+  alternates: { canonical: "https://helplaw.com/resources" },
 };
 
 export const revalidate = 60;
