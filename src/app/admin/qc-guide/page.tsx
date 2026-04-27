@@ -8,8 +8,9 @@ import { PrintButton } from "./PrintButton";
 
 export const metadata: Metadata = {
   title: "Content QC Guide | Help Law Group (Internal)",
-  description: "Internal reference: how content quality control works across helplaw.com.",
+  description: "Internal reference: how content quality control works across helplaw.com — the four QC layers, what auto-fixes, and what needs human review.",
   robots: { index: false, follow: false },
+  alternates: { canonical: "https://helplaw.com/admin/qc-guide" },
 };
 
 const lastUpdated = "April 27, 2026";
