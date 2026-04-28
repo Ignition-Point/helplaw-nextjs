@@ -93,13 +93,13 @@ export default async function HomePage() {
 
             <div className="mt-[14px] md:mt-8 lg:mt-15 flex flex-wrap items-center justify-center md:justify-start gap-4">
               <Link
-                href="/cases"
+                href="#lead-form"
                 className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
               >
                 Check Eligibility
               </Link>
               <Link
-                href="/how-it-works"
+                href="#lead-form"
                 className="inline-flex items-center justify-center rounded-full border-2 border-white px-[24px] py-[15px] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] text-white transition-all hover:bg-white hover:text-[#122D56]"
               >
                 How It Works
@@ -205,7 +205,7 @@ export default async function HomePage() {
             </p>
 
             <Link
-              href="/cases"
+              href="#lead-form"
               className="mt-[14px] md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-[#122D56] md:bg-white text-white md:text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
             >
               Take the First Step Here
@@ -249,7 +249,7 @@ export default async function HomePage() {
                   </p>
 
                   <Link
-                    href="/cases"
+                    href="#lead-form"
                     className="mt-[14px] md:mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#1A365E]"
                   >
                     Start a Confidential Review
@@ -451,7 +451,7 @@ export default async function HomePage() {
 
             <div className="my-[14px] md:my-[26px] lg:my-[28px] text-center md:text-left">
               <Link
-                href="/cases"
+                href="#lead-form"
                 className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[16px] text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] font-semibold text-white transition-all"
               >
                 Speak With Our Team
@@ -474,7 +474,7 @@ export default async function HomePage() {
       <HomeBlogCards />
 
       {/* ─── What Help Law Group Can Do For You + Lead Form ─── */}
-      <section className="">
+      <section className="" id="lead-form">
         <div className="">
           <div className="grid md:grid-cols-[50%_50%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}

@@ -258,7 +258,7 @@ export default async function BlogPostPage({ params }: PageParams) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           {/* Mobile ToC */}
           {headings.length > 2 && (
-            <div className="lg:hidden max-w-3xl mx-auto">
+            <div className="lg:hidden max-w-3xl mx-auto mb-[18px]">
               <StickyTableOfContents
                 headings={headings.map((h) => ({
                   id: h.anchor,

@@ -103,7 +103,7 @@ export function HeroWithForm({
           </div>
 
           {/* Right: form */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2" id="form">
             <div className="rounded-xl bg-white p-6 sm:p-8 shadow-2xl shadow-navy-950/50">
               <h2 className="heading text-xl font-bold text-[#122D56] mb-1">
                 Begin Your Free Case Review
@@ -124,7 +124,7 @@ export function HeroWithForm({
                   </p>
                   <a
                     href={`tel:${phoneNumber}`}
-                    className="mt-4 inline-flex items-center justify-center rounded-md bg-gold-500 px-5 py-3 text-sm font-semibold text-navy-950 transition-all hover:bg-gold-400"
+                    className="mt-4 inline-flex items-center justify-center rounded-md bg-[#FFBF0F] px-5 py-3 text-sm font-semibold text-[#122D56] transition-all hover:bg-[#1A365E] hover:text-white"
                   >
                     Call {displayNumber}
                   </a>

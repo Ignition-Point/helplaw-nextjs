@@ -73,7 +73,7 @@ export default async function CasesPage() {
             place to find out.
           </p>
           <Link
-            href="/cases"
+            href="/get-legal-help"
             className="mt-[14px] md:mt-6 inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
           >
             Get a Free Case Evaluation
