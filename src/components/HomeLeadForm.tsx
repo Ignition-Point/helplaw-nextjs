@@ -4,6 +4,18 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { Loader2, CheckCircle } from "lucide-react";
 
+const HARM_TYPES = [
+  "Clergy or Religious Institution Abuse",
+  "Medical Abuse",
+  "Online Platform Harm",
+  "Social Media Addiction",
+  "Juvenile Detention Abuse",
+  "Foster Care Abuse",
+  "Rideshare Assault",
+  "Unsafe Products",
+  "Other / Not Sure",
+];
+
 export function HomeLeadForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -12,6 +24,7 @@ export function HomeLeadForm() {
     last_name: "",
     email: "",
     phone: "",
+    harm_type: "",
     description: "",
   });
 
@@ -46,6 +59,9 @@ export function HomeLeadForm() {
       </div>
     );
   }
+
+    const inputClass =
+    "w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-sm lg:text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -84,6 +100,27 @@ export function HomeLeadForm() {
         onChange={(e) => setValues((v) => ({ ...v, phone: e.target.value }))}
         className="w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors"
       />
+      </div>
+            <div>
+       
+        <select
+          value={values.harm_type}
+          onChange={(e) =>
+            setValues((v) => ({ ...v, harm_type: e.target.value }))
+          }
+          className={`${inputClass} ${
+            !values.harm_type ? "text-slate-warm-400" : ""
+          }`}
+        >
+        <option value="" disabled selected hidden>
+          Type of harm
+        </option>
+          {HARM_TYPES.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
       </div>
       <textarea
         placeholder="Briefly Describe Your Case"
