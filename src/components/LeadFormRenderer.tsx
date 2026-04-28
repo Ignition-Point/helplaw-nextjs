@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -80,30 +79,76 @@ const dummyLeadForm: LeadForm = {
 export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRendererProps) {
   const [form, setForm] = useState<LeadForm | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [values, setValues] = useState<Record<string, string>>({});
 
   useEffect(() => {
+    setLoadError(false);
     if (leadFormId === DUMMY_LEAD_FORM_ID && shouldUseDummyCases()) {
       setForm(dummyLeadForm);
       setLoading(false);
       return;
     }
 
-    const supabase = createClient();
-    supabase
-      .from("lead_forms")
-      .select("id, name, fields, cta_text, thank_you_message")
-      .eq("id", leadFormId)
-      .single()
-      .then(({ data }) => {
-        if (data) {
-          const fields = (typeof data.fields === "string" ? JSON.parse(data.fields) : data.fields) as FormField[];
-          setForm({ ...data, fields });
+    let cancelled = false;
+
+    async function loadWithRetry() {
+      setLoading(true);
+
+      for (let attempt = 0; attempt < 3; attempt++) {
+        try {
+          const res = await fetch(`/api/lead-forms/${encodeURIComponent(leadFormId)}`, {
+            method: "GET",
+            headers: { Accept: "application/json" },
+            cache: "no-store",
+          });
+
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const json = (await res.json()) as { form?: LeadForm | null };
+          const data = json.form;
+          if (!data) throw new Error("No form");
+
+          let fields = data.fields as unknown;
+          if (typeof fields === "string") {
+            try {
+              fields = JSON.parse(fields) as unknown;
+            } catch {
+              fields = [];
+            }
+          }
+
+          const normalizedFields = (Array.isArray(fields) ? fields : []) as FormField[];
+
+          if (!cancelled) {
+            setForm({ ...data, fields: normalizedFields });
+            setLoading(false);
+          }
+          return;
+        } catch (e) {
+          if (attempt < 2) {
+            // small backoff: 250ms, 500ms
+            await new Promise((r) => setTimeout(r, 250 * (attempt + 1)));
+            continue;
+          }
+          if (!cancelled) {
+            if (process.env.NODE_ENV !== "production") {
+              // eslint-disable-next-line no-console
+              console.warn("[LeadFormRenderer] failed to load form", leadFormId, e);
+            }
+            setForm(null);
+            setLoadError(true);
+            setLoading(false);
+          }
         }
-        setLoading(false);
-      });
+      }
+    }
+
+    void loadWithRetry();
+    return () => {
+      cancelled = true;
+    };
   }, [leadFormId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -146,7 +191,20 @@ export function LeadFormRenderer({ leadFormId, caseId, caseSlug }: LeadFormRende
     );
   }
 
-  if (!form) return null;
+  if (!form) {
+    return (
+      <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-center">
+        <p className="text-sm font-semibold text-navy-900">
+          Form temporarily unavailable
+        </p>
+        <p className="mt-1 text-sm text-slate-warm-600">
+          {loadError
+            ? "Please try again in a moment. If you prefer, call our team for a confidential review."
+            : "Please try again in a moment."}
+        </p>
+      </div>
+    );
+  }
 
   if (submitted) {
     return (

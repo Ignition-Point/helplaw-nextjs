@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 import { HomeCaseCards } from "@/components/HomeCaseCards";
 import { HomeBlogCards } from "@/components/HomeBlogCards";
 import { HomeLeadForm } from "@/components/HomeLeadForm";
 import PreventWidowText from "@/components/PreventWidowText";
+import { ScrollToHashLink } from "@/components/ScrollToHashLink";
 
 export const metadata: Metadata = {
   title: "Help Law Group | Mass Tort & Class Action Attorneys",
@@ -92,18 +92,18 @@ export default async function HomePage() {
             </div>
 
             <div className="mt-[14px] md:mt-8 lg:mt-15 flex flex-wrap items-center justify-center md:justify-start gap-4">
-              <Link
+              <ScrollToHashLink
                 href="#lead-form"
                 className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
               >
                 Check Eligibility
-              </Link>
-              <Link
+              </ScrollToHashLink>
+              <ScrollToHashLink
                 href="#lead-form"
                 className="inline-flex items-center justify-center rounded-full border-2 border-white px-[24px] py-[15px] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] text-white transition-all hover:bg-white hover:text-[#122D56]"
               >
                 How It Works
-              </Link>
+              </ScrollToHashLink>
             </div>
 
             {/* Attorney avatar row */}
@@ -204,12 +204,12 @@ export default async function HomePage() {
             </>
             </p>
 
-            <Link
+            <ScrollToHashLink
               href="#lead-form"
               className="mt-[14px] md:mt-6 lg:mt-8 inline-flex items-center justify-center rounded-full bg-[#122D56] md:bg-white text-white md:text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-[#1A365E] hover:text-white"
             >
               Take the First Step Here
-            </Link>
+            </ScrollToHashLink>
 
             <p className="inline-flex items-start leading-[130%] gap-[10px] mt-[14px] md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#546885] md:text-white max-w-[250px] md:max-w-none">
               &bull; Free review &bull; Private &amp; confidential &bull; No cost
@@ -248,12 +248,12 @@ export default async function HomePage() {
                     complexity, the pressure, and the fight.
                   </p>
 
-                  <Link
+                  <ScrollToHashLink
                     href="#lead-form"
                     className="mt-[14px] md:mt-[18px] inline-flex items-center justify-center rounded-full bg-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] text-white transition-all hover:bg-[#1A365E]"
                   >
                     Start a Confidential Review
-                  </Link>
+                  </ScrollToHashLink>
                 </div>
               </div>
             </div>
@@ -450,12 +450,12 @@ export default async function HomePage() {
             </div>
 
             <div className="my-[14px] md:my-[26px] lg:my-[28px] text-center md:text-left">
-              <Link
+              <ScrollToHashLink
                 href="#lead-form"
                 className="inline-flex items-center justify-center rounded-full bg-[#122D56] hover:bg-[#1A365E] px-[24px] py-[16px] text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] font-semibold text-white transition-all"
               >
                 Speak With Our Team
-              </Link>
+              </ScrollToHashLink>
             </div>
             <p className="text-center md:text-left leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56] max-w-[260px] md:max-w-none mx-auto md:mx-unset">
               &bull; Private & confidential &bull; No obligation &bull; No cost unless

@@ -421,8 +421,28 @@ export function sanitizeCaseRecord(input: CaseRecord): SanitizeResult<CaseRecord
  */
 export function sanitizeCaseSection(input: CaseSectionRecord): SanitizeResult<CaseSectionRecord> {
   const fixed: string[] = [];
-  const content = (input.content || {}) as Record<string, unknown>;
-  const out: CaseSectionRecord = { ...input, content: { ...content } };
+  const rawContent = input.content as unknown;
+  let contentObj: Record<string, unknown> = {};
+
+  if (typeof rawContent === "object" && rawContent !== null && !Array.isArray(rawContent)) {
+    contentObj = rawContent as Record<string, unknown>;
+  } else if (typeof rawContent === "string") {
+    const trimmed = rawContent.trim();
+    if (trimmed.startsWith("{")) {
+      try {
+        const parsed = JSON.parse(trimmed) as unknown;
+        if (typeof parsed === "object" && parsed !== null && !Array.isArray(parsed)) {
+          contentObj = parsed as Record<string, unknown>;
+          fixed.push("Parsed section.content JSON string into object");
+        }
+      } catch {
+        // fall through
+      }
+    }
+  }
+
+  const content = contentObj;
+  const out: CaseSectionRecord = { ...input, content: { ...contentObj } };
   const newContent = out.content as Record<string, unknown>;
 
   // Only certain content keys hold HTML body
