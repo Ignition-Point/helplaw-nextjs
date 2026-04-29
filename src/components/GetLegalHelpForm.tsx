@@ -142,7 +142,12 @@ export function GetLegalHelpForm() {
           }
           className={`${inputClass} appearance-none pr-[40px] ${
             !values.harm_type ? "text-slate-warm-400" : ""
-          }`}
+          }`}     style={{
+    backgroundImage: `url("data:image/svg+xml;utf8,<svg fill='none' stroke='%236b7280' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/></svg>")`,
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "calc(100% - 12px) center",
+    backgroundSize: "18px",
+  }}
         >
           <option value="">Select a category</option>
           {HARM_TYPES.map((type) => (
@@ -151,17 +156,7 @@ export function GetLegalHelpForm() {
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute top-[40px]  right-3 flex items-center">
-    <svg
-      className="w-4 h-4 text-gray-500"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      viewBox="0 0 24 24"
-    >
-      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
+
       </div>
 
       <div>
