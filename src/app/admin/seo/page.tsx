@@ -1,4 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "SEO Audit Dashboard | Help Law Group",
+  description:
+    "Internal dashboard for monitoring SEO quality across case and resource pages.",
+  alternates: { canonical: "https://helplaw.com/admin/seo" },
+  robots: { index: false, follow: false },
+};
 
 export const revalidate = 0;
 export const dynamic = "force-dynamic";
