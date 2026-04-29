@@ -10,7 +10,7 @@ import { ScrollToHashLink } from "@/components/ScrollToHashLink";
 export const metadata: Metadata = {
   title: "Help Law Group | Mass Tort & Class Action Attorneys",
   description:
-    "Were you harmed by a person, company, or institution? Help Law Group connects you with experienced attorneys for a free, confidential case evaluation. No fees unless you win.",
+    "Harmed by a company or institution? Help Law Group connects you with attorneys for a free, confidential case review. No fee unless you win.",
   openGraph: {
     title: "Help Law Group | Mass Tort & Class Action Attorneys",
     description:

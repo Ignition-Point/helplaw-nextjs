@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Design Review",
+  title: "Design Review | Help Law Group",
+  description:
+    "Internal design upgrade proposals and implementation recommendations.",
+  alternates: { canonical: "https://helplaw.com/design-review" },
   robots: { index: false, follow: false },
 };
 

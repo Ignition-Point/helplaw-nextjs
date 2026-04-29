@@ -24,6 +24,10 @@ export const revalidate = 0;
 
 // Prevent search engines from indexing preview pages
 export const metadata: Metadata = {
+  title: "Case Preview Portal | Help Law Group",
+  description:
+    "Preview unpublished Help Law Group case pages before publishing.",
+  alternates: { canonical: "https://helplaw.com/cases/preview" },
   robots: { index: false, follow: false },
 };
 
