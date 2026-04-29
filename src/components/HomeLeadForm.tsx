@@ -61,7 +61,7 @@ export function HomeLeadForm() {
   }
 
     const inputClass =
-    "w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#9ca3af] placeholder:text-[#9CA3AF] outline-none transition-colors";
+    "w-full appearance-none rounded-[2px] border border-[#D1D5DB] px-4 py-3 pr-[40px] text-base text-[#9ca3af] placeholder:text-[#9CA3AF] outline-none transition-colors";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -101,7 +101,7 @@ export function HomeLeadForm() {
         className="w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors"
       />
       </div>
-            <div>
+            <div className="relative w-full">
        
         <select
           value={values.harm_type}
@@ -112,15 +112,25 @@ export function HomeLeadForm() {
             !values.harm_type ? "text-[#9ca3af]" : ""
           }`}
         >
-        <option value="" disabled selected hidden>
-          Type of harm
-        </option>
+        <option value="" disabled selected hidden>Type of harm</option>
           {HARM_TYPES.map((type) => (
             <option key={type} value={type} style={{ color: "#122D56" }}>
               {type}
             </option>
           ))}
         </select>
+          {/* <!-- Custom Arrow --> */}
+  <div className="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+    <svg
+      className="w-4 h-4 text-gray-500"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
       </div>
       <textarea
         placeholder="Briefly Describe Your Case"

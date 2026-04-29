@@ -530,7 +530,7 @@ export default async function HomePage() {
                 Law Group
               </h2>
 
-              <div className="mt-[14px] md:mt-6 lg:mt-10 space-y-[14px] md:space-y-6 w-full max-w-[430px]">
+              <div className="mt-[14px] md:mt-6 lg:mt-10 space-y-[14px] md:space-y-6 w-full max-w-[460px]">
                 {[
                   {
                     title: "We Take On the Powerful",

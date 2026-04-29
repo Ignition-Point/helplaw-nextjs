@@ -131,7 +131,7 @@ export function GetLegalHelpForm() {
         />
       </div>
 
-      <div>
+      <div className="relative">
         <label className="block text-sm font-medium text-[#122D56] mb-1.5">
           Type of harm
         </label>
@@ -140,7 +140,7 @@ export function GetLegalHelpForm() {
           onChange={(e) =>
             setValues((v) => ({ ...v, harm_type: e.target.value }))
           }
-          className={`${inputClass} ${
+          className={`${inputClass} appearance-none pr-[40px] ${
             !values.harm_type ? "text-slate-warm-400" : ""
           }`}
         >
@@ -151,6 +151,17 @@ export function GetLegalHelpForm() {
             </option>
           ))}
         </select>
+        <div className="pointer-events-none absolute top-[40px]  right-3 flex items-center">
+    <svg
+      className="w-4 h-4 text-gray-500"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  </div>
       </div>
 
       <div>

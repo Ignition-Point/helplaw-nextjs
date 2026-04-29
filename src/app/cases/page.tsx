@@ -51,7 +51,7 @@ export default async function CasesPage() {
             <h1 className="heading text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] leading-[120%] text-white tracking-tight">
               Our <span className="text-[#FFBF0F]">Cases</span>
             </h1>
-            <p className="max-w-[280px] md:max-w-[100%] mt-[14px] mx-auto md:mx-0 md:mt-4 text-[14px] md:text-base lg:text-lg text-white font-normal leading-[140%]">
+            <p className="max-w-[280px] md:max-w-[700px] mt-[14px] mx-auto md:mx-0 md:mt-4 text-[14px] md:text-base lg:text-lg text-white font-normal leading-[140%]">
            
               Attorneys in our network are actively reviewing cases in these
               areas. If you or someone you know experienced this kind of harm,
