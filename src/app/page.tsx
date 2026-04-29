@@ -38,10 +38,23 @@ export default async function HomePage() {
         <Image
           src="/assets/alt/hero-img-new.png"
           alt="Hero Image"
-          fill
-          unoptimized
           quality={100}
-          className="!relative md:!absolute !inset-auto md:!inset-0 aspect-video md:aspect-auto w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
+          unoptimized
+
+          /* MOBILE */
+          width={1200}
+          height={800}
+          className="
+            w-full h-auto  aspect-video md:aspect-auto
+
+            /* DESKTOP */
+            md:absolute md:inset-0
+            md:w-full md:h-full object-cover object-[88%_top]
+
+            rounded-none md:border-t-2 border-white
+          "
+
+          sizes="(max-width: 768px) 100vw, 100vw"
         />
         {/* <video
           autoPlay
@@ -58,7 +71,6 @@ export default async function HomePage() {
 
         <div className="bg-[#122d56] md:bg-transparent relative mx-auto  max-w-7xl items-center justify-between px-5  pt-[30px] pb-[30px] md:pt-[70px] md:pb-[72px] lg:pt-[100px] lg:pb-[92px]">
           <div className="max-w-[785px] w-full text-center md:text-left">
-        
             <h1 className="heading font-bold text-[22px] md:text-[50px] lg:text-[70px] leading-[120%]  align-middle capitalize text-white">
               Standing With People When It Matters Most
             </h1>
@@ -169,17 +181,24 @@ export default async function HomePage() {
       </div>
 
       {/* ─── "When You Are Ready. We Are Here." ─── */}
-          <section
-            className="relative overflow-hidden bg-none md:bg-[url('/assets/alt/section-2-image-new.png')] md:bg-cover md:bg-no-repeat md:bg-[center_0]"
-          >
-          <div className="aspect-video md:hidden">
+      <section className="relative overflow-hidden bg-none md:bg-[url('/assets/alt/section-2-image-new.png')] md:bg-cover md:bg-no-repeat md:bg-[center_0]">
+        {/* Mobile Image */}
+        <div className="relative w-full h-[200px] md:hidden">
+          <Image
+            src="/assets/alt/section-2-image-mobile-new-1.png"
+            alt="section-2-image"
+            fill
+            className="object-cover object-[88%_top]"
+          />
+        </div>
+        {/* <div className="aspect-video md:hidden">
          <Image
           src="/assets/alt/section-2-image-mobile-new-1.png"
           alt="section-2-image"
           fill
           className="!relative md:!absolute  w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
         />
-        </div>
+        </div> */}
         {/* <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(9,22,42,0)_0%,#09162A_100%)]" /> */}
         <div className="relative mx-auto max-w-7xl px-5 py-[30px] md:py-[60px] lg:py-[80px]">
           <div className="max-w-[578px] ml-auto text-center md:text-left">
@@ -197,11 +216,11 @@ export default async function HomePage() {
               they’re untouchable.
             </p>
             <p className="mt-[10px] md:mt-[16px] lg:mt-[18px] font-normal text-[14px] md:text-[18px] leading-[140%] text-[#546885] md:text-white">
-             <>
-              We fight for accountability and we don’t stop
-              <br className="md:hidden" />
-              until the work is done.
-            </>
+              <>
+                We fight for accountability and we don’t stop
+                <br className="md:hidden" />
+                until the work is done.
+              </>
             </p>
 
             <ScrollToHashLink
@@ -212,8 +231,8 @@ export default async function HomePage() {
             </ScrollToHashLink>
 
             <p className="inline-flex items-start leading-[130%] gap-[10px] mt-[14px] md:mt-6 font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#546885] md:text-white max-w-[250px] md:max-w-none">
-              &bull; Free review &bull; Private &amp; confidential &bull; No cost
-              unless you win
+              &bull; Free review &bull; Private &amp; confidential &bull; No
+              cost unless you win
             </p>
           </div>
         </div>
@@ -262,9 +281,16 @@ export default async function HomePage() {
               <Image
                 src="/assets/alt/section-3-image-new.png"
                 alt="Help Law Group Team"
-                fill
-                className="!relative lg:!absolute rounded-[14px] md:rounded-[16px] lg:rounded-[26px] object-cover object-top"
-                sizes="(max-width: 1024px) 100vw, 55vw"
+                /* MOBILE */
+                width={800}
+                height={600}
+                className="
+      w-full h-auto object-contain
+      md:object-cover md:absolute md:inset-0
+      rounded-[14px] md:rounded-[16px] lg:rounded-[26px]
+    "
+                /* DESKTOP */
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 55vw"
               />
               {/* Fade-out gradient on right edge */}
               {/* <div className="hidden lg:block absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-white to-transparent" /> */}
@@ -374,17 +400,24 @@ export default async function HomePage() {
       </section>
 
       {/* ─── How It Works ─── */}
-      <section
-        className="relative overflow-hidden pt-0 py-[30px] md:py-[60px] lg:py-[80px] bg-none md:bg-[url('/assets/alt/section-4-image-new.png')] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]"
-      >
+      <section className="relative overflow-hidden pt-0 py-[30px] md:py-[60px] lg:py-[80px] bg-none md:bg-[url('/assets/alt/section-4-image-new.png')] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]">
         <div className="absolute inset-0 bg-white/60 md:hidden"></div>
 
-         <Image
+        {/* Mobile Image */}
+        <div className="relative w-full h-[200px] md:hidden">
+          <Image
+            src="/assets/alt/section-4-image-new-mobile.png"
+            alt="section-4-image"
+            fill
+            className="object-cover object-[88%_top]"
+          />
+        </div>
+        {/* <Image
           src="/assets/alt/section-4-image-new-mobile.png"
           alt="section-4-image"
           fill
           className="!relative md:!absolute md:hidden w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
-        />
+        /> */}
 
         <div className="hidden md:block  -rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
 
@@ -458,8 +491,8 @@ export default async function HomePage() {
               </ScrollToHashLink>
             </div>
             <p className="text-center md:text-left leading-[130%] gap-[10px] font-medium text-[14px] md:text-[16px] lg:text-[18px] text-[#122D56] max-w-[260px] md:max-w-none mx-auto md:mx-unset">
-              &bull; Private & confidential &bull; No obligation &bull; No cost unless
-              your case wins
+              &bull; Private & confidential &bull; No obligation &bull; No cost
+              unless your case wins
             </p>
           </div>
         </div>
@@ -478,12 +511,16 @@ export default async function HomePage() {
         <div className="">
           <div className="grid md:grid-cols-[50%_50%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}
-                  <Image
-          src="/assets/alt/contect-info-bg-mobile.jpg"
-          alt="section-2-image"
-          fill
-          className="!relative md:!absolute md:hidden aspect-video w-full h-full object-cover object-[88%_top] md:object-top md:border-t-2 border-white"
-        />
+            {/* Mobile Image */}
+          <div className="relative w-full h-[200px] md:hidden">
+            <Image
+              src="/assets/alt/contect-info-bg-mobile.jpg"
+              alt="contect-info-bg-mobile.jpg"
+              fill
+              className="object-cover object-[88%_top]"
+            />
+          </div>
+                      
             <div
               className="relative z-10 py-[30px] md:py-[60px] lg:py-[80px] px-5 md:px-[40px] lg:px-[60px] bg-[#1A365E] md:bg-[url('/assets/alt/contect-info-bg.jpg')] md:bg-cover md:bg-no-repeat md:bg-top">
               <div className="hidden md:block absolute bg-[#19263799] inset-0 -z-10" />
@@ -550,7 +587,7 @@ export default async function HomePage() {
             </div>
 
             {/* Right: Lead form */}
-            <div id="lead-form">
+            <div id="lead-form" className="scroll-pt-[50px]">
               <div className="py-[30px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
                 <h3 className="font-bold text-[22px] md:text-[26px] lg:text-[30px] leading-[120%] tracking-[0%] text-[#1F3044] text-center mb-[14px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review
