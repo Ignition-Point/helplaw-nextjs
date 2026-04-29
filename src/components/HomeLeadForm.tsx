@@ -61,7 +61,7 @@ export function HomeLeadForm() {
   }
 
     const inputClass =
-    "w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-sm lg:text-base text-[#122D56] placeholder:text-[#9CA3AF] outline-none transition-colors";
+    "w-full rounded-[2px] border border-[#D1D5DB] px-4 py-3 text-base text-[#9ca3af] placeholder:text-[#9CA3AF] outline-none transition-colors";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
@@ -109,14 +109,14 @@ export function HomeLeadForm() {
             setValues((v) => ({ ...v, harm_type: e.target.value }))
           }
           className={`${inputClass} ${
-            !values.harm_type ? "text-slate-warm-400" : ""
+            !values.harm_type ? "text-[#9ca3af]" : ""
           }`}
         >
         <option value="" disabled selected hidden>
           Type of harm
         </option>
           {HARM_TYPES.map((type) => (
-            <option key={type} value={type}>
+            <option key={type} value={type} style={{ color: "#122D56" }}>
               {type}
             </option>
           ))}
