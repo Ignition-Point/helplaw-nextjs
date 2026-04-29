@@ -39,7 +39,7 @@ export default function GetLegalHelpPage() {
 
       {/* Trust bar */}
       <div className="bg-[#FFBF0F] py-3 md:py-4 ">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center gap-x-8 gap-y-2">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-center md:justify-start gap-x-3 md:gap-x-5 lg:gap-x-8 gap-y-2">
           {[
             "Free case evaluation",
             "Confidential",
@@ -97,7 +97,7 @@ export default function GetLegalHelpPage() {
                       "There is no pressure to move forward. When you are ready, we connect you with the right attorney.",
                   },
                 ].map(({ step, title, description }) => (
-                  <div key={step} className="flex gap-4">
+                  <div key={step} className="flex gap-3 md:gap-4">
                     <span className="flex w-[25px] h-[38px] border border-[#FFBF0F] rounded-[120px] shrink-0 items-center justify-center rounded-full font-semibold text-[18px] leading-[120%] align-middle text-[#132F55] ">
                       {step}
                     </span>
@@ -115,7 +115,7 @@ export default function GetLegalHelpPage() {
             </div>
 
             {/* Right: form */}
-            <div>
+            <div id="get-help">
               <div className="rounded-[12px] lg:rounded-2xl bg-white border border-navy-100 p-4 md:p-8 sm:p-10 shadow-xl">
                 <h3 className="text-center md:text-left heading text-[22px] md:text-[34px] lg:text-[42px] font-bold text-[#122D56] leading-[120%] mb-[14px]">
                   Request a Private Case Review

@@ -298,7 +298,7 @@
 }
 
 .animate-scroll-x {
-  animation: scroll-x 30s linear infinite;
+  animation: scroll-x 20s linear infinite;
 }
 
   .prose-helplaw h2{
@@ -326,10 +326,13 @@
   -ms-overflow-style: none;  /* IE & Edge */
   scrollbar-width: none;     /* Firefox */
 }
+h2.heading.text-\[22px\]{
+  margin-top: -5px;
+}
 
 @media (max-width: 767px) {
   .animate-scroll-x {
-    animation-duration: 8s;
+    animation-duration: 6s;
   }
   .prose-helplaw h2{
     font-size: 22px;

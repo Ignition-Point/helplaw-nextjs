@@ -259,7 +259,7 @@ export default function AboutPage() {
             The first conversation is free. No obligation. No pressure.
           </p>
           <Link
-            href="/get-legal-help"
+            href="/#lead-form"
             className="mt-[14px] md:mt-6 inline-flex items-center gap-2 rounded-full px-[24px] py-[13px] text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] font-semibold tracking-[0%] bg-[#122D56] text-white hover:bg-[#1A365E] transition-all"
           >
             Get a Free Case Evaluation

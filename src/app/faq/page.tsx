@@ -221,13 +221,13 @@ export default function FAQPage() {
           </p>
           <div className="mt-[14px] md:mt-5  flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
-              href="/cases"
+              href="/#lead-form"
               className="inline-flex items-center justify-center rounded-full bg-white text-[#122D56] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%]  px-[24px] py-[16px] transition-all hover:bg-navy-800 hover:text-white"
             >
               Get a Free Case Evaluation
             </Link>
             <Link
-              href="/about"
+              href="/get-legal-help"
               className="inline-flex items-center justify-center rounded-full border-2 border-white px-[24px] py-[15px] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] text-white transition-all hover:bg-white hover:text-[#122D56]"
             >
               Contact Us

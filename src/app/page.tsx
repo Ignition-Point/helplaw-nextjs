@@ -389,7 +389,7 @@ export default async function HomePage() {
         <div className="hidden md:block  -rotate-180 absolute inset-0 bg-[linear-gradient(260.96deg,rgba(255,255,255,0)_27.52%,rgba(255,255,255,0.519954)_37.25%,rgba(255,255,255,0.85)_45.55%,rgba(255,255,255,0.95)_65.98%,rgba(255,255,255,0.98)_86.05%,#FFFFFF_100%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5">
-          <div className="max-w-[650px] w-full ml-auto pt-[30px]">
+          <div className="max-w-[650px] w-full ml-auto pt-[30px] md:pt-0">
             <div className="mb-[14px] md:mb-[30px] text-center md:text-left">
               <h2 className="heading font-bold text-[22px] md:text-[34px] lg:text-[42px] leading-[120%] align-middle capitalize text-[#122D56]">
                 A Private Conversation On 
@@ -474,7 +474,7 @@ export default async function HomePage() {
       <HomeBlogCards />
 
       {/* ─── What Help Law Group Can Do For You + Lead Form ─── */}
-      <section className="" id="lead-form">
+      <section className="">
         <div className="">
           <div className="grid md:grid-cols-[50%_50%] lg:grid-cols-[38%_62%] items-center">
             {/* Left: value props */}
@@ -550,7 +550,7 @@ export default async function HomePage() {
             </div>
 
             {/* Right: Lead form */}
-            <div>
+            <div id="lead-form">
               <div className="py-[30px] md:py-[60px] px-[20px] md:px-[32px] lg:px-[40px]">
                 <h3 className="font-bold text-[22px] md:text-[26px] lg:text-[30px] leading-[120%] tracking-[0%] text-[#1F3044] text-center mb-[14px] md:mb-[30px]lg:mb-[40px]">
                   Request a Private Review

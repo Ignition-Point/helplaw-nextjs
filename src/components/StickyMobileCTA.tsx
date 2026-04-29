@@ -44,7 +44,7 @@ export function StickyMobileCTA() {
 
       {/* Free Case Review button */}
       <a
-        href="#get-help"
+        href="/get-legal-help#get-help"
         className="bg-[#FFBF0F] hover:bg-gold-500 text-[#122D56] font-bold text-sm px-5 py-2.5 rounded-md transition-colors"
       >
         Free Case Review
