@@ -1,33 +1,39 @@
-"use client";
-
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
 
-const placeholderPosts = [
-  {
-    category: "Legal Guidance",
-    title: "What Is Sexual Abuse?",
-    description:
-      "Understanding what sexual abuse includes is the first step toward knowing your rights.",
-    href: "/resources",
-  },
-  {
-    category: "Legal Guidance",
-    title:
-      "Can a Platform Like Snapchat or Roblox Be Held Legally Responsible?",
-    description:
-      "Platforms that fail to protect children from exploitation and predatory behavior face civil lawsuits. Here is what legal responsibility for platform harm looks like.",
-    href: "/resources",
-  },
-  {
-    category: "Legal Guidance",
-    title: "What Is Grooming? How Abusers Build Trust Before They Cause Harm",
-    description:
-      "Grooming is deliberate and calculated. Understanding how it works is the first step toward recognizing it.",
-    href: "/resources",
-  },
+const FEATURED_TITLES = [
+  "What Is Sexual Abuse?",
+  "Can a Platform Like Snapchat or Roblox Be Held Legally Responsible?",
+  "What Is Grooming? How Abusers Build Trust Before They Cause Harm",
 ];
 
-export function HomeBlogCards() {
+async function getFeaturedPosts() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("blog_posts")
+    .select("title, slug, excerpt, category")
+    .eq("status", "published")
+    .in("title", FEATURED_TITLES);
+
+  if (!data?.length) return FEATURED_TITLES.map((title) => ({
+    title,
+    slug: "",
+    excerpt: "",
+    category: "Legal Guidance",
+  }));
+
+  const ordered = FEATURED_TITLES.map(
+    (t) => data.find((p) => p.title === t) ?? { title: t, slug: "", excerpt: "", category: "Legal Guidance" }
+  );
+  return ordered.map((p) => ({
+    ...p,
+    slug: (p.slug ?? "").replace(/^.*\//, ""),
+  }));
+}
+
+export async function HomeBlogCards() {
+  const posts = await getFeaturedPosts();
+
   return (
     <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#1A365E]">
       <div className="mx-auto max-w-7xl px-5">
@@ -58,26 +64,25 @@ export function HomeBlogCards() {
                 className="transition-transform group-hover:translate-x-1"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z"
                   fill="currentColor"
                 />
               </svg>
-              {/* <ArrowRight className="h-4 w-4" /> */}
             </Link>
           </div>
           <div>
- 
+
 
           </div>
         </div>
 
         <div className="grid gap-[12px] md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {placeholderPosts.map((post) => (
+          {posts.map((post) => (
             <Link
               key={post.title}
-              href={post.href}
+              href={post.slug ? `/resources/${post.slug}` : "/resources"}
               className="group border border-[#F0F0F0] p-[16px] lg:p-[24px] rounded-[12px] md:rounded-[16px] lg:rounded-[20px] transition-all bg-white hover:bg-[#F6F6F6] hover:border-[#FFBF0F]"
             >
               <div className="">
@@ -88,7 +93,7 @@ export function HomeBlogCards() {
                   {post.title}
                 </h3>
                 <p className="mt-2 font-normal text-[14px] md:text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">
-                  {post.description}
+                  {post.excerpt}
                 </p>
                 <div className="mt-[12px] lg:mt-[20px]">
                   <svg
@@ -115,44 +120,35 @@ export function HomeBlogCards() {
                         y2="1.5"
                         gradientUnits="userSpaceOnUse"
                       >
-                        <stop stop-color="white" />
-                        <stop offset="0.504808" stop-color="#1C385F" />
-                        <stop offset="1" stop-color="white" />
+                        <stop stopColor="white" />
+                        <stop offset="0.504808" stopColor="#1C385F" />
+                        <stop offset="1" stopColor="white" />
                       </linearGradient>
                     </defs>
                   </svg>
                 </div>
                 <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-semibold text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
                   Learn More
-                      <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                className="transition-transform group-hover:translate-x-1"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z"
-                  fill="currentColor"
-                />
-              </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
                 </span>
               </div>
             </Link>
           ))}
         </div>
-
-        {/* <div className="mt-8 text-center sm:hidden">
-          <Link
-            href="/resources"
-            className="text-sm font-semibold text-navy-700"
-          >
-            View All Resources
-          </Link>
-        </div> */}
       </div>
     </section>
   );
