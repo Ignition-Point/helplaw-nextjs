@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
 
-const FILTER_CATEGORIES = [
+const RESOURCE_CATEGORIES = [
   "All",
   "General",
   "Medical abuse",
@@ -86,7 +86,7 @@ export function ResourceGrid({ posts }: { posts: Post[] }) {
             />
           </div>
           <div className="flex flex-wrap gap-2">
-            {FILTER_CATEGORIES.map((cat) => (
+            {RESOURCE_CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}

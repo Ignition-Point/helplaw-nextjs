@@ -1,55 +1,64 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { createClient } from "@/lib/supabase/server";
 
-const caseCategories = [
+const FEATURED_CASES = [
   {
     title: "Clergy and Religious Institution Abuse",
     description:
       "Sexual abuse committed by clergy members or within religious organizations, including cases from years ago.",
     image: "/images/cases/clergy-religious-institution-abuse.jpg",
-    href: "/cases",
   },
   {
     title: "Medical Abuse",
     description:
       "Sexual abuse or misconduct by a doctor, nurse, or other healthcare provider.",
     image: "/images/cases/medical-abuse.jpg",
-    href: "/cases",
   },
   {
     title: "Online Platform Harm",
     description:
       "Sexual exploitation or serious harm facilitated by platforms like Snapchat, Roblox, or Instagram.",
     image: "/images/cases/online-platform-harm.jpg",
-    href: "/cases",
   },
   {
     title: "Unsafe Products",
     description:
       "Injuries caused by a product that failed or was never safe to begin with.",
     image: "/images/cases/unsafe-products.jpg",
-    href: "/cases",
   },
   {
     title: "NYC Clergy Abuse Lawsuits",
     description:
       "Active settlement efforts are underway across NYC dioceses. If you were abused by clergy in New York, your options may still be open.",
     image: "/images/cases/nyc-clergy-abuse.jpg",
-    href: "/cases",
   },
   {
     title: "NYC Juvenile Detention Abuse",
     description:
       "Survivors of abuse at Spofford, Horizon, Crossroads, or Rikers youth housing may have legal options under recent legislation.",
     image: "/images/cases/nyc-juvenile-detention-abuse.jpg",
-    href: "/cases",
   },
 ];
 
-export function HomeCaseCards() {
+async function getCaseSlugs() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("cases")
+    .select("title, slug")
+    .eq("status", "published");
+
+  const slugMap = new Map<string, string>();
+  for (const row of data ?? []) {
+    slugMap.set(row.title, (row.slug ?? "").replace(/^.*\//, ""));
+  }
+  return slugMap;
+}
+
+export async function HomeCaseCards() {
+  const slugMap = await getCaseSlugs();
+
   return (
     <section className="py-20 sm:py-28 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -65,35 +74,38 @@ export function HomeCaseCards() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {caseCategories.map((c) => (
-            <Link
-              key={c.title}
-              href={c.href}
-              className="group relative rounded-2xl border border-navy-100 bg-white overflow-hidden shadow-sm transition-all hover:shadow-lg hover:border-navy-200 hover:-translate-y-0.5"
-            >
-              <div className="relative h-44 overflow-hidden">
-                <Image
-                  src={c.image}
-                  alt={c.title}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-              </div>
-              <div className="p-5">
-                <h3 className="text-lg font-semibold text-navy-900 leading-snug group-hover:text-navy-700">
-                  {c.title}
-                </h3>
-                <p className="mt-2 text-sm text-slate-warm-500 line-clamp-2 leading-relaxed">
-                  {c.description}
-                </p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy-700 group-hover:text-gold-600 transition-colors">
-                  Check Eligibility
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </span>
-              </div>
-            </Link>
-          ))}
+          {FEATURED_CASES.map((c) => {
+            const slug = slugMap.get(c.title);
+            return (
+              <Link
+                key={c.title}
+                href={slug ? `/cases/${slug}` : "/cases"}
+                className="group relative rounded-2xl border border-navy-100 bg-white overflow-hidden shadow-sm transition-all hover:shadow-lg hover:border-navy-200 hover:-translate-y-0.5"
+              >
+                <div className="relative h-44 overflow-hidden">
+                  <Image
+                    src={c.image}
+                    alt={c.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="p-5">
+                  <h3 className="text-lg font-semibold text-navy-900 leading-snug group-hover:text-navy-700">
+                    {c.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-slate-warm-500 line-clamp-2 leading-relaxed">
+                    {c.description}
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy-700 group-hover:text-gold-600 transition-colors">
+                    Check Eligibility
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
         <div className="mt-10 text-center">

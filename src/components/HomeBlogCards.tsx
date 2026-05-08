@@ -1,33 +1,39 @@
-"use client";
-
 import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
 
-const placeholderPosts = [
-  {
-    category: "Legal Guidance",
-    title: "What Is Sexual Abuse?",
-    description:
-      "Understanding what sexual abuse includes is the first step toward knowing your rights.",
-    href: "/resources",
-  },
-  {
-    category: "Legal Guidance",
-    title:
-      "Can a Platform Like Snapchat or Roblox Be Held Legally Responsible?",
-    description:
-      "Platforms that fail to protect children from exploitation and predatory behavior face civil lawsuits. Here is what legal responsibility for platform harm looks like.",
-    href: "/resources",
-  },
-  {
-    category: "Legal Guidance",
-    title: "What Is Grooming? How Abusers Build Trust Before They Cause Harm",
-    description:
-      "Grooming is deliberate and calculated. Understanding how it works is the first step toward recognizing it.",
-    href: "/resources",
-  },
+const FEATURED_TITLES = [
+  "What Is Sexual Abuse?",
+  "Can a Platform Like Snapchat or Roblox Be Held Legally Responsible?",
+  "What Is Grooming? How Abusers Build Trust Before They Cause Harm",
 ];
 
-export function HomeBlogCards() {
+async function getFeaturedPosts() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("blog_posts")
+    .select("title, slug, excerpt, category")
+    .eq("status", "published")
+    .in("title", FEATURED_TITLES);
+
+  if (!data?.length) return FEATURED_TITLES.map((title) => ({
+    title,
+    slug: "",
+    excerpt: "",
+    category: "Legal Guidance",
+  }));
+
+  const ordered = FEATURED_TITLES.map(
+    (t) => data.find((p) => p.title === t) ?? { title: t, slug: "", excerpt: "", category: "Legal Guidance" }
+  );
+  return ordered.map((p) => ({
+    ...p,
+    slug: (p.slug ?? "").replace(/^.*\//, ""),
+  }));
+}
+
+export async function HomeBlogCards() {
+  const posts = await getFeaturedPosts();
+
   return (
     <section className="py-20 sm:py-28 bg-slate-warm-50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -50,10 +56,10 @@ export function HomeBlogCards() {
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {placeholderPosts.map((post) => (
+          {posts.map((post) => (
             <Link
               key={post.title}
-              href={post.href}
+              href={post.slug ? `/resources/${post.slug}` : "/resources"}
               className="group rounded-2xl border border-navy-100 bg-white overflow-hidden shadow-sm transition-all hover:shadow-lg hover:-translate-y-0.5"
             >
               <div className="p-5">
@@ -64,7 +70,7 @@ export function HomeBlogCards() {
                   {post.title}
                 </h3>
                 <p className="mt-2 text-sm text-slate-warm-500 line-clamp-2 leading-relaxed">
-                  {post.description}
+                  {post.excerpt}
                 </p>
                 <span className="mt-3 inline-block text-sm font-semibold text-navy-700 group-hover:text-gold-600 transition-colors">
                   Learn More

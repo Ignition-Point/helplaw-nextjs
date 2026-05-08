@@ -80,7 +80,7 @@ export default async function HomePage() {
               Get a Free Case Evaluation
             </Link>
             <Link
-              href="/how-it-works"
+              href="#how-it-works"
               className="inline-flex items-center justify-center rounded-full border-2 border-navy-200 px-8 py-3.5 text-base font-semibold text-navy-700 transition-all hover:border-navy-400 hover:bg-navy-50"
             >
               See How It Works
@@ -189,7 +189,7 @@ export default async function HomePage() {
               </p>
 
               <Link
-                href="/cases"
+                href="/get-legal-help"
                 className="mt-8 inline-flex items-center justify-center rounded-full bg-navy-800 px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-navy-700 shadow-sm"
               >
                 Start a Confidential Review
@@ -205,6 +205,7 @@ export default async function HomePage() {
 
       {/* ─── How It Works ─── */}
       <section
+        id="how-it-works"
         className="relative overflow-hidden"
         style={{ backgroundImage: "url(/assets/alt/section-4-image.webp)", backgroundSize: "cover", backgroundPosition: "center" }}
       >
@@ -256,7 +257,7 @@ export default async function HomePage() {
 
           <div className="mt-10 text-center">
             <Link
-              href="/cases"
+              href="/get-legal-help"
               className="inline-flex items-center justify-center rounded-full bg-navy-800 px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-navy-700"
             >
               Speak With Our Team
