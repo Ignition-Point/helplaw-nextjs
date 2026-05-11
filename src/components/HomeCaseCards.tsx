@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { createClient } from "@/lib/supabase/server";
 
 const FEATURED_CASES = [
   {
@@ -8,56 +7,46 @@ const FEATURED_CASES = [
     description:
       "Sexual abuse committed by clergy members or within religious organizations, including cases from years ago.",
     image: "/images/cases/clergy-religious-institution-abuse.jpg",
+    category: "Clergy and Religious Institution Abuse",
   },
   {
     title: "Medical Abuse",
     description:
       "Sexual abuse or misconduct by a doctor, nurse, or other healthcare provider.",
     image: "/images/cases/medical-abuse.jpg",
+    category: "Medical Abuse",
   },
   {
     title: "Online Platform Harm",
     description:
       "Sexual exploitation or serious harm facilitated by platforms like Snapchat, Roblox, or Instagram.",
     image: "/images/cases/online-platform-harm.jpg",
+    category: "Online Platform Harm",
   },
   {
     title: "Unsafe Products",
     description:
       "Injuries caused by a product that failed or was never safe to begin with.",
     image: "/images/cases/unsafe-products.jpg",
+    category: "Unsafe Products",
   },
   {
     title: "NYC Clergy Abuse Lawsuits",
     description:
       "Active settlement efforts are underway across NYC dioceses. If you were abused by clergy in New York, your options may still be open.",
     image: "/images/cases/nyc-clergy-abuse.jpg",
+    category: "Clergy and Religious Institution Abuse",
   },
   {
     title: "NYC Juvenile Detention Abuse",
     description:
       "Survivors of abuse at Spofford, Horizon, Crossroads, or Rikers youth housing may have legal options under recent legislation.",
     image: "/images/cases/nyc-juvenile-detention-abuse.jpg",
+    category: "Juvenile Detention Abuse",
   },
 ];
 
-async function getCaseSlugs() {
-  const supabase = await createClient();
-  const { data } = await supabase
-    .from("cases")
-    .select("title, slug")
-    .eq("status", "published");
-
-  const slugMap = new Map<string, string>();
-  for (const row of data ?? []) {
-    slugMap.set(row.title, (row.slug ?? "").replace(/^.*\//, ""));
-  }
-  return slugMap;
-}
-
-export async function HomeCaseCards() {
-  const slugMap = await getCaseSlugs();
-
+export function HomeCaseCards() {
   return (
     <section className="py-[30px] md:py-[60px] lg:py-[80px]  bg-white">
       <div className="mx-auto max-w-7xl px-5">
@@ -101,84 +90,81 @@ export async function HomeCaseCards() {
         </div>
 
         <div className="grid gap-[12px] md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {FEATURED_CASES.map((c) => {
-            const slug = slugMap.get(c.title);
-            return (
-              <Link
-                key={c.title}
-                href={slug ? `/cases/${slug}` : "/cases"}
-                className="group relative overflow-hidden bg-white border border-[#F0F0F0] p-[12px] lg:p-[18px] rounded-[12px] lg:rounded-[20px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] transition-all"
-              >
-                <div className="relative h-44 overflow-hidden rounded-[12px] lg:rounded-[14px]">
-                  <Image
-                    src={c.image}
-                    alt={c.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="pt-[10px]">
-                  <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] tracking-[-0.04em] align-middle text-[#132F55] mb-2">
-                    {c.title}
-                  </h3>
-                  <p className="font-normal text-[14px] lg:text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">
-                    {c.description}
-                  </p>
-                  <div className="mt-[12px] lg:mt-[20px]">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="350"
-                      height="1"
-                      viewBox="0 0 350 1"
-                      fill="none"
-                      className="w-full"
-                    >
-                      <line
-                        opacity="0.2"
-                        y1="0.5"
+          {FEATURED_CASES.map((c) => (
+            <Link
+              key={c.title}
+              href={`/cases?category=${encodeURIComponent(c.category)}`}
+              className="group relative overflow-hidden bg-white border border-[#F0F0F0] p-[12px] lg:p-[18px] rounded-[12px] lg:rounded-[20px] shadow-[0px_8px_80px_-12px_rgba(0,0,0,0.08)] transition-all"
+            >
+              <div className="relative h-44 overflow-hidden rounded-[12px] lg:rounded-[14px]">
+                <Image
+                  src={c.image}
+                  alt={c.title}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
+              <div className="pt-[10px]">
+                <h3 className="font-bold text-[16px] md:text-[18px] lg:text-[20px] leading-[1.2] tracking-[-0.04em] align-middle text-[#132F55] mb-2">
+                  {c.title}
+                </h3>
+                <p className="font-normal text-[14px] lg:text-[16px] leading-[140%] tracking-[-0.03em] line-clamp-2 overflow-hidden text-[#546885]">
+                  {c.description}
+                </p>
+                <div className="mt-[12px] lg:mt-[20px]">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="350"
+                    height="1"
+                    viewBox="0 0 350 1"
+                    fill="none"
+                    className="w-full"
+                  >
+                    <line
+                      opacity="0.2"
+                      y1="0.5"
+                      x2="350"
+                      y2="0.5"
+                      stroke="url(#paint0_linear_391_46)"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="paint0_linear_391_46"
+                        x1="0"
+                        y1="1.5"
                         x2="350"
-                        y2="0.5"
-                        stroke="url(#paint0_linear_391_46)"
-                      />
-                      <defs>
-                        <linearGradient
-                          id="paint0_linear_391_46"
-                          x1="0"
-                          y1="1.5"
-                          x2="350"
-                          y2="1.5"
-                          gradientUnits="userSpaceOnUse"
-                        >
-                          <stop stopColor="white" />
-                          <stop offset="0.504808" stopColor="#1C385F" />
-                          <stop offset="1" stopColor="white" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
-                  </div>
-                  <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-semibold text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
-                    Check Eligibility
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      className="transition-transform group-hover:translate-x-1"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </span>
+                        y2="1.5"
+                        gradientUnits="userSpaceOnUse"
+                      >
+                        <stop stopColor="white" />
+                        <stop offset="0.504808" stopColor="#1C385F" />
+                        <stop offset="1" stopColor="white" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                 </div>
-              </Link>
-            );
-          })}
+                <span className="mt-[10px] lg:mt-[15px] inline-flex items-center gap-1 font-semibold text-[14px] lg:text-[16px] leading-[100%] tracking-[0%] text-[#1A365E] group-hover:text-[#132F55] transition-colors">
+                  Check Eligibility
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    className="transition-transform group-hover:translate-x-1"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M7.5 5.625C7.15482 5.625 6.875 5.34518 6.875 5C6.875 4.65482 7.15482 4.375 7.5 4.375H15C15.3452 4.375 15.625 4.65482 15.625 5V12.5C15.625 12.8452 15.3452 13.125 15 13.125C14.6548 13.125 14.375 12.8452 14.375 12.5V6.50888L5.44194 15.4419C5.19786 15.686 4.80214 15.686 4.55806 15.4419C4.31398 15.1979 4.31398 14.8021 4.55806 14.5581L13.4911 5.625H7.5Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

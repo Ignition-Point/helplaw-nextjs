@@ -3,8 +3,8 @@ import { createClient } from "@/lib/supabase/server";
 
 const FEATURED_TITLES = [
   "What Is Sexual Abuse?",
-  "Can a Platform Like Snapchat or Roblox Be Held Legally Responsible?",
-  "What Is Grooming? How Abusers Build Trust Before They Cause Harm",
+  "Can Snapchat or Roblox Be Held Legally Responsible for Harm to Your Child?",
+  "Grooming in Religious Settings: How It Works and Why It's Hard to Recognize",
 ];
 
 async function getFeaturedPosts() {

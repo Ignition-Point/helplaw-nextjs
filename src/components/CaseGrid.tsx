@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import PreventWidowText from "./PreventWidowText";
@@ -30,7 +31,12 @@ interface CaseItem {
 }
 
 export function CaseGrid({ cases }: { cases: CaseItem[] }) {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category") || "";
+  const initialFilter =
+    FILTER_CATEGORIES.find((c) => c.toLowerCase() === categoryParam.toLowerCase()) || "All";
+
+  const [activeFilter, setActiveFilter] = useState(initialFilter);
   const filterBarRef = useRef<HTMLDivElement | null>(null);
   const filterButtonRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 

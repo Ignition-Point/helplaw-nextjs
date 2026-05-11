@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { createClient } from "@/lib/supabase/server";
@@ -62,7 +63,9 @@ export default async function CasesPage() {
       </section>
 
       {/* Case filter + cards */}
-      <CaseGrid cases={cases} />
+      <Suspense>
+        <CaseGrid cases={cases} />
+      </Suspense>
 
       {/* Bottom CTA */}
       <section className="py-[30px] md:py-[60px] lg:py-[80px] bg-[#09162A]">
