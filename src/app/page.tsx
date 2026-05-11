@@ -111,7 +111,7 @@ export default async function HomePage() {
                 Check Eligibility
               </ScrollToHashLink>
               <ScrollToHashLink
-                href="#lead-form"
+                href="#how-it-works"
                 className="inline-flex items-center justify-center rounded-full border-2 border-white px-[24px] py-[15px] font-semibold text-[14px] md:text-[16px] lg:text-[18px] leading-[100%] text-white transition-all hover:bg-white hover:text-[#122D56]"
               >
                 How It Works
@@ -400,7 +400,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── How It Works ─── */}
-      <section className="relative overflow-hidden pt-0 py-[30px] md:py-[60px] lg:py-[80px] bg-none md:bg-[url('/assets/alt/section-4-image-new.png')] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]">
+      <section id="how-it-works" className="relative overflow-hidden pt-0 py-[30px] md:py-[60px] lg:py-[80px] bg-none md:bg-[url('/assets/alt/section-4-image-new.png')] bg-cover bg-no-repeat bg-[position:20%_0] md:bg-[position:center_top]">
         <div className="absolute inset-0 bg-white/60 md:hidden"></div>
 
         {/* Mobile Image */}
